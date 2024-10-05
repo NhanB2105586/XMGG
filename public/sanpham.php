@@ -1,7 +1,6 @@
 <?php
-require_once __DIR__ . '/../src/bootstrap.php';
 include_once __DIR__ . '/../src/partials/header.php';
-
+include_once __DIR__ . '/../src/dp.php';
 ?>
 
 <body>
@@ -48,144 +47,29 @@ include_once __DIR__ . '/../src/partials/header.php';
 
         <!-- Danh sách sản phẩm -->
         <div class="product-grid">
-            <div class="product-item">
-                <img class="product-image default-image" src="/logo/dssanpham/ghe1.jpg" alt="Armchair Doulton vintage">
-                <img class="product-image hover-image" src="/logo/dssanpham/ghe1.1.jpg" alt="Armchair Doulton vintage hover">
-                <div class="product-name">Armchair Doulton vintage</div>
-                <div class="product-price">28,500,000đ</div>
-                <div class="product-actions">
-                    <button class="add-to-cart-btn">THÊM VÀO GIỎ</button>
-                    <button class="view-more-btn">XEM THÊM</button>
-                </div>
-            </div>
+            <?php
+            // Truy vấn lấy danh sách sản phẩm từ cơ sở dữ liệu
+            $sql = "SELECT * FROM products";
+            $result = $conn->query($sql);
 
-            <div class="product-item">
-                <img class="product-image default-image" src="/logo/dssanpham/ghe1.jpg" alt="Armchair Doulton vintage">
-                <img class="product-image hover-image" src="/logo/dssanpham/ghe1.1.jpg" alt="Armchair Doulton vintage hover">
-                <div class="product-name">Armchair Doulton vintage</div>
-                <div class="product-price">28,500,000đ</div>
-                <div class="product-actions">
-                    <button class="add-to-cart-btn">THÊM VÀO GIỎ</button>
-                    <button class="view-more-btn">XEM THÊM</button>
-                </div>
-            </div>
-
-            <div class="product-item">
-                <img class="product-image default-image" src="/logo/dssanpham/ghe1.jpg" alt="Armchair Doulton vintage">
-                <img class="product-image hover-image" src="/logo/dssanpham/ghe1.1.jpg" alt="Armchair Doulton vintage hover">
-                <div class="product-name">Armchair Doulton vintage</div>
-                <div class="product-price">28,500,000đ</div>
-                <div class="product-actions">
-                    <button class="add-to-cart-btn">THÊM VÀO GIỎ</button>
-                    <button class="view-more-btn">XEM THÊM</button>
-                </div>
-            </div>
-
-            <div class="product-item">
-                <img class="product-image default-image" src="/logo/dssanpham/ghe1.jpg" alt="Armchair Doulton vintage">
-                <img class="product-image hover-image" src="/logo/dssanpham/ghe1.1.jpg" alt="Armchair Doulton vintage hover">
-                <div class="product-name">Armchair Doulton vintage</div>
-                <div class="product-price">28,500,000đ</div>
-                <div class="product-actions">
-                    <button class="add-to-cart-btn">THÊM VÀO GIỎ</button>
-                    <button class="view-more-btn">XEM THÊM</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Danh sách sản phẩm -->
-        <div class="product-grid">
-            <div class="product-item">
-                <img class="product-image default-image" src="/logo/dssanpham/ghe1.jpg" alt="Armchair Doulton vintage">
-                <img class="product-image hover-image" src="/logo/dssanpham/ghe1.1.jpg" alt="Armchair Doulton vintage hover">
-                <div class="product-name">Armchair Doulton vintage</div>
-                <div class="product-price">28,500,000đ</div>
-                <div class="product-actions">
-                    <button class="add-to-cart-btn">THÊM VÀO GIỎ</button>
-                    <button class="view-more-btn">XEM THÊM</button>
-                </div>
-            </div>
-
-            <div class="product-item">
-                <img class="product-image default-image" src="/logo/dssanpham/ghe1.jpg" alt="Armchair Doulton vintage">
-                <img class="product-image hover-image" src="/logo/dssanpham/ghe1.1.jpg" alt="Armchair Doulton vintage hover">
-                <div class="product-name">Armchair Doulton vintage</div>
-                <div class="product-price">28,500,000đ</div>
-                <div class="product-actions">
-                    <button class="add-to-cart-btn">THÊM VÀO GIỎ</button>
-                    <button class="view-more-btn">XEM THÊM</button>
-                </div>
-            </div>
-
-            <div class="product-item">
-                <img class="product-image default-image" src="/logo/dssanpham/ghe1.jpg" alt="Armchair Doulton vintage">
-                <img class="product-image hover-image" src="/logo/dssanpham/ghe1.1.jpg" alt="Armchair Doulton vintage hover">
-                <div class="product-name">Armchair Doulton vintage</div>
-                <div class="product-price">28,500,000đ</div>
-                <div class="product-actions">
-                    <button class="add-to-cart-btn">THÊM VÀO GIỎ</button>
-                    <button class="view-more-btn">XEM THÊM</button>
-                </div>
-            </div>
-
-            <div class="product-item">
-                <img class="product-image default-image" src="/logo/dssanpham/ghe1.jpg" alt="Armchair Doulton vintage">
-                <img class="product-image hover-image" src="/logo/dssanpham/ghe1.1.jpg" alt="Armchair Doulton vintage hover">
-                <div class="product-name">Armchair Doulton vintage</div>
-                <div class="product-price">28,500,000đ</div>
-                <div class="product-actions">
-                    <button class="add-to-cart-btn">THÊM VÀO GIỎ</button>
-                    <button class="view-more-btn">XEM THÊM</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Danh sách sản phẩm -->
-        <div class="product-grid">
-            <div class="product-item">
-                <img class="product-image default-image" src="/logo/dssanpham/ghe1.jpg" alt="Armchair Doulton vintage">
-                <img class="product-image hover-image" src="/logo/dssanpham/ghe1.1.jpg" alt="Armchair Doulton vintage hover">
-                <div class="product-name">Armchair Doulton vintage</div>
-                <div class="product-price">28,500,000đ</div>
-                <div class="product-actions">
-                    <button class="add-to-cart-btn">THÊM VÀO GIỎ</button>
-                    <button class="view-more-btn">XEM THÊM</button>
-                </div>
-            </div>
-
-            <div class="product-item">
-                <img class="product-image default-image" src="/logo/dssanpham/ghe1.jpg" alt="Armchair Doulton vintage">
-                <img class="product-image hover-image" src="/logo/dssanpham/ghe1.1.jpg" alt="Armchair Doulton vintage hover">
-                <div class="product-name">Armchair Doulton vintage</div>
-                <div class="product-price">28,500,000đ</div>
-                <div class="product-actions">
-                    <button class="add-to-cart-btn">THÊM VÀO GIỎ</button>
-                    <button class="view-more-btn">XEM THÊM</button>
-                </div>
-            </div>
-
-            <div class="product-item">
-                <img class="product-image default-image" src="/logo/dssanpham/ghe1.jpg" alt="Armchair Doulton vintage">
-                <img class="product-image hover-image" src="/logo/dssanpham/ghe1.1.jpg" alt="Armchair Doulton vintage hover">
-                <div class="product-name">Armchair Doulton vintage</div>
-                <div class="product-price">28,500,000đ</div>
-                <div class="product-actions">
-                    <button class="add-to-cart-btn">THÊM VÀO GIỎ</button>
-                    <button class="view-more-btn">XEM THÊM</button>
-                </div>
-            </div>
-
-            <div class="product-item">
-                <img class="product-image default-image" src="/logo/dssanpham/ghe1.jpg" alt="Armchair Doulton vintage">
-                <img class="product-image hover-image" src="/logo/dssanpham/ghe1.1.jpg" alt="Armchair Doulton vintage hover">
-                <div class="product-name">Armchair Doulton vintage</div>
-                <div class="product-price">28,500,000đ</div>
-                <div class="product-actions">
-                    <button class="add-to-cart-btn">THÊM VÀO GIỎ</button>
-                    <button class="view-more-btn">XEM THÊM</button>
-                </div>
-            </div>
-        </div>
+            if ($result->num_rows > 0) {
+                // Lặp qua từng sản phẩm và hiển thị
+                while ($row = $result->fetch_assoc()) {
+                    echo '<div class="product-item">';
+                    echo '<img class="product-image default-image" src="' . $row["image_url"] . '" alt="' . htmlspecialchars($row["name"]) . '">';
+                    echo '<img class="product-image hover-image" src="' . $row["hover_image_url"] . '" alt="' . htmlspecialchars($row["name"]) . ' hover">';
+                    echo '<div class="product-name">' . htmlspecialchars($row["name"]) . '</div>';
+                    echo '<div class="product-price">' . number_format($row["price"], 0, ",", ".") . 'đ</div>';
+                    echo '<div class="product-actions">';
+                    echo '<button class="add-to-cart-btn">THÊM VÀO GIỎ</button>';
+                    echo '<button class="view-more-btn">XEM THÊM</button>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+            } else {
+                echo "Không có sản phẩm nào.";
+            }
+            ?>
     </div>
 
     <!-- Footer -->
