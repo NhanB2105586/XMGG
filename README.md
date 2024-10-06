@@ -8,9 +8,9 @@ Học kỳ 1, Năm học 2024-2025
 
 **Họ tên SV 1**: Nguyễn Trọng Nhân
 
-**MSSV 2**:
+**MSSV 2**: B2111860
 
-**Họ tên SV 2**:
+**Họ tên SV 2**: Võ Phú Quí
 
 **Lớp học phần**: CT275/01
 
