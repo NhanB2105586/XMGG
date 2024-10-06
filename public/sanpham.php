@@ -2,6 +2,7 @@
 include_once __DIR__ . '/../src/partials/header.php';
 include_once __DIR__ . '/../src/dp.php';
 ?>
+<link href="/css/stylesanpham.css" rel="stylesheet">
 
 <body>
     <!-- Navbar -->
@@ -70,11 +71,11 @@ include_once __DIR__ . '/../src/dp.php';
                 echo "Không có sản phẩm nào.";
             }
             ?>
-    </div>
+        </div>
 
-    <!-- Footer -->
-    <?php include_once __DIR__ . '/../src/partials/app.php'; ?>
-    <?php include_once __DIR__ . '/../src/partials/footer.php'; ?>
+        <!-- Footer -->
+        <?php include_once __DIR__ . '/../src/partials/app.php'; ?>
+        <?php include_once __DIR__ . '/../src/partials/footer.php'; ?>
 </body>
 
 </html>

@@ -25,13 +25,12 @@
                   <div class="row">
                     <div class="col-sm-4">
                       <ul class="multi-column-dropdown">
-                        <li><a href="#">Sofa</a></li>
+                        <li><a href="/sanpham/sofa.php">Sofa</a></li>
                         <li class="divider"></li>
                         <li><a href="#">Ghế thư giãn</a></li>
                         <li><a href="#">Ghế ăn</a></li>
                         <li><a href="#">Ghế làm việc</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Kệ trưng bày</a></li>
                         <li><a href="#">Kệ phòng khách</a></li>
                         <li class="divider"></li>
                         <li><a href="#">Giường ngủ</a></li>
@@ -45,7 +44,6 @@
                         <li><a href="#">Bàn làm việc </a></li>
                         <li class="divider"></li>
                         <li><a href="#">Tủ tivi</a></li>
-                        <li><a href="#">Tủ giày</a></li>
                         <li><a href="#">Tủ bếp</a></li>
                         <li><a href="#">Tủ ly </a></li>
                         <li><a href="#">Tủ áo</a></li>
@@ -68,22 +66,21 @@
                 </ul>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="roomDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle <?php if (basename($_SERVER['PHP_SELF']) == 'phongkhach.php') echo 'active'; ?>" href="/" id="productDropdown1" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   PHÒNG
                 </a>
-                <ul class="dropdown-menu multi-column columns-3">
+                <ul class="dropdown-menu multi-column columns-2">
                   <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                       <ul class="multi-column-dropdown">
-                        <li><a href="#">Phòng khách</a></li>
-                        <li><a href="#">Phòng ăn</a></li>
-                        <li><a href="#">Phòng ngủ</a></li>
-                        <li><a href="#">Phòng làm việc</a></li>
+                        <li><a href="/phongkhach.php">Phòng khách</a></li>
+                        <li><a href="/phongan.php">Phòng ăn</a></li>
+                        <li><a href="/phongngu.php">Phòng ngủ</a></li>
+                        <li><a href="/phonglamviec.php">Phòng làm việc</a></li>
                       </ul>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                       <ul class="multi-column-dropdown">
-                        <li><a href="#">Tủ bếp</a></li>
                         <li><a href="#">Hàng trang trí</a></li>
                       </ul>
                     </div>
@@ -91,13 +88,16 @@
                 </ul>
               </li>
               <li class="nav-item"><a class="nav-link" href="#">BỘ SƯU TẬP</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">KHUYẾN MÃI</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">DỊCH VỤ</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">TIN TỨC</a></li>
               <li class="nav-item"><a class="nav-link" href="#">LIÊN HỆ CHÚNG TÔI</a></li>
             </ul>
 
             <!-- Search Bar -->
             <form class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Tìm sản phẩm" aria-label="Search">
-              <button class="btn btn-outline-primary" type="submit">
+              <button class="btn btn-outline-dark" type="submit">
                 <i class="fas fa-search"></i>
               </button>
             </form>
@@ -109,12 +109,30 @@
                   <i class="fas fa-shopping-cart"></i>
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
+              <li class="nav-item position-relative">
+                <a class="nav-link" href="#" id="userIcon" data-bs-toggle="dropdown" aria-expanded="false">
                   <i class="fas fa-user"></i>
                 </a>
+                <div class="dropdown-menu p-4 dropdown-menu-end shadow" style="min-width: 350px;">
+                  <h2 class="dropdown-header text-center fw-bold">ĐĂNG NHẬP TÀI KHOẢN</h2>
+                  <p class="text-center">Nhập email và mật khẩu của bạn:</p>
+                  <form>
+                    <div class="mb-3">
+                      <input type="email" class="form-control" id="email" placeholder="Nhập email hoặc số điện thoại">
+                    </div>
+                    <div class="mb-3">
+                      <input type="password" class="form-control" id="password" placeholder="Mật khẩu">
+                    </div>
+                    <button type="submit" class="btn btn-dark w-100">ĐĂNG NHẬP</button>
+                    <div class="text-center mt-3">
+                      <p class="mb-1">Khách hàng mới? <a href="/dangky.php">Tạo tài khoản</a></p>
+                      <p>Quên mật khẩu? <a href="#">Khôi phục mật khẩu</a></p>
+                    </div>
+                  </form>
+                </div>
               </li>
             </ul>
+
           </div>
         </div>
       </nav>
