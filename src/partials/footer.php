@@ -53,7 +53,7 @@
   </div>
 </footer>
 
-
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </script>
 <script>
@@ -82,3 +82,22 @@
     document.getElementById('productDropdown').classList.add('active');
   }
 </script>
+
+<script>
+  // Lấy phần tử bằng ID
+  document.getElementById("productDropdown1").addEventListener("click", function(event) {
+    // Ngăn không cho menu thả xuống bị kích hoạt
+    event.preventDefault();
+    // Chuyển hướng đến trang sanpham.php
+    window.location.href = "/phongkhach.php";
+  });
+</script>
+
+<script>
+  // Kiểm tra URL của trang hiện tại
+  if (window.location.pathname.includes('phongkhach.php')) {
+    document.getElementById('productDropdown1').classList.add('active');
+  }
+</script>
+
+
