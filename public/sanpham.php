@@ -2,7 +2,6 @@
 include_once __DIR__ . '/../src/partials/header.php';
 include_once __DIR__ . '/../src/dp.php';
 ?>
-<link href="/css/stylesanpham.css" rel="stylesheet">
 
 <body>
     <!-- Navbar -->
@@ -17,7 +16,8 @@ include_once __DIR__ . '/../src/dp.php';
             <div class="banner-text">
                 Sản phẩm
                 <div class="breadcrumb">
-                    <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/sanpham.php"> <strong class="current-page">Sản phẩm</strong></a>
+                    <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/sanpham.php"> <strong class="current-page">Sản
+                            phẩm</strong></a>
                 </div>
             </div>
         </div>
@@ -47,32 +47,144 @@ include_once __DIR__ . '/../src/dp.php';
         </div>
 
         <!-- Danh sách sản phẩm -->
-        <div class="product-grid">
-            <?php
-            // Truy vấn lấy danh sách sản phẩm từ cơ sở dữ liệu
-            $sql = "SELECT * FROM products";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                // Lặp qua từng sản phẩm và hiển thị
-                while ($row = $result->fetch_assoc()) {
-                    echo '<div class="product-item">';
-                    echo '<img class="product-image default-image" src="' . $row["image_url"] . '" alt="' . htmlspecialchars($row["name"]) . '">';
-                    echo '<img class="product-image hover-image" src="' . $row["hover_image_url"] . '" alt="' . htmlspecialchars($row["name"]) . ' hover">';
-                    echo '<div class="product-name">' . htmlspecialchars($row["name"]) . '</div>';
-                    echo '<div class="product-price">' . number_format($row["price"], 0, ",", ".") . 'đ</div>';
-                    echo '<div class="product-actions">';
-                    echo '<button class="add-to-cart-btn">THÊM VÀO GIỎ</button>';
-                    echo '<button class="view-more-btn">XEM THÊM</button>';
-                    echo '</div>';
-                    echo '</div>';
-                }
-            } else {
-                echo "Không có sản phẩm nào.";
-            }
-            ?>
+        <div class="container mb-3 mt-3 ">
+            <div class="title text-center py-3">
+                <h2 class="position-relative d-inline-block">SOFA</h2>
+            </div>
+            <div class="special-list row g-0 ">
+                <div class=" product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
+                    <div class="special-img position-relative overflow-hidden">
+                        <img src="/images/tu-quan-ao-wddct05.jpg" class="w-100" alt="anh">
+                    </div>
+                    <div class="text-start m-1">
+                        <p class="text-capitalize mt-3 mb-1">Tủ quần áo</p>
+                        <div class="d-flex">
+                            <span class="fw-bold d-block ">20.000.000đ</span>
+                            <p class=" price-old ">23.000.000đ</p>
+                        </div>
+                    </div>
+                    <div class=" d-flex justify-content-around">
+                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
+                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Chi Tiết</a>
+                    </div>
+                </div>
+                <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3 ">
+                    <div class="special-img position-relative overflow-hidden">
+                        <img src="/images/tu-quan-ao-wddct05.jpg" class="w-100">
+                    </div>
+                    <div class="text-start m-1">
+                        <p class="text-capitalize mt-3 mb-1">Tủ quần áo</p>
+                        <div class="d-flex">
+                            <span class="fw-bold d-block ">20.000.000đ</span>
+                            <p class=" price-old ">23.000.000đ</p>
+                        </div>
+                    </div>
+                    <div class=" d-flex justify-content-around">
+                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
+                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Chi Tiết</a>
+                    </div>
+                </div>
+                <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3 ">
+                    <div class="special-img position-relative overflow-hidden">
+                        <img src="/images/tu-quan-ao-wddct05.jpg" class="w-100">
+                    </div>
+                    <div class="text-start m-1">
+                        <p class="text-capitalize mt-3 mb-1">Tủ quần áo</p>
+                        <div class="d-flex">
+                            <span class="fw-bold d-block ">20.000.000đ</span>
+                            <p class=" price-old ">23.000.000đ</p>
+                        </div>
+                    </div>
+                    <div class=" d-flex justify-content-around">
+                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
+                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Chi Tiết</a>
+                    </div>
+                </div>
+                <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3 ">
+                    <div class="special-img position-relative overflow-hidden">
+                        <img src="/images/tu-quan-ao-wddct05.jpg" class="w-100">
+                    </div>
+                    <div class="text-start m-1">
+                        <p class="text-capitalize mt-3 mb-1">Tủ quần áo</p>
+                        <div class="d-flex">
+                            <span class="fw-bold d-block ">20.000.000đ</span>
+                            <p class=" price-old ">23.000.000đ</p>
+                        </div>
+                    </div>
+                    <div class=" d-flex justify-content-around">
+                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
+                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Chi Tiết</a>
+                    </div>
+                </div>
+                <div class=" product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
+                    <div class="special-img position-relative overflow-hidden">
+                        <img src="/images/tu-quan-ao-wddct05.jpg" class="w-100">
+                    </div>
+                    <div class="text-start m-1">
+                        <p class="text-capitalize mt-3 mb-1">Tủ quần áo</p>
+                        <div class="d-flex">
+                            <span class="fw-bold d-block ">20.000.000đ</span>
+                            <p class=" price-old ">23.000.000đ</p>
+                        </div>
+                    </div>
+                    <div class=" d-flex justify-content-around">
+                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
+                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Chi Tiết</a>
+                    </div>
+                </div>
+                <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3 ">
+                    <div class="special-img position-relative overflow-hidden">
+                        <img src="/images/tu-quan-ao-wddct05.jpg" class="w-100">
+                    </div>
+                    <div class="text-start m-1">
+                        <p class="text-capitalize mt-3 mb-1">Tủ quần áo</p>
+                        <div class="d-flex">
+                            <span class="fw-bold d-block ">20.000.000đ</span>
+                            <p class=" price-old ">23.000.000đ</p>
+                        </div>
+                    </div>
+                    <div class=" d-flex justify-content-around">
+                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
+                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Chi Tiết</a>
+                    </div>
+                </div>
+                <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3 ">
+                    <div class="special-img position-relative overflow-hidden">
+                        <img src="/images/tu-quan-ao-wddct05.jpg" class="w-100">
+                    </div>
+                    <div class="text-start m-1">
+                        <p class="text-capitalize mt-3 mb-1">Tủ quần áo</p>
+                        <div class="d-flex">
+                            <span class="fw-bold d-block ">20.000.000đ</span>
+                            <p class=" price-old ">23.000.000đ</p>
+                        </div>
+                    </div>
+                    <div class=" d-flex justify-content-around">
+                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
+                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Chi Tiết</a>
+                    </div>
+                </div>
+                <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3 ">
+                    <div class="special-img position-relative overflow-hidden">
+                        <img src="/images/tu-quan-ao-wddct05.jpg" class="w-100">
+                    </div>
+                    <div class="text-start m-1">
+                        <p class="text-capitalize mt-3 mb-1">Tủ quần áo</p>
+                        <div class="d-flex">
+                            <span class="fw-bold d-block ">20.000.000đ</span>
+                            <p class=" price-old ">23.000.000đ</p>
+                        </div>
+                    </div>
+                    <div class=" d-flex justify-content-around">
+                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
+                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Chi Tiết</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="/sofa.php" class="btn btn-secondary m-3" style="width: 200px;">Xem thêm</a>
+            </div>
         </div>
-
         <!-- Footer -->
         <?php include_once __DIR__ . '/../src/partials/app.php'; ?>
         <?php include_once __DIR__ . '/../src/partials/footer.php'; ?>

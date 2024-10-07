@@ -239,9 +239,9 @@ include_once __DIR__ . '/../src/partials/header.php';
             </div>
         </div>
     </div>
-    < <!-- Footer -->
-        <?php include_once __DIR__ . '/../src/partials/app.php'; ?>
-        <?php include_once __DIR__ . '/../src/partials/footer.php'; ?>
+    <!-- Footer -->
+    <?php include_once __DIR__ . '/../src/partials/app.php'; ?>
+    <?php include_once __DIR__ . '/../src/partials/footer.php'; ?>
 </body>
 
 </html>
