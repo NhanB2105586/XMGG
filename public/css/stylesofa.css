@@ -74,25 +74,16 @@
     cursor: pointer;
 }
 
-.product-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 20px;
-}
 
 .product-item {
     position: relative;
-    width: 300px;
     /* Tùy chỉnh chiều rộng cho phù hợp */
-    margin: 15px;
+
     text-align: center;
     border: 1px solid #ccc;
     /* Thêm viền cho sản phẩm */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    overflow: hidden;
-    padding: 15px;
     /* Tạo khoảng cách giữa khung và nội dung */
 }
 

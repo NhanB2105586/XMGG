@@ -1,22 +1,45 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white py-2 fixed-top">
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white py-1 fixed-top">
     <div class="container">
-        <!-- Navbar Brand -->
-        <a class="navbar-brand order-lg-0" href="/">
-            <img src="/logo/logo.png" alt="Logo" style="height: 50px;">
+        <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0" href="/index.php">
+            <img src="images/logo.png" alt="site icon" style="width: 70px;">
         </a>
 
-        <!-- Navbar Collapse -->
+        <div class="order-lg-2 nav-btns d-flex">
+            <form class="d-flex " role="search" style="width: 220px;">
+                <input class="form-control me-2" type="search" placeholder="Tìm sản phẩm" aria-label="Search">
+                <button class="btn btn-outline-dark" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+            <button type="button" class="btn position-relative">
+                <a href="" class="text-black"><i class="fa fa-shopping-cart"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge bg-primary">5</span></a>
+
+            </button>
+            <button type="button" class="btn position-relative">
+                <a href="/dangnhap.php"><i class="fa fa-user text-black"></i> </a></button>
+
+
+        </div>
+
+        <button class="navbar-toggler border-0 order-lg-1" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle <?php if (basename($_SERVER['PHP_SELF']) == 'sanpham.php') echo 'active'; ?>" href="/" id="productDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle <?php if (basename($_SERVER['PHP_SELF']) == 'sanpham.php') echo 'active'; ?>"
+                        href="/" id="productDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         SẢN PHẨM
                     </a>
                     <ul class="dropdown-menu multi-column columns-3">
                         <div class="row">
                             <div class="col-sm-4">
                                 <ul class="multi-column-dropdown">
-                                    <li><a href="/sanpham/sofa.php">Sofa</a></li>
+                                    <li><a href="/sofa.php">Sofa</a></li>
                                     <li class="divider"></li>
                                     <li><a href="#">Ghế thư giãn</a></li>
                                     <li><a href="#">Ghế ăn</a></li>
@@ -58,7 +81,8 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="roomDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="roomDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         PHÒNG
                     </a>
                     <ul class="dropdown-menu multi-column columns-3">
@@ -84,44 +108,7 @@
                 <li class="nav-item"><a class="nav-link" href="#">LIÊN HỆ CHÚNG TÔI</a></li>
             </ul>
 
-            <!-- Search Bar -->
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Tìm sản phẩm" aria-label="Search">
-                <button class="btn btn-outline-dark" type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
-            </form>
 
-            <!-- Icons for Cart and User -->
-            <ul class="navbar-nav ms-3">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-shopping-cart"></i>
-                    </a>
-                </li>
-                <li class="nav-item position-relative">
-                    <a class="nav-link" href="#" id="userIcon" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user"></i>
-                    </a>
-                    <div class="dropdown-menu p-4 dropdown-menu-end shadow" style="min-width: 350px;">
-                        <h2 class="dropdown-header text-center fw-bold">ĐĂNG NHẬP TÀI KHOẢN</h2>
-                        <p class="text-center">Nhập email và mật khẩu của bạn:</p>
-                        <form>
-                            <div class="mb-3">
-                                <input type="email" class="form-control" id="email" placeholder="Nhập email hoặc số điện thoại">
-                            </div>
-                            <div class="mb-3">
-                                <input type="password" class="form-control" id="password" placeholder="Mật khẩu">
-                            </div>
-                            <button type="submit" class="btn btn-dark w-100">ĐĂNG NHẬP</button>
-                            <div class="text-center mt-3">
-                                <p class="mb-1">Khách hàng mới? <a href="/dangky.php">Tạo tài khoản</a></p>
-                                <p>Quên mật khẩu? <a href="#">Khôi phục mật khẩu</a></p>
-                            </div>
-                        </form>
-                    </div>
-                </li>
-            </ul>
         </div>
     </div>
 </nav>

@@ -1,0 +1,29 @@
+.wrapper{
+    margin-top: 150px;
+    margin-bottom: 200px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.form-register{
+    padding: 40px 15% ;
+}
+body{
+    background: url(/images/anhnendangnhap.png) no-repeat center center fixed;
+    background-size: cover;
+}
+label{
+    font-size: 19px;
+}
+.title-form{
+    font-weight: 600;
+}
+.btn-form{
+    background-color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: 500;
+    
+}
+.btn-form:hover{
+    background-color: rgb(162, 165, 168);
+}

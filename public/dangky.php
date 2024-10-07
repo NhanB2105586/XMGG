@@ -13,7 +13,7 @@ include_once __DIR__ . '/../src/dp.php';
         <div class="row">
             <div class="col-md-6">
                 <h1 class="fw-bold">Tạo tài khoản</h1>
-                <p>Đăng ký tài khoản chỉ trong 1 phút để tích lũy điểm và nhận ưu đãi từ MOHO.</p>
+                <p>Đăng ký tài khoản chỉ trong 1 phút để tích lũy điểm và nhận ưu đãi</p>
             </div>
             <div class="col-md-6">
                 <div class="card p-4 shadow">
@@ -37,7 +37,7 @@ include_once __DIR__ . '/../src/dp.php';
                             <input type="email" class="form-control" placeholder="Email">
                         </div>
                         <div class="mb-3">
-                            <input type="phone" class="form-control"  placeholder="Số điện thoại">
+                            <input type="phone" class="form-control" placeholder="Số điện thoại">
                         </div>
                         <div class="mb-3">
                             <input type="password" class="form-control" placeholder="Mật khẩu">
@@ -51,10 +51,10 @@ include_once __DIR__ . '/../src/dp.php';
             </div>
         </div>
     </div>
+
+
     <!-- Footer -->
     <?php include_once __DIR__ . '/../src/partials/app.php'; ?>
     <?php include_once __DIR__ . '/../src/partials/footer.php'; ?>
 
 </body>
-
-</html>
