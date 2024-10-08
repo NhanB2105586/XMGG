@@ -113,7 +113,8 @@ include_once __DIR__ . '/../src/partials/header.php';
                     </div>
                     <div class=" d-flex justify-content-around">
                         <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
-                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Chi Tiết</a>
+                        <a href="/chitietsanpham.php" class="btn btn-product mt-3 p-2 btn-detail-product"
+                            style="width: 45%;">Chi Tiết</a>
                     </div>
                 </div>
                 <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3 ">
@@ -129,7 +130,8 @@ include_once __DIR__ . '/../src/partials/header.php';
                     </div>
                     <div class=" d-flex justify-content-around">
                         <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
-                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Chi Tiết</a>
+                        <a href="/chitietsanpham.php" class="btn btn-product mt-3 p-2 btn-detail-product"
+                            style="width: 45%;">Chi Tiết</a>
                     </div>
                 </div>
                 <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3 ">
@@ -145,7 +147,8 @@ include_once __DIR__ . '/../src/partials/header.php';
                     </div>
                     <div class=" d-flex justify-content-around">
                         <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
-                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Chi Tiết</a>
+                        <a href="/chitietsanpham.php" class="btn btn-product mt-3 p-2 btn-detail-product"
+                            style="width: 45%;">Chi Tiết</a>
                     </div>
                 </div>
                 <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3 ">
@@ -161,9 +164,13 @@ include_once __DIR__ . '/../src/partials/header.php';
                     </div>
                     <div class=" d-flex justify-content-around">
                         <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
-                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Chi Tiết</a>
+                        <a href="/chitietsanpham.php" class="btn btn-product mt-3 p-2 btn-detail-product"
+                            style="width: 45%;">Chi Tiết</a>
                     </div>
                 </div>
+            </div>
+            <div class="text-center">
+                <a href="#" class="btn btn-secondary m-3" style="width: 200px;">Xem thêm</a>
             </div>
         </div>
         <div class="container mb-3">
@@ -185,7 +192,8 @@ include_once __DIR__ . '/../src/partials/header.php';
                     </div>
                     <div class=" d-flex justify-content-around">
                         <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
-                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Chi Tiết</a>
+                        <a href="/chitietsanpham.php" class="btn btn-product mt-3 p-2 btn-detail-product"
+                            style="width: 45%;">Chi Tiết</a>
                     </div>
                 </div>
                 <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3 ">
@@ -201,7 +209,8 @@ include_once __DIR__ . '/../src/partials/header.php';
                     </div>
                     <div class=" d-flex justify-content-around">
                         <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
-                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Chi Tiết</a>
+                        <a href="/chitietsanpham.php" class="btn btn-product mt-3 p-2 btn-detail-product"
+                            style="width: 45%;">Chi Tiết</a>
                     </div>
                 </div>
                 <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3 ">
@@ -217,7 +226,8 @@ include_once __DIR__ . '/../src/partials/header.php';
                     </div>
                     <div class=" d-flex justify-content-around">
                         <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
-                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Chi Tiết</a>
+                        <a href="/chitietsanpham.php" class="btn btn-product mt-3 p-2 btn-detail-product"
+                            style="width: 45%;">Chi Tiết</a>
                     </div>
                 </div>
                 <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3 ">
@@ -233,12 +243,19 @@ include_once __DIR__ . '/../src/partials/header.php';
                     </div>
                     <div class=" d-flex justify-content-around">
                         <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
-                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Chi Tiết</a>
+                        <a href="/chitietsanpham.php" class="btn btn-product mt-3 p-2 btn-detail-product"
+                            style="width: 45%;">Chi Tiết</a>
                     </div>
                 </div>
+                <a href="#" class="detailLink" style="display: none;"></a>
+            </div>
+            <div class="text-center">
+                <a href="#" class="btn btn-secondary m-3" style="width: 200px;">Xem thêm</a>
             </div>
         </div>
     </div>
+    <!--Script-->
+    <script src="/js/script.js"></script>
     <!-- Footer -->
     <?php include_once __DIR__ . '/../src/partials/app.php'; ?>
     <?php include_once __DIR__ . '/../src/partials/footer.php'; ?>
