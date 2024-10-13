@@ -13,7 +13,7 @@
                 </button>
             </form>
             <button type="button" class="btn position-relative">
-                <a href="" class="text-black"><i class="fa fa-shopping-cart"></i>
+                <a href="/giohang.php" class="text-black"><i class="fa fa-shopping-cart"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge bg-primary">5</span></a>
 
             </button>
@@ -89,10 +89,10 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <ul class="multi-column-dropdown">
-                                    <li><a href="#">Phòng khách</a></li>
-                                    <li><a href="#">Phòng ăn</a></li>
-                                    <li><a href="#">Phòng ngủ</a></li>
-                                    <li><a href="#">Phòng làm việc</a></li>
+                                    <li><a href="/phongkhach.php">Phòng khách</a></li>
+                                    <li><a href="/phongan.php">Phòng ăn</a></li>
+                                    <li><a href="/phongngu.php">Phòng ngủ</a></li>
+                                    <li><a href="/phonglamviec.php">Phòng làm việc</a></li>
                                 </ul>
                             </div>
                             <div class="col-sm-4">

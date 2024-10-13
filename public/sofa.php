@@ -52,7 +52,7 @@ include_once __DIR__ . '/../src/dp.php';
             <div class="special-list row g-0 ">
                 <div class=" product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
                     <div class="special-img position-relative overflow-hidden">
-                        <img src="/images/tu-quan-ao-wddct05.jpg" class="w-100" alt="anh">
+                        <img src="/images/sofa.png" class="w-100" alt="anh">
                     </div>
                     <div class="text-start m-1">
                         <p class="text-capitalize mt-3 mb-1">Tủ quần áo</p>
@@ -68,7 +68,7 @@ include_once __DIR__ . '/../src/dp.php';
                 </div>
                 <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3 ">
                     <div class="special-img position-relative overflow-hidden">
-                        <img src="/images/tu-quan-ao-wddct05.jpg" class="w-100">
+                        <img src="/images/sofa.png" class="w-100">
                     </div>
                     <div class="text-start m-1">
                         <p class="text-capitalize mt-3 mb-1">Tủ quần áo</p>
@@ -84,7 +84,7 @@ include_once __DIR__ . '/../src/dp.php';
                 </div>
                 <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3 ">
                     <div class="special-img position-relative overflow-hidden">
-                        <img src="/images/tu-quan-ao-wddct05.jpg" class="w-100">
+                        <img src="/images/sofa.png" class="w-100">
                     </div>
                     <div class="text-start m-1">
                         <p class="text-capitalize mt-3 mb-1">Tủ quần áo</p>
@@ -100,7 +100,7 @@ include_once __DIR__ . '/../src/dp.php';
                 </div>
                 <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3 ">
                     <div class="special-img position-relative overflow-hidden">
-                        <img src="/images/tu-quan-ao-wddct05.jpg" class="w-100">
+                        <img src="/images/sofa.png" class="w-100">
                     </div>
                     <div class="text-start m-1">
                         <p class="text-capitalize mt-3 mb-1">Tủ quần áo</p>
@@ -116,7 +116,7 @@ include_once __DIR__ . '/../src/dp.php';
                 </div>
                 <div class=" product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
                     <div class="special-img position-relative overflow-hidden">
-                        <img src="/images/tu-quan-ao-wddct05.jpg" class="w-100">
+                        <img src="/images/sofa.png" class="w-100">
                     </div>
                     <div class="text-start m-1">
                         <p class="text-capitalize mt-3 mb-1">Tủ quần áo</p>
@@ -132,7 +132,7 @@ include_once __DIR__ . '/../src/dp.php';
                 </div>
                 <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3 ">
                     <div class="special-img position-relative overflow-hidden">
-                        <img src="/images/tu-quan-ao-wddct05.jpg" class="w-100">
+                        <img src="/images/sofa.png" class="w-100">
                     </div>
                     <div class="text-start m-1">
                         <p class="text-capitalize mt-3 mb-1">Tủ quần áo</p>
@@ -148,7 +148,7 @@ include_once __DIR__ . '/../src/dp.php';
                 </div>
                 <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3 ">
                     <div class="special-img position-relative overflow-hidden">
-                        <img src="/images/tu-quan-ao-wddct05.jpg" class="w-100">
+                        <img src="/images/sofa.png" class="w-100">
                     </div>
                     <div class="text-start m-1">
                         <p class="text-capitalize mt-3 mb-1">Tủ quần áo</p>
@@ -164,7 +164,7 @@ include_once __DIR__ . '/../src/dp.php';
                 </div>
                 <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3 ">
                     <div class="special-img position-relative overflow-hidden">
-                        <img src="/images/tu-quan-ao-wddct05.jpg" class="w-100">
+                        <img src="/images/sofa.png" class="w-100">
                     </div>
                     <div class="text-start m-1">
                         <p class="text-capitalize mt-3 mb-1">Tủ quần áo</p>
