@@ -49,7 +49,7 @@ include_once __DIR__ . '/../src/dp.php';
         <!-- Danh sách sản phẩm -->
         <div class="container mb-3 mt-3 ">
             <div class="title text-center py-3">
-                <h2 class="position-relative d-inline-block">SOFA</h2>
+                <h2 class="position-relative d-inline-block">Sản phẩm bán chạy</h2>
             </div>
             <div class="special-list row g-0 ">
                 <div class=" product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">

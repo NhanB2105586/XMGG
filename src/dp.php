@@ -3,7 +3,7 @@
 
 $servername = "localhost";  // Tên máy chủ
 $username = "root";     // Tên người dùng
-$password = "";     // Mật khẩu của cơ sở dữ liệu
+$password = "nhan12345678";     // Mật khẩu của cơ sở dữ liệu
 $dbname = "project";  // Tên cơ sở dữ liệu
 
 // Tạo kết nối
