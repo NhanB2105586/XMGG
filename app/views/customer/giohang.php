@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once __DIR__ . '/../src/dp.php';
-include_once __DIR__ . '/../src/partials/header.php';
+include_once __DIR__ . '/../app/models/PDOFactory.php';
+include_once __DIR__ . '/../app/partials/header.php';
 
 // Assuming you store the cart items in a session:
 $cart_items = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
@@ -10,7 +10,7 @@ $total = 0;
 
 <body>
     <!-- Navbar -->
-    <?php include_once __DIR__ . '/../src/partials/navbar.php'; ?>
+    <?php include_once __DIR__ . '/../app/partials/navbar.php'; ?>
 
     <!-- Main Container -->
     <div class="container my-5">
@@ -23,7 +23,8 @@ $total = 0;
                         <div class="card mb-3">
                             <div class="row g-0">
                                 <div class="col-md-4">
-                                    <img src="<?php echo $item['image']; ?>" class="img-fluid rounded-start" alt="<?php echo $item['name']; ?>">
+                                    <img src="<?php echo $item['image']; ?>" class="img-fluid rounded-start"
+                                        alt="<?php echo $item['name']; ?>">
                                 </div>
                                 <div class="col-md-8">
                                     <div class="card-body">
@@ -63,7 +64,8 @@ $total = 0;
                             </li>
                             <li class="list-group-item">
                                 <form action="apply_coupon.php" method="POST" class="input-group">
-                                    <input type="text" name="coupon_code" class="form-control" placeholder="Mã giảm giá">
+                                    <input type="text" name="coupon_code" class="form-control"
+                                        placeholder="Mã giảm giá">
                                     <button type="submit" class="btn btn-primary">Sử dụng</button>
                                 </form>
                             </li>
@@ -80,8 +82,8 @@ $total = 0;
         </div>
     </div>
 
-    <?php include_once __DIR__ . '/../src/partials/app.php'; ?>
-    <?php include_once __DIR__ . '/../src/partials/footer.php'; ?>
+    <?php include_once __DIR__ . '/../app/partials/app.php'; ?>
+    <?php include_once __DIR__ . '/../app/partials/footer.php'; ?>
 </body>
 
 </html>

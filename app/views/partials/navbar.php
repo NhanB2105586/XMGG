@@ -18,7 +18,7 @@
 
             </button>
             <button type="button" class="btn position-relative">
-                <a href="/dangnhap.php"><i class="fa fa-user text-black"></i> </a></button>
+                <a href="/src/views/auth/dangnhap.php"><i class="fa fa-user text-black"></i> </a></button>
 
 
         </div>

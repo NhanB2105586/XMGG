@@ -1,6 +1,6 @@
 <?php
 include_once __DIR__ . '/../src/partials/header.php';
-include_once __DIR__ . '/../src/dp.php';
+include_once __DIR__ . '/../src/models/PDOFactory.php';
 ?>
 <link href="/css/stylesofa.css" rel="stylesheet">
 

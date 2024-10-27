@@ -1,0 +1,18 @@
+{
+    "name": "noithatquinhan/project",
+    "description": "Xây d?ng trang web n?i th?t Quí Nhân",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "files": [
+			"./app/helpers.php"
+		]
+    },
+    "require": {
+		"bramus/router": "^1.6",
+		"vlucas/phpdotenv": "^5.5",
+        "league/plates": "^3.5",
+        "symfony/http-foundation": "^6.0"
+	}
+}

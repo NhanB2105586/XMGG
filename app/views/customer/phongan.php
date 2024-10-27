@@ -2,7 +2,6 @@
 include_once __DIR__ . '/../src/partials/header.php';
 include_once __DIR__ . '/../src/dp.php';
 ?>
-<link href="/css/stylephongan.css" rel="stylesheet">
 
 <body>
     <!-- Navbar -->
@@ -17,7 +16,8 @@ include_once __DIR__ . '/../src/dp.php';
             <div class="banner-text">
                 Phòng ăn
                 <div class="breadcrumb">
-                    <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/phongan.php"> <strong class="current-page">Phòng ăn</strong></a>
+                    <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/phongan.php"> <strong class="current-page">Phòng
+                            ăn</strong></a>
                 </div>
             </div>
         </div>
@@ -30,12 +30,18 @@ include_once __DIR__ . '/../src/dp.php';
                         <li class="list-group-item bg-transparent border-0 fw-bold">
                             <h4>Nội thất phòng ăn</h4>
                         </li>
-                        <li class="list-group-item bg-transparent border-0 fw-bold"><a href="#" class="text-decoration-none text-dark">Mẫu phòng ăn</a></li>
-                        <li class="list-group-item bg-transparent border-0"><a href="/sanpham/sofa.php" class="text-decoration-none text-dark">Bàn ăn</a></li>
-                        <li class="list-group-item bg-transparent border-0"><a href="#" class="text-decoration-none text-dark">Ghế ăn</a></li>
-                        <li class="list-group-item bg-transparent border-0"><a href="#" class="text-decoration-none text-dark">Ghế bar</a></li>
-                        <li class="list-group-item bg-transparent border-0"><a href="#" class="text-decoration-none text-dark">Tủ ly</a></li>
-                        <li class="list-group-item bg-transparent border-0"><a href="#" class="text-decoration-none text-dark">Tủ bếp</a></li>
+                        <li class="list-group-item bg-transparent border-0 fw-bold"><a href="#"
+                                class="text-decoration-none text-dark">Mẫu phòng ăn</a></li>
+                        <li class="list-group-item bg-transparent border-0"><a href="/sanpham/sofa.php"
+                                class="text-decoration-none text-dark">Bàn ăn</a></li>
+                        <li class="list-group-item bg-transparent border-0"><a href="#"
+                                class="text-decoration-none text-dark">Ghế ăn</a></li>
+                        <li class="list-group-item bg-transparent border-0"><a href="#"
+                                class="text-decoration-none text-dark">Ghế bar</a></li>
+                        <li class="list-group-item bg-transparent border-0"><a href="#"
+                                class="text-decoration-none text-dark">Tủ ly</a></li>
+                        <li class="list-group-item bg-transparent border-0"><a href="#"
+                                class="text-decoration-none text-dark">Tủ bếp</a></li>
                     </ul>
                 </div>
             </div>
