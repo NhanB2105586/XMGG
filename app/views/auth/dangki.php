@@ -16,15 +16,9 @@ include_once __DIR__ . '/../../models/PDOFactory.php';
                     <h2 class="title-form text-center mb-3">ĐĂNG KÝ</h2>
 
                     <div class="mb-3">
-                        <label for="firstName" class="form-label">Họ</label>
-                        <input type="text" class="form-control" id="firstName" name="first_name" required>
+                        <label for="fullName" class="form-label">Họ và tên</label>
+                        <input type="text" class="form-control" id="fullName" name="full_name" required>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="lastName" class="form-label">Tên</label>
-                        <input type="text" class="form-control" id="lastName" name="last_name" required>
-                    </div>
-
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" name="email" required>

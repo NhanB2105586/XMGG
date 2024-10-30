@@ -1,2 +1,2 @@
 <?php
-$router->get('/admin', "App\Controllers\AdminController@index");
+$router->get('/admin', "App\Controllers\Admin\AdminController@index");
