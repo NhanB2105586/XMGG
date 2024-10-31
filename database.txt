@@ -1,0 +1,102 @@
+create database project
+use project
+-- Create the 'categories' table
+CREATE TABLE categories (
+    category_id INT PRIMARY KEY AUTO_INCREMENT,
+    category_name VARCHAR(255) NOT NULL
+);
+
+-- Create the 'products' table with modifications
+CREATE TABLE products (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    product_name VARCHAR(255) NOT NULL,
+    category_id INT,
+    old_price DECIMAL(10, 2),  -- Thêm giá cũ
+    price DECIMAL(10, 2) NOT NULL,  -- Giá hiện tại
+    image_url VARCHAR(255),  -- Thêm đường dẫn ảnh sản phẩm
+    in_stock BOOLEAN DEFAULT TRUE,  -- Thay thế stock bằng trạng thái còn hàng
+    description TEXT,  -- Thêm mô tả sản phẩm
+    FOREIGN KEY (category_id) REFERENCES categories(category_id)
+);
+
+-- Create the 'product_images' table
+CREATE TABLE product_images (
+    image_id INT PRIMARY KEY AUTO_INCREMENT,
+    product_id INT,
+    image_url VARCHAR(255),
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
+
+-- Create the 'users' table with modifications
+CREATE TABLE users (
+    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    fullname VARCHAR(255),
+    username VARCHAR(255) UNIQUE NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    address VARCHAR(255),  -- Thêm địa chỉ
+    phone_number VARCHAR(20)  -- Thêm số điện thoại
+);
+
+-- Create the 'orders' table with modifications
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    total_amount DECIMAL(10, 2) NOT NULL,  -- Thêm tổng tiền
+    status VARCHAR(50),
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+-- Create the 'order_details' table
+CREATE TABLE order_details (
+    order_detail_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT,
+    product_id INT,
+    quantity INT,
+    price DECIMAL(10, 2),
+    FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
+
+
+-- Thêm dữ liệu mẫu vào bảng 'categories' (loại sản phẩm)
+INSERT INTO categories (category_name) VALUES 
+('Ghế'),
+('Bàn'),
+('Tủ'),
+('Giường');
+
+-- Thêm dữ liệu mẫu vào bảng 'products' (sản phẩm)
+INSERT INTO products (product_name, category_id, old_price, price, image_url, in_stock, description) VALUES 
+('Ghế sofa', 1, 8000000, 7500000, 'giuong1.webp', TRUE, 'Ghế sofa ba chỗ ngồi với thiết kế hiện đại, bọc vải cao cấp'),
+('Ghế ăn', 1, 1200000, 1000000, 'giuong1.webp', TRUE, 'Ghế ăn gỗ tự nhiên với nệm êm'),
+('Bàn trà', 2, 1500000, 1200000, 'giuong1.webp', TRUE, 'Bàn trà mặt kính chịu lực, chân gỗ'),
+('Bàn làm việc', 2, 2000000, 1800000, 'giuong1.webp', FALSE, 'Bàn làm việc có hộc để đồ, làm từ gỗ công nghiệp'),
+('Tủ quần áo', 3, 5000000, 4500000, 'giuong1.webp', TRUE, 'Tủ quần áo gỗ hai cánh, tiết kiệm không gian'),
+('Giường ngủ', 4, 6000000, 5500000, 'giuong1.webpg', TRUE, 'Giường ngủ cỡ lớn làm từ gỗ tự nhiên chắc chắn');
+
+-- Thêm dữ liệu mẫu vào bảng 'product_images' (hình ảnh sản phẩm)
+INSERT INTO product_images (product_id, image_url) VALUES 
+(1, 'giuong1.webp'),
+(1, 'giuong1.webp'),
+(3, 'giuong1.webp'),
+(4, 'giuong1.webp'),
+(5, 'giuong1.webp'),
+(6, 'giuong1.webp');
+
+-- Thêm dữ liệu mẫu vào bảng 'users' (người dùng)
+INSERT INTO users (fullname, username, email, password, address, phone_number) VALUES 
+('Nguyễn Văn A', 'nguyenvana', 'nguyenvana@example.com', 'password123', '123 Đường Chính, TP.HCM', '0901234567'),
+('Trần Thị B', 'tranthib', 'tranthib@example.com', 'password456', '456 Đường Phụ, TP.HCM', '0907654321');
+
+-- Thêm dữ liệu mẫu vào bảng 'orders' (đơn hàng)
+INSERT INTO orders (user_id, order_date, total_amount, status) VALUES 
+(1, '2024-10-01 14:30:00', 8700000, 'Hoàn tất'),
+(2, '2024-10-02 10:00:00', 4500000, 'Đang xử lý');
+
+-- Thêm dữ liệu mẫu vào bảng 'order_details' (chi tiết đơn hàng)
+INSERT INTO order_details (order_id, product_id, quantity, price) VALUES 
+(1, 1, 1, 7500000),
+(1, 3, 1, 1200000),
+(2, 5, 1, 4500000);
