@@ -18,7 +18,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = $this->productModel->all();
+        $products = $this->productModel->getAllProducts();
         $this->sendPage('user/sanpham', [
             'products' => $products,
         ]);
@@ -26,7 +26,7 @@ class ProductController extends Controller
 
     public function show(int $id)
     {
-        $product = $this->productModel->find($id);
+        $product = $this->productModel->getProductById($id);
 
         if ($product) {
             $this->sendPage('products/show', ['product' => $product]);
