@@ -2,56 +2,39 @@
 
 namespace App\Models;
 
-use PDO;
-
 class Product extends Model
 {
-    private string $tableName = 'products';
-    private PDO $db;
-
-    public int $id = -1;
-    public string $name;
-    public string $description;
-    public float $price;
-    public string $stock_status;
-    public string $color;
-    public int $category_id;
-    public string $created_at;
-
-    public function __construct(PDO $db)
+    public function __construct($PDO)
     {
-        parent::__construct($db);
-        $this->db = $db; // Gán $db vào thuộc tính $this->db
+        parent::__construct($PDO);
     }
 
-    public function all(): array
+    public function getAllProducts()
     {
-        return parent::getAll($this->tableName); // Gọi phương thức getAll từ lớp cha
+
+        return $this->getAll('products');
+
     }
 
-    public function find(int $id): ?Product
+    public function getProductById($id)
     {
-        $statement = $this->db->prepare('SELECT * FROM products WHERE product_id = :id');
-        $statement->execute(['id' => $id]);
-
-        if ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-            $product = new Product($this->db); // Tạo đối tượng Product mới
-            return $product->fillFromDbRow($row);
-        }
-
-        return null;
+        return $this->getByID('products', 'product_id', $id);
     }
 
-    private function fillFromDbRow(array $row): Product
+
+
+    public function createProduct($data)
     {
-        $this->id = $row['product_id'];
-        $this->name = $row['product_name'];
-        $this->description = $row['description'];
-        $this->price = $row['price'];
-        $this->stock_status = $row['stock_status'];
-        $this->color = $row['color'];
-        $this->category_id = $row['category_id'];
-        $this->created_at = $row['created_at'];
-        return $this;
+        return $this->set('products', $data);
+    }
+
+    public function updateProduct($id, $data)
+    {
+        return $this->update('products', 'product_id', $id, $data);
+    }
+
+    public function deleteProduct($id)
+    {
+        return $this->delete('products', 'product_id', $id);
     }
 }

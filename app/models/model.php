@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Core\PDOFactory;
 use \PDO;
 
 class Model
