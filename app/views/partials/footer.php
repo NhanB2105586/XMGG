@@ -71,37 +71,3 @@ document.querySelector('.top-btn').addEventListener('click', function(e) {
     });
 });
 </script>
-
-<script>
-// Lấy phần tử bằng ID
-document.getElementById("productDropdown").addEventListener("click", function(event) {
-    // Ngăn không cho menu thả xuống bị kích hoạt
-    event.preventDefault();
-    // Chuyển hướng đến trang sanpham.php
-    window.location.href = "/sanpham.php";
-});
-</script>
-
-<script>
-// Kiểm tra URL của trang hiện tại
-if (window.location.pathname.includes('sanpham.php')) {
-    document.getElementById('productDropdown').classList.add('active');
-}
-</script>
-
-<script>
-// Lấy phần tử bằng ID
-document.getElementById("productDropdown1").addEventListener("click", function(event) {
-    // Ngăn không cho menu thả xuống bị kích hoạt
-    event.preventDefault();
-    // Chuyển hướng đến trang sanpham.php
-    window.location.href = "/phongkhach.php";
-});
-</script>
-
-<script>
-// Kiểm tra URL của trang hiện tại
-if (window.location.pathname.includes('phongkhach.php')) {
-    document.getElementById('productDropdown1').classList.add('active');
-}
-</script>

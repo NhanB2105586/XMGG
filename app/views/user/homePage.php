@@ -1,41 +1,44 @@
 <?php
-include_once __DIR__ . '/app/models/PDOFactory.php';
-include_once __DIR__ . '/app/partials/header.php';
+include_once __DIR__ . '../../../core/PDOFactory.php';
+include_once __DIR__ . '/../partials/header.php';
 ?>
 
 <body>
     <!-- Navbar -->
-    <?php include_once __DIR__ . '/app/partials/navbar.php'; ?>
+    <div class="container mb-4"> <?php include_once __DIR__ . '/../partials/navbar.php'; ?></div>
+
 
     <!-- Main Page Content -->
-    <div class="container-fluid main-content mt-3">
+    <div class="container-fluid main-content mt-5">
         <!-- Nội dung của bạn sẽ nằm ở đây -->
-        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
             <div class="carousel-inner">
                 <!-- Slide 1 -->
                 <div class="carousel-item active">
-                    <img src="/images/slider/Home.png" class="d-block w-100 img-fluid" alt="Home Slide">
+                    <img src="/images/slider/Home.png" class="d-block w-100 " alt="Home Slide">
                 </div>
                 <!-- Slide 2 -->
                 <div class="carousel-item">
-                    <img src="/images/slider/Our Story.png" class="d-block w-100 img-fluid" alt="Story Slide">
+                    <img src="/images/slider/Our Story.png" class="d-block w-100 " alt="Story Slide">
                 </div>
 
                 <!-- Slide 3 -->
                 <div class="carousel-item">
-                    <img src="/images/slider/Our Collections.png" class="d-block w-100 img-fluid"
+                    <img src="/images/slider/Our Collections.png" class="d-block w-100 "
                         alt="Collections Slide">
                 </div>
 
                 <!-- Slide 4 -->
                 <div class="carousel-item">
-                    <img src="/images/slider/Our Clients.png" class="d-block w-100 img-fluid" alt="Clients Slide">
+                    <img src="/images/slider/Our Clients.png" class="d-block w-100 " alt="Clients Slide">
                 </div>
                 <!-- Slide 5 -->
                 <div class="carousel-item">
-                    <img src="/images/slider/Contact Details.png" class="d-block w-100 img-fluid" alt="Contact Slide">
+                    <img src="/images/slider/Contact Details.png" class="d-block w-100 " alt="Contact Slide">
                 </div>
             </div>
+
+
 
             <!-- Controls (Previous/Next buttons) -->
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -247,8 +250,8 @@ include_once __DIR__ . '/app/partials/header.php';
     <!--Script-->
     <script src="/js/script.js"></script>
     <!-- Footer -->
-    <?php include_once __DIR__ . '/../app/partials/app.php'; ?>
-    <?php include_once __DIR__ . '/../app/partials/footer.php'; ?>
+    <?php include_once __DIR__ . '/../partials/app.php'; ?>
+    <?php include_once __DIR__ . '/../partials/footer.php'; ?>
 </body>
 
 </html>

@@ -1,12 +1,12 @@
 <?php
-include_once __DIR__ . '/../src/partials/header.php';
-include_once __DIR__ . '/../src/dp.php';
+include_once __DIR__ . '../../../core/PDOFactory.php';
+include_once __DIR__ . '/../partials/header.php';
 ?>
 <link href="/css/stylephongkhach.css" rel="stylesheet">
 
 <body>
     <!-- Navbar -->
-    <?php include_once __DIR__ . '/../src/partials/navbar.php'; ?>
+    <?php include_once __DIR__ . '/../partials/navbar.php'; ?>
 
 
     <!-- Main Page Content -->
@@ -55,7 +55,7 @@ include_once __DIR__ . '/../src/dp.php';
                 <div class="product-grid">
                     <!-- Sản phẩm 1 -->
                     <div class="product-item">
-                        <img class="product-image" src="/logo/phongkhach/mau/coastal.png" alt="Phòng khách Ogami">
+                        <img class="product-image" src="/images/logo/phongkhach/mau/coastal.png" alt="Phòng khách Ogami">
                         <div class="product-name">Độc đáo, trẻ trung với phòng khách Ogami</div>
                         <p class="product-description">Ogami thổi một làn gió trẻ trung vào không gian [...]</p>
                         <button class="view-more-btn">XEM CHI TIẾT</button>
@@ -63,7 +63,7 @@ include_once __DIR__ . '/../src/dp.php';
 
                     <!-- Sản phẩm 2 -->
                     <div class="product-item">
-                        <img class="product-image" src="/logo/phongkhach/mau/ogami.png" alt="Phòng khách Orientale">
+                        <img class="product-image" src="/images/logo/phongkhach/mau/ogami.png" alt="Phòng khách Orientale">
                         <div class="product-name">Phòng khách Orientale – Không gian của cảm hứng và sự bình yên</div>
                         <p class="product-description">Với sự chăm chút tỉ mỉ trong từng chi tiết, [...]</p>
                         <button class="view-more-btn">XEM CHI TIẾT</button>
@@ -72,7 +72,7 @@ include_once __DIR__ . '/../src/dp.php';
                     <!-- Sản phẩm 3 -->
                     <div class="product-item">
                         <div class="content"></div>
-                        <img class="product-image" src="/logo/phongkhach/mau/ogami.png" alt="Phòng khách hiện đại">
+                        <img class="product-image" src="/images/logo/phongkhach/mau/ogami.png" alt="Phòng khách hiện đại">
                         <div class="product-name">Phòng khách Modern – Đơn giản nhưng không kém phần sang trọng</div>
                         <p class="product-description">Thiết kế đơn giản, hiện đại với màu sắc nhẹ nhàng [...]</p>
                         <button class="view-more-btn">XEM CHI TIẾT</button>
@@ -84,8 +84,8 @@ include_once __DIR__ . '/../src/dp.php';
 
 
     <!-- Footer -->
-    <?php include_once __DIR__ . '/../src/partials/app.php'; ?>
-    <?php include_once __DIR__ . '/../src/partials/footer.php'; ?>
+    <?php include_once __DIR__ . '/../partials/app.php'; ?>
+    <?php include_once __DIR__ . '/../partials/footer.php'; ?>
 </body>
 
 </html>

@@ -11,13 +11,17 @@ class Product extends Model
 
     public function getAllProducts()
     {
+
         return $this->getAll('products');
+
     }
 
     public function getProductById($id)
     {
         return $this->getByID('products', 'product_id', $id);
     }
+
+
 
     public function createProduct($data)
     {
