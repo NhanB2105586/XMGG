@@ -21,11 +21,12 @@ class Product extends Model
     public function __construct(PDO $db)
     {
         parent::__construct($db);
+        $this->db = $db; // Gán $db vào thuộc tính $this->db
     }
 
     public function all(): array
     {
-        return parent::getAll($this->tableName);
+        return parent::getAll($this->tableName); // Gọi phương thức getAll từ lớp cha
     }
 
     public function find(int $id): ?Product
@@ -34,7 +35,8 @@ class Product extends Model
         $statement->execute(['id' => $id]);
 
         if ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-            return $this->fillFromDbRow($row);
+            $product = new Product($this->db); // Tạo đối tượng Product mới
+            return $product->fillFromDbRow($row);
         }
 
         return null;

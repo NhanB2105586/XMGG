@@ -1,16 +1,15 @@
 <?php
-include_once __DIR__ . '/../src/partials/header.php';
-include_once __DIR__ . '/../src/models/PDOFactory.php';
+include_once __DIR__ . '../../../core/PDOFactory.php';
+include_once __DIR__ . '/../partials/header.php';
 ?>
 <link href="/css/stylesofa.css" rel="stylesheet">
 
 <body>
     <!-- Navbar -->
-    <?php include_once __DIR__ . '/../src/partials/navbar.php'; ?>
-
+     <?php include_once __DIR__ . '/../partials/navbar.php'; ?>
 
     <!-- Main Page Content -->
-    <div class="container-fluid main-content mt-3">
+    <div class="container-fluid main-content mt-5">
 
         <!-- Phần hình ảnh trên cùng -->
         <div class="top-banner">
@@ -183,6 +182,6 @@ include_once __DIR__ . '/../src/models/PDOFactory.php';
     </div>
 
     <!-- Footer -->
-    <?php include_once __DIR__ . '/../src/partials/app.php'; ?>
-    <?php include_once __DIR__ . '/../src/partials/footer.php'; ?>
+    <?php include_once __DIR__ . '/../partials/app.php'; ?>
+    <?php include_once __DIR__ . '/../partials/footer.php'; ?>
 </body>
