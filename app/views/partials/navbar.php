@@ -1,8 +1,8 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white py-1 fixed-top">
     <div class="container">
-        <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0" href="/index.php">
-            <img src="images/logo.png" alt="site icon" style="width: 70px;">
+        <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0" href="/">
+            <img src="/images/logo.jpg" alt="Logo" style="width: 70px;">
         </a>
 
         <div class="order-lg-2 nav-btns d-flex">
@@ -13,12 +13,12 @@
                 </button>
             </form>
             <button type="button" class="btn position-relative">
-                <a href="/giohang.php" class="text-black"><i class="fa fa-shopping-cart"></i>
+                <a href="/giohang" class="text-black"><i class="fa fa-shopping-cart"></i>
                     <span class="position-absolute top-0 start-100 translate-middle badge bg-primary">5</span></a>
 
             </button>
             <button type="button" class="btn position-relative">
-                <a href="/src/views/auth/dangnhap.php"><i class="fa fa-user text-black"></i> </a></button>
+                <a href="/dangnhap"><i class="fa fa-user text-black"></i> </a></button>
 
 
         </div>
@@ -31,19 +31,19 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle <?php if (basename($_SERVER['PHP_SELF']) == 'sanpham.php') echo 'active'; ?>"
-                        href="/" id="productDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle"
+                        href="/sanpham" id="productDropdown" role="button"  aria-expanded="false">
                         SẢN PHẨM
                     </a>
                     <ul class="dropdown-menu multi-column columns-3">
                         <div class="row">
                             <div class="col-sm-4">
                                 <ul class="multi-column-dropdown">
-                                    <li><a href="/sofa.php">Sofa</a></li>
+                                    <li><a href="/sanpham/sofa">Sofa</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#">Ghế thư giãn</a></li>
-                                    <li><a href="#">Ghế ăn</a></li>
-                                    <li><a href="#">Ghế làm việc</a></li>
+                                    <li><a href="/sanpham/ghethugian">Ghế thư giãn</a></li>
+                                    <li><a href="/sanpham/ghean">Ghế ăn</a></li>
+                                    <li><a href="/sanpham/ghelamviec">Ghế làm việc</a></li>
                                     <li class="divider"></li>
                                     <li><a href="#">Kệ phòng khách</a></li>
                                     <li class="divider"></li>
@@ -81,18 +81,18 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="roomDropdown" role="button"
-                        data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="/phongkhach" id="roomDropdown" role="button"
+                         aria-expanded="false">
                         PHÒNG
                     </a>
                     <ul class="dropdown-menu multi-column columns-3">
                         <div class="row">
                             <div class="col-sm-4">
                                 <ul class="multi-column-dropdown">
-                                    <li><a href="/phongkhach.php">Phòng khách</a></li>
-                                    <li><a href="/phongan.php">Phòng ăn</a></li>
-                                    <li><a href="/phongngu.php">Phòng ngủ</a></li>
-                                    <li><a href="/phonglamviec.php">Phòng làm việc</a></li>
+                                    <li><a href="/phongkhach">Phòng khách</a></li>
+                                    <li><a href="/phongan">Phòng ăn</a></li>
+                                    <li><a href="/phongngu">Phòng ngủ</a></li>
+                                    <li><a href="/phonglamviec">Phòng làm việc</a></li>
                                 </ul>
                             </div>
                             <div class="col-sm-4">

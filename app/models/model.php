@@ -36,11 +36,10 @@ class Model
     }
 
     # get all records in a table
-    public function getAll(string $table): array
+    public function getAll(string $tableName): array
     {
-        $query = "select * from $table;";
-        $stmt = $this->db->query($query);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $statement = $this->db->query("SELECT * FROM $tableName");
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     # get record in a table by ID
