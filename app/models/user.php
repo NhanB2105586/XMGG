@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Models;
-
+use PDO;
 class User extends Model
 {
     public function __construct($PDO)
     {
         parent::__construct($PDO);
     }
-
     public function getAllUsers()
     {
         return $this->getAll('users');
@@ -19,22 +18,20 @@ class User extends Model
         return $this->getByID('users', 'user_id', $id);
     }
 
-    public function createUser($data)
+    public function addUser(array $data): bool
     {
-        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
         return $this->set('users', $data);
     }
 
-    public function updateUser($id, $data)
+    public function updateUser(int $id, array $data): bool
     {
         return $this->update('users', 'user_id', $id, $data);
     }
 
-    public function deleteUser($id)
+    public function deleteUser(int $id): bool
     {
         return $this->delete('users', 'user_id', $id);
     }
-
     public function authenticate($username, $password)
     {
         $user = $this->getByProps('users', ['username' => $username]);
@@ -43,4 +40,16 @@ class User extends Model
         }
         return false;
     }
+
+    public function getCustomersSearch($limit, $offset, $searchTerm = '')
+    {
+        return $this->getItems('users', $limit, $offset, $searchTerm);
+    }
+
+    public function getTotalCustomersSearch($searchTerm = '')
+    {
+        return $this->getTotalItems('users', $searchTerm);
+    }
+
+    
 }

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use \PDO;
+use PDO;
 
 class Model
 {
@@ -67,12 +67,11 @@ class Model
     }
 
     # delete record from table
-    public function delete(string $table, string $idName, int $id): bool
+    public function delete($table,$idName, $id)
     {
-        $query = "delete from $table where $idName = :$idName";
-
-        $stmt = $this->db->prepare($query);
-        $stmt->bindValue(":$idName", $id, PDO::PARAM_INT);
+        $sql = "DELETE FROM $table WHERE $idName = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
 
@@ -91,5 +90,86 @@ class Model
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function usernameExists($username)
+    {
+        $query = "SELECT COUNT(*) FROM users WHERE username = :username";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':username', $username);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0; // Trả về true nếu tồn tại
+    }
+
+    public function emailExists($email)
+    {
+        $query = "SELECT COUNT(*) FROM users WHERE email = :email";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':email', $email);
+        $stmt->execute();
+        return $stmt->fetchColumn() > 0; // Trả về true nếu tồn tại
+    }
+
+    protected function getItems($table, $limit, $offset, $searchTerm = '')
+    {
+        $sql = "SELECT * FROM $table WHERE fullname LIKE :searchTerm LIMIT :limit OFFSET :offset";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    protected function getTotalItems($table, $searchTerm = '')
+    {
+        $sql = "SELECT COUNT(*) FROM $table WHERE fullname LIKE :searchTerm";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchColumn();
+    }
+
+    public function hasOrders($userId)
+    {
+        $sql = "SELECT COUNT(*) FROM orders WHERE user_id = :user_id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchColumn() > 0; // Trả về true nếu có đơn hàng
+    }
+
+    public function deleteOrdersByUserId($userId)
+    {
+        $sql = "DELETE FROM orders WHERE user_id = :user_id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+    public function countUsers()
+    {
+        $stmt = $this->db->query("SELECT COUNT(*) FROM users");
+        return $stmt->fetchColumn();
+    }
+    
+    public function countOrders()
+    {
+        $stmt = $this->db->query("SELECT COUNT(*) FROM orders");
+        return $stmt->fetchColumn();
+    }
+
+    public function countSuccessfulOrders()
+    {
+        $stmt = $this->db->query("SELECT COUNT(*) FROM orders WHERE status = 'success'");
+        return $stmt->fetchColumn();
+    }
+
+    public function calculateRevenue()
+    {
+        $stmt = $this->db->query("SELECT SUM(total_amount) FROM orders WHERE status = 'success'");
+        return $stmt->fetchColumn() ?: 0; // Trả về 0 nếu không có doanh thu
     }
 }

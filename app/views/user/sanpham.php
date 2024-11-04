@@ -14,6 +14,7 @@ $productModel = new Product($pdo);
 $products = $productModel->getAllProducts();
 ?>
 
+
 <link href="/css/stylesanpham.css" rel="stylesheet">
 
 <body>
@@ -32,31 +33,28 @@ $products = $productModel->getAllProducts();
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Phần bộ lọc sản phẩm -->
-        <div class="filter-section">
-            <div class="filter-item">
-                <label for="price-filter">Giá:</label>
-                <select id="price-filter">
-                    <option value="popular">Theo mức độ phổ biến</option>
-                    <option value="low-to-high">Giá từ thấp đến cao</option>
-                    <option value="high-to-low">Giá từ cao đến thấp</option>
-                </select>
-            </div>
-
-            <div class="filter-item">
-                <label for="material-filter">Chất liệu:</label>
-                <select id="material-filter">
-                    <option value="all">Tất cả</option>
-                    <option value="wood">Gỗ</option>
-                    <option value="fabric">Vải</option>
-                    <option value="leather">Da</option>
-                </select>
-            </div>
-
-            <button class="apply-filter-btn">ÁP DỤNG</button>
+    <!-- Phần bộ lọc sản phẩm -->
+    <div class="filter-section">
+        <div class="filter-item">
+            <label for="price-filter">Giá:</label>
+            <select id="price-filter">
+                <option value="popular">Theo mức độ phổ biến</option>
+                <option value="low-to-high">Giá từ thấp đến cao</option>
+                <option value="high-to-low">Giá từ cao đến thấp</option>
+            </select>
         </div>
 
+        <div class="filter-item">
+            <label for="material-filter">Chất liệu:</label>
+            <select id="material-filter">
+                <option value="all">Tất cả</option>
+                <option value="wood">Gỗ</option>
+                <option value="fabric">Vải</option>
+                <option value="leather">Da</option>
+            </select>
+        </div>
         <!-- Danh sách sản phẩm -->
         <div class="container mb-3 mt-3 ">
             <div class="title text-center py-3">
@@ -84,9 +82,10 @@ $products = $productModel->getAllProducts();
             </div>
             <div class="text-center">
                 <a href="/sofa.php" class="btn btn-secondary m-3" style="width: 200px;">Xem thêm</a>
-            </div>
-        </div>
 
+            </div>
+            <?php endforeach; ?>
+        </div>
         <!--Script-->
         <script src="/js/script.js"></script>
         <!-- Footer -->
@@ -98,4 +97,5 @@ $products = $productModel->getAllProducts();
 include_once __DIR__ . '/../partials/app.php';
 include_once __DIR__ . '/../partials/foot.php';
 include_once __DIR__ . '/../partials/footer.php';
+
 ?>

@@ -11,7 +11,9 @@ $router = new \Bramus\Router\Router();
 
 session_start();
 require_once __DIR__ . '/../app/routes/admin.php';
+require_once __DIR__ . '/../app/routes/manageCustomer.php';
 require_once __DIR__ . '/../app/routes/product.php';
+
 $router->get('/', function () {
     include __DIR__ . '/../app/views/user/homePage.php'; // Đường dẫn đến tệp trang chủ
 });

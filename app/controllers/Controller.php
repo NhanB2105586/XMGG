@@ -18,6 +18,13 @@ class Controller
     // Gửi trang với dữ liệu đi kèm
     public function sendPage($page, array $data = [])
     {
+        // Kiểm tra xem có thông báo lỗi không
+        if (isset($data['errors']) && !empty($data['errors'])) {
+            // Lưu thông báo lỗi vào session để có thể hiển thị trong view
+            $_SESSION['error_messages'] = $data['errors'];
+        }
+
+        // Render view
         exit($this->view->render($page, $data));
     }
 
@@ -70,6 +77,16 @@ class Controller
         }
         $this->jsonResponse($response, $status);
     }
-    
-    
+    public function filterData(array $keys, array $data): array
+    {
+        $result = [];
+
+        foreach ($keys as $key) {
+            if (isset($data[$key])) {
+                $result[$key] = $data[$key];
+            }
+        }
+
+        return $result;
+    }
 }
