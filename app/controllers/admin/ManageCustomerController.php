@@ -3,7 +3,7 @@
 namespace App\Controllers\Admin;
 
 use App\Controllers\Controller;
-use App\Models\User; // Giả sử bạn đã có model Customer
+use App\Models\User; 
 use PDO;
 
 class ManageCustomerController extends Controller
@@ -103,7 +103,7 @@ class ManageCustomerController extends Controller
         // Lấy thông tin khách hàng dựa trên ID
         $customer = $this->customerModel->getByID('users', 'user_id', $id);
         if (!$customer) {
-            $this->sendNotFound(); // Gửi phản hồi nếu không tìm thấy khách hàng
+            $this->sendNotFound();
             return;
         }
 
@@ -116,16 +116,16 @@ class ManageCustomerController extends Controller
             $data = $this->filterData(['fullname', 'username', 'email', 'address', 'phone_number'], $_POST);
 
             // Kiểm tra tính hợp lệ của dữ liệu
-            if (empty($data['fullname']) || empty($data['username']) ||empty($data['address'])|| empty($data['phone_number']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-                $message = 'Vui lòng điền đầy đủ thông tin hợp lệ.'; // Thông báo lỗi
+            if (empty($data['fullname']) || empty($data['username']) || empty($data['address']) || empty($data['phone_number']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+                $errors[] = 'Vui lòng điền đầy đủ thông tin hợp lệ.'; // Thông báo lỗi
             } else {
                 // Cập nhật thông tin khách hàng
                 if ($this->customerModel->updateUser($id, $data)) {
-                    $message = 'Khách hàng đã được cập nhật thành công!'; // Thông báo thành công
-                    // Có thể redirect hoặc làm gì đó khác sau khi thành công
-                    // ví dụ: $this->redirect('/admin/viewCustomer');
+                    $_SESSION['success_message'] = 'Khách hàng đã được cập nhật thành công!';
+                    header('Location: /admin/viewCustomer');
+                    exit;
                 } else {
-                    $message = 'Có lỗi xảy ra khi cập nhật khách hàng.'; // Thông báo lỗi
+                    $errors[] = 'Có lỗi xảy ra khi cập nhật khách hàng.'; // Thông báo lỗi
                 }
             }
         }
@@ -139,19 +139,18 @@ class ManageCustomerController extends Controller
     }
 
 
+
     public function deleteCustomer()
     {
         // Kiểm tra xem có ID được gửi không
         if (isset($_POST['id'])) {
             $customerId = $_POST['id'];
-            if ($this->customerModel->hasOrders($customerId)) {
+            if ($this->customerModel->hasOrders('users','user_id',$customerId)) {
                 // Lưu thông báo lỗi
                 $_SESSION['error_message'] = 'Không thể xóa khách hàng này vì còn đơn hàng liên quan.';
             } else {
-                // Xóa các đơn hàng liên quan
-                
-                // Xóa khách hàng
                 $this->customerModel->deleteUser($customerId);
+                $_SESSION['success_message'] = 'Khách hàng đã được xóa thành công!';
             }
 
             // Chuyển hướng về danh sách khách hàng

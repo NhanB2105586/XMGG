@@ -37,7 +37,7 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                 </form>
             </div>
-            <a href="/admin/addCustomer" class="btn btn-primary btn-add">Thêm Khách Hàng</a>
+            <a href="/admin/addCategory" class="btn btn-primary btn-add">Thêm Danh Mục</a>
         </div>
         <div class="table-responsive">
             <?php if (!empty($essage)): ?>
@@ -75,34 +75,26 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
             }, 2000);
             </script>
             <?php endif; ?>
-
             <table class="table mt-1">
                 <thead>
                     <tr>
                         <th class="text-center">STT</th>
-                        <th class="text-center">Họ và Tên</th>
-                        <th class="text-center">Email</th>
-                        <th class="text-center">Địa Chỉ</th>
-                        <th class="text-center">Số Điện Thoại</th>
-                        <th class="text-center">Ngày Tạo</th>
+                        <th class="text-center">Tên Danh Mục</th>
                         <th class="text-center">Hành Động</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if (!empty($customers)): ?>
-                    <?php foreach ($customers as $index => $customer): ?>
+                    <?php if (!empty($categories)): ?>
+                    <?php foreach ($categories as $index => $category): ?>
                     <tr>
                         <td class="text-center"><?= $index + 1 ?></td>
-                        <td><?= htmlspecialchars($customer["fullname"]) ?></td>
-                        <td><?= htmlspecialchars($customer["email"]) ?></td>
-                        <td><?= htmlspecialchars($customer["address"]) ?></td>
-                        <td class="text-center"><?= htmlspecialchars($customer["phone_number"]) ?></td>
-                        <td class="text-center"><?= htmlspecialchars($customer["created_at"]) ?></td>
+                        <td><?= htmlspecialchars($category["category_name"]) ?></td>
                         <td class="text-center">
-                            <a href="/admin/editCustomer?id=<?= $customer['user_id'] ?>"
-                                class="btn btn-warning btn-sm">Chỉnh Sửa</a>
-                            <form action="/admin/deleteCustomer" method="POST" style="display:inline;">
-                                <input type="hidden" name="id" value="<?= $customer['user_id'] ?>">
+                            <a href="/admin/editCategory/<?= $category['category_id'] ?>"
+                                class="btn btn-warning btn-sm">Chỉnh
+                                Sửa</a>
+                            <form action="/admin/deleteCategory" method="POST" style="display:inline;">
+                                <input type="hidden" name="id" value="<?= $category['category_id'] ?>">
                                 <button type="submit" class="btn btn-danger btn-sm"
                                     onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa
                                 </button>
@@ -112,7 +104,7 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                     <?php endforeach; ?>
                     <?php else: ?>
                     <tr>
-                        <td colspan="7" class="text-center">Không có khách hàng nào.</td>
+                        <td colspan="3" class="text-center">Không có danh mục nào.</td>
                     </tr>
                     <?php endif; ?>
                 </tbody>
@@ -154,3 +146,5 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
     include_once __DIR__ . '/../partials/footAdmin.php';
     ?>
 </body>
+
+</html>

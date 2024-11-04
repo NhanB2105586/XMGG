@@ -131,15 +131,17 @@ class Model
         return $stmt->fetchColumn();
     }
 
-    public function hasOrders($userId)
+    public function hasOrders($table, $columnId, $id)
     {
-        $sql = "SELECT COUNT(*) FROM orders WHERE user_id = :user_id";
+        // Chú ý: Đảm bảo $table và $columnId là an toàn và đã được xác thực
+        $sql = "SELECT COUNT(*) FROM $table WHERE $columnId = :id"; // Ghép tên bảng và cột trực tiếp
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':user_id', $userId, PDO::PARAM_INT);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT); // Ràng buộc giá trị cho id
         $stmt->execute();
 
         return $stmt->fetchColumn() > 0; // Trả về true nếu có đơn hàng
     }
+
 
     public function deleteOrdersByUserId($userId)
     {
@@ -172,4 +174,36 @@ class Model
         $stmt = $this->db->query("SELECT SUM(total_amount) FROM orders WHERE status = 'success'");
         return $stmt->fetchColumn() ?: 0; // Trả về 0 nếu không có doanh thu
     }
+    //Category
+    protected function getItemsCategories($table, $limit, $offset, $searchTerm = '')
+    {
+        $sql = "SELECT * FROM $table WHERE category_name LIKE :searchTerm LIMIT :limit OFFSET :offset";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    protected function getTotalItemsCategories($table, $searchTerm = '')
+    {
+        $sql = "SELECT COUNT(*) FROM $table WHERE category_name LIKE :searchTerm";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchColumn();
+    }
+    public function categoryExists($categoryName)
+    {
+        $sql = "SELECT COUNT(*) FROM categories WHERE category_name = :category_name";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':category_name', $categoryName, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchColumn() > 0; // Nếu có bản ghi, trả về true
+    }
+
 }

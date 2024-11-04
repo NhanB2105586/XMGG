@@ -12,6 +12,7 @@ $router = new \Bramus\Router\Router();
 session_start();
 require_once __DIR__ . '/../app/routes/admin.php';
 require_once __DIR__ . '/../app/routes/manageCustomer.php';
+require_once __DIR__ . '/../app/routes/manageCategorie.php';
 require_once __DIR__ . '/../app/routes/product.php';
 
 $router->get('/', function () {
