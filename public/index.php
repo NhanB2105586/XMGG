@@ -19,7 +19,7 @@ $router->get('/', function () {
 $router->set404('\App\Controllers\Controller@sendNotFound');
 
 $router->get(
-    '/sanpham/sofa',
+    '/phongkhach/sofa',
     '\App\Controllers\UserController@showsofa'
 );
 $router->get(
@@ -29,5 +29,42 @@ $router->get(
 $router->get(
     '/phongkhach',
     '\App\Controllers\UserController@showphongkhach'
+);
+$router->get(
+    '/phongan',
+    '\App\Controllers\UserController@showphongan'
+);
+$router->get(
+    '/phongngu',
+    '\App\Controllers\UserController@showphongngu'
+);
+$router->get(
+    '/phonglamviec',
+    '\App\Controllers\UserController@showphonglamviec'
+);
+
+$router->get(
+    '/chitietsanpham/(\d+)', // Route với ID sản phẩm dạng số
+    '\App\Controllers\UserController@showchitietsanpham'
+);
+
+$router->get(
+    '/lienhe',
+    '\App\Controllers\UserController@showlienhe'
+);
+
+$router->get(
+    '/dangnhap',
+    '\App\Controllers\UserController@showdangnhap'
+);
+
+$router->get(
+    '/dangki',
+    '\App\Controllers\UserController@showdangki'
+);
+
+$router->get(
+    '/khoiphucmatkhau',
+    '\App\Controllers\UserController@showkhoiphuc'
 );
 $router->run();

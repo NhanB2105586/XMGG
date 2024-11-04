@@ -371,3 +371,30 @@ img{
 .main-detail-product{
   margin-top: 100px;
 }
+
+.gif-icon {
+  width: 90px;
+  /* Đặt kích thước phù hợp cho ảnh GIF */
+  height: auto;
+  margin-left: 10px;
+  /* Khoảng cách giữa ảnh và tiêu đề */
+  vertical-align: middle;
+  /* Căn giữa theo chiều dọc */
+}
+.gif-icon-2 {
+  width: 40px;
+  /* Đặt kích thước phù hợp cho ảnh GIF */
+  height: auto;
+  margin-left: 10px;
+  /* Khoảng cách giữa ảnh và tiêu đề */
+  vertical-align: middle;
+  /* Căn giữa theo chiều dọc */
+}
+
+    .special-img img {
+        width: 100%;
+        height: 200px; /* Chiều cao cố định, bạn có thể điều chỉnh */
+        object-fit: cover; /* Cắt xén ảnh để vừa khung */
+    }
+
+  

@@ -32,49 +32,45 @@
             <ul class="navbar-nav me-auto">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle"
-                        href="/sanpham" id="productDropdown" role="button"  aria-expanded="false">
+                        href="/sanpham" id="productDropdown" role="button" aria-expanded="false">
                         SẢN PHẨM
                     </a>
                     <ul class="dropdown-menu multi-column columns-3">
                         <div class="row">
                             <div class="col-sm-4">
                                 <ul class="multi-column-dropdown">
-                                    <li><a href="/sanpham/sofa">Sofa</a></li>
+                                    <li><a href="/phongkhach/sofa">Sofa</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="/sanpham/ghethugian">Ghế thư giãn</a></li>
-                                    <li><a href="/sanpham/ghean">Ghế ăn</a></li>
-                                    <li><a href="/sanpham/ghelamviec">Ghế làm việc</a></li>
+                                    <li><a href="/phongan/ghean">Ghế ăn</a></li>
+                                    <li><a href="/phonglamviec/ghelamviec">Ghế làm việc</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#">Kệ phòng khách</a></li>
+                                    <li><a href="phongkhach/kephongkhach">Kệ phòng khách</a></li>
+                                    <li><a href="/phonglamviec/kesach">Kệ sách</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#">Giường ngủ</a></li>
-                                    <li><a href="#">Nệm</a></li>
+                                    <li><a href="/phongngu/giuongngu">Giường ngủ</a></li>
+                                    <li><a href="/phongngu/nem">Nệm</a></li>
                                 </ul>
                             </div>
                             <div class="col-sm-4">
                                 <ul class="multi-column-dropdown">
-                                    <li><a href="#">Bàn nước</a></li>
-                                    <li><a href="#">Bàn ăn</a></li>
-                                    <li><a href="#">Bàn trang điểm</a></li>
-                                    <li><a href="#">Bàn làm việc </a></li>
+                                    <li><a href="/phongkhach/bannuoc">Bàn nước</a></li>
+                                    <li><a href="/phongan/banan">Bàn ăn</a></li>
+                                    <li><a href="/phonglamviec/banlamviec">Bàn làm việc </a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#">Tủ tivi</a></li>
-                                    <li><a href="#">Tủ bếp</a></li>
-                                    <li><a href="#">Tủ ly </a></li>
-                                    <li><a href="#">Tủ áo</a></li>
+                                    <li><a href="/phongkhach/tutivi">Tủ tivi</a></li>
+                                    <li><a href="/phongan/tubep">Tủ bếp</a></li>
+                                    <li><a href="/phongan/tuly">Tủ ly </a></li>
+                                    <li><a href="/phongngu/tuao">Tủ áo</a></li>
                                 </ul>
                             </div>
                             <div class="col-sm-4">
                                 <ul class="multi-column-dropdown">
-                                    <li><a href="#">Bình trang trí</a></li>
-                                    <li><a href="#">Đèn trang trí</a></li>
-                                    <li><a href="#">Đồng hồ</a></li>
-                                    <li><a href="#">Gối</a></li>
-                                    <li><a href="#">Thảm</a></li>
-                                    <li><a href="#">Mền</a></li>
-                                    <li><a href="#">Tranh</a></li>
-                                    <li><a href="#">Khung gương</a></li>
-                                    <li><a href="#">Khung hình</a></li>
+                                    <li><a href="/phongngu/goi">Gối</a></li>
+                                    <li><a href="/phongngu/men">Mền</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="hangtrangtri/binh">Bình trang trí</a></li>
+                                    <li><a href="hangtrangtri/den">Đèn trang trí</a></li>
+                                    <li><a href="hangtrangtri/tranh">Tranh</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -82,7 +78,7 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="/phongkhach" id="roomDropdown" role="button"
-                         aria-expanded="false">
+                        aria-expanded="false">
                         PHÒNG
                     </a>
                     <ul class="dropdown-menu multi-column columns-3">
@@ -97,15 +93,14 @@
                             </div>
                             <div class="col-sm-4">
                                 <ul class="multi-column-dropdown">
-                                    <li><a href="#">Tủ bếp</a></li>
-                                    <li><a href="#">Hàng trang trí</a></li>
+                                    <li><a href="/hangtrangtri">Hàng trang trí</a></li>
                                 </ul>
                             </div>
                         </div>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="#">BỘ SƯU TẬP</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">LIÊN HỆ CHÚNG TÔI</a></li>
+                <li class="nav-item"><a class="nav-link" href="/bosuutap">BỘ SƯU TẬP</a></li>
+                <li class="nav-item"><a class="nav-link" href="/lienhe">LIÊN HỆ CHÚNG TÔI</a></li>
             </ul>
 
 

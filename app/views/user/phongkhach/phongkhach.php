@@ -1,0 +1,87 @@
+<?php
+include_once __DIR__ . '../../../../core/PDOFactory.php';
+include_once __DIR__ . '/../../partials/header.php';
+?>
+<link href="/css/stylephong.css" rel="stylesheet">
+
+<body>
+    <!-- Navbar -->
+    <?php include_once __DIR__ . '/../../partials/navbar.php'; ?>
+
+
+    <!-- Main Page Content -->
+    <div class="container-fluid main-content mt-3">
+
+        <!-- Phần hình ảnh trên cùng -->
+        <div class="top-banner-phongkhach">
+            <div class="banner-text">
+                Phòng khách
+                <div class="breadcrumb">
+                    <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/phongkhach.php"> <strong class="current-page">Phòng
+                            khách</strong></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar danh mục sản phẩm -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="category-sidebar p-4 bg-light border rounded shadow-sm">
+                    <ul class="list-group">
+                        <li class="list-group-item bg-transparent border-0 fw-bold">
+                            <h4>Nội thất phòng khách</h4>
+                        </li>
+                        <li class="list-group-item bg-transparent border-0 fw-bold"><a href="#"
+                                class="text-decoration-none text-dark">Mẫu phòng khách</a></li>
+                        <li class="list-group-item bg-transparent border-0"><a href="/sanpham/sofa.php"
+                                class="text-decoration-none text-dark">Sofa</a></li>
+                        <li class="list-group-item bg-transparent border-0"><a href="#"
+                                class="text-decoration-none text-dark">Bàn nước</a></li>
+                        <li class="list-group-item bg-transparent border-0"><a href="#"
+                                class="text-decoration-none text-dark">Tủ tivi</a></li>
+                        <li class="list-group-item bg-transparent border-0"><a href="#"
+                                class="text-decoration-none text-dark">Kệ phòng khách</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <!-- Nội dung chính - Các sản phẩm phòng khách -->
+            <div class="col-md-9">
+                <div class="product-grid">
+                    <!-- Sản phẩm 1 -->
+                    <div class="product-item">
+                        <img class="product-image" src="/images/logo/phongkhach/mau/coastal.png" alt="Phòng khách Ogami">
+                        <div class="product-name">Độc đáo, trẻ trung với phòng khách Ogami</div>
+                        <p class="product-description">Ogami thổi một làn gió trẻ trung vào không gian [...]</p>
+                        <button class="view-more-btn">XEM CHI TIẾT</button>
+                    </div>
+
+                    <!-- Sản phẩm 2 -->
+                    <div class="product-item">
+                        <img class="product-image" src="/images/logo/phongkhach/mau/ogami.png" alt="Phòng khách Orientale">
+                        <div class="product-name">Phòng khách Orientale – Không gian của cảm hứng và sự bình yên</div>
+                        <p class="product-description">Với sự chăm chút tỉ mỉ trong từng chi tiết, [...]</p>
+                        <button class="view-more-btn">XEM CHI TIẾT</button>
+                    </div>
+
+                    <!-- Sản phẩm 3 -->
+                    <div class="product-item">
+                        <div class="content"></div>
+                        <img class="product-image" src="/images/logo/phongkhach/mau/ogami.png" alt="Phòng khách hiện đại">
+                        <div class="product-name">Phòng khách Modern – Đơn giản nhưng không kém phần sang trọng</div>
+                        <p class="product-description">Thiết kế đơn giản, hiện đại với màu sắc nhẹ nhàng [...]</p>
+                        <button class="view-more-btn">XEM CHI TIẾT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <?php include_once __DIR__ . '/../../partials/app.php'; ?>
+    <?php include_once __DIR__ . '/../../partials/footer.php'; ?>
+</body>
+
+</html>

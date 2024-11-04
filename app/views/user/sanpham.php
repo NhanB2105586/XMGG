@@ -1,13 +1,24 @@
 <?php
 include_once __DIR__ . '/../partials/header.php';
-include_once __DIR__ . '/../../core/PDOFactory.php';
-include_once __DIR__ . '/../../models/product.php';
+include_once __DIR__ . '/../../models/Product.php';
+
+use App\Core\PDOFactory;
+use App\Models\Product;
+
+
+// Khởi tạo kết nối PDO và model Product
+$pdoFactory = new PDOFactory();
+$pdo = $pdoFactory->create();
+$productModel = new Product($pdo);
+// Lấy danh sách sản phẩm
+$products = $productModel->getAllProducts();
 ?>
+
+<link href="/css/stylesanpham.css" rel="stylesheet">
 
 <body>
     <!-- Navbar -->
     <?php include_once __DIR__ . '/../partials/navbar.php'; ?>
-
 
     <!-- Main Page Content -->
     <div class="container-fluid main-content mt-3">
@@ -17,8 +28,7 @@ include_once __DIR__ . '/../../models/product.php';
             <div class="banner-text">
                 Sản phẩm
                 <div class="breadcrumb">
-                    <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/sanpham.php"> <strong class="current-page">Sản
-                            phẩm</strong></a>
+                    <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/sanpham.php"> <strong class="current-page">Sản phẩm</strong></a>
                 </div>
             </div>
         </div>
@@ -54,40 +64,36 @@ include_once __DIR__ . '/../../models/product.php';
             </div>
             <div class="special-list row g-0 ">
                 <?php foreach ($products as $product): ?>
-                <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                    <div class="special-img position-relative overflow-hidden">
-                        <img src="/images/upload/<?php echo $product['image_url']; ?>" class="w-100"
-                            alt="<?php echo htmlspecialchars($product['product_name']); ?>">
-                    </div>
-                    <div class="text-start m-1">
-                        <p class="text-capitalize mt-3 mb-1"><?php echo htmlspecialchars($product['product_name']); ?>
-                        </p>
-                        <div class="d-flex">
-                            <span
-                                class="fw-bold d-block "><?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?></span>
-                            <span
-                                class="price-old"><?php echo number_format($product['old_price'], 0, ',', '.') . 'đ'; ?>
-                            </span>
+                    <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
+                        <div class="special-img position-relative overflow-hidden">
+                            <img src="/images/upload/<?php echo htmlspecialchars($product['image_url']); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                        </div>
+                        <div class="text-start m-1">
+                            <p class="text-capitalize mt-3 mb-1"><?php echo htmlspecialchars($product['product_name']); ?></p>
+                            <div class="d-flex">
+                                <span class="fw-bold d-block"><?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?></span>
+                                <span class="price-old"><?php echo number_format($product['old_price'], 0, ',', '.') . 'đ'; ?></span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-around">
+                            <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
+                            <a href="/products/<?php echo $product['product_id']; ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 45%;">Chi Tiết</a>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-around">
-                        <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
-                        <a href="/products/<?php echo $product['product_id']; ?>"
-                            class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 45%;">Chi Tiết</a>
-                    </div>
-                </div>
                 <?php endforeach; ?>
             </div>
             <div class="text-center">
                 <a href="/sofa.php" class="btn btn-secondary m-3" style="width: 200px;">Xem thêm</a>
             </div>
         </div>
+
         <!--Script-->
         <script src="/js/script.js"></script>
         <!-- Footer -->
 </body>
 
 </html>
+
 <?php
 include_once __DIR__ . '/../partials/app.php';
 include_once __DIR__ . '/../partials/foot.php';
