@@ -6,7 +6,7 @@ use PDO;
 
 class Model
 {
-    private PDO $db;
+    protected PDO $db;
 
     public function __construct(PDO $pdo)
     {
@@ -43,15 +43,11 @@ class Model
     }
 
     # get record in a table by ID
-    public function getByID(string $table, string $idName, int $id): array
+    public function getByID($table, $column, $id)
     {
-        $query = "select * from $table where $idName = :$idName;";
-
-        $stmt = $this->db->prepare($query);
-        $stmt->bindValue(":$idName", $id, PDO::PARAM_INT);
-        $stmt->execute();
-
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $statement = $this->db->prepare("SELECT * FROM $table WHERE $column = :id");
+        $statement->execute(['id' => $id]);
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
     # update record of table

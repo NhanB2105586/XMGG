@@ -2,7 +2,7 @@
     margin-top: 150px;
     margin-bottom: 200px;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 0, 0, 0.845);
 }
 .form-register{
     padding: 40px 15% ;
@@ -25,4 +25,41 @@ label{
 }
 .btn-form:hover{
     background-color: rgb(162, 165, 168);
+}
+
+.wrapper .form-register {
+    color: white; /* Đặt màu chữ thành trắng */
+}
+
+.form-register .form-label {
+    color: white; /* Đặt màu chữ của nhãn thành trắng */
+}
+
+.btn-form {
+    width: 48%; /* Giới hạn độ rộng nút */
+    margin-top: 10px;
+}
+
+.form-register .btn-container {
+    display: flex;
+    justify-content: space-between; /* Căn hai nút sang hai bên */
+}
+
+.btn-form {
+    background-color: #ffffff !important; /* Màu nền mặc định của nút */
+    color: rgb(0, 0, 0) !important; /* Màu chữ mặc định */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển đổi mượt */
+}
+
+.btn-form:hover {
+    background-color: rgb(47, 45, 45) !important; /* Nền đen khi rê chuột vào */
+    color: white !important; /* Chữ trắng khi rê chuột vào */
+}
+
+.form-register a {
+    color: rgb(255, 128, 128) !important; /* Đặt màu đỏ cho các liên kết */
+}
+
+.form-register a:hover {
+    color: rgb(255, 0, 0) !important; /* Màu khi rê chuột vào liên kết */
 }

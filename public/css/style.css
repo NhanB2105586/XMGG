@@ -4,7 +4,6 @@
   --color-product3:rgb(211, 189, 140);
   --color-product4:rgb(231, 221, 173);
   --color-product5:rgb(255, 255, 255);
-   
 }
 .bg-color-product1{
   background-color: var(--color-product1);
@@ -36,7 +35,6 @@ body {
 
 .main-content {
   width: 100vw;
-  /* Chiều rộng toàn màn hình */
   padding: 0;
   margin: 0;
 }
@@ -44,8 +42,8 @@ body {
   position: relative;
   margin-top: auto;
   width: 100%;
-  height: 60px; /* Set the fixed height of the footer here */
-  line-height: 60px; /* Vertically center the text there */
+  height: 60px;
+  line-height: 60px;
   background-color: #000000;
   color: #fff;
   padding: 40px 0;
@@ -87,32 +85,23 @@ footer p {
   right: 20px;
 }
 .special-img img {
-  -webkit-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
 }
 
 .special-img:hover img {
-  -webkit-transform: scale(1.2);
-  -ms-transform: scale(1.2);
   transform: scale(1.2);
 }
 /* Carousel */
 .carousel-item img {
   width: 100vw;
-  /* Chiều rộng ngang toàn bộ màn hình */
   height: 100vh;
-  /* Chiều cao toàn màn hình hoặc tùy chỉnh */
   object-fit: cover;
-  /* Đảm bảo hình ảnh không bị biến dạng */
 }
 .carousel-item-product img{
   width: 100%;
-  
-    object-fit: cover;
+  object-fit: cover;
 }
-/* App nổi */
- /* CSS cho các nút liên hệ */
+/* Floating contact buttons */
 .contact-buttons {
   position: fixed;
   bottom: 50px;
@@ -134,7 +123,7 @@ footer p {
   justify-content: center;
   align-items: center;
   transition: all 0.3s ease;
-  cursor: pointer; /* Đảm bảo con trỏ thay đổi thành pointer */
+  cursor: pointer;
 }
 
 .contact-btn img {
@@ -142,50 +131,28 @@ footer p {
   height: 60%;
 }
 
-/* Màu nền cho từng nút */
-.phone-btn {
+.phone-btn, .zalo-btn, .messenger-btn, .top-btn {
   background-color: white;
 }
 
-.zalo-btn {
-  background-color: white;
-}
-
-.messenger-btn {
-  background-color: white;
-}
-
-.top-btn {
-  background-color: white;
-}
-/*Gạch giữa giá cũ*/
 .price-old{
   text-decoration: line-through;
   margin-left: 10px;
 }
-/* Hiệu ứng hover */
-.contact-btn:hover  {
+
+.contact-btn:hover, .btn-product:hover {
   transform: scale(1.1);
   box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
 }
-.btn-product:hover{
-  transform: scale(1.1);
-    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
-}
 .nav-link:hover {
   font-weight: bold;
-  /* Chữ sẽ in đậm khi rê chuột vào */
 }
 
-
-/* text color */
 .text-primary {
   color: var(--pink) !important;
 }
 
-/* navbar */
 .navbar {
-  -webkit-box-shadow: 0 3px 9px 3px rgba(0, 0, 0, 0.1);
   box-shadow: 0 3px 9px 3px rgba(0, 0, 0, 0.5);
 }
 
@@ -212,11 +179,9 @@ footer p {
   border-radius: 25px;
   border: 1px solid rgb(85, 85, 85);
 }
-/* Khi rê chuột vào nav-item có class dropdown, menu con sẽ hiện ra */
 .nav-item.dropdown:hover .dropdown-menu {
 	display: block;
 	margin-top: 0;
-
 }
 
 img{
@@ -250,30 +215,23 @@ img{
 
 .multi-column-dropdown li a {
 	display: block;
-	clear: both;
 	line-height: 1.428571429;
 	color: #000000;
 	white-space: normal;
 }
 
 .multi-column-dropdown li a:hover {
-	text-decoration: none;
 	color: #ffffff;
 	background-color: #000000;
 }
 .multi-column-dropdown li a {
 	text-decoration: none;
-	/* Xóa dấu gạch chân */
 }
 .divider {
 	height: 1px;
-	/* Chiều cao của divider */
 	background-color: #ddd;
-	/* Màu nền của divider */
 	margin: 5px 0;
-	/* Khoảng cách trên và dưới */
 	width: 100%;
-	/* Chiều rộng đầy đủ */
 }
 
 @media (max-width: 767px) {
@@ -281,7 +239,6 @@ img{
 		min-width: 240px !important;
 		overflow-x: hidden;
 	}
-
   .hidden{
     display: none;
   }
@@ -299,25 +256,19 @@ img{
     margin-top: 140px;
   }
 }
-.nav-link i.fas.fa-user {
+.nav-link i.fas.fa-user, .nav-link i.fas.fa-shopping-cart {
   font-size: 1.5em;
   line-height: 1;
-  /* Tăng kích thước icon người dùng */
-}
-.nav-link i.fas.fa-shopping-cart {
-  font-size: 1.5em;
-  /* Tăng kích thước icon người dùng */
 }
 
-/*Hôp thoại đăng nhập */
-    .login-modal {
-      z-index: 1050;
-      width: 300px;
-      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    }
+/* Login modal */
+.login-modal {
+  z-index: 1050;
+  width: 300px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
 
-/*thumbnail*/
-
+/* Thumbnail */
 .color-product {
   margin-right: 10px;
   width: 42px;
@@ -325,7 +276,7 @@ img{
   border-radius: 50%;
 }
 
-/*nut tang giam san pham*/
+/* Quantity buttons */
 .quantity {
   display: flex;
   align-items: center;
@@ -345,7 +296,7 @@ img{
   text-align: center;
 }
 
-/*Nut mua hang va them gio hang o trang chi tiet san pham*/
+/* Product buttons in detail page */
 .btn-group-product button{
   width: 49.5%;
   font-weight: 600;
@@ -368,6 +319,27 @@ img{
 .main-detail-product{
   margin-top: 100px;
 }
+
+/* GIF icons */
+.gif-icon {
+  width: 90px;
+  height: auto;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+.gif-icon-2 {
+  width: 40px;
+  height: auto;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.special-img img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,500,600,700&display=swap');
 
 * {
@@ -396,87 +368,19 @@ img{
 }
 
 /************************** for sidebar ***********************************/
-
-/* The sidebar menu */
 .sidebar {
   height: 100%;
-  /* 100% Full-height */
   width: 0;
-  /* 0 width - change this with JavaScript */
   position: fixed;
-  /* Stay in place */
   z-index: 1;
-  /* Stay on top */
   top: 0;
   left: 0;
   background-color: #3B3131;
-  /* Black*/
   overflow-x: hidden;
-  /* Disable horizontal scroll */
   padding-top: 60px;
-  /* Place content 60px from the top */
   transition: 0.5s;
-  /* 0.5 second transition effect to slide in the sidebar */
 }
 
-/* The sidebar links */
 .sidebar a {
   padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 22px;
-  color: #fff;
-  display: block;
-  transition: 0.3s;
-}
-
-.sidebar .side-header {
-  margin-left: 30px;
-  margin-bottom: 8px;
-  color: #fff;
-}
-
-/* When you mouse over the navigation links, change their color */
-.sidebar a:hover {
-  background-color: #584e46;
-}
-
-/* Position and style the close button (top right corner) */
-.sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 2px;
-  font-size: 34px;
-  margin-left: 50px;
-}
-
-/* The button used to open the sidebar */
-.openbtn {
-  font-size: 20px;
-  cursor: pointer;
-  padding: 10px 15px;
-  border: none;
-  color: #fff;
-  background-color: #584e46;
-}
-
-.openbtn:hover {
-  color: #ECDAC9;
-}
-
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main {
-  transition: margin-left .5s;
-  /* If you want a transition effect */
-  padding: 20px;
-}
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidebar {
-    padding-top: 15px;
-  }
-
-  .sidebar a {
-    font-size: 18px;
-  }
-}
+  text-decoration:

@@ -15,5 +15,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/css/style.css">
 
+    <link rel="stylesheet" href="/css/styleAdmin.css">
+
+
 
 </head>
