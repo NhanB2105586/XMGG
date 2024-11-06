@@ -20,7 +20,7 @@ include_once __DIR__ . '/../partials/header.php';
                         </div>
                         <div class="my-1">
                             <a href="/" class="btn btn-primary btn-lg me-1">
-                                <i class="fa fa-home"></i> Quay về Trang chủ</a>
+                                <i class="fa fa-home"></i>&nbsp;Quay về Trang chủ</a>
                         </div>
                     </div>
                 </div>

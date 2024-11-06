@@ -55,7 +55,7 @@ $products = $productModel->getAllProducts();
                 </select>
             </div>
 
-            <button class="apply-filter-btn">ÁP DỤNG</button>
+            <button class="btn apply-filter-btn">ÁP DỤNG</button>
         </div>
 
         <!-- Danh sách sản phẩm -->

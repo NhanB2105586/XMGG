@@ -1,5 +1,17 @@
 <?php
-$router->get('/products', function () use ($PDO) {
-    $controller = new App\Controllers\User\ProductController($PDO);
-    $controller->index();
-});
+
+$router->get(
+    '/sanpham',
+    '\App\Controllers\User\ProductController@showsanpham'
+);
+
+$router->get(
+    '/phongkhach/sofa',
+    '\App\Controllers\User\ProductController@showsofa'
+);
+
+$router->get(
+    '/chitietsanpham/(\d+)', // Route với ID sản phẩm dạng số
+    '\App\Controllers\User\ProductController@showchitietsanpham'
+);
+

@@ -132,7 +132,7 @@ footer p {
 }
 
 .phone-btn, .zalo-btn, .messenger-btn, .top-btn {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.403);
 }
 
 .price-old{
@@ -174,9 +174,9 @@ footer p {
 }
 .btn:not(.nav-btns button) {
   background-color: #fff;
-  color: rgb(85, 85, 85);
+  color: rgb(0, 0, 0);
   padding: 10px 28px;
-  border-radius: 25px;
+  border-radius: 10px;
   border: 1px solid rgb(85, 85, 85);
 }
 .nav-item.dropdown:hover .dropdown-menu {
@@ -261,12 +261,6 @@ img{
   line-height: 1;
 }
 
-/* Login modal */
-.login-modal {
-  z-index: 1050;
-  width: 300px;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-}
 
 /* Thumbnail */
 .color-product {
@@ -299,7 +293,7 @@ img{
 /* Product buttons in detail page */
 .btn-group-product button{
   width: 49.5%;
-  font-weight: 600;
+  font-weight: 500;
 }
 .detail-product{
   padding-left:30px;
@@ -340,15 +334,14 @@ img{
   object-fit: cover;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,500,600,700&display=swap');
 
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,500,600,700&display=swap');
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Work Sans', sans-serif;
-  font-size: 18px;
+  font-family: 'Work Sans', 'sans-serif';
+  font-size: 17px;
 }
-
 .user-cart span {
   background-color: red;
   padding-right: 3px;
@@ -357,7 +350,6 @@ img{
   font-size: 18px;
   margin-left: -1.2rem;
 }
-
 /*********** admin dashboard styling **********/
 .card {
   background-color: #3B3131;
@@ -366,21 +358,148 @@ img{
   border-radius: 10px;
   box-shadow: 8px 5px 5px #3B3131;
 }
-
 /************************** for sidebar ***********************************/
+/* The sidebar menu */
 .sidebar {
   height: 100%;
+  /* 100% Full-height */
   width: 0;
+  /* 0 width - change this with JavaScript */
   position: fixed;
+  /* Stay in place */
   z-index: 1;
+  /* Stay on top */
   top: 0;
   left: 0;
   background-color: #3B3131;
+  /* Black*/
   overflow-x: hidden;
+  /* Disable horizontal scroll */
   padding-top: 60px;
+  /* Place content 60px from the top */
   transition: 0.5s;
+  /* 0.5 second transition effect to slide in the sidebar */
 }
-
+/* The sidebar links */
 .sidebar a {
   padding: 8px 8px 8px 32px;
-  text-decoration:
+  text-decoration: none;
+  font-size: 16px;
+  color: #fff;
+  display: block;
+  transition: 0.3s;
+}
+.sidebar .side-header {
+  margin-left: 30px;
+  margin-bottom: 8px;
+  color: #fff;
+}
+/* When you mouse over the navigation links, change their color */
+.sidebar a:hover {
+  background-color: #584e46;
+}
+/* Position and style the close button (top right corner) */
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 2px;
+  font-size: 34px;
+  margin-left: 50px;
+}
+/* The button used to open the sidebar */
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  padding: 10px 15px;
+  border: none;
+  color: #fff;
+  background-color: #584e46;
+}
+.openbtn:hover {
+  color: #ECDAC9;
+}
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s;
+  /* If you want a transition effect */
+  padding: 20px;
+}
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+  .sidebar {
+    padding-top: 15px;
+  }
+  .sidebar a {
+    font-size: 18px;
+  }}
+
+
+
+.btn {
+    display: inline-flex;               /* Sử dụng inline-flex để căn giữa nội dung */
+    align-items: center;                /* Căn giữa theo chiều dọc */
+    justify-content: center;            /* Căn giữa theo chiều ngang */
+    padding: 10px 20px;                 /* Khoảng cách trong của nút */
+    font-size: 18px;                    /* Kích thước chữ */
+    text-decoration: none;              /* Xóa gạch chân */
+    border-radius: 5px;                 /* Bo tròn các góc */
+    cursor: pointer;                    /* Con trỏ chỉ tay */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Hiệu ứng chuyển */
+}
+
+.btn:hover{
+   color: white !important;
+  background-color: #000000 !important; /* Màu nền khi hover */
+}
+
+.btn-product{
+   font-size: 14px;   
+}
+
+.nav-btns {
+  align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.nav-btns form {
+  display: flex;
+  align-items: center;
+  width: 220px;
+}
+
+.nav-btns .form-control {
+  flex-grow: 1; /* Để input chiếm tối đa diện tích */
+}
+
+.nav-btns .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem; /* Đảm bảo kích thước nút đồng nhất */
+  margin-left: 10px; /* Khoảng cách giữa nút tìm kiếm và giỏ hàng */
+}
+
+
+.icon-btn:hover {
+    background-color: rgb(193, 192, 192) !important;
+}
+
+
+
+.alert {
+    position: fixed;
+    top: 75px; /* Điều chỉnh giá trị này tùy theo chiều cao của navbar */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999; /* Đảm bảo thông báo nằm trên các thành phần khác */
+    width: 90%;
+    max-width: 600px;
+}
+
+/* Hiệu ứng ẩn dần */
+.alert.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+
