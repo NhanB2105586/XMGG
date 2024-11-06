@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use League\Plates\Engine;
 use PDO;
+
 class Controller
 {
     protected $view;
@@ -11,7 +12,7 @@ class Controller
     public function __construct()
     {
         $this->view = new Engine(ROOTDIR . 'app/views');
-        $this->db = new PDO('mysql:host=localhost;dbname=project', 'root', 'nhan12345678');
+        $this->db = new PDO('mysql:host=localhost;dbname=project', 'root', '');
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 

@@ -17,7 +17,8 @@ include_once __DIR__ . '/../../models/Product.php';
             <div class="banner-text">
                 Sản phẩm
                 <div class="breadcrumb">
-                    <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/sanpham.php"> <strong class="current-page">Sản phẩm</strong></a>
+                    <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/sanpham.php"> <strong class="current-page">Sản
+                            phẩm</strong></a>
                 </div>
             </div>
         </div>

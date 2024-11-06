@@ -4,6 +4,7 @@ namespace App\Models;
 use PDO;
 class ProductImage extends Model
 {
+
     protected string $table = 'product_images'; // Đặt tên bảng cho hình ảnh sản phẩm
 
     public function __construct(PDO $pdo)
@@ -38,3 +39,6 @@ class ProductImage extends Model
         return $this->delete($this->table, 'image_id', $imageId);
     }
 }
+
+
+    
