@@ -1,11 +1,8 @@
 <?php
 
 namespace App\Controllers\User;
-
 use App\Controllers\Controller;
-
 use App\Models\Product;
-
 use App\Models\ProductImage;
 use App\Models\User;
 use App\Models\Cart;
@@ -94,7 +91,7 @@ class UserController extends Controller
             if ($user) {
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['success_message'] = "Đăng nhập thành công!";
-                $_SESSION['username']= $user['username'];
+                $_SESSION['username']= $user['fullname'];
 
                 $cartModel = new Cart($this->db); // Giả sử bạn có model Cart
                 $productCount = $cartModel->getProductCountByUserId($user['user_id']);
@@ -110,12 +107,47 @@ class UserController extends Controller
         }
     }
 
+    public function handleRegistration()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $fullName = $_POST['full_name'] ?? '';
+            $email = $_POST['email'] ?? '';
+            $phone = $_POST['phone'] ?? '';
+            $address = $_POST['address'] ?? '';
+            $password = $_POST['password'] ?? '';
+            $confirmPassword = $_POST['confirm_password'] ?? '';
+
+            // Kiểm tra tính hợp lệ của dữ liệu
+            if ($password !== $confirmPassword) {
+                $_SESSION['error_message'] = "Mật khẩu không khớp.";
+                header('Location: /dangki');
+                exit();
+            }
+
+            $userModel = new User($this->db);
+            $registrationSuccess = $userModel->registerUser($fullName, $email, $phone, $address, $password);
+
+            if ($registrationSuccess) {
+                $_SESSION['success_message'] = "Đăng ký thành công! Bạn có thể đăng nhập ngay.";
+                header('Location: /dangnhap'); // Chuyển hướng về trang đăng nhập
+                exit();
+            } else {
+                $_SESSION['error_message'] = "Đăng ký không thành công. Vui lòng thử lại.";
+                header('Location: /dangki'); // Quay lại trang đăng ký
+                exit();
+            }
+        }
+    }
+
+
     public function logout()
     {
         session_start();
-        session_unset(); // Xóa tất cả các biến session
-        session_destroy(); // Hủy session
-        header('Location: /dangnhap'); // Chuyển hướng về trang đăng nhập
+        session_unset();
+        session_destroy();
+        $_SESSION['success_message'] = "Đăng xuất thành công!";
+        header('Location: /dangnhap');
         exit();
     }
+
 }

@@ -6,7 +6,7 @@ use PDO;
 
 class Order extends Model
 {
-    private PDO $db;
+    protected PDO $db;
 
     public function __construct(PDO $db)
     {
@@ -88,13 +88,12 @@ class Order extends Model
 
 
     // Tạo đơn hàng mới
-    public function createOrder($userId, $totalAmount, $status = 'Đang xử lý')
+    public function createOrder($userId, $totalAmount)
     {
-        $stmt = $this->db->prepare("INSERT INTO orders (user_id, order_date, total_amount, status) VALUES (:user_id, NOW(), :total_amount, :status)");
+        $stmt = $this->db->prepare("INSERT INTO orders (user_id, order_date, total_amount) VALUES (:user_id, NOW(), :total_amount)");
         $stmt->execute([
             'user_id' => $userId,
-            'total_amount' => $totalAmount,
-            'status' => $status
+            'total_amount' => $totalAmount
         ]);
         return $this->db->lastInsertId(); // Trả về ID của đơn hàng mới
     }

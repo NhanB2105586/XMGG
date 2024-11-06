@@ -58,5 +58,18 @@ class User extends Model
         return $user[0]['user_id'] ?? null; // Trả về null nếu không tìm thấy
     }
 
-    
+    public function registerUser($fullName, $email, $phone, $address, $password)
+    {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT); // Mã hóa mật khẩu
+
+        $stmt = $this->db->prepare("INSERT INTO users (fullname, email, phone_number, address, password) VALUES (:fullname, :email, :phone, :address, :password)");
+
+        return $stmt->execute([
+            'fullname' => $fullName,
+            'email' => $email,
+            'phone' => $phone,
+            'address' => $address,
+            'password' => $hashedPassword
+        ]);
+    }
 }
