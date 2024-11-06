@@ -12,4 +12,10 @@ $router->get(
     '\App\Controllers\User\UserController@logout'
 );
 
+$router->post(
+    '/checkdangky',
+    '\App\Controllers\User\UserController@handleRegistration'
+);
+
+
 ?>

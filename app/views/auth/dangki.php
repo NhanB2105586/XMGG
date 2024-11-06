@@ -11,8 +11,20 @@ include_once __DIR__ . '/../../core/PDOFactory.php';
     <!-- Main Page Content -->
     <div class="row">
         <div class="col-lg-5 col-md-8 col-sm-11 mx-auto">
+            <?php
+            if (isset($_SESSION['success_message'])) {
+                echo '<div id="success-alert" class="alert alert-success" role="alert">' . htmlspecialchars($_SESSION['success_message']) . '</div>';
+                unset($_SESSION['success_message']); // Xóa thông báo sau khi hiển thị
+            }
+            ?>
+            <?php
+            if (isset($_SESSION['error_message'])) {
+                echo '<div id="success-alert" class="alert alert-success" role="alert">' . htmlspecialchars($_SESSION['error_message']) . '</div>';
+                unset($_SESSION['error_message']); // Xóa thông báo sau khi hiển thị
+            }
+            ?>
             <div class="wrapper">
-                <form class="form-register" action="register_process.php" method="POST">
+                <form class="form-register" action="/checkdangky" method="POST">
                     <h2 class="title-form text-center mb-3">ĐĂNG KÝ</h2>
 
                     <div class="mb-3">

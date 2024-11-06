@@ -56,7 +56,7 @@ class OrdersController extends Controller
 
         // Lấy thông tin từ form thanh toán
         $totalAmount = $_POST['total_amount'];
-        $paymentMethod = $_POST['payment_method'];
+        $paymentMethod = 'Đang xử lý';
         $name = $_POST['name'];
         $phone = $_POST['phone'];
         $address = $_POST['address'];
