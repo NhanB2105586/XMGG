@@ -9,11 +9,9 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
     <a href="/admin"><i class="fa fa-home"></i> Dashboard</a>
     <a href="/admin/viewCustomer"><i class="fa fa-users"></i> Khách hàng</a>
-    <a href="/admin/viewProduct"><i class="fa fa-th-large"></i> Sản phẩm</a>
+    <a href="/admin/viewProducts"><i class="fa fa-th-large"></i> Sản phẩm</a>
     <a href="/admin/viewCategory"><i class="fa fa-th"></i> Danh mục</a>
-    <a href="#productsizes"><i class=" fa fa-th-list"></i> Đơn hàng</a>
-    <a href="#products"><i class="fa fa-th"></i> Products</a>
-    <a href="#orders"><i class="fa fa-list"></i> Orders</a>
+    <a href="/admin/viewOrders"><i class=" fa fa-th-list"></i> Đơn hàng</a>
 
 
     <!---->

@@ -6,7 +6,7 @@ use PDO;
 
 class Model
 {
-    protected PDO $db;
+    private PDO $db;
 
     public function __construct(PDO $pdo)
     {
@@ -165,13 +165,13 @@ class Model
 
     public function countSuccessfulOrders()
     {
-        $stmt = $this->db->query("SELECT COUNT(*) FROM orders WHERE status = 'success'");
+        $stmt = $this->db->query("SELECT COUNT(*) FROM orders WHERE status = 'completed'");
         return $stmt->fetchColumn();
     }
 
     public function calculateRevenue()
     {
-        $stmt = $this->db->query("SELECT SUM(total_amount) FROM orders WHERE status = 'success'");
+        $stmt = $this->db->query("SELECT SUM(total_amount) FROM orders WHERE status = 'completed'");
         return $stmt->fetchColumn() ?: 0; // Trả về 0 nếu không có doanh thu
     }
     //Category
@@ -204,6 +204,104 @@ class Model
         $stmt->execute();
 
         return $stmt->fetchColumn() > 0; // Nếu có bản ghi, trả về true
+    }
+
+    //product
+    protected function getItemsProduct($table, $limit, $offset, $searchTerm = '')
+    {
+        $sql = "SELECT * FROM $table WHERE product_name LIKE :searchTerm LIMIT :limit OFFSET :offset";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    protected function getTotalItemsProduct($table, $searchTerm = '')
+    {
+        $sql = "SELECT COUNT(*) FROM $table WHERE product_name LIKE :searchTerm";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchColumn();
+    }
+    public function productExists($productName)
+    {
+        $sql = "SELECT COUNT(*) FROM products WHERE product_name = :product_name";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':product_name', $productName, PDO::PARAM_STR);
+        $stmt->execute();
+
+        return $stmt->fetchColumn() > 0; // Nếu có bản ghi, trả về true
+    }
+    public function getNewProducts(int $limit = 4)
+    {
+        $query = "SELECT * FROM products ORDER BY created_at DESC LIMIT :limit";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    // Lấy tất cả hình ảnh của một sản phẩm
+    public function getImagesByProductId($productId)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM product_images WHERE product_id = ?");
+        $stmt->execute([$productId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getImageById($image_id)
+    {
+        $stmt = $this->db->prepare('SELECT * FROM product_images WHERE image_id = :image_id');
+        $stmt->execute(['image_id' => $image_id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    //Order
+    protected function getItemsOrder($table, $limit, $offset, $searchTerm = ''){
+    // Thực hiện JOIN giữa bảng orders và bảng users để lấy tên khách hàng
+    $sql = "SELECT o.*, u.fullname AS customer_name 
+            FROM $table o 
+            JOIN users u ON o.user_id = u.user_id  -- Tham chiếu đúng cột user_id
+            WHERE u.fullname LIKE :searchTerm 
+            LIMIT :limit OFFSET :offset";
+
+    // Chuẩn bị câu lệnh SQL
+    $stmt = $this->db->prepare($sql);
+    
+    // Gán giá trị cho tham số searchTerm (tìm kiếm theo tên khách hàng)
+    $stmt->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
+    
+    // Gán giá trị cho các tham số limit và offset để phân trang
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    
+    // Thực thi câu lệnh
+    $stmt->execute();
+
+    // Trả về kết quả dưới dạng mảng
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+    protected function getTotalItemsOrder($table, $searchTerm = '')
+    {
+        // Thực hiện JOIN giữa bảng orders và bảng users để tìm kiếm theo fullname
+        $sql = "SELECT COUNT(*) 
+            FROM $table o 
+            JOIN users u ON o.user_id = u.user_id  -- Tham chiếu đúng cột user_id
+            WHERE u.fullname LIKE :searchTerm";
+
+        // Chuẩn bị câu lệnh SQL
+        $stmt = $this->db->prepare($sql);
+
+        // Gán giá trị cho tham số searchTerm (tìm kiếm theo tên khách hàng)
+        $stmt->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
+
+        // Thực thi câu lệnh
+        $stmt->execute();
+
+        // Trả về kết quả dưới dạng một số (số lượng đơn hàng)
+        return $stmt->fetchColumn();
     }
 
 }

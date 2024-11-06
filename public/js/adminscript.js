@@ -31,3 +31,5 @@ function closeNav() {
   document.getElementById("main-content").style.marginLeft = originalMarginLeft; // Khôi phục margin-left
   document.getElementById("navbar-text").classList.add("active");
 }
+
+

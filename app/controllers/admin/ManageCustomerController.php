@@ -100,7 +100,6 @@ class ManageCustomerController extends Controller
 
     public function editCustomer($id)
     {
-        // Lấy thông tin khách hàng dựa trên ID
         $customer = $this->customerModel->getByID('users', 'user_id', $id);
         if (!$customer) {
             $this->sendNotFound();
@@ -114,6 +113,7 @@ class ManageCustomerController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Lọc dữ liệu từ form
             $data = $this->filterData(['fullname', 'username', 'email', 'address', 'phone_number'], $_POST);
+
 
             // Kiểm tra tính hợp lệ của dữ liệu
             if (empty($data['fullname']) || empty($data['username']) || empty($data['address']) || empty($data['phone_number']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
@@ -145,7 +145,7 @@ class ManageCustomerController extends Controller
         // Kiểm tra xem có ID được gửi không
         if (isset($_POST['id'])) {
             $customerId = $_POST['id'];
-            if ($this->customerModel->hasOrders('users','user_id',$customerId)) {
+            if ($this->customerModel->hasOrders('orders','user_id',$customerId)) {
                 // Lưu thông báo lỗi
                 $_SESSION['error_message'] = 'Không thể xóa khách hàng này vì còn đơn hàng liên quan.';
             } else {

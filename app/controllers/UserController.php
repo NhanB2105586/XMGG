@@ -64,17 +64,17 @@ class UserController extends Controller
         }
 
         // Lấy danh sách ảnh của sản phẩm
-        $images = $productModel->getProductImages($id);
+        //$images = $productModel->getProductImages($id);
 
         // Lấy danh sách chi tiết của sản phẩm
-        $details = $productModel->getProductDetails($id);
+        //$details = $productModel->getProductDetails($id);
 
         // Gửi tất cả dữ liệu đến view
-        $this->sendPage('user/chitietsanpham', [
-            'product' => $product,
-            'images' => $images,
-            'details' => $details
-        ]);
+        //$this->sendPage('user/chitietsanpham', [
+        //    'product' => $product,
+        //    'images' => $images,
+         //   'details' => $details
+        //]);
     }
 
 }

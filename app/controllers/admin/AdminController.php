@@ -4,6 +4,7 @@ namespace App\Controllers\Admin;
 
 use App\Controllers\Controller;
 use App\Models\Model;
+use App\Models\Order;
 use PDO;
 
 class AdminController extends Controller
@@ -44,7 +45,6 @@ class AdminController extends Controller
         }
         // Lấy số liệu thống kê
         $data = $this->getStatistics();
-        
         $this->sendPage('/admin/dashboard', [
             'admin' => $_SESSION['admin'],
             'userCount' => $data['userCount'],

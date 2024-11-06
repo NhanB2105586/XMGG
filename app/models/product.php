@@ -1,69 +1,43 @@
 <?php
 
 namespace App\Models;
-use PDO;
+
 class Product extends Model
 {
-    protected string $table = 'products'; // Đặt tên bảng cho sản phẩm
-
-    public function __construct(PDO $pdo)
+    public function createProduct(array $data)
     {
-        parent::__construct($pdo);
+        return $this->set('products', $data);
     }
 
-    // Lấy tất cả sản phẩm
-    public function getAllProducts(): array
+    public function updateProduct(int $id, array $data)
     {
-        return $this->getAll($this->table);
+        return $this->update('products', 'product_id', $id, $data);
     }
 
-    // Lấy sản phẩm theo ID
     public function getProductById($id)
     {
         return $this->getByID('products', 'product_id', $id);
     }
 
-    public function getProductImages($productId)
+    public function getAllProducts()
     {
-        return $this->getByProps('product_images', ['product_id' => $productId]);
+        return $this->getAll('products');
     }
 
-    // Lấy danh sách chi tiết từ bảng `product_details` cho một sản phẩm cụ thể
-    public function getProductDetails($productId)
+    public function deleteProduct(int $id)
     {
-        return $this->getByProps('product_details', ['product_id' => $productId]);
-    }
-    // Thêm sản phẩm mới
-    public function addProduct(array $productData): bool
-    {
-        return $this->set($this->table, $productData);
+        return $this->delete('products', 'product_id', $id);
     }
 
-    // Cập nhật thông tin sản phẩm
-    public function updateProduct(int $id, array $newData): bool
+    public function getProductSearch($limit, $offset, $searchTerm = '')
     {
-        return $this->update($this->table, 'id', $id, $newData);
+        return $this->getItemsProduct('Products', $limit, $offset, $searchTerm);
     }
 
-    // Xóa sản phẩm theo ID
-    public function deleteProduct(int $id): bool
+    public function getTotalProductSearch($searchTerm = '')
     {
-        return $this->delete($this->table, 'id', $id);
+        return $this->getTotalItemsProduct('Products', $searchTerm);
     }
 
-    // Tìm sản phẩm theo thuộc tính
-    public function findProductByAttributes(array $attributes): array
-    {
-        return $this->getByProps($this->table, $attributes);
-    }
-
-    public function getNewProducts(int $limit = 4): array
-    {
-        $query = "SELECT * FROM {$this->table} ORDER BY created_at DESC LIMIT :limit";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
     
 }

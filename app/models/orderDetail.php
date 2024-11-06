@@ -2,35 +2,20 @@
 
 namespace App\Models;
 
+use PDO;
+
 class OrderDetail extends Model
 {
-    public function __construct($PDO)
+    public function __construct(PDO $pdo)
     {
-        parent::__construct($PDO);
+        parent::__construct($pdo);
     }
 
-    public function getAllOrderDetails()
-    {
-        return $this->getAll('order_details');
-    }
+    // Lấy tất cả các chi tiết của một đơn hàng theo order_id
 
-    public function getOrderDetailById($id)
+    // Phương thức để lấy chi tiết đơn hàng
+    public function getByOrderId(int $orderId): array
     {
-        return $this->getByID('order_details', 'order_detail_id', $id);
-    }
-
-    public function createOrderDetail($data)
-    {
-        return $this->set('order_details', $data);
-    }
-
-    public function updateOrderDetail($id, $data)
-    {
-        return $this->update('order_details', 'order_detail_id', $id, $data);
-    }
-
-    public function deleteOrderDetail($id)
-    {
-        return $this->delete('order_details', 'order_detail_id', $id);
+        return $this->getByID('order_details', 'order_id', $orderId);
     }
 }
