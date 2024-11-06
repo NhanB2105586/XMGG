@@ -9,18 +9,18 @@ if (isset($_SESSION['error_messages'])) {
 }
 ?>
 <style>
-.form-login-admin {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+    .form-login-admin {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
 
-.wrapper-admin {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
-}
+    .wrapper-admin {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
 </style>
 <div class="col-lg-3 col-md-8 col-sm-11 form-login-admin mx-auto">
     <div class="wrapper-admin ">
@@ -40,6 +40,7 @@ if (isset($_SESSION['error_messages'])) {
                 <label for="remember">Ghi Nhớ Tôi</label>
             </div>
             <button type="submit" class="btn btn-form">Đăng Nhập</button>
+            <a href="/dangnhap" class="btn btn-form">Quay lại</button></a>
         </form>
     </div>
 </div>

@@ -65,5 +65,26 @@ class Product extends Model
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-    
+
+
+    public function getRelatedProducts($currentProductId, $limit = 4)
+    {
+        $query = "SELECT * FROM {$this->table} WHERE product_id != :currentProductId ORDER BY RAND() LIMIT :limit";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':currentProductId', $currentProductId, PDO::PARAM_INT);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    public function getProductsByCategory($categoryId)
+    {
+        $query = "SELECT * FROM {$this->table} WHERE category_id = :category_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':category_id', $categoryId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

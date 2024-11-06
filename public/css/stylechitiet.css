@@ -16,3 +16,47 @@
         height: 75px; /* Chiều cao ảnh lớn */
         object-fit: cover;
     }
+
+    /* Đặt nền ban đầu, màu chữ và các thuộc tính chung cho nút */
+.hidden-btn {
+    width: 250px !important;
+    text-transform: uppercase;
+    transition: all 0.3s ease; /* Hiệu ứng chuyển khi hover */
+    border-radius: 5px;
+}
+
+/* Hiệu ứng khi rê chuột vào nút */
+.hidden-btn:hover {
+    color: white !important;
+    background-color: #000000 !important; /* Màu nền khi hover */
+    transform: scale(1.05); /* Tăng kích thước nhẹ khi hover */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Thêm bóng đổ */
+}
+
+
+.btn-group-product {
+    display: flex;
+    gap: 10px; /* Khoảng cách giữa các nút */
+    justify-content: center; /* Căn giữa các nút trong dòng */
+    
+}
+
+/* Cấu hình ban đầu cho ảnh */
+.content-detail img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+}
+
+/* Hiệu ứng khi rê chuột vào ảnh */
+.content-detail img:hover {
+    transform: scale(1.05); /* Phóng to nhẹ khi hover */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Bóng đổ nhẹ */
+    filter: brightness(1.1); /* Tăng độ sáng */
+}
+.content-detail p {
+    font-style: italic;
+}
+
+button[disabled] {
+    background-color: #c9c8c8 !important;
+    cursor: not-allowed;
+}

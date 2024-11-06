@@ -2,35 +2,72 @@
 
 namespace App\Models;
 
-class Order extends Model
+use PDO;
+
+class Order
 {
-    public function __construct($PDO)
+    private PDO $db;
+
+    public function __construct(PDO $db)
     {
-        parent::__construct($PDO);
+        $this->db = $db;
     }
 
-    public function getAllOrders()
+    // Tạo đơn hàng mới
+    public function createOrder($userId, $totalAmount, $status = 'Đang xử lý')
     {
-        return $this->getAll('orders');
+        $stmt = $this->db->prepare("INSERT INTO orders (user_id, order_date, total_amount, status) VALUES (:user_id, NOW(), :total_amount, :status)");
+        $stmt->execute([
+            'user_id' => $userId,
+            'total_amount' => $totalAmount,
+            'status' => $status
+        ]);
+        return $this->db->lastInsertId(); // Trả về ID của đơn hàng mới
     }
 
-    public function getOrderById($id)
+    // Thêm chi tiết sản phẩm vào đơn hàng
+    public function addOrderDetail($orderId, $productId, $quantity, $price)
     {
-        return $this->getByID('orders', 'order_id', $id);
+        $stmt = $this->db->prepare("INSERT INTO order_details (order_id, product_id, quantity, price) VALUES (:order_id, :product_id, :quantity, :price)");
+        $stmt->execute([
+            'order_id' => $orderId,
+            'product_id' => $productId,
+            'quantity' => $quantity,
+            'price' => $price
+        ]);
     }
 
-    public function createOrder($data)
+
+
+    public function getOrderDetails($orderId)
     {
-        return $this->set('orders', $data);
+        $stmt = $this->db->prepare("
+        SELECT od.*, p.product_name, 
+            (SELECT pi.image_url FROM product_images pi WHERE pi.product_id = p.product_id LIMIT 1) AS image_url
+        FROM order_details od
+        JOIN products p ON od.product_id = p.product_id
+        WHERE od.order_id = :order_id
+    ");
+        $stmt->execute(['order_id' => $orderId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function updateOrder($id, $data)
+
+
+
+    // Lấy trạng thái đơn hàng
+    public function getOrderStatus($orderId)
     {
-        return $this->update('orders', 'order_id', $id, $data);
+        $stmt = $this->db->prepare("SELECT status FROM orders WHERE order_id = :order_id");
+        $stmt->execute(['order_id' => $orderId]);
+        return $stmt->fetchColumn(); // Trả về trạng thái đơn hàng
     }
 
-    public function deleteOrder($id)
+    public function getOrdersByUserId($userId)
     {
-        return $this->delete('orders', 'order_id', $id);
+        $stmt = $this->db->prepare("SELECT * FROM orders WHERE user_id = :user_id");
+        $stmt->execute(['user_id' => $userId]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 }

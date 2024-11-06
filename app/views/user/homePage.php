@@ -2,26 +2,22 @@
 include_once __DIR__ . '../../../core/PDOFactory.php';
 include_once __DIR__ . '/../partials/header.php';
 
-use App\Core\PDOFactory;
-use App\Models\Product;
-
-// Khởi tạo PDO và Model Product
-$pdoFactory = new PDOFactory();
-$pdo = $pdoFactory->create();
-$productModel = new Product($pdo);
-
-// Lấy sản phẩm mới nhất
-$newProducts = $productModel->getNewProducts();
 ?>
 <link href="/css/stylehomePage.css" rel="stylesheet">
 
 <body>
     <!-- Navbar -->
-    <div class="container mb-4"> <?php include_once __DIR__ . '/../partials/navbar.php'; ?></div>
+    <div class="container mb-3"> <?php include_once __DIR__ . '/../partials/navbar.php'; ?></div>
 
 
     <!-- Main Page Content -->
     <div class="container-fluid main-content mt-5">
+        <?php
+        if (isset($_SESSION['success_message'])) {
+            echo '<div id="success-alert" class="alert alert-success" role="alert">' . htmlspecialchars($_SESSION['success_message']) . '</div>';
+            unset($_SESSION['success_message']); // Xóa thông báo sau khi hiển thị
+        }
+        ?>
         <!-- Nội dung của bạn sẽ nằm ở đây -->
         <div id="carouselExample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
             <div class="carousel-inner">
@@ -121,29 +117,43 @@ $newProducts = $productModel->getNewProducts();
                 <h2 class="position-relative d-inline-block"> <img src="/images/GIF/new-blinking.gif" alt="Hot" class="gif-icon"> Sản Phẩm Mới<img src="/images/GIF/new-blinking.gif" alt="Hot" class="gif-icon">
                 </h2>
             </div>
-
-            <div class="special-list row g-0 ">
-                <?php foreach ($newProducts as $product): ?>
-                    <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                        <div class="special-img position-relative overflow-hidden">
-                            <a href="/chitietsanpham/<?php echo $product['product_id']; ?>">
-                                <img src="/images/upload/<?php echo htmlspecialchars($product['image_url']); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
-                            </a>
-                        </div>
-                        <div class="text-start m-1">
-                            <p class="text-capitalize mt-3 mb-1"><?php echo htmlspecialchars($product['product_name']); ?></p>
-                            <div class="d-flex">
-                                <span class="fw-bold d-block"><?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?></span>
-                                <span class="price-old"><?php echo number_format($product['old_price'], 0, ',', '.') . 'đ'; ?></span>
+            <div class="special-list row g-0">
+                <?php if (!empty($products)) : ?>
+                    <?php foreach ($products as $product): ?>
+                        <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
+                            <div class="special-img position-relative overflow-hidden">
+                                <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>">
+                                    <?php
+                                    // Hiển thị hình ảnh đầu tiên nếu có, nếu không, hiển thị một ảnh mặc định
+                                    $image_url = !empty($product['images'][0]['image_url']) ? $product['images'][0]['image_url'] : 'default.jpg';
+                                    ?>
+                                    <img src="/images/upload/<?php echo htmlspecialchars($image_url); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                                </a>
+                            </div>
+                            <div class="text-start m-1">
+                                <p class="text-capitalize mt-3 mb-1"><?php echo htmlspecialchars($product['product_name']); ?></p>
+                                <div class="d-flex">
+                                    <span class="fw-bold d-block">
+                                        <?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?>
+                                    </span>
+                                    <?php if (!empty($product['old_price'])) : ?>
+                                        <span class="price-old ms-2">
+                                            <?php echo number_format($product['old_price'], 0, ',', '.') . 'đ'; ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-around">
+                                <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
+                                <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 45%;">Chi Tiết</a>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-around">
-                            <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
-                            <a href="/chitietsanpham/<?php echo $product['product_id']; ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 45%;">Chi Tiết</a>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <p class="text-center">Không có sản phẩm nào mới.</p>
+                <?php endif; ?>
             </div>
+
         </div>
 
         <div class="container mb-3">
@@ -153,39 +163,62 @@ $newProducts = $productModel->getNewProducts();
                 </h2>
             </div>
 
-            <div class="special-list row g-0 ">
-                <?php foreach ($newProducts as $product): ?>
-                    <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                        <div class="special-img position-relative overflow-hidden">
-                            <a href="/chitietsanpham/<?php echo $product['product_id']; ?>">
-                                <img src="/images/upload/<?php echo htmlspecialchars($product['image_url']); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
-                            </a>
-                        </div>
-                        <div class="text-start m-1">
-                            <p class="text-capitalize mt-3 mb-1"><?php echo htmlspecialchars($product['product_name']); ?></p>
-                            <div class="d-flex">
-                                <span class="fw-bold d-block"><?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?></span>
-                                <span class="price-old"><?php echo number_format($product['old_price'], 0, ',', '.') . 'đ'; ?></span>
+            <div class="special-list row g-0">
+                <?php if (!empty($products)) : ?>
+                    <?php foreach ($products as $product): ?>
+                        <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
+                            <div class="special-img position-relative overflow-hidden">
+                                <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>">
+                                    <?php
+                                    // Hiển thị hình ảnh đầu tiên nếu có, nếu không, hiển thị một ảnh mặc định
+                                    $image_url = !empty($product['images'][0]['image_url']) ? $product['images'][0]['image_url'] : 'default.jpg';
+                                    ?>
+                                    <img src="/images/upload/<?php echo htmlspecialchars($image_url); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                                </a>
+                            </div>
+                            <div class="text-start m-1">
+                                <p class="text-capitalize mt-3 mb-1"><?php echo htmlspecialchars($product['product_name']); ?></p>
+                                <div class="d-flex">
+                                    <span class="fw-bold d-block">
+                                        <?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?>
+                                    </span>
+                                    <?php if (!empty($product['old_price'])) : ?>
+                                        <span class="price-old ms-2">
+                                            <?php echo number_format($product['old_price'], 0, ',', '.') . 'đ'; ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-around">
+                                <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
+                                <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 45%;">Chi Tiết</a>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-around">
-                            <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
-                            <a href="/chitietsanpham/<?php echo $product['product_id']; ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 45%;">Chi Tiết</a>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <p class="text-center">Không có sản phẩm nào mới.</p>
+                <?php endif; ?>
             </div>
+
             <div class="text-center">
                 <a href="#" class="btn btn-secondary m-3" style="width: 200px;">Xem thêm</a>
             </div>
         </div>
     </div>
-    <!--Script-->
-    <script src="/js/script.js"></script>
-    
+
     <!-- Footer -->
     <?php include_once __DIR__ . '/../partials/app.php'; ?>
     <?php include_once __DIR__ . '/../partials/footer.php'; ?>
+
+    <script>
+        // Tự động ẩn thông báo sau 2 giây
+        setTimeout(function() {
+            const alert = document.getElementById('success-alert');
+            if (alert) {
+                alert.style.display = 'none';
+            }   
+        }, 3000); // 2000ms = 2 giây
+    </script>
 </body>
 
 </html>

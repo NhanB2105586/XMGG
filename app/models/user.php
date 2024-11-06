@@ -32,9 +32,9 @@ class User extends Model
     {
         return $this->delete('users', 'user_id', $id);
     }
-    public function authenticate($username, $password)
+    public function authenticate($email, $password)
     {
-        $user = $this->getByProps('users', ['username' => $username]);
+        $user = $this->getByProps('users', ['email' => $email]);
         if ($user && password_verify($password, $user[0]['password'])) {
             return $user[0];
         }
@@ -49,6 +49,13 @@ class User extends Model
     public function getTotalCustomersSearch($searchTerm = '')
     {
         return $this->getTotalItems('users', $searchTerm);
+    }
+
+
+    public function getUserIdByEmail($email)
+    {
+        $user = $this->getByProps('users', ['email' => $email]);
+        return $user[0]['user_id'] ?? null; // Trả về null nếu không tìm thấy
     }
 
     
