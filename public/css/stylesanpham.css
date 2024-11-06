@@ -1,187 +1,179 @@
+.main-content {
+    width: 100vw;
+    /* Chiều rộng toàn màn hình */
+    padding: 0;
+    margin: 0;
+}
 
-    .main-content {
-        width: 100vw;
-        /* Chiều rộng toàn màn hình */
-        padding: 0;
-        margin: 0;
-    }
+/* CSS cho phần hình ảnh trên cùng */
+.top-banner {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-image: url('/images/logo/banner/bannersofa.png');
+    background-size: cover;
+    background-position: center;
+}
 
-    /* CSS cho phần hình ảnh trên cùng */
-    .top-banner {
-        position: relative;
-        width: 100%;
-        height: 400px;
-        background-image: url('/logo/banner/bannersanpham.png');
-        background-size: cover;
-        background-position: center;
-    }
+/* CSS cho văn bản trên hình ảnh */
+.banner-text {
+    position: absolute;
+    bottom: 30px;
+    left: 100px;
+    color: black;
+    font-size: 36px;
+    font-weight: bold;
+}
 
-    /* CSS cho văn bản trên hình ảnh */
-    .banner-text {
-        position: absolute;
-        bottom: 30px;
-        left: 100px;
-        color: black;
-        font-size: 36px;
-        font-weight: bold;
-    }
+.breadcrumb {
+    font-size: 18px;
+    color: black;
+    font-weight: normal;
+}
 
-    .breadcrumb {
-        font-size: 18px;
-        color: black;
-        font-weight: normal;
-    }
+.breadcrumb a {
+    color: black;
+    text-decoration: none;
+}
 
-    .breadcrumb a {
-        color: black;
-        text-decoration: none;
-    }
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
 
-    .breadcrumb a:hover {
-        text-decoration: underline;
-    }
+/* CSS cho bộ lọc sản phẩm */
 
-    /* CSS cho bộ lọc sản phẩm */
-    
-        /* CSS để thay đổi màu chữ trong các tùy chọn */
-        #price-filter option {
-            color: black;
-            /* Giữ màu chữ trong các tùy chọn là màu đen */
-        }
-    .filter-section {
-        display: flex;
-        justify-content: space-between;
-        padding: 20px;
-        background-color: #f4f4f4;
-        border-bottom: 1px solid #ccc;
-    }
-    .filter-item{
-        margin-left: 40px;
-    }
+/* CSS để thay đổi màu chữ trong các tùy chọn */
+#price-filter option {
+    color: black;
+    /* Giữ màu chữ trong các tùy chọn là màu đen */
+}
 
-    .filter-section select {
-        padding: 5px;
-        font-size: 14px;
-    }
+.filter-section {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-bottom: 1px solid #ccc;
+}
 
-    .apply-filter-btn {
-        margin-right: 40px;
-        padding: 10px 20px;
-        background-color: #000;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-    }
+.filter-item {
+    margin-left: 40px;
+}
 
-    .product-grid {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        padding: 20px;
-    }
+.filter-section select {
+    padding: 5px;
+    font-size: 14px;
+}
 
-    .product-item {
-        position: relative;
-        width: 300px;
-        /* Tùy chỉnh chiều rộng cho phù hợp */
-        margin: 15px;
-        text-align: center;
-        border: 1px solid #ccc;
-        /* Thêm viền cho sản phẩm */
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-        overflow: hidden;
-        padding: 15px;
-        /* Tạo khoảng cách giữa khung và nội dung */
-    }
-
-    .product-item:hover {
-        box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
-        border: 1px solid #000;
-        /* Viền đậm hơn khi rê chuột */
-        transform: translateY(-5px);
-    }
-
-    .product-item .product-image {
-        max-width: 100%;
-        height: auto;
-        transition: opacity 0.3s ease;
-        display: block;
-        margin: 0 auto;
-        /* Đảm bảo hình ảnh căn giữa */
-    }
-
-    .product-item .hover-image {
-        max-width: 280px;
-        position: absolute;
-        top: 5px;
-        /* Cùng giá trị với padding để trùng vị trí */
-        left: 5px;
-        right: 5px;
-        opacity: 0;
-    }
-
-    .product-item:hover .hover-image {
-        opacity: 1;
-    }
-
-    .product-item:hover .default-image {
-        opacity: 0;
-    }
+.apply-filter-btn {
+    margin-right: 40px;
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
 
 
-    .product-item .product-name {
-        font-weight: bold;
-        margin: 10px 0;
-    }
+.product-item {
+    position: relative;
+    /* Tùy chỉnh chiều rộng cho phù hợp */
 
-    .product-item .product-price {
-        color: #ff0000;
-        margin-bottom: 10px;
-    }
+    text-align: center;
+    border: 1px solid #ccc;
+    /* Thêm viền cho sản phẩm */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    /* Tạo khoảng cách giữa khung và nội dung */
+}
 
-    .product-actions {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 10px;
-        display: none;
-        /* Ẩn các nút này mặc định */
-    }
+.product-item:hover {
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+    border: 1px solid #000;
+    /* Viền đậm hơn khi rê chuột */
+    transform: translateY(-5px);
+}
 
-    .product-item:hover .product-actions {
-        display: flex;
-        /* Hiển thị các nút khi rê chuột vào sản phẩm */
-    }
+.product-item .product-image {
+    max-width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease;
+    display: block;
+    margin: 0 auto;
+    /* Đảm bảo hình ảnh căn giữa */
+}
 
-    .add-to-cart-btn,
-    .view-more-btn {
-        margin: 10px;
-        padding: 5px 10px;
-        border: 1px solid #000;
-        background-color: #fff;
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-    }
+.product-item .hover-image {
+    max-width: 280px;
+    position: absolute;
+    top: 5px;
+    /* Cùng giá trị với padding để trùng vị trí */
+    left: 5px;
+    right: 5px;
+    opacity: 0;
+}
 
-    .add-to-cart-btn:hover {
-        background-color: #000;
-        color: #fff;
-    }
+.product-item:hover .hover-image {
+    opacity: 1;
+}
 
-    .view-more-btn {
-        background-color: #000;
-        color: #fff;
-    }
+.product-item:hover .default-image {
+    opacity: 0;
+}
 
-    .view-more-btn:hover {
-        background-color: #fff;
-        color: #000;
-    }
 
-    .product-item:hover {
-        border: 1px solid #000;
-        /* Viền đậm hơn khi rê chuột */
-        transform: translateY(-5px);
-    }
+.product-item .product-name {
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.product-item .product-price {
+    color: #ff0000;
+    margin-bottom: 10px;
+}
+
+.product-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    display: none;
+    /* Ẩn các nút này mặc định */
+}
+
+.product-item:hover .product-actions {
+    display: flex;
+    /* Hiển thị các nút khi rê chuột vào sản phẩm */
+}
+
+.add-to-cart-btn,
+.view-more-btn {
+    margin: 10px;
+    padding: 5px 10px;
+    border: 1px solid #000;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.view-more-btn {
+    background-color: #000;
+    color: #fff;
+}
+
+.view-more-btn:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.product-item:hover {
+    border: 1px solid #000;
+    /* Viền đậm hơn khi rê chuột */
+    transform: translateY(-5px);
+}
 
