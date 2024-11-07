@@ -13,11 +13,11 @@ include_once __DIR__ . '/../../models/Product.php';
     <div class="container-fluid main-content mt-3">
 
         <!-- Phần hình ảnh trên cùng -->
-        <div class="top-banner">
+        <div class="top-banner-sp">
             <div class="banner-text">
                 Sản phẩm
                 <div class="breadcrumb">
-                    <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/sanpham.php"> <strong class="current-page">Sản
+                    <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/sanpham"> <strong class="current-page">Sản
                             phẩm</strong></a>
                 </div>
             </div>
@@ -29,30 +29,25 @@ include_once __DIR__ . '/../../models/Product.php';
         <div class="filter-item">
             <label for="price-filter">Giá:</label>
             <select id="price-filter">
-                <option value="popular">Theo mức độ phổ biến</option>
-                <option value="low-to-high">Giá từ thấp đến cao</option>
-                <option value="high-to-low">Giá từ cao đến thấp</option>
+                <option value="popular" <?= ($filter === 'popular') ? 'selected' : '' ?>>Theo mức độ phổ biến</option>
+                <option value="low-to-high" <?= ($filter === 'low-to-high') ? 'selected' : '' ?>>Giá từ thấp đến cao</option>
+                <option value="high-to-low" <?= ($filter === 'high-to-low') ? 'selected' : '' ?>>Giá từ cao đến thấp</option>
             </select>
         </div>
 
-        <div class="filter-item">
-            <label for="material-filter">Chất liệu:</label>
-            <select id="material-filter">
-                <option value="all">Tất cả</option>
-                <option value="wood">Gỗ</option>
-                <option value="fabric">Vải</option>
-                <option value="leather">Da</option>
-            </select>
-        </div>
-
-        <button class="btn apply-filter-btn">ÁP DỤNG</button>
+        <button class="btn apply-filter-btn" id="apply-filter">ÁP DỤNG</button>
     </div>
 
+
     <!-- Danh sách sản phẩm -->
+    <!-- Phần danh sách sản phẩm -->
     <div class="container mb-3 mt-3">
         <div class="title text-center py-3">
-            <h2 class="position-relative d-inline-block">Sản phẩm bán chạy</h2>
+            <h2 class="position-relative d-inline-block">Danh sách sản phẩm</h2>
         </div>
+        <?php if (!empty($query)): ?>
+            <p class="text-center">Kết quả tìm kiếm cho: "<strong><?php echo htmlspecialchars($query); ?></strong>"</p>
+        <?php endif; ?>
         <div class="special-list row g-0">
             <?php if (!empty($products)) : ?>
                 <?php foreach ($products as $product): ?>
@@ -94,8 +89,18 @@ include_once __DIR__ . '/../../models/Product.php';
                 <p class="text-center">Không có sản phẩm nào mới.</p>
             <?php endif; ?>
         </div>
+
+        <!-- Phân trang -->
         <div class="text-center">
-            <a href="/sofa.php" class="btn btn-secondary m-3" style="width: 200px;">Xem thêm</a>
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                        <li class="page-item <?= ($i == $currentPage) ? 'active' : '' ?>">
+                            <a class="page-link" href="?page=<?php echo $i; ?><?php echo !empty($query) ? '&query=' . urlencode($query) : ''; ?>"><?php echo $i; ?></a>
+                        </li>
+                    <?php endfor; ?>
+                </ul>
+            </nav>
         </div>
     </div>
 
@@ -104,6 +109,13 @@ include_once __DIR__ . '/../../models/Product.php';
 
     <!-- Scripts -->
     <script src="/js/script.js"></script>
+
+    <script>
+        document.getElementById('apply-filter').addEventListener('click', function() {
+            const filterValue = document.getElementById('price-filter').value;
+            window.location.href = '?filter=' + filterValue; // Chuyển hướng với bộ lọc
+        });
+    </script>
 </body>
 
 </html>

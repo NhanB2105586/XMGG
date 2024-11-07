@@ -5,7 +5,21 @@ include_once __DIR__ . '/../partials/header.php';
 <body>
     <!-- Navbar -->
     <?php include_once __DIR__ . '/../partials/navbar.php'; ?>
+    <?php include_once __DIR__ . '/../partials/navbar.php'; ?>
+    <?php if (isset($_SESSION['error_message'])) : ?>
+        <div class="alert alert-danger">
+            <?php echo $_SESSION['error_message']; ?>
+        </div>
+        <?php unset($_SESSION['error_message']); ?>
+    <?php endif; ?>
 
+
+    <?php if (isset($_SESSION['success_message'])) : ?>
+        <div class="alert alert-success text-center">
+            <?php echo $_SESSION['success_message']; ?>
+        </div>
+        <?php unset($_SESSION['success_message']); ?>
+    <?php endif; ?>
     <div class="container my-5">
         <h2 class="text-center mb-4 mt-5">Đơn hàng của bạn</h2>
 
@@ -45,13 +59,23 @@ include_once __DIR__ . '/../partials/header.php';
                 </table>
                 <!-- Nút quay lại giỏ hàng -->
                 <div class="text-center">
-                    <a href="/giohang" class="btn btn-secondary">Quay lại giỏ hàng</a>
+                    <a href="/" class="btn btn-secondary">Quay lại</a>
                 </div>
             </div>
         </div>
     </div>
 
     <?php include_once __DIR__ . '/../partials/footer.php'; ?>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                const alerts = document.querySelectorAll('.alert');
+                alerts.forEach(alert => {
+                    alert.classList.add('fade-out');
+                });
+            }, 2000); // Thời gian hiển thị là 2000ms = 2 giây
+        });
+    </script>
 </body>
 
 </html>

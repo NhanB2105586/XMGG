@@ -1,87 +1,100 @@
 <?php
-include_once __DIR__ . '../../../core/PDOFactory.php';
-include_once __DIR__ . '/../partials/header.php';
+include_once __DIR__ . '/../../partials/header.php';
+include_once __DIR__ . '/../../../models/Product.php';
 ?>
-<link href="/css/stylephong.css" rel="stylesheet">
+
+<link href="/css/stylesanpham.css" rel="stylesheet">
 
 <body>
     <!-- Navbar -->
-    <?php include_once __DIR__ . '/../partials/navbar.php'; ?>
-
+    <?php include_once __DIR__ . '/../../partials/navbar.php'; ?>
 
     <!-- Main Page Content -->
     <div class="container-fluid main-content mt-3">
 
         <!-- Phần hình ảnh trên cùng -->
-        <div class="top-banner-phongkhach">
+        <div class="top-banner-sp">
             <div class="banner-text">
-                Phòng khách
+                Hàng trang trí
                 <div class="breadcrumb">
-                    <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/phongkhach.php"> <strong class="current-page">Phòng
-                            khách</strong></a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sidebar danh mục sản phẩm -->
-        <div class="row">
-            <div class="col-md-3">
-                <div class="category-sidebar p-4 bg-light border rounded shadow-sm">
-                    <ul class="list-group">
-                        <li class="list-group-item bg-transparent border-0 fw-bold">
-                            <h4>Nội thất phòng khách</h4>
-                        </li>
-                        <li class="list-group-item bg-transparent border-0 fw-bold"><a href="#"
-                                class="text-decoration-none text-dark">Mẫu phòng khách</a></li>
-                        <li class="list-group-item bg-transparent border-0"><a href="/sanpham/sofa.php"
-                                class="text-decoration-none text-dark">Sofa</a></li>
-                        <li class="list-group-item bg-transparent border-0"><a href="#"
-                                class="text-decoration-none text-dark">Bàn nước</a></li>
-                        <li class="list-group-item bg-transparent border-0"><a href="#"
-                                class="text-decoration-none text-dark">Tủ tivi</a></li>
-                        <li class="list-group-item bg-transparent border-0"><a href="#"
-                                class="text-decoration-none text-dark">Kệ phòng khách</a></li>
-                    </ul>
-                </div>
-            </div>
-
-
-            <!-- Nội dung chính - Các sản phẩm phòng khách -->
-            <div class="col-md-9">
-                <div class="product-grid">
-                    <!-- Sản phẩm 1 -->
-                    <div class="product-item">
-                        <img class="product-image" src="/images/logo/phongkhach/mau/coastal.png" alt="Phòng khách Ogami">
-                        <div class="product-name">Độc đáo, trẻ trung với phòng khách Ogami</div>
-                        <p class="product-description">Ogami thổi một làn gió trẻ trung vào không gian [...]</p>
-                        <button class="view-more-btn">XEM CHI TIẾT</button>
-                    </div>
-
-                    <!-- Sản phẩm 2 -->
-                    <div class="product-item">
-                        <img class="product-image" src="/images/logo/phongkhach/mau/ogami.png" alt="Phòng khách Orientale">
-                        <div class="product-name">Phòng khách Orientale – Không gian của cảm hứng và sự bình yên</div>
-                        <p class="product-description">Với sự chăm chút tỉ mỉ trong từng chi tiết, [...]</p>
-                        <button class="view-more-btn">XEM CHI TIẾT</button>
-                    </div>
-
-                    <!-- Sản phẩm 3 -->
-                    <div class="product-item">
-                        <div class="content"></div>
-                        <img class="product-image" src="/images/logo/phongkhach/mau/ogami.png" alt="Phòng khách hiện đại">
-                        <div class="product-name">Phòng khách Modern – Đơn giản nhưng không kém phần sang trọng</div>
-                        <p class="product-description">Thiết kế đơn giản, hiện đại với màu sắc nhẹ nhàng [...]</p>
-                        <button class="view-more-btn">XEM CHI TIẾT</button>
-                    </div>
+                    <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/sanpham"> <strong class="current-page">Hàng trang trí</strong></a>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Phần bộ lọc sản phẩm -->
+    <div class="filter-section">
+        <div class="filter-item">
+            <label for="price-filter">Giá:</label>
+            <select id="price-filter">
+                <option value="popular">Theo mức độ phổ biến</option>
+                <option value="low-to-high">Giá từ thấp đến cao</option>
+                <option value="high-to-low">Giá từ cao đến thấp</option>
+            </select>
+        </div>
+
+
+        <button class="btn apply-filter-btn">ÁP DỤNG</button>
+    </div>
+
+    <!-- Danh sách sản phẩm -->
+    <div class="container mb-3 mt-3">
+
+        <div class="title text-center py-3">
+            <h2 class="position-relative d-inline-block">Danh sách sản phẩm</h2>
+        </div>
+        <div class="special-list row g-0">
+            <?php if (!empty($products)) : ?>
+                <?php foreach ($products as $product): ?>
+                    <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
+                        <div class="special-img position-relative overflow-hidden">
+                            <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>">
+                                <?php
+                                // Hiển thị hình ảnh đầu tiên nếu có, nếu không, hiển thị một ảnh mặc định
+                                $image_url = !empty($product['images'][0]['image_url']) ? $product['images'][0]['image_url'] : 'default.jpg';
+                                ?>
+                                <img src="/images/upload/<?php echo htmlspecialchars($image_url); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                            </a>
+                        </div>
+                        <div class="text-start m-1">
+                            <p class="text-capitalize mt-3 mb-1"><?php echo htmlspecialchars($product['product_name']); ?></p>
+                            <div class="d-flex">
+                                <span class="fw-bold d-block">
+                                    <?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?>
+                                </span>
+                                <?php if (!empty($product['old_price'])) : ?>
+                                    <span class="price-old ms-2">
+                                        <?php echo number_format($product['old_price'], 0, ',', '.') . 'đ'; ?>
+                                    </span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-around">
+                            <form action="/cart/add" method="POST" style="width: 45%;">
+                                <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['product_id']); ?>">
+                                <input type="hidden" name="quantity" value="1"> <!-- Số lượng mặc định là 1 -->
+                                <button type="submit" class="btn btn-product mt-3 p-2 w-100">Thêm Vào Giỏ</button>
+                            </form>
+                            <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 45%;">Chi Tiết</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <p class="text-center">Không có sản phẩm nào mới.</p>
+            <?php endif; ?>
+        </div>
+        <div class="text-center">
+            <a href="/sofa.php" class="btn btn-secondary m-3" style="width: 200px;">Xem thêm</a>
+        </div>
+    </div>
 
     <!-- Footer -->
-    <?php include_once __DIR__ . '/../partials/app.php'; ?>
-    <?php include_once __DIR__ . '/../partials/footer.php'; ?>
+    <?php include_once __DIR__ . '/../../partials/footer.php'; ?>
+
+    <!-- Scripts -->
+    <script src="/js/script.js"></script>
 </body>
 
 </html>

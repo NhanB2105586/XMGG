@@ -34,15 +34,26 @@ class CartController extends Controller
     {
         $userId = $_SESSION['user_id'] ?? null;
         $cart = $this->cartModel->getCartByUserId($userId);
+
         if ($cart) {
+            // Xóa sản phẩm khỏi giỏ hàng
             $this->cartModel->removeProduct($cart['cart_id'], $productId);
+
+            // Thiết lập thông báo thành công
+            $_SESSION['success_message'] = "Sản phẩm đã được xóa khỏi giỏ hàng thành công!";
+        } else {
+            $_SESSION['error_message'] = "Không tìm thấy giỏ hàng.";
         }
 
+        // Cập nhật lại số loại sản phẩm trong session
         $cartModel = new Cart($this->db); // Giả sử bạn có model Cart
         $_SESSION['cart_product_count'] = $cartModel->getProductCountByUserId($userId);
+
+        // Chuyển hướng về trang giỏ hàng
         header("Location: /giohang");
         exit();
     }
+
 
     
 
@@ -113,8 +124,12 @@ class CartController extends Controller
         // Cập nhật lại số loại sản phẩm trong session
         $_SESSION['cart_product_count'] = $this->cartModel->getProductCountByUserId($userId);
 
+        // Thiết lập thông báo thành công
+        $_SESSION['success_message'] = "Sản phẩm đã được thêm vào giỏ hàng thành công!";
+
         // Chuyển hướng về trang giỏ hàng
         header("Location: /giohang");
         exit();
     }
+
 }

@@ -17,5 +17,6 @@ $router->post(
     '\App\Controllers\User\UserController@handleRegistration'
 );
 
+$router->post('/updateProfile', 'App\Controllers\User\UserController@updateProfile');
 
 ?>

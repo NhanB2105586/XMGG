@@ -8,8 +8,8 @@
         </a>
 
         <div class="order-lg-2 nav-btns d-flex">
-            <form class="d-flex " role="search" style="width: 220px;">
-                <input class="form-control me-2" type="search" placeholder="Tìm sản phẩm" aria-label="Search">
+            <form class="d-flex" role="search" style="width: 220px;" action="/sanpham" method="GET">
+                <input class="form-control me-2" type="search" name="query" placeholder="Tìm sản phẩm" aria-label="Search" required>
                 <button class="btn btn-outline-dark" type="submit">
                     <i class="fas fa-search"></i>
                 </button>
@@ -68,7 +68,7 @@
                                     <li><a href="/phongan/ghean">Ghế ăn</a></li>
                                     <li><a href="/phonglamviec/ghelamviec">Ghế làm việc</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="phongkhach/kephongkhach">Kệ phòng khách</a></li>
+                                    <li><a href="/phongkhach/kephongkhach">Kệ phòng khách</a></li>
                                     <li><a href="/phonglamviec/kesach">Kệ sách</a></li>
                                     <li class="divider"></li>
                                     <li><a href="/phongngu/giuongngu">Giường ngủ</a></li>
@@ -86,15 +86,15 @@
                                     <li><a href="/phongan/tuly">Tủ ly </a></li>
                                     <li><a href="/phongngu/tuao">Tủ áo</a></li>
                                 </ul>
-                            </div>
+                            </div>  
                             <div class="col-sm-4">
                                 <ul class="multi-column-dropdown">
                                     <li><a href="/phongngu/goi">Gối</a></li>
                                     <li><a href="/phongngu/men">Mền</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="hangtrangtri/binh">Bình trang trí</a></li>
-                                    <li><a href="hangtrangtri/den">Đèn trang trí</a></li>
-                                    <li><a href="hangtrangtri/tranh">Tranh</a></li>
+                                    <li><a href="/hangtrangtri/binh">Bình trang trí</a></li>
+                                    <li><a href="/hangtrangtri/den">Đèn trang trí</a></li>
+                                    <li><a href="/hangtrangtri/tranh">Tranh</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -113,11 +113,6 @@
                                     <li><a href="/phongan">Phòng ăn</a></li>
                                     <li><a href="/phongngu">Phòng ngủ</a></li>
                                     <li><a href="/phonglamviec">Phòng làm việc</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-4">
-                                <ul class="multi-column-dropdown">
-                                    <li><a href="/hangtrangtri">Hàng trang trí</a></li>
                                 </ul>
                             </div>
                         </div>

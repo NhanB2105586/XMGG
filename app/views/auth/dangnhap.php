@@ -18,6 +18,12 @@ include_once __DIR__ . '/../../core/PDOFactory.php'; // Đường dẫn tới PD
                         <?= htmlspecialchars($error) ?>
                     </div>
                 <?php endif; ?>
+                <?php
+                if (isset($_SESSION['success_message'])) {
+                    echo '<div id="success-alert" class="alert alert-success" role="alert">' . htmlspecialchars($_SESSION['success_message']) . '</div>';
+                    unset($_SESSION['success_message']); // Xóa thông báo sau khi hiển thị
+                }
+                ?>
 
                 <form class="form-register" action="/checkuser" method="POST">
                     <h2 class="title-form text-center mb-3">ĐĂNG NHẬP</h2>
@@ -44,7 +50,15 @@ include_once __DIR__ . '/../../core/PDOFactory.php'; // Đường dẫn tới PD
 
     </div>
 
-
+    <script>
+        // Tự động ẩn thông báo sau 2 giây
+        setTimeout(function() {
+            const alert = document.getElementById('success-alert');
+            if (alert) {
+                alert.style.display = 'none';
+            }
+        }, 3000); // 2000ms = 2 giây
+    </script>
     <!-- Footer -->
     <?php include_once __DIR__ . '/../partials/footer.php'; ?>
 </body>

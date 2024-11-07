@@ -17,7 +17,7 @@ include_once __DIR__ . '/../../partials/header.php';
             <div class="banner-text-phonglamviec">
                 Phòng làm việc
                 <div class="breadcrumb-lv">
-                    <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/phonglamviec.php"> <strong class="current-page">Phòng làm việc</strong></a>
+                    <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/phonglamviec"> <strong class="current-page">Phòng làm việc</strong></a>
                 </div>
             </div>
         </div>
@@ -30,10 +30,20 @@ include_once __DIR__ . '/../../partials/header.php';
                         <li class="list-group-item bg-transparent border-0 fw-bold">
                             <h4>Nội thất phòng làm việc</h4>
                         </li>
-                        <li class="list-group-item bg-transparent border-0 fw-bold"><a href="#" class="text-decoration-none text-dark">Mẫu phòng khách</a></li>
-                        <li class="list-group-item bg-transparent border-0"><a href="/sanpham/sofa.php" class="text-decoration-none text-dark">Bàn làm việc</a></li>
-                        <li class="list-group-item bg-transparent border-0"><a href="#" class="text-decoration-none text-dark">Ghế làm việc</a></li>
-                        <li class="list-group-item bg-transparent border-0"><a href="#" class="text-decoration-none text-dark">Kệ sách</a></li>
+                        <li class="list-group-item bg-transparent border-0 fw-bold"><a href="#" class="text-decoration-none text-dark">Mẫu phòng làm việc</a></li>
+                        <li class="list-group-item bg-transparent border-0"><a href="/phonglamviec/banlamviec" class="text-decoration-none text-dark">Bàn làm việc</a></li>
+                        <li class="list-group-item bg-transparent border-0"><a href="/phonglamviec/ghelamviec" class="text-decoration-none text-dark">Ghế làm việc</a></li>
+                        <li class="list-group-item bg-transparent border-0"><a href="/phonglamviec/kesach" class="text-decoration-none text-dark">Kệ sách</a></li>
+                        <li class="list-group-item bg-transparent border-0 fw-bold">
+                            <h4>Hàng trang trí</h4>
+                        </li>
+                        <li class="list-group-item bg-transparent border-0"><a href="/hangtrangtri/den"
+                                class="text-decoration-none text-dark">Đèn trang trí</a></li>
+                        <li class="list-group-item bg-transparent border-0"><a href="/hangtrangtri/binh"
+                                class="text-decoration-none text-dark">Bình trang trí</a></li>
+                        <li class="list-group-item bg-transparent border-0"><a href="/hangtrangtri/tranh"
+                                class="text-decoration-none text-dark">Tranh trang trí</a></li>
+                        <li class="list-group-item bg-transparent border-0 fw-bold">
                     </ul>
                 </div>
             </div>
@@ -44,24 +54,46 @@ include_once __DIR__ . '/../../partials/header.php';
                 <div class="product-grid">
                     <!-- Sản phẩm 1 -->
                     <div class="product-item">
-                        <img class="product-image" src="/logo/phongkhach/mau/coastal.png" alt="Phòng khách Ogami">
-                        <div class="product-name">Độc đáo, trẻ trung với phòng khách Ogami</div>
+                        <img class="product-image" src="/images/bosuutap/1.png" alt="Phòng khách Ogami">
+                        <div class="product-name">Độc đáo, trẻ trung với phòng làm việc Ogami</div>
                         <p class="product-description">Ogami thổi một làn gió trẻ trung vào không gian [...]</p>
                         <button class="view-more-btn">XEM CHI TIẾT</button>
                     </div>
 
                     <!-- Sản phẩm 2 -->
                     <div class="product-item">
-                        <img class="product-image" src="/logo/phongkhach/mau/ogami.png" alt="Phòng khách Orientale">
-                        <div class="product-name">Phòng khách Orientale – Không gian của cảm hứng và sự bình yên</div>
+                        <img class="product-image" src="/images/bosuutap/2.png" alt="Phòng khách Orientale">
+                        <div class="product-name">Phòng làm việc Orientale – Không gian của cảm hứng và sự bình yên</div>
                         <p class="product-description">Với sự chăm chút tỉ mỉ trong từng chi tiết, [...]</p>
                         <button class="view-more-btn">XEM CHI TIẾT</button>
                     </div>
 
                     <!-- Sản phẩm 3 -->
                     <div class="product-item">
-                        <img class="product-image" src="/logo/phongkhach/mau/ogami.png" alt="Phòng khách hiện đại">
-                        <div class="product-name">Phòng khách Modern – Đơn giản nhưng không kém phần sang trọng</div>
+                        <div class="content"></div>
+                        <img class="product-image" src="/images/bosuutap/3.png" alt="Phòng khách hiện đại">
+                        <div class="product-name">Phòng làm việc Modern – Đơn giản nhưng không kém phần sang trọng</div>
+                        <p class="product-description">Thiết kế đơn giản, hiện đại với màu sắc nhẹ nhàng [...]</p>
+                        <button class="view-more-btn">XEM CHI TIẾT</button>
+                    </div>
+                    <div class="product-item">
+                        <div class="content"></div>
+                        <img class="product-image" src="/images/bosuutap/4.png" alt="Phòng khách hiện đại">
+                        <div class="product-name">Phòng làm việc Modern – Đơn giản nhưng không kém phần sang trọng</div>
+                        <p class="product-description">Thiết kế đơn giản, hiện đại với màu sắc nhẹ nhàng [...]</p>
+                        <button class="view-more-btn">XEM CHI TIẾT</button>
+                    </div>
+                    <div class="product-item">
+                        <div class="content"></div>
+                        <img class="product-image" src="/images/bosuutap/1.png" alt="Phòng khách hiện đại">
+                        <div class="product-name">Phòng làm việc Modern – Đơn giản nhưng không kém phần sang trọng</div>
+                        <p class="product-description">Thiết kế đơn giản, hiện đại với màu sắc nhẹ nhàng [...]</p>
+                        <button class="view-more-btn">XEM CHI TIẾT</button>
+                    </div>
+                    <div class="product-item">
+                        <div class="content"></div>
+                        <img class="product-image" src="/images/bosuutap/2.png" alt="Phòng khách hiện đại">
+                        <div class="product-name">Phòng làm việc Modern – Đơn giản nhưng không kém phần sang trọng</div>
                         <p class="product-description">Thiết kế đơn giản, hiện đại với màu sắc nhẹ nhàng [...]</p>
                         <button class="view-more-btn">XEM CHI TIẾT</button>
                     </div>

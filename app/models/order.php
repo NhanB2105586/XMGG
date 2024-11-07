@@ -88,12 +88,14 @@ class Order extends Model
 
 
     // Tạo đơn hàng mới
-    public function createOrder($userId, $totalAmount)
+    public function createOrder($userId, $totalAmount, $status)
     {
-        $stmt = $this->db->prepare("INSERT INTO orders (user_id, order_date, total_amount) VALUES (:user_id, NOW(), :total_amount)");
+        $stmt = $this->db->prepare("INSERT INTO orders (user_id, order_date, total_amount, status) VALUES (:user_id, NOW(), :total_amount,  :status)");
+
         $stmt->execute([
             'user_id' => $userId,
-            'total_amount' => $totalAmount
+            'total_amount' => $totalAmount,
+            'status' =>  $status
         ]);
         return $this->db->lastInsertId(); // Trả về ID của đơn hàng mới
     }
