@@ -50,5 +50,37 @@ include_once __DIR__ . '../../../core/PDOFactory.php';
         </div>
     <?php endif; ?>
 </body>
+<script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        const fullname = document.querySelector('input[name="fullname"]').value.trim();
+        const phoneNumber = document.querySelector('input[name="phone_number"]').value.trim();
+        const address = document.querySelector('input[name="address"]').value.trim();
+
+        let isValid = true;
+
+        // Kiểm tra họ và tên
+        if (fullname === '') {
+            alert('Họ và tên không được để trống.');
+            isValid = false;
+        }
+
+        // Kiểm tra số điện thoại (có 10-12 ký tự, bắt đầu bằng số 0)
+        if (phoneNumber === '' || !/^0\d{9,11}$/.test(phoneNumber)) {
+            alert('Số điện thoại không hợp lệ. Số điện thoại phải bắt đầu bằng số 0 và có từ 10 đến 12 ký tự.');
+            isValid = false;
+        }
+
+        // Kiểm tra địa chỉ
+        if (address === '') {
+            alert('Địa chỉ không được để trống.');
+            isValid = false;
+        }
+
+        // Nếu không hợp lệ, ngăn không cho form gửi
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
+</script>
 
 <?php include_once __DIR__ . '/../partials/footer.php'; ?>

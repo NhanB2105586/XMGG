@@ -15,17 +15,30 @@ class UserController extends Controller
         $productModel = new Product($this->db);
         $productImageModel = new ProductImage($this->db);
 
-        // Lấy tất cả sản phẩm
-        $products = $productModel->getAllProducts();
+        // Lấy 8 sản phẩm mới
+        $newProducts = $productModel->getNewProducts(8);
 
-        // Lấy hình ảnh cho từng sản phẩm
-        foreach ($products as &$product) {
+        // Lấy 8 sản phẩm bán chạy (giả định rằng bạn đã có hàm này)
+        $bestsellers = $productModel->getBestSellers(8);
+
+        // Lấy hình ảnh cho từng sản phẩm mới
+        foreach ($newProducts as &$product) {
             $product['images'] = $productImageModel->getImagesByProductId($product['product_id']);
         }
 
-        // Gửi dữ liệu đến view 'user/homePage'
-        $this->sendPage('user/homePage', ['products' => $products]);
+        // Lấy hình ảnh cho từng sản phẩm bán chạy
+        foreach ($bestsellers as &$product) {
+            $product['images'] = $productImageModel->getImagesByProductId($product['product_id']);
+        }
+
+        // Gửi dữ liệu đến view
+        $this->sendPage('user/homePage', [
+            'newProducts' => $newProducts,
+            'bestsellers' => $bestsellers,
+        ]);
     }
+
+
 
     public function showphongkhach()
     {
@@ -139,15 +152,45 @@ class UserController extends Controller
         }
     }
 
+    public function updateProfile()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Lấy thông tin từ form
+            $fullName = $_POST['fullname'] ?? '';
+            $phoneNumber = $_POST['phone_number'] ?? '';
+            $address = $_POST['address'] ?? '';
+            $userId = $_SESSION['user_id']; // Giả sử bạn lưu trữ ID người dùng trong session
+
+            
+
+            // Cập nhật thông tin vào cơ sở dữ liệu
+            $userModel = new User($this->db);
+            $updateSuccess = $userModel->updateUserProfile($userId, $fullName, $phoneNumber, $address);
+     
+            if ($updateSuccess) {
+                $user = $userModel->getUserById($userId);
+                $_SESSION['username'] = $user['fullname'];
+                // Nếu cập nhật thành công, chuyển hướng với thông báo thành công
+                header('Location: /hoso?success=1');
+                exit();
+            } else {
+                // Xử lý lỗi (nếu cần)
+                $_SESSION['error_message'] = 'Cập nhật thông tin không thành công. Vui lòng thử lại.';
+                header('Location: /hoso');
+                exit();
+            }
+        }
+    }
 
     public function logout()
     {
         session_start();
+        $_SESSION['success_message'] = "Đăng xuất thành công!"; // Thiết lập thông báo trước
         session_unset();
         session_destroy();
-        $_SESSION['success_message'] = "Đăng xuất thành công!";
         header('Location: /dangnhap');
         exit();
     }
+
 
 }

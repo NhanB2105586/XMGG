@@ -56,7 +56,7 @@ class OrdersController extends Controller
 
         // Lấy thông tin từ form thanh toán
         $totalAmount = $_POST['total_amount'];
-        $paymentMethod = 'Đang xử lý';
+        $paymentMethod = 'pending';
         $name = $_POST['name'];
         $phone = $_POST['phone'];
         $address = $_POST['address'];
@@ -71,15 +71,20 @@ class OrdersController extends Controller
             $this->orderModel->addOrderDetail($orderId, $item['product_id'], $item['quantity'], $item['price']);
         }
 
+
+
         // Xóa giỏ hàng sau khi thanh toán
         $this->cartModel->clearCart($userId);
+
+        // Cập nhật số lượng sản phẩm trong session
+        $productCount = $this->cartModel->getProductCountByUserId($userId);
+        $_SESSION['cart_product_count'] = $productCount;
 
         // Thông báo thành công và chuyển hướng đến trang đơn hàng
         $_SESSION['success_message'] = "Thanh toán thành công! Mã đơn hàng của bạn là #$orderId";
         header("Location: /donhang/$orderId"); // Chuyển hướng tới trang đơn hàng với mã đơn hàng
         exit();
     }
-
 
 
     // Hiển thị chi tiết đơn hàng

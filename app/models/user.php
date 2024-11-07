@@ -72,4 +72,16 @@ class User extends Model
             'password' => $hashedPassword
         ]);
     }
+
+    public function updateUserProfile($userId, $fullName, $phoneNumber, $address)
+    {
+        $stmt = $this->db->prepare("UPDATE users SET fullname = :fullname, phone_number = :phone_number, address = :address WHERE user_id = :user_id");
+        return $stmt->execute([
+            'fullname' => $fullName,
+            'phone_number' => $phoneNumber,
+            'address' => $address,
+            'user_id' => $userId
+        ]);
+    }
+
 }

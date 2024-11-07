@@ -1,24 +1,15 @@
 <?php
-    include_once __DIR__ . '/../partials/header.php';
-    include_once __DIR__ . '/../../models/Product.php';
+include_once __DIR__ . '/../../partials/header.php';
+include_once __DIR__ . '/../../../models/Product.php';
 
 use App\Core\PDOFactory;
 use App\Models\Product;
-
-
-// Khởi tạo kết nối PDO và model Product
-$pdoFactory = new PDOFactory();
-$pdo = $pdoFactory->create();
-$productModel = new Product($pdo);
-// Lấy danh sách sản phẩm
-$products = $productModel->getAllProducts();
-?>
 ?>
 <link href="/css/stylesanpham.css" rel="stylesheet">
 
 <body>
     <!-- Navbar -->
-    <?php include_once __DIR__ . '/../partials/navbar.php'; ?>
+    <?php include_once __DIR__ . '/../../partials/navbar.php'; ?>
 
     <!-- Main Page Content -->
     <div class="container-fluid main-content mt-5">
@@ -26,10 +17,10 @@ $products = $productModel->getAllProducts();
         <!-- Phần hình ảnh trên cùng -->
         <div class="top-banner">
             <div class="banner-text">
-                Sofa
+                Ghê làm việc
                 <div class="breadcrumb">
-                    <a href="/">Trang chủ</a>&nbsp;/&nbsp; <a href="/phongkhach.php">Phòng khách</a>/&nbsp<a
-                        href="/sanpham/sofa.php"> <strong class="current-page">Sofa</strong></a>
+                    <a href="/">Trang chủ</a>&nbsp;/&nbsp; <a href="/phonglamviec">Phòng làm việc</a>/&nbsp<a
+                        href="/phonglamviec/ghelamviec"> <strong class="current-page">Ghế làm việc</strong></a>
                 </div>
             </div>
         </div>
@@ -45,17 +36,9 @@ $products = $productModel->getAllProducts();
                 </select>
             </div>
 
-            <div class="filter-item">
-                <label for="material-filter">Chất liệu:</label>
-                <select id="material-filter">
-                    <option value="all">Tất cả</option>
-                    <option value="wood">Gỗ</option>
-                    <option value="fabric">Vải</option>
-                    <option value="leather">Da</option>
-                </select>
-            </div>
 
-            <button class="apply-filter-btn">ÁP DỤNG</button>
+
+            <button class="btn apply-filter-btn">ÁP DỤNG</button>
         </div>
 
         <!-- Danh sách sản phẩm -->
@@ -64,7 +47,8 @@ $products = $productModel->getAllProducts();
                 <?php foreach ($products as $product): ?>
                     <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
                         <div class="special-img position-relative overflow-hidden">
-                            <img src="/images/upload/<?php echo htmlspecialchars($product['image_url']); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                            <img src="/images/upload/<?php echo htmlspecialchars($product['image_url'] ?? 'default.jpg'); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+
                         </div>
                         <div class="text-start m-1">
                             <p class="text-capitalize mt-3 mb-1"><?php echo htmlspecialchars($product['product_name']); ?></p>
@@ -84,6 +68,6 @@ $products = $productModel->getAllProducts();
     </div>
 
     <!-- Footer -->
-    <?php include_once __DIR__ . '/../partials/app.php'; ?>
-    <?php include_once __DIR__ . '/../partials/footer.php'; ?>
+    <?php include_once __DIR__ . '/../../partials/app.php'; ?>
+    <?php include_once __DIR__ . '/../../partials/footer.php'; ?>
 </body>
