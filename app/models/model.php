@@ -66,16 +66,26 @@ class Model
         return $stmt->execute();
     }
 
-    # delete record from table
     public function delete($table,$idName, $id)
     {
+        $sql = "DELETE FROM cart_items WHERE cart_id IN (SELECT cart_id FROM carts WHERE user_id = :id)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        // Xóa giỏ hàng
+        $sql = "DELETE FROM carts WHERE user_id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
+        // Xóa bản ghi từ bảng chính
         $sql = "DELETE FROM $table WHERE $idName = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
 
-    # get records in table by attributes
     public function getByProps(string $table, array $props): array
     {
         $keys = array_keys($props);
@@ -131,15 +141,14 @@ class Model
         return $stmt->fetchColumn();
     }
 
-    public function hasOrders($table, $columnId, $id)
+    public function existsInTable($table, $columnId, $id)
     {
-        // Chú ý: Đảm bảo $table và $columnId là an toàn và đã được xác thực
-        $sql = "SELECT COUNT(*) FROM $table WHERE $columnId = :id"; // Ghép tên bảng và cột trực tiếp
+        $sql = "SELECT COUNT(*) FROM $table WHERE $columnId = :id";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT); // Ràng buộc giá trị cho id
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT); 
         $stmt->execute();
 
-        return $stmt->fetchColumn() > 0; // Trả về true nếu có đơn hàng
+        return $stmt->fetchColumn() > 0; 
     }
 
 

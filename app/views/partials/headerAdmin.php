@@ -14,5 +14,9 @@
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/css/styleadmin.css">
-
+    <style>
+        .container {
+            max-width: 90%;
+        }
+    </style>
 </head>

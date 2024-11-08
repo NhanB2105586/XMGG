@@ -2,30 +2,8 @@
 include_once __DIR__ . '/../partials/headerAdmin.php';
 ?>
 
+
 <body>
-    <style>
-    .table {
-        border-collapse: collapse;
-        font-size: 0.85rem;
-        width: 100%;
-    }
-
-    .table th,
-    .table td {
-        padding: 0.5rem;
-        text-align: center;
-    }
-
-    .btn-link {
-        padding: 0;
-        font-size: 0.9rem;
-    }
-
-    .pagination {
-        margin-top: 15px;
-    }
-    </style>
-
     <?php
     require_once __DIR__ . "/../partials/headingAdmin.php";
     require_once __DIR__ . "/../partials/sidebar.php";
@@ -131,32 +109,7 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                                             <h5 class="modal-title" id="modalLabel-<?= $order['order_id'] ?>">Chi Tiết
                                                 Đơn Hàng #<?= $order['order_id'] ?></h5>
                                         </div>
-                                        <div class="modal-body">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Tên Sản Phẩm</th>
-                                                        <th>Số Lượng</th>
-                                                        <th>Giá</th>
-                                                        <th>Tổng Tiền</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
 
-                                                    <?php foreach ($orderdetail as $detail): ?>
-                                                    <tr>
-                                                        <td><?php echo htmlspecialchars($detail['product_name']); ?>
-                                                        </td>
-                                                        <td><?php echo htmlspecialchars($detail['quantity']); ?></td>
-                                                        <td><?php echo number_format($detail['price'], 0, ',', '.'); ?>
-                                                            VNĐ</td>
-                                                        <td><?php echo number_format($detail['price'] * $detail['quantity'], 0, ',', '.'); ?>
-                                                            VNĐ</td>
-                                                    </tr>
-                                                    <?php endforeach; ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Đóng</button>

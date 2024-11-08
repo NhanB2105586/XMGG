@@ -45,7 +45,7 @@ class ManageCustomerController extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Lấy và lọc dữ liệu từ form
-            $data = $this->filterData(['fullname', 'username', 'email', 'password', 'address', 'phone_number'], $_POST);
+            $data = $this->filterData(['fullname', 'email', 'password', 'address', 'phone_number'], $_POST);
 
             // Kiểm tra xem tất cả các trường có được điền đầy đủ không
             if (in_array('', $data)) {
@@ -62,11 +62,7 @@ class ManageCustomerController extends Controller
                 return;
             }
 
-            // Kiểm tra trùng lặp email và username
-            if ($this->customerModel->usernameExists($data['username'])) {
-                $errors[] = 'Tên đăng nhập đã tồn tại.';
-            }
-
+            // Kiểm tra trùng lặp email
             if ($this->customerModel->emailExists($data['email'])) {
                 $errors[] = 'Email đã tồn tại.';
             }
@@ -116,7 +112,7 @@ class ManageCustomerController extends Controller
 
 
             // Kiểm tra tính hợp lệ của dữ liệu
-            if (empty($data['fullname']) || empty($data['username']) || empty($data['address']) || empty($data['phone_number']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            if (empty($data['fullname']) || empty($data['address']) || empty($data['phone_number']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
                 $errors[] = 'Vui lòng điền đầy đủ thông tin hợp lệ.'; // Thông báo lỗi
             } else {
                 // Cập nhật thông tin khách hàng
@@ -145,7 +141,7 @@ class ManageCustomerController extends Controller
         // Kiểm tra xem có ID được gửi không
         if (isset($_POST['id'])) {
             $customerId = $_POST['id'];
-            if ($this->customerModel->hasOrders('orders','user_id',$customerId)) {
+            if ($this->customerModel->existsInTable('orders','user_id',$customerId)) {
                 // Lưu thông báo lỗi
                 $_SESSION['error_message'] = 'Không thể xóa khách hàng này vì còn đơn hàng liên quan.';
             } else {
@@ -165,9 +161,6 @@ class ManageCustomerController extends Controller
         $errors = [];
         if (empty($data['fullname'])) {
             $errors[] = 'Họ và tên là bắt buộc.';
-        }
-        if (empty($data['username'])) {
-            $errors[] = 'Tên người dùng là bắt buộc.';
         }
         if (empty($data['email']) || !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
             $errors[] = 'Email không hợp lệ.';

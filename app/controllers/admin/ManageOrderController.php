@@ -49,15 +49,27 @@ class ManageOrderController extends Controller
     }
 
     // Xem chi tiết đơn hàng
-    public function viewOrder($orderId)
+    public function viewOrder()
     {
-        // Lấy thông tin đơn hàng và chi tiết đơn hàng
-        $orderDetail = $this->orderDetailModel->getByOrderId($orderId);
-        $order = $this->orderModel->getOrderById($orderId);
+        // Lấy thông tin đơn hàng
+        $order = $this->orderModel->getOrderById(48);
         if (!$order) {
             $this->sendNotFound(); // Nếu không tìm thấy đơn hàng, trả về trang lỗi 404
             return;
         }
+
+        // Lấy thông tin chi tiết đơn hàng
+        $orderDetail = $this->orderDetailModel->getByOrderId(48);
+        echo '<pre>';
+        print_r($orderDetail);
+        echo '</pre>';
+        exit;
+        // Kiểm tra nếu không có chi tiết đơn hàng
+        if (!$orderDetail) {
+            echo "Không tìm thấy chi tiết đơn hàng!";
+            exit;
+        }
+
         // Truyền dữ liệu vào view
         $this->sendPage('admin/viewOrder', [
             'order' => $order,

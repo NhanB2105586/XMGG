@@ -10,11 +10,8 @@ class OrderDetail extends Model
     {
         parent::__construct($pdo);
     }
-
-    // Lấy tất cả các chi tiết của một đơn hàng theo order_id
-
     // Phương thức để lấy chi tiết đơn hàng
-    public function getByOrderId(int $orderId): array
+    public function getByOrderId(int $orderId)
     {
         return $this->getByID('order_details', 'order_id', $orderId);
     }
