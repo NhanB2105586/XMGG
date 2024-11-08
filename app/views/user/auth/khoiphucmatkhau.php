@@ -1,12 +1,12 @@
 <?php
-include_once __DIR__ . '/../partials/header.php'; // Đường dẫn tới header.php
-include_once __DIR__ . '/../../core/PDOFactory.php'; // Đường dẫn tới PDOFactory.php
+include_once __DIR__ . '/../../partials/header.php'; // Đường dẫn tới header.php
+include_once __DIR__ . '/../../../core/PDOFactory.php'; // Đường dẫn tới PDOFactory.php
 ?>
 <link rel="stylesheet" href="/css/styleforgotpassword.css">
 
 <body>
     <!-- Navbar -->
-    <div class="container mb-4"> <?php include_once __DIR__ . '/../partials/navbar.php'; ?> </div>
+    <div class="container mb-4"> <?php include_once __DIR__ . '/../../partials/navbar.php'; ?> </div>
 
         <!-- Main Page Content -->
         <div class="row mt-5 mb-5">
@@ -32,5 +32,5 @@ include_once __DIR__ . '/../../core/PDOFactory.php'; // Đường dẫn tới PD
         </div>
 
         <!-- Footer -->
-        <?php include_once __DIR__ . '/../partials/footer.php'; ?>
+        <?php include_once __DIR__ . '/../../partials/footer.php'; ?>
 </body>

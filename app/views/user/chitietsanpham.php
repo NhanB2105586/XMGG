@@ -110,11 +110,12 @@ include_once __DIR__ . '/../partials/header.php';
                         <input type="hidden" name="quantity" id="formQuantityInput" value="1">
                     </form>
 
-                    <!-- Form ẩn để mua ngay -->
-                    <form id="buyNowForm" action="/checkout" method="GET" style="display: none;">
+                    <!-- Form ẩn để mua ngay và thêm vào giỏ hàng -->
+                    <form id="buyNowForm" action="/cart/buynow" method="POST">
                         <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['product_id']); ?>">
                         <input type="hidden" name="quantity" id="buyNowQuantityInput" value="1">
                     </form>
+
 
                     <div class="btn-group-product row">
                         <button class="btn hidden-btn " id="addToCartBtn" <?php echo $product['in_stock'] <= 0 ? 'disabled' : ''; ?>>THÊM VÀO GIỎ</button>
@@ -126,7 +127,7 @@ include_once __DIR__ . '/../partials/header.php';
                         <p>✔ Miễn phí giao hàng & lắp đặt tại tất cả quận huyện thuộc TP.Cần Thơ, Hậu Giang, Vĩnh Long (*)</p>
                         <p>✔ Miễn phí 1 đổi 1 - Bảo hành 2 năm - Bảo trì trọn đời (**) </p>
                         <p>(*) Không áp dụng cho danh mục Đồ Trang Trí</p>
-                        <p>(**) Không áp dụng cho các sản phẩm Clearance. Chỉ bảo hành 01 năm cho khung ghế, mâm và cần đối với Ghế Văn Phòng</p>
+                        <p>(**) Không áp dụng cho các sản phẩm Clearance. Chỉ bảo hành 01 năm cho khung ghế đối với Ghế Văn Phòng</p>
                     </div>
 
                 </div>
@@ -137,30 +138,36 @@ include_once __DIR__ . '/../partials/header.php';
                 <h2 class="position-relative d-inline-block p-1">Chi Tiết Sản Phẩm</h2>
             </div>
             <div class="content-describe-detail-product">
-                <?php
-                $contents = [
-                    "Nội dung 1",
-                    "Nội dung 2",
-                    "Nội dung 3",
-                    // Thêm nội dung khác nếu cần
-                ];
-                ?>
+                <?php if (isset($product)): ?>
+                    <?php
+                    $contents = [
+                        htmlspecialchars($product['description']),
+                        "Sản phẩm không chỉ mang lại sự tiện nghi cho không gian sống mà còn giúp tối ưu hóa diện tích.",
+                    ];
 
-                <?php foreach ($contents as $index => $content): ?>
-                    <div class="content-detail">
-                        <!-- Hiển thị nội dung cố định -->
-                        <p><?php echo $content; ?></p>
+                    // Thêm "Nội dung 3" chỉ khi có 3 ảnh trở lên
+                    if (isset($product['images']) && count($product['images']) >= 3) {
+                        $contents[] = "Sản phẩm dễ dàng vệ sinh và bảo trì, giúp bạn tiết kiệm thời gian và công sức trong việc chăm sóc ngôi nhà.";
+                    }
+                    ?>
 
-                        <!-- Hiển thị ảnh tương ứng từ bảng `product_images` nếu có -->
-                        <?php if (isset($product['images'][$index])): ?>
-                            <img src="/images/upload/<?php echo htmlspecialchars($product['images'][$index]['image_url'] ?? ''); ?>"
-                                alt="<?php echo htmlspecialchars($product['images'][$index]['alt_text'] ?? 'No description'); ?>"
-                                class="d-block w-100 h-100 img-fluid">
-                            <br>
-                        <?php endif; ?>
-                    </div>
-                <?php endforeach; ?>
+                    <?php foreach ($contents as $index => $content): ?>
+                        <div class="content-detail">
+                            <p><?php echo $content; ?></p>
+
+                            <?php if (isset($product['images'][$index])): ?>
+                                <img src="/images/upload/<?php echo htmlspecialchars($product['images'][$index]['image_url'] ?? ''); ?>"
+                                    alt="<?php echo htmlspecialchars($product['images'][$index]['alt_text'] ?? 'No description'); ?>"
+                                    class="d-block w-100 h-100 img-fluid">
+                                <br>
+                            <?php endif; ?>
+                        </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>Không có thông tin sản phẩm.</p>
+                <?php endif; ?>
             </div>
+
 
         </div>
 
@@ -169,47 +176,61 @@ include_once __DIR__ . '/../partials/header.php';
             <div class="title text-center py-3">
                 <h2 class="position-relative d-inline-block">Sản Phẩm Liên Quan</h2>
             </div>
-
-            <div class="special-list row g-0">
-                <?php if (!empty($relatedProducts)) : ?>
-                    <?php foreach ($relatedProducts as $relatedProduct): ?>
-                        <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                            <div class="special-img position-relative overflow-hidden">
-                                <a href="/chitietsanpham/<?php echo htmlspecialchars($relatedProduct['product_id']); ?>">
-                                    <?php
-                                    // Hiển thị hình ảnh đầu tiên nếu có, nếu không, hiển thị một ảnh mặc định
-                                    $relatedImageUrl = !empty($relatedProduct['images'][0]['image_url']) ? $relatedProduct['images'][0]['image_url'] : 'default.jpg';
-                                    ?>
-                                    <img src="/images/upload/<?php echo htmlspecialchars($relatedImageUrl); ?>" class="w-100" alt="<?php echo htmlspecialchars($relatedProduct['product_name']); ?>">
-                                </a>
-                            </div>
-                            <div class="text-start m-1">
-                                <p class="text-capitalize mt-3 mb-1"><?php echo htmlspecialchars($relatedProduct['product_name']); ?></p>
-                                <div class="d-flex">
-                                    <span class="fw-bold d-block">
-                                        <?php echo number_format($relatedProduct['price'], 0, ',', '.') . 'đ'; ?>
-                                    </span>
-                                    <?php if (!empty($relatedProduct['old_price'])) : ?>
-                                        <span class="price-old ms-2">
-                                            <?php echo number_format($relatedProduct['old_price'], 0, ',', '.') . 'đ'; ?>
-                                        </span>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-around">
-                                <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
-                                <a href="/chitietsanpham/<?php echo htmlspecialchars($relatedProduct['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 45%;">Chi Tiết</a>
+            <div id="relatedProductsCarousel" class="carousel slide mb-3" data-bs-ride="carousel" data-bs-interval="3000">
+                <div class="carousel-inner">
+                    <?php foreach (array_chunk($relatedProducts, 4) as $index => $productsChunk): ?>
+                        <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
+                            <div class="row">
+                                <?php foreach ($productsChunk as $product): ?>
+                                    <div class="product-item col-md-3">
+                                        <div class="special-img position-relative overflow-hidden">
+                                            <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>">
+                                                <img src="/images/upload/<?php echo htmlspecialchars($product['images'][0]['image_url']); ?>" class="" alt="<?php echo htmlspecialchars($product['product_name']); ?>" style="height: 200px;">
+                                            </a>
+                                        </div>
+                                        <div class="text-start m-1">
+                                            <p class="text-capitalize mt-3 mb-1"><?php echo htmlspecialchars($product['product_name']); ?></p>
+                                            <div class="d-flex">
+                                                <span class="fw-bold d-block">
+                                                    <?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?>
+                                                </span>
+                                                <?php if (!empty($product['old_price'])) : ?>
+                                                    <span class="price-old ms-2">
+                                                        <?php echo number_format($product['old_price'], 0, ',', '.') . 'đ'; ?>
+                                                    </span>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-around mb-2">
+                                            <!-- Nút Thêm Vào Giỏ -->
+                                            <form action="/cart/add" method="POST" style="width: 45%;">
+                                                <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['product_id']); ?>">
+                                                <input type="hidden" name="quantity" value="1"> <!-- Số lượng mặc định là 1 -->
+                                                <button type="submit" class="btn btn-product mt-3 p-2 w-100">Thêm Vào Giỏ</button>
+                                            </form>
+                                            <!-- Nút Chi Tiết -->
+                                            <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 45%;">Chi Tiết</a>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                     <?php endforeach; ?>
-                <?php else : ?>
-                    <p class="text-center">Không có sản phẩm liên quan.</p>
-                <?php endif; ?>
+                </div>
+
+                <!-- Nút điều khiển Carousel -->
+                <a class="carousel-control-prev" href="#relatedProductsCarousel" role="button" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#relatedProductsCarousel" role="button" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </a>
             </div>
-            <div class="text-center">
-                <a href="#" class="btn btn-secondary m-3" style="width: 200px;">Xem thêm</a>
-            </div>
+
         </div>
+
 
     </div>
     <!--Script-->
@@ -241,6 +262,7 @@ include_once __DIR__ . '/../partials/header.php';
                 quantityInput.value = currentQuantity;
             } else {
                 alert("Số lượng không thể nhỏ hơn 1.");
+                quantityInput.value = 1; // Đặt giá trị tối thiểu là 1
             }
         });
 
@@ -251,12 +273,14 @@ include_once __DIR__ . '/../partials/header.php';
                 quantityInput.value = currentQuantity;
             } else {
                 alert("Số lượng không thể vượt quá hàng trong kho!");
+                quantityInput.value = inStock - 1; // Đặt giá trị tối đa là inStock
             }
         });
 
+
         // Sự kiện khi thay đổi trực tiếp trong ô input
         quantityInput.addEventListener('input', () => {
-            let currentQuantity = parseInt(quantityInput.value);
+            let currentQuantity = parseInt(quantityInput.value) || 1;
             if (currentQuantity > inStock) {
                 alert("Số lượng không thể vượt quá hàng trong kho!");
                 quantityInput.value = inStock;
@@ -265,6 +289,7 @@ include_once __DIR__ . '/../partials/header.php';
                 quantityInput.value = 1;
             }
         });
+
 
         // Xử lý thêm vào giỏ hàng
         addToCartBtn.addEventListener('click', () => {
@@ -283,15 +308,25 @@ include_once __DIR__ . '/../partials/header.php';
         // Xử lý mua ngay
         buyNowBtn.addEventListener('click', () => {
             let quantity = parseInt(quantityInput.value);
-            if (quantity > inStock) {
-                alert("Số lượng không thể vượt quá hàng trong kho!");
-            } else if (quantity < 1) {
-                alert("Số lượng không thể nhỏ hơn 1.");
-            } else {
-                // Cập nhật số lượng trong form và submit
-                buyNowQuantityInput.value = quantity;
-                buyNowForm.submit();
+
+            // Kiểm tra số lượng hợp lệ
+            if (isNaN(quantity) || quantity < 1) {
+                quantityInput.value = 1;
+                alert("Vui lòng nhập số lượng hợp lệ.");
+                return;
             }
+
+            if (quantity > inStock) {
+                quantityInput.value = inStock;
+                alert(`Số lượng không thể vượt quá hàng trong kho! Chỉ còn ${inStock} sản phẩm.`);
+                return;
+            }
+
+            // Cập nhật số lượng trong form và gửi yêu cầu thêm vào giỏ hàng
+            buyNowQuantityInput.value = quantity;
+
+            // Gửi form để thêm sản phẩm vào giỏ hàng và chuyển hướng đến trang thanh toán
+            buyNowForm.submit();
         });
     </script>
 </body>

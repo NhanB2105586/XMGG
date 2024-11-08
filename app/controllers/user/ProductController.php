@@ -228,35 +228,40 @@ class ProductController extends Controller
 
 
 
-public function showchitietsanpham($id)
-{
-    $productModel = new Product($this->db);
-    $productImageModel = new ProductImage($this->db);
+    public function showchitietsanpham($id)
+    {
+        $productModel = new Product($this->db);
+        $productImageModel = new ProductImage($this->db);
 
-    // Lấy chi tiết sản phẩm theo ID
-    $product = $productModel->getProductById($id);
+        // Lấy chi tiết sản phẩm theo ID
+        $product = $productModel->getProductById($id);
 
-    // Kiểm tra xem sản phẩm có tồn tại không
-    if ($product) {
-        // Lấy hình ảnh cho sản phẩm dựa vào `product_id`
-        $product['images'] = $productImageModel->getImagesByProductId($id);
+        // Kiểm tra xem sản phẩm có tồn tại không
+        if ($product) {
+            // Lấy hình ảnh cho sản phẩm dựa vào `product_id`
+            $product['images'] = $productImageModel->getImagesByProductId($id);
 
-        // Lấy các sản phẩm liên quan (ví dụ: 4 sản phẩm khác)
-        $relatedProducts = $productModel->getRelatedProducts($id, 4);
-        foreach ($relatedProducts as &$relatedProduct) {
-            // Lấy hình ảnh đầu tiên của mỗi sản phẩm liên quan
-            $relatedProduct['images'] = $productImageModel->getImagesByProductId($relatedProduct['product_id']);
+            // Lấy danh sách sản phẩm liên quan dựa trên cùng loại (`category_id`)
+            $categoryId = $product['category_id'];
+            $relatedProducts = $productModel->getProductsByCategory($categoryId, $id, 8); // Hiển thị tối đa 8 sản phẩm liên quan
+
+            // Lấy hình ảnh cho từng sản phẩm liên quan
+            foreach ($relatedProducts as &$relatedProduct) {
+                $relatedProduct['images'] = $productImageModel->getImagesByProductId($relatedProduct['product_id']);
+            }
+
+            // Gửi dữ liệu sản phẩm và sản phẩm liên quan đến view 'user/chitietsanpham'
+            $this->sendPage('user/chitietsanpham', [
+                'product' => $product,
+                'relatedProducts' => $relatedProducts
+            ]);
+        } else {
+            return $this->sendPage('errors/404'); // Giả sử bạn có một trang lỗi 404
         }
-    } else {
-        return $this->sendPage('errors/404'); // Giả sử bạn có một trang lỗi 404
     }
 
-    // Gửi dữ liệu sản phẩm và sản phẩm liên quan đến view 'user/chitietsanpham'
-    $this->sendPage('user/chitietsanpham', [
-        'product' => $product,
-        'relatedProducts' => $relatedProducts
-    ]);
-}
+
+
 
 
 }
