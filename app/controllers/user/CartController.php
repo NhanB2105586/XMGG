@@ -132,4 +132,40 @@ class CartController extends Controller
         exit();
     }
 
+    public function buyNow($userId, $productId, $quantity)
+    {
+        if (!$userId) {
+            $_SESSION['error_message'] = "Vui lòng đăng nhập để mua sản phẩm.";
+            header("Location: /dangnhap");
+            exit();
+        }
+
+        // Kiểm tra số lượng sản phẩm trong kho
+        $product = $this->cartModel->getProductById($productId);
+        if ($quantity > $product['in_stock']) {
+            $_SESSION['error_message'] = "Số lượng vượt quá hàng trong kho. Chỉ còn {$product['in_stock']} sản phẩm.";
+            header("Location: /chitietsanpham/$productId");
+            exit();
+        }
+
+        // Thêm sản phẩm vào giỏ hàng
+        $this->cartModel->addProduct($userId, $productId, $quantity);
+
+        // Cập nhật lại số lượng sản phẩm trong session
+        $_SESSION['cart_product_count'] = $this->cartModel->getProductCountByUserId($userId);
+
+        // Tạo form ẩn và tự động submit bằng JavaScript
+        echo "
+        <form id='checkoutForm' action='/thanhtoan' method='POST'>
+            <input type='hidden' name='product_id' value='{$productId}'>
+            <input type='hidden' name='quantity' value='{$quantity}'>
+        </form>
+        <script>
+            document.getElementById('checkoutForm').submit();
+        </script>
+    ";
+        exit();
+    }
+
+
 }

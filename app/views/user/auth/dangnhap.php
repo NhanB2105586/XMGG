@@ -1,12 +1,12 @@
 <?php
-include_once __DIR__ . '/../partials/header.php'; // Đường dẫn tới header.php
-include_once __DIR__ . '/../../core/PDOFactory.php'; // Đường dẫn tới PDOFactory.php
+include_once __DIR__ . '/../../partials/header.php'; // Đường dẫn tới header.php
+include_once __DIR__ . '/../../../core/PDOFactory.php'; // Đường dẫn tới PDOFactory.php
 ?>
 <link rel="stylesheet" href="/css/styledangnhap.css">
 
 <body>
     <!-- Navbar -->
-    <?php include_once __DIR__ . '/../partials/navbar.php'; ?>
+    <?php include_once __DIR__ . '/../../partials/navbar.php'; ?>
 
     <!-- Main Page Content -->
     <div class="row">
@@ -60,5 +60,5 @@ include_once __DIR__ . '/../../core/PDOFactory.php'; // Đường dẫn tới PD
         }, 3000); // 2000ms = 2 giây
     </script>
     <!-- Footer -->
-    <?php include_once __DIR__ . '/../partials/footer.php'; ?>
+    <?php include_once __DIR__ . '/../../partials/footer.php'; ?>
 </body>

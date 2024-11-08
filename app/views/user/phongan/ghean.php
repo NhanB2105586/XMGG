@@ -36,7 +36,7 @@ use App\Models\Product;
                 </select>
             </div>
 
- 
+
 
             <button class="btn apply-filter-btn">ÁP DỤNG</button>
         </div>
@@ -46,10 +46,13 @@ use App\Models\Product;
             <div class="special-list row g-0 ">
                 <?php foreach ($products as $product): ?>
                     <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                        <div class="special-img position-relative overflow-hidden">
-                            <img src="/images/upload/<?php echo htmlspecialchars($product['image_url'] ?? 'default.jpg'); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
-
-                        </div>
+                        <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>">
+                            <?php
+                            // Hiển thị hình ảnh đầu tiên nếu có, nếu không, hiển thị một ảnh mặc định
+                            $image_url = !empty($product['images'][0]['image_url']) ? $product['images'][0]['image_url'] : 'default.jpg';
+                            ?>
+                            <img src="/images/upload/<?php echo htmlspecialchars($image_url); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                        </a>
                         <div class="text-start m-1">
                             <p class="text-capitalize mt-3 mb-1"><?php echo htmlspecialchars($product['product_name']); ?></p>
                             <div class="d-flex">
@@ -57,7 +60,7 @@ use App\Models\Product;
                                 <span class="price-old"><?php echo number_format($product['old_price'], 0, ',', '.') . 'đ'; ?></span>
                             </div>
                         </div>
-                     <div class="d-flex justify-content-around">
+                        <div class="d-flex justify-content-around">
                             <form action="/cart/add" method="POST" style="width: 45%;">
                                 <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['product_id']); ?>">
                                 <input type="hidden" name="quantity" value="1"> <!-- Số lượng mặc định là 1 -->

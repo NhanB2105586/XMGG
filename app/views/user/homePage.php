@@ -133,7 +133,16 @@ include_once __DIR__ . '/../partials/header.php';
                                         </div>
                                         <div class="text-start m-1">
                                             <p class="text-capitalize mt-3 mb-1"><?php echo htmlspecialchars($product['product_name']); ?></p>
-                                            <span class="fw-bold d-block"><?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?></span>
+                                            <div class="d-flex">
+                                                <span class="fw-bold d-block">
+                                                    <?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?>
+                                                </span>
+                                                <?php if (!empty($product['old_price'])) : ?>
+                                                    <span class="price-old ms-2">
+                                                        <?php echo number_format($product['old_price'], 0, ',', '.') . 'đ'; ?>
+                                                    </span>
+                                                <?php endif; ?>
+                                            </div>
                                         </div>
                                         <div class="d-flex justify-content-around mb-2">
                                             <form action="/cart/add" method="POST" style="width: 45%;">
@@ -182,7 +191,16 @@ include_once __DIR__ . '/../partials/header.php';
                                         </div>
                                         <div class="text-start m-1">
                                             <p class="text-capitalize mt-3 mb-1"><?php echo htmlspecialchars($product['product_name']); ?></p>
-                                            <span class="fw-bold d-block"><?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?></span>
+                                            <div class="d-flex">
+                                                <span class="fw-bold d-block">
+                                                    <?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?>
+                                                </span>
+                                                <?php if (!empty($product['old_price'])) : ?>
+                                                    <span class="price-old ms-2">
+                                                        <?php echo number_format($product['old_price'], 0, ',', '.') . 'đ'; ?>
+                                                    </span>
+                                                <?php endif; ?>
+                                            </div>
                                         </div>
                                         <div class="d-flex justify-content-around mb-2">
                                             <form action="/cart/add" method="POST" style="width: 45%;">
@@ -217,7 +235,7 @@ include_once __DIR__ . '/../partials/header.php';
                 </div>
                 <div class="row">
                     <div class="col-md-3 mb-3 product-item">
-                        <div class="mt-3" >
+                        <div class="mt-3">
                             <a href="/phongkhach">
                                 <img src="/images/GIF/phongkhach.gif" class="card-img-top" alt="Phòng Khách">
                             </a>

@@ -64,17 +64,17 @@ class UserController extends Controller
 
     public function showdangnhap()
     {
-        $this->sendPage('auth/dangnhap');
+        $this->sendPage('/user/auth/dangnhap');
     }
 
     public function showdangki()
     {
-        $this->sendPage('auth/dangki');
+        $this->sendPage('/user/auth/dangki');
     }
 
     public function showkhoiphuc()
     {
-        $this->sendPage('auth/khoiphucmatkhau');
+        $this->sendPage('/user/auth/khoiphucmatkhau');
     }
 
     public function showbosuutap()

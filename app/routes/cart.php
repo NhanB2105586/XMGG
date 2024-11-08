@@ -17,4 +17,14 @@ $router->post('/cart/add', function () {
     $cartController = new \App\Controllers\User\CartController();
     $cartController->addToCart($userId, $productId, $quantity);
 });
+
+$router->post('/cart/buynow', function () {
+    $userId = $_SESSION['user_id'] ?? null;
+    $productId = $_POST['product_id'] ?? null;
+    $quantity = $_POST['quantity'] ?? 1;
+
+    $cartController = new \App\Controllers\User\CartController();
+    $cartController->buyNow($userId, $productId, $quantity);
+});
+
 ?>
