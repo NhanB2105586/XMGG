@@ -115,7 +115,7 @@ class UserController extends Controller
                 exit();
             } else {
                 $error = "Email hoặc mật khẩu không đúng.";
-                $this->sendPage('auth/dangnhap', ['error' => $error]); // Trả lại trang đăng nhập với lỗi
+                $this->sendPage('user/auth/dangnhap', ['error' => $error]); // Trả lại trang đăng nhập với lỗi
             }
         }
     }
