@@ -59,7 +59,7 @@ include_once __DIR__ . '/../partials/header.php';
                 </table>
                 <!-- Nút quay lại giỏ hàng -->
                 <div class="text-center">
-                    <a href="/" class="btn btn-secondary">Quay lại</a>
+                    <a href="/showallorders" class="btn btn-secondary">Quay lại</a>
                 </div>
             </div>
         </div>
