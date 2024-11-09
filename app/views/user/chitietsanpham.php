@@ -121,6 +121,7 @@ include_once __DIR__ . '/../partials/header.php';
                     <form id="buyNowForm" action="/cart/buynow" method="POST">
                         <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['product_id']); ?>">
 
+
                         <input type="hidden" name="quantity" id="buyNowQuantityInput" value="1">
                     </form>
 
@@ -150,6 +151,7 @@ include_once __DIR__ . '/../partials/header.php';
                 <h2 class="position-relative d-inline-block p-1">Chi Tiết Sản Phẩm</h2>
             </div>
             <div class="content-describe-detail-product">
+
                 <?php if (isset($product)): ?>
                     <?php
                     $contents = [
@@ -178,6 +180,7 @@ include_once __DIR__ . '/../partials/header.php';
                 <?php else: ?>
                     <p>Không có thông tin sản phẩm.</p>
                 <?php endif; ?>
+
             </div>
 
 
