@@ -25,7 +25,7 @@ include_once __DIR__ . '/../../core/PDOFactory.php';
             ?>
             <div class="wrapper">
                 <form class="form-register" action="/checkdangky" method="POST">
-                    <h2 class="title-form text-center mb-3">ĐĂNG KÝ</h2>
+                    <h2 class="title-form text-center text-white mb-3">ĐĂNG KÝ</h2>
 
                     <div class="mb-3">
                         <label for="fullName" class="form-label">Họ và tên:</label>

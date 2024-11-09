@@ -54,7 +54,6 @@ class ManageProductController extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = $_POST;
-            $data['in_stock'] = isset($data['in_stock']) ? true : false;
 
             // Tạo sản phẩm
             $this->productModel->createProduct($data);

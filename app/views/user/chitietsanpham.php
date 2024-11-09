@@ -115,7 +115,7 @@ include_once __DIR__ . '/../partials/header.php';
                     </form>
 
                     <!-- Form ẩn để mua ngay -->
-                    <form id="buyNowForm" action="/checkout" method="GET" style="display: none;">
+                    <form id="buyNowForm" action="/thanhtoan" method="GET" style="display: none;">
                         <input type="hidden" name="product_id"
                             value="<?php echo htmlspecialchars($product['product_id']); ?>">
                         <input type="hidden" name="quantity" id="buyNowQuantityInput" value="1">
@@ -146,29 +146,7 @@ include_once __DIR__ . '/../partials/header.php';
                 <h2 class="position-relative d-inline-block p-1">Chi Tiết Sản Phẩm</h2>
             </div>
             <div class="content-describe-detail-product">
-                <?php
-                $contents = [
-                    "Nội dung 1",
-                    "Nội dung 2",
-                    "Nội dung 3",
-                    // Thêm nội dung khác nếu cần
-                ];
-                ?>
-
-                <?php foreach ($contents as $index => $content): ?>
-                <div class="content-detail">
-                    <!-- Hiển thị nội dung cố định -->
-                    <p><?php echo $content; ?></p>
-
-                    <!-- Hiển thị ảnh tương ứng từ bảng `product_images` nếu có -->
-                    <?php if (isset($product['images'][$index])): ?>
-                    <img src="/images/upload/<?php echo htmlspecialchars($product['images'][$index]['image_url'] ?? ''); ?>"
-                        alt="<?php echo htmlspecialchars($product['images'][$index]['alt_text'] ?? 'No description'); ?>"
-                        class="d-block w-100 h-100 img-fluid">
-                    <br>
-                    <?php endif; ?>
-                </div>
-                <?php endforeach; ?>
+                <?php echo $product['description']; ?>
             </div>
 
         </div>
