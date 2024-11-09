@@ -2,40 +2,19 @@
 include_once __DIR__ . '/../partials/headerAdmin.php';
 ?>
 
+
 <body>
-    <style>
-    .table {
-        border-collapse: collapse;
-        font-size: 0.85rem;
-        width: 100%;
-    }
-
-    .table th,
-    .table td {
-        padding: 0.5rem;
-        text-align: center;
-    }
-
-    .btn-link {
-        padding: 0;
-        font-size: 0.9rem;
-    }
-
-    .pagination {
-        margin-top: 15px;
-    }
-    </style>
-
     <?php
     require_once __DIR__ . "/../partials/headingAdmin.php";
     require_once __DIR__ . "/../partials/sidebar.php";
+
     ?>
 
     <div class="container mt-3" id="main-content">
         <div class="d-flex justify-content-between mb-3">
             <div class="search-form me-auto">
                 <form method="GET" action="" class="d-flex">
-                    <input type="text" name="search" class="form-control" placeholder="Tìm kiếm theo tên sản phẩm"
+                    <input type="text" name="search" class="form-control" placeholder="Tìm kiếm theo tên khách hàng"
                         value="<?php echo htmlspecialchars($searchTerm); ?>">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                 </form>
@@ -119,52 +98,11 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                             </form>
                         </td>
                         <td>
-                            <button class="btn btn-link" data-toggle="modal"
-                                data-target="#order-details-modal-<?= $order['order_id'] ?>">Xem Chi Tiết</button>
-
-                            <!-- Modal chi tiết đơn hàng -->
-                            <div class="modal fade" id="order-details-modal-<?= $order['order_id'] ?>" tabindex="-1"
-                                role="dialog" aria-labelledby="modalLabel-<?= $order['order_id'] ?>" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="modalLabel-<?= $order['order_id'] ?>">Chi Tiết
-                                                Đơn Hàng #<?= $order['order_id'] ?></h5>
-                                        </div>
-                                        <div class="modal-body">
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Tên Sản Phẩm</th>
-                                                        <th>Số Lượng</th>
-                                                        <th>Giá</th>
-                                                        <th>Tổng Tiền</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                    <?php foreach ($orderdetail as $detail): ?>
-                                                    <tr>
-                                                        <td><?php echo htmlspecialchars($detail['product_name']); ?>
-                                                        </td>
-                                                        <td><?php echo htmlspecialchars($detail['quantity']); ?></td>
-                                                        <td><?php echo number_format($detail['price'], 0, ',', '.'); ?>
-                                                            VNĐ</td>
-                                                        <td><?php echo number_format($detail['price'] * $detail['quantity'], 0, ',', '.'); ?>
-                                                            VNĐ</td>
-                                                    </tr>
-                                                    <?php endforeach; ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Đóng</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <a href="/admin/viewOrderDetail/<?= $order['order_id'] ?>" class="btn btn-link">
+                                Xem Chi Tiết
+                            </a>
                         </td>
+
                         <td class="text-center">
                             <form action="/admin/deleteOrders/<?= $order['order_id'] ?>" method="POST"
                                 style="display:inline;">

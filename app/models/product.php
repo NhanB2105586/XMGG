@@ -26,6 +26,8 @@ class Product extends Model
     {
         return $this->getByID('products', 'product_id', $id);
     }
+    
+    
 
     public function getAllProducts()
     {
@@ -184,4 +186,3 @@ class Product extends Model
 
 
 }
-

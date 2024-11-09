@@ -1,45 +1,17 @@
 <?php
 include_once __DIR__ . '/../partials/headerAdmin.php';
 ?>
+<style>
+.modal-body {
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-height: 400px;
+    overflow-y: auto;
+}
+</style>
 
 <body>
-    <style>
-    .table {
-        border-collapse: collapse;
-        font-size: 0.85rem;
-        width: 100%;
-    }
-
-    .table th,
-    .table td {
-        padding: 0.5rem;
-        text-align: center;
-    }
-
-    .table img {
-        max-width: 80px;
-        height: auto;
-    }
-
-    .btn-link {
-        padding: 0;
-        font-size: 0.9rem;
-    }
-
-    .carousel-inner img {
-        width: 100%;
-        height: auto;
-    }
-
-    .modal-body {
-        max-height: 400px;
-        overflow-y: auto;
-    }
-
-    .pagination {
-        margin-top: 15px;
-    }
-    </style>
     <?php
     require_once __DIR__ . "/../partials/headingAdmin.php";
     require_once __DIR__ . "/../partials/sidebar.php";
@@ -114,35 +86,18 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                         <td><?= htmlspecialchars($product["product_name"]) ?></td>
                         <td class="text-center">
                             <?php if (!empty($product['images'])): ?>
-                            <div id="carousel<?= $product['product_id'] ?>" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner">
-                                    <?php foreach ($product['images'] as $index => $image): ?>
-                                    <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
-                                        <img src="/images/upload/<?= htmlspecialchars($image['image_url']) ?>"
-                                            alt="<?= htmlspecialchars($product['product_name']) ?>"
-                                            style="width: 100%; height: auto;">
-                                    </div>
-                                    <?php endforeach; ?>
-                                </div>
-                                <a class="carousel-control-prev" href="#carousel<?= $product['product_id'] ?>"
-                                    role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carousel<?= $product['product_id'] ?>"
-                                    role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </div>
+                            <img src="/images/upload/<?= htmlspecialchars($product['images'][0]['image_url']) ?>"
+                                alt="<?= htmlspecialchars($product['product_name']) ?>"
+                                style="width: 100%; height: auto;">
                             <?php else: ?>
                             <p>Không có hình ảnh</p>
                             <?php endif; ?>
                         </td>
 
+
                         <td class="text-center"><?= htmlspecialchars($product["old_price"]) ?></td>
                         <td class="text-center"><?= htmlspecialchars($product["price"]) ?></td>
-                        <td class="text-center"><?= htmlspecialchars($product["in_stock"] ? 'Còn hàng' : 'Hết hàng') ?>
+                        <td class="text-center"><?= htmlspecialchars($product["in_stock"]) ?>
                         </td>
                         <td>
                             <div>

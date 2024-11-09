@@ -3,55 +3,6 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
 ?>
 
 <body>
-    <style>
-    .container {
-        max-width: 600px;
-        margin: auto;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        background-color: #f9f9f9;
-    }
-
-    h2 {
-        margin-bottom: 20px;
-        color: #333;
-    }
-
-    .form-control {
-        border-radius: 5px;
-        transition: border-color 0.3s;
-    }
-
-    .form-control:focus {
-        border-color: #007bff;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    }
-
-    .btn-primary {
-        background-color: #007bff;
-        border-color: #007bff;
-        padding: 10px 20px;
-        border-radius: 5px;
-        width: 100%;
-    }
-
-    .btn-primary:hover {
-        background-color: #0056b3;
-        border-color: #0056b3;
-    }
-
-    .form-group {
-        margin-top: 10px;
-    }
-
-    @media (max-width: 576px) {
-        .container {
-            padding: 15px;
-        }
-    }
-    </style>
-
     <?php
     require_once __DIR__ . "/../partials/headingAdmin.php";
     require_once __DIR__ . "/../partials/sidebar.php";
@@ -80,13 +31,19 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                 <select class="form-control" id="category_id" name="category_id" required>
                     <option value="">Chọn danh mục</option>
                     <?php foreach ($categories as $category): ?>
-                    <option value="<?= htmlspecialchars($category['category_id']) ?>"
-                        <?= (isset($old['category_id']) && $old['category_id'] == $category['category_id']) ? 'selected' : '' ?>>
+                    <option value="<?= htmlspecialchars($category['category_id']) ?>" <?php
+                            // So sánh category_id của sản phẩm với category_id trong danh sách và đánh dấu `selected`
+                            if (isset($product['category_id']) && $product['category_id'] == $category['category_id']) {
+                                echo 'selected';
+                            }
+                            ?>>
                         <?= htmlspecialchars($category['category_name']) ?>
                     </option>
                     <?php endforeach; ?>
                 </select>
             </div>
+
+
 
             <div class="form-group">
                 <label for="product_name">Tên Sản Phẩm</label>
@@ -113,13 +70,9 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
             </div>
 
             <div class="form-group">
-                <label for="in_stock">Còn Hàng</label>
-                <select class="form-control" id="in_stock" name="in_stock" required>
-                    <option value="1" <?= (isset($old['in_stock']) && $old['in_stock'] == 1) ? 'selected' : ''; ?>>Còn
-                        hàng</option>
-                    <option value="0" <?= (isset($old['in_stock']) && $old['in_stock'] == 0) ? 'selected' : ''; ?>>Hết
-                        hàng</option>
-                </select>
+                <label for="in_stock">Số lượng</label>
+                <input type="number" class="form-control" id="in_stock" name="in_stock"
+                    value="<?php echo htmlspecialchars($old['in_stock'] ?? $product['in_stock']); ?>">
             </div>
 
             <?php if (!empty($product['images'])): ?>

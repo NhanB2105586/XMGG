@@ -3,27 +3,6 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
 ?>
 
 <body>
-    <style>
-    .table {
-        border-collapse: collapse;
-        font-size: 0.9rem;
-    }
-
-    .btn-add {
-        margin-bottom: 15px;
-    }
-
-    .search-form {
-        display: flex;
-        align-items: center;
-        margin-bottom: 15px;
-    }
-
-    .search-form input {
-        margin-right: 10px;
-        flex-grow: 1;
-    }
-    </style>
     <?php
     require_once __DIR__ . "/../partials/headingAdmin.php";
     require_once __DIR__ . "/../partials/sidebar.php";

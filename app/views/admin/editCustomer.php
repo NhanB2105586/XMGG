@@ -88,11 +88,6 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                     value="<?php echo htmlspecialchars($customer['fullname']); ?>" required>
             </div>
             <div class="form-group">
-                <label for="username">Tên đăng nhập</label>
-                <input type="text" class="form-control" id="username" name="username"
-                    value="<?php echo htmlspecialchars($customer['username']); ?>" required>
-            </div>
-            <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" name="email"
                     value="<?php echo htmlspecialchars($customer['email']); ?>" required>
