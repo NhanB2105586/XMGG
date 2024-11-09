@@ -7,13 +7,14 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
     <?php
     require_once __DIR__ . "/../partials/headingAdmin.php";
     require_once __DIR__ . "/../partials/sidebar.php";
+
     ?>
 
     <div class="container mt-3" id="main-content">
         <div class="d-flex justify-content-between mb-3">
             <div class="search-form me-auto">
                 <form method="GET" action="" class="d-flex">
-                    <input type="text" name="search" class="form-control" placeholder="Tìm kiếm theo tên sản phẩm"
+                    <input type="text" name="search" class="form-control" placeholder="Tìm kiếm theo tên khách hàng"
                         value="<?php echo htmlspecialchars($searchTerm); ?>">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                 </form>
@@ -97,27 +98,11 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                             </form>
                         </td>
                         <td>
-                            <button class="btn btn-link" data-toggle="modal"
-                                data-target="#order-details-modal-<?= $order['order_id'] ?>">Xem Chi Tiết</button>
-
-                            <!-- Modal chi tiết đơn hàng -->
-                            <div class="modal fade" id="order-details-modal-<?= $order['order_id'] ?>" tabindex="-1"
-                                role="dialog" aria-labelledby="modalLabel-<?= $order['order_id'] ?>" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="modalLabel-<?= $order['order_id'] ?>">Chi Tiết
-                                                Đơn Hàng #<?= $order['order_id'] ?></h5>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Đóng</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <a href="/admin/viewOrderDetail/<?= $order['order_id'] ?>" class="btn btn-link">
+                                Xem Chi Tiết
+                            </a>
                         </td>
+
                         <td class="text-center">
                             <form action="/admin/deleteOrders/<?= $order['order_id'] ?>" method="POST"
                                 style="display:inline;">

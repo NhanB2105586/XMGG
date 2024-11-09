@@ -93,7 +93,7 @@ class ManageProductController extends Controller
 
         // Lấy danh mục và sản phẩm từ database
         $categories = $this->categoryModel->getAllCategories();
-        $product = $this->productModel->getProductById($id);
+        $product = $this->productModel->getProductCategoryById($id);
         if (!$product) {
             $_SESSION['error_message'] = 'Không tìm thấy sản phẩm.';
             header('Location: /admin/viewProducts');

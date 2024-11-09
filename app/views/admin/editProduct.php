@@ -31,13 +31,19 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                 <select class="form-control" id="category_id" name="category_id" required>
                     <option value="">Chọn danh mục</option>
                     <?php foreach ($categories as $category): ?>
-                    <option value="<?= htmlspecialchars($category['category_id']) ?>"
-                        <?= (isset($old['category_id']) && $old['category_id'] == $category['category_id']) ? 'selected' : '' ?>>
+                    <option value="<?= htmlspecialchars($category['category_id']) ?>" <?php
+                            // So sánh category_id của sản phẩm với category_id trong danh sách và đánh dấu `selected`
+                            if (isset($product['category_id']) && $product['category_id'] == $category['category_id']) {
+                                echo 'selected';
+                            }
+                            ?>>
                         <?= htmlspecialchars($category['category_name']) ?>
                     </option>
                     <?php endforeach; ?>
                 </select>
             </div>
+
+
 
             <div class="form-group">
                 <label for="product_name">Tên Sản Phẩm</label>

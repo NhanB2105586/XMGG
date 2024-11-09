@@ -15,8 +15,15 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/css/styleadmin.css">
     <style>
-        .container {
-            max-width: 90%;
-        }
+    .container {
+        max-width: 90%;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 10px 20px;
+        border-radius: 5px;
+    }
     </style>
 </head>

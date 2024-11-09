@@ -5,17 +5,18 @@ $router->get('/admin/viewOrders', function () use ($PDO) {
     $orderController = new App\Controllers\Admin\ManageOrderController();
     $orderController->index();
 });
-$router->get('/admin/viewOrders', function () use ($PDO) {
-    $orderController = new App\Controllers\Admin\ManageOrderController();
-    $orderController->viewOrder($_GET['id']);
-});
 // Route cập nhật trạng thái đơn hàng
 $router->post('/admin/update-statusOrders/{id}', function ($id) use ($PDO) {
     $orderController = new App\Controllers\Admin\ManageOrderController();
     $orderController->updateOrderStatus($id);
 });
+$router->post('/admin/deleteOrders/{id}', function ($id) use ($PDO) {
+    $orderController = new App\Controllers\Admin\ManageOrderController();
+    $orderController->deleteOrder($id);
+});
 
-$router->get('/admin/viewOrders', function ($orderId) {
-    // Gọi phương thức xem chi tiết đơn hàng
-    (new App\Controllers\Admin\ManageOrderController())->viewOrder($orderId);
+// Route để xem chi tiết đơn hàng
+$router->get('/admin/viewOrderDetail/{id}', function ($id) {
+    $orderController = new App\Controllers\Admin\ManageOrderController();
+    $orderController->viewOrder($id);
 });

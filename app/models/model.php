@@ -49,7 +49,30 @@ class Model
         $statement->execute(['id' => $id]);
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
+    
+    public function getByOrderId(int $orderId)
+    {
+        // Thực hiện truy vấn lấy chi tiết đơn hàng
+        $query = "SELECT * FROM order_details o join products p on p.product_id=o.product_id WHERE order_id = :order_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':order_id', $orderId, PDO::PARAM_INT);
+        $stmt->execute();
 
+        // Trả về kết quả (nếu có)
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); // Dùng fetchAll nếu có thể có nhiều dòng
+    }
+    public function getUserByOrder(int $orderId)
+    {
+        // Thực hiện truy vấn lấy chi tiết đơn hàng
+        $query = "SELECT * FROM orders o join users u on o.user_id=u.user_id where order_id= :order_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':order_id', $orderId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        // Trả về kết quả (nếu có)
+        return $stmt->fetch(PDO::FETCH_ASSOC); // Dùng fetchAll nếu có thể có nhiều dòng
+    }
+    
     # update record of table
     public function update(string $table, string $idName, int $id, array $newValue): bool
     {
@@ -311,6 +334,11 @@ class Model
 
         // Trả về kết quả dưới dạng một số (số lượng đơn hàng)
         return $stmt->fetchColumn();
+    }
+    public function getProductCategoryById($id)  {
+        $statement = $this->db->prepare("select * from products p join categories c on p.category_id=c.category_id where product_id= :id");
+        $statement->execute([':id' => $id]);
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
 }
