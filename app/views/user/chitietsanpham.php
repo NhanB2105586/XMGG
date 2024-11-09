@@ -98,11 +98,12 @@ include_once __DIR__ . '/../partials/header.php';
                     </div>
                     <div>
                         <?php if ($product['in_stock'] > 0): ?>
-                            <span class="fw-bold">Số lượng còn lại:</span> <?php echo $product['in_stock']; ?>
+                            <span id="inStockDisplay" class="fw-bold">Số lượng còn lại: <?php echo $product['in_stock']; ?></span>
                         <?php else: ?>
-                            <span class="fw-bold text-danger">Hết hàng</span>
+                            <span id="inStockDisplay" class="fw-bold text-danger">Hết hàng</span>
                         <?php endif; ?>
                     </div>
+
 
                     <!-- Form ẩn để thêm vào giỏ hàng -->
                     <form id="addToCartForm" action="/cart/add" method="POST" style="display: none;">
@@ -233,18 +234,22 @@ include_once __DIR__ . '/../partials/header.php';
 
 
     </div>
-    <!--Script-->
-    <script src="/js/script.js"></script>
+
     <!-- Footer -->
     <?php include_once __DIR__ . '/../partials/app.php'; ?>
     <?php include_once __DIR__ . '/../partials/footer.php'; ?>
 
-
     <script>
-        // Số lượng hàng trong kho
-        const inStock = <?php echo $product['in_stock']; ?>;
+        // Lấy giá trị số lượng còn lại từ phần tử có ID 'inStockDisplay'
+        const inStockElement = document.getElementById('inStockDisplay');
+        const inStockText = inStockElement.textContent;
 
-        // Các phần tử DOM
+        // Lấy giá trị số lượng bằng cách kiểm tra nội dung văn bản
+        const inStock = inStockText.includes('Hết hàng') ? 0 : parseInt(inStockText.match(/\d+/)[0]);
+
+        console.log(`Số lượng trong kho (frontend): ${inStock}`);
+
+        // Lấy các phần tử DOM
         const quantityInput = document.getElementById('quantityInput');
         const formQuantityInput = document.getElementById('formQuantityInput');
         const buyNowQuantityInput = document.getElementById('buyNowQuantityInput');
@@ -255,51 +260,60 @@ include_once __DIR__ . '/../partials/header.php';
         const addToCartForm = document.getElementById('addToCartForm');
         const buyNowForm = document.getElementById('buyNowForm');
 
+        /**
+         * Kiểm tra và tự động điều chỉnh số lượng khi người dùng nhập
+         * @param {number} quantity - Số lượng người dùng nhập
+         */
+        function updateQuantity(quantity) {
+            // Cho phép xóa hết ô input và chỉ kiểm tra khi người dùng nhập lại
+            if (quantity === '' || isNaN(quantity)) {
+                return;
+            }
+
+            quantity = parseInt(quantity);
+
+            // Nếu số lượng nhỏ hơn 1, tự động đặt lại là 1
+            if (quantity < 1) {
+                quantityInput.value = 1;
+            } else if (quantity > inStock) {
+                // Nếu số lượng vượt quá hàng trong kho, hiển thị thông báo và đặt lại giá trị tối đa
+                showAlert(`Số lượng không thể vượt quá hàng trong kho! Chỉ còn ${inStock} sản phẩm.`);
+                quantityInput.value = inStock;
+            } else {
+                quantityInput.value = quantity;
+            }
+        }
+
+        /**
+         * Hiển thị thông báo lỗi cho người dùng
+         * @param {string} message - Nội dung thông báo
+         */
+        function showAlert(message) {
+            alert(message);
+        }
+
         // Sự kiện giảm số lượng
         decrementButton.addEventListener('click', () => {
-            let currentQuantity = parseInt(quantityInput.value);
-            if (currentQuantity > 1) {
-                quantityInput.value = currentQuantity;
-            } else {
-                alert("Số lượng không thể nhỏ hơn 1.");
-                quantityInput.value = 1; // Đặt giá trị tối thiểu là 1
-            }
+            let currentQuantity = parseInt(quantityInput.value) || 1;
+            updateQuantity(currentQuantity - 1);
         });
 
         // Sự kiện tăng số lượng
         incrementButton.addEventListener('click', () => {
-            let currentQuantity = parseInt(quantityInput.value);
-            if (currentQuantity < inStock) {
-                quantityInput.value = currentQuantity;
-            } else {
-                alert("Số lượng không thể vượt quá hàng trong kho!");
-                quantityInput.value = inStock - 1; // Đặt giá trị tối đa là inStock
-            }
-        });
-
-
-        // Sự kiện khi thay đổi trực tiếp trong ô input
-        quantityInput.addEventListener('input', () => {
             let currentQuantity = parseInt(quantityInput.value) || 1;
-            if (currentQuantity > inStock) {
-                alert("Số lượng không thể vượt quá hàng trong kho!");
-                quantityInput.value = inStock;
-            } else if (currentQuantity < 1) {
-                alert("Số lượng không thể nhỏ hơn 1.");
-                quantityInput.value = 1;
-            }
+            updateQuantity(currentQuantity + 1);
         });
 
+        // Sự kiện thay đổi trực tiếp trong ô input
+        quantityInput.addEventListener('input', () => {
+            let currentQuantity = quantityInput.value;
+            updateQuantity(currentQuantity);
+        });
 
         // Xử lý thêm vào giỏ hàng
         addToCartBtn.addEventListener('click', () => {
-            let quantity = parseInt(quantityInput.value);
-            if (quantity > inStock) {
-                alert("Số lượng không thể vượt quá hàng trong kho!");
-            } else if (quantity < 1) {
-                alert("Số lượng không thể nhỏ hơn 1.");
-            } else {
-                // Cập nhật số lượng trong form và submit
+            let quantity = parseInt(quantityInput.value) || 1;
+            if (quantity <= inStock) {
                 formQuantityInput.value = quantity;
                 addToCartForm.submit();
             }
@@ -307,26 +321,12 @@ include_once __DIR__ . '/../partials/header.php';
 
         // Xử lý mua ngay
         buyNowBtn.addEventListener('click', () => {
-            let quantity = parseInt(quantityInput.value);
-
-            // Kiểm tra số lượng hợp lệ
-            if (isNaN(quantity) || quantity < 1) {
-                quantityInput.value = 1;
-                alert("Vui lòng nhập số lượng hợp lệ.");
-                return;
+            let quantity = parseInt(quantityInput.value) || 1;
+            if (quantity <= inStock) {
+                buyNowQuantityInput.value = quantity;
+                buyNowForm.submit();
             }
-
-            if (quantity > inStock) {
-                quantityInput.value = inStock;
-                alert(`Số lượng không thể vượt quá hàng trong kho! Chỉ còn ${inStock} sản phẩm.`);
-                return;
-            }
-
-            // Cập nhật số lượng trong form và gửi yêu cầu thêm vào giỏ hàng
-            buyNowQuantityInput.value = quantity;
-
-            // Gửi form để thêm sản phẩm vào giỏ hàng và chuyển hướng đến trang thanh toán
-            buyNowForm.submit();
         });
     </script>
+
 </body>

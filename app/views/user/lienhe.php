@@ -22,13 +22,13 @@ include_once __DIR__ . '/../partials/header.php';
                 <p><strong>Địa chỉ:</strong> 3/2, Quận Ninh Kiều, Tp.Cần Thơ, Việt nam</p>
                 <p><strong>Số điện thoại:</strong> (012) 345-678</p>
                 <p><strong>Email:</strong> nhanb2105586@company.com</p>
-                <p><strong>Giờ làm việc:</strong> Thứ 2 - Thứ 6: 9:00 - 18:00</p>
+                <p><strong>Giờ làm việc:</strong> Thứ 2 - Thứ 7: 9:00 - 18:00</p>
                 <br>
                 <h4>Xưởng sản xuất</h4>
                 <p><strong>Địa chỉ:</strong> 30/4, Quận Ninh Kiều, Tp.Cần Thơ, Việt nam</p>
                 <p><strong>Số điện thoại:</strong> (012) 345-000</p>
                 <p><strong>Email:</strong> quyb2111860@company.com</p>
-                <p><strong>Giờ làm việc:</strong> Thứ 2 - Thứ 6: 9:00 - 18:00</p>
+                <p><strong>Giờ làm việc:</strong> Thứ 2 - Thứ 7: 9:00 - 18:00</p>
             </div>
 
             <!-- Form liên hệ -->
