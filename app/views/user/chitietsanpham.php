@@ -13,33 +13,38 @@ include_once __DIR__ . '/../partials/header.php';
     <div class="container main-detail-product">
         <!-- Phần hình ảnh trên cùng -->
         <div class="breadcrumb">
-            <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="#"><strong class="current-page"><?php echo htmlspecialchars($product['product_name']); ?></strong></a>
+            <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="#"><strong
+                    class="current-page"><?php echo htmlspecialchars($product['product_name']); ?></strong></a>
         </div>
         <div class="row detail-product-first">
 
-            <div id="carouselExample" class="detail-product-slider carousel slide col-lg-6 col-sm-12" data-bs-ride="carousel" data-bs-interval="3000">
+            <div id="carouselExample" class="detail-product-slider carousel slide col-lg-6 col-sm-12"
+                data-bs-ride="carousel" data-bs-interval="3000">
                 <div class="carousel-inner">
                     <?php if (!empty($product['images'])) : ?>
-                        <?php foreach ($product['images'] as $index => $image): ?>
-                            <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
-                                <img src="/images/upload/<?php echo htmlspecialchars($image['image_url']); ?>" class="d-block img-fluid" alt="Product Image">
-                            </div>
-                        <?php endforeach; ?>
+                    <?php foreach ($product['images'] as $index => $image): ?>
+                    <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                        <img src="/images/upload/<?php echo htmlspecialchars($image['image_url']); ?>"
+                            class="d-block img-fluid" alt="Product Image">
+                    </div>
+                    <?php endforeach; ?>
                     <?php else: ?>
-                        <!-- Trường hợp không có hình ảnh nào -->
-                        <div class="carousel-item active">
-                            <img src="/images/upload/default.jpg" class="d-block img-fluid" alt="No Image Available">
-                        </div>
+                    <!-- Trường hợp không có hình ảnh nào -->
+                    <div class="carousel-item active">
+                        <img src="/images/upload/default.jpg" class="d-block img-fluid" alt="No Image Available">
+                    </div>
                     <?php endif; ?>
                 </div>
 
 
                 <!-- Controls (Previous/Next buttons) -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </button>
@@ -47,16 +52,20 @@ include_once __DIR__ . '/../partials/header.php';
                 <!-- Carousel Indicators -->
                 <div class="carousel-indicators hidden-slider">
                     <?php if (!empty($product['images'])) : ?>
-                        <?php foreach ($product['images'] as $index => $image): ?>
-                            <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="<?php echo $index; ?>" class="<?php echo $index === 0 ? 'active' : ''; ?>" aria-current="true" aria-label="Slide <?php echo $index + 1; ?>" style="width: 100px;">
-                                <img src="/images/upload/<?php echo htmlspecialchars($image['image_url']); ?>" class="d-block img-thumbnail img-fluid" />
-                            </button>
-                        <?php endforeach; ?>
+                    <?php foreach ($product['images'] as $index => $image): ?>
+                    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="<?php echo $index; ?>"
+                        class="<?php echo $index === 0 ? 'active' : ''; ?>" aria-current="true"
+                        aria-label="Slide <?php echo $index + 1; ?>" style="width: 100px;">
+                        <img src="/images/upload/<?php echo htmlspecialchars($image['image_url']); ?>"
+                            class="d-block img-thumbnail img-fluid" />
+                    </button>
+                    <?php endforeach; ?>
                     <?php else: ?>
-                        <!-- Trường hợp không có hình ảnh nào, hiển thị một ảnh mặc định -->
-                        <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active" aria-current="true" aria-label="No Image Available" style="width: 100px;">
-                            <img src="/images/upload/default.jpg" class="d-block img-thumbnail img-fluid" />
-                        </button>
+                    <!-- Trường hợp không có hình ảnh nào, hiển thị một ảnh mặc định -->
+                    <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="No Image Available" style="width: 100px;">
+                        <img src="/images/upload/default.jpg" class="d-block img-thumbnail img-fluid" />
+                    </button>
                     <?php endif; ?>
                 </div>
 
@@ -73,14 +82,8 @@ include_once __DIR__ . '/../partials/header.php';
                     <div class="d-flex">
                         <h3 class="m-2 fw-bold"><?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?></h3>
                         <?php if (!empty($product['old_price'])): ?>
-                            <del class="m-1"><?php echo number_format($product['old_price'], 0, ',', '.') . 'đ'; ?></del>
+                        <del class="m-1"><?php echo number_format($product['old_price'], 0, ',', '.') . 'đ'; ?></del>
                         <?php endif; ?>
-                    </div>
-                    <div>
-                        <button class=" color-product active bg-color-product1"></button>
-                        <button class=" color-product bg-color-product2"></button>
-                        <button class=" color-product bg-color-product3"></button>
-                        <button class=" color-product bg-color-product5"></button>
                     </div>
                     <div>
                         <span class="fw-bold">Kích thước:</span>
@@ -101,34 +104,42 @@ include_once __DIR__ . '/../partials/header.php';
                             <span id="inStockDisplay" class="fw-bold">Số lượng còn lại: <?php echo $product['in_stock']; ?></span>
                         <?php else: ?>
                             <span id="inStockDisplay" class="fw-bold text-danger">Hết hàng</span>
+
+
                         <?php endif; ?>
                     </div>
 
 
                     <!-- Form ẩn để thêm vào giỏ hàng -->
                     <form id="addToCartForm" action="/cart/add" method="POST" style="display: none;">
-                        <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['product_id']); ?>">
+                        <input type="hidden" name="product_id"
+                            value="<?php echo htmlspecialchars($product['product_id']); ?>">
                         <input type="hidden" name="quantity" id="formQuantityInput" value="1">
                     </form>
 
                     <!-- Form ẩn để mua ngay và thêm vào giỏ hàng -->
                     <form id="buyNowForm" action="/cart/buynow" method="POST">
                         <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['product_id']); ?>">
+
                         <input type="hidden" name="quantity" id="buyNowQuantityInput" value="1">
                     </form>
 
 
                     <div class="btn-group-product row">
-                        <button class="btn hidden-btn " id="addToCartBtn" <?php echo $product['in_stock'] <= 0 ? 'disabled' : ''; ?>>THÊM VÀO GIỎ</button>
-                        <button class="btn hidden-btn" id="buyNowBtn" <?php echo $product['in_stock'] <= 0 ? 'disabled' : ''; ?>>MUA NGAY</button>
+                        <button class="btn hidden-btn " id="addToCartBtn"
+                            <?php echo $product['in_stock'] <= 0 ? 'disabled' : ''; ?>>THÊM VÀO GIỎ</button>
+                        <button class="btn hidden-btn" id="buyNowBtn"
+                            <?php echo $product['in_stock'] <= 0 ? 'disabled' : ''; ?>>MUA NGAY</button>
                     </div>
 
 
                     <div class="product-notes mt-3">
-                        <p>✔ Miễn phí giao hàng & lắp đặt tại tất cả quận huyện thuộc TP.Cần Thơ, Hậu Giang, Vĩnh Long (*)</p>
+                        <p>✔ Miễn phí giao hàng & lắp đặt tại tất cả quận huyện thuộc TP.Cần Thơ, Hậu Giang, Vĩnh Long
+                            (*)</p>
                         <p>✔ Miễn phí 1 đổi 1 - Bảo hành 2 năm - Bảo trì trọn đời (**) </p>
                         <p>(*) Không áp dụng cho danh mục Đồ Trang Trí</p>
                         <p>(**) Không áp dụng cho các sản phẩm Clearance. Chỉ bảo hành 01 năm cho khung ghế đối với Ghế Văn Phòng</p>
+
                     </div>
 
                 </div>
@@ -228,6 +239,7 @@ include_once __DIR__ . '/../partials/header.php';
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Next</span>
                 </a>
+
             </div>
 
         </div>

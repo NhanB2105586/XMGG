@@ -93,7 +93,7 @@ class ManageProductController extends Controller
 
         // Lấy danh mục và sản phẩm từ database
         $categories = $this->categoryModel->getAllCategories();
-        $product = $this->productModel->getProductById($id);
+        $product = $this->productModel->getProductCategoryById($id);
         if (!$product) {
             $_SESSION['error_message'] = 'Không tìm thấy sản phẩm.';
             header('Location: /admin/viewProducts');
@@ -151,28 +151,6 @@ class ManageProductController extends Controller
         ]);
     }
 
-    private function getUploadErrorMessage($errorCode)
-    {
-        switch ($errorCode) {
-            case UPLOAD_ERR_INI_SIZE:
-                return 'Tệp vượt quá kích thước tối đa cho phép trong php.ini.';
-            case UPLOAD_ERR_FORM_SIZE:
-                return 'Tệp vượt quá kích thước tối đa cho phép trong form HTML.';
-            case UPLOAD_ERR_PARTIAL:
-                return 'Tệp chỉ tải lên một phần.';
-            case UPLOAD_ERR_NO_FILE:
-                return 'Không có tệp nào được tải lên.';
-            case UPLOAD_ERR_NO_TMP_DIR:
-                return 'Thiếu thư mục tạm thời.';
-            case UPLOAD_ERR_CANT_WRITE:
-                return 'Không thể ghi tệp vào đĩa.';
-            case UPLOAD_ERR_EXTENSION:
-                return 'Tệp bị dừng lại do một phần mở rộng PHP.';
-            default:
-                return 'Có lỗi khi tải lên tệp.';
-        }
-    }
-
     private function deleteProductImage($image_id, $product_id)
     {
         // Lấy thông tin hình ảnh từ cơ sở dữ liệu bằng image_id
@@ -205,11 +183,13 @@ class ManageProductController extends Controller
             header('Location: /admin/viewProducts');
             exit;
         }
-        if ($this->productModel->deleteProduct($id)) {
-            $_SESSION['success_message'] = 'Sản phẩm đã được xóa thành công.';
-        } else {
-            $_SESSION['error_messages'] = ['Có lỗi xảy ra khi xóa sản phẩm.'];
-        }
+        if ($this->productModel->existsInTable('order_details','product_id',$id)) {
+                // Lưu thông báo lỗi
+                $_SESSION['error_message'] = 'Không thể xóa khách hàng này vì còn đơn hàng liên quan.';
+            } else {
+                $this->productModel->deleteProduct($id);
+                $_SESSION['success_message'] = 'Khách hàng đã được xóa thành công!';
+            }
         header('Location: /admin/viewProducts');
         exit;
     }
@@ -245,7 +225,7 @@ class ManageProductController extends Controller
 
         // Kiểm tra tình trạng sản phẩm (Còn hàng hay hết hàng)
         if (!isset($data['in_stock'])) {
-            $errors[] = 'Vui lòng chọn tình trạng sản phẩm.';
+            $errors[] = 'Vui lòng điền số lượng sản phẩm.';
         }
 
         // Nếu có lỗi, lưu thông báo lỗi vào session và trả về false

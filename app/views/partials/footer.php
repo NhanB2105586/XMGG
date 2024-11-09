@@ -1,3 +1,11 @@
+<style>
+p,
+h5,
+a,
+.list-unstyled {
+    color: black;
+}
+</style>
 <footer id="footer" class="bg-dark text-light pt-5">
     <div class="container">
         <div class="row">
@@ -21,12 +29,13 @@
             <!-- Hỗ trợ khách hàng -->
             <div class="col-md-3">
                 <h5>HỖ TRỢ KHÁCH HÀNG</h5>
-                <ul class="list-unstyled">
-                    <li><a href="#" class="text-light">Đổi trả - bảo hành</a></li>
-                    <li><a href="#" class="text-light">Hình thức thanh toán</a></li>
-                    <li><a href="#" class="text-light">Vận chuyển - giao nhận</a></li>
-                    <li><a href="#" class="text-light">Chính sách bảo mật</a></li>
-                </ul>
+                <div class="list-unstyled">
+                    <a href="#" class="text-black">Đổi trả - bảo hành</a><br>
+                    <a href="#" class="text-black">Hình thức
+                        thanh toán</a><br>
+                    <a href="#" class="text-black">Vận chuyển - giao nhận</a><br>
+                    <a href="#" class="text-black">Chính sách bảo mật</a><br>
+                </div>
             </div>
 
             <!-- Map Showroom -->

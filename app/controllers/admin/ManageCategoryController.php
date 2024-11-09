@@ -138,12 +138,12 @@ class ManageCategoryController extends Controller
         // Kiểm tra xem có ID được gửi không
         if (isset($_POST['id'])) {
             $categoryId = $_POST['id'];
-            if ($this->categoryModel->hasOrders('products','category_id',$categoryId)) {
+            if ($this->categoryModel->existsInTable('products','category_id',$categoryId)) {
                 // Lưu thông báo lỗi
-                $_SESSION['error_message'] = 'Không thể xóa khách hàng này vì còn đơn hàng liên quan.';
+                $_SESSION['error_message'] = 'Không thể xóa danh mục này vì còn sản phẩm liên quan.';
             } else {
                 $this->categoryModel->deleteCategory($categoryId);
-                $_SESSION['success_message'] = 'Khách hàng đã được xóa thành công!';
+                $_SESSION['success_message'] = 'Danh mục đã được xóa thành công!';
             }
 
             // Chuyển hướng về danh sách khách hàng
