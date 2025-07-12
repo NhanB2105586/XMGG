@@ -91,38 +91,28 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <ul class="multi-column-dropdown">
-                                    <li><a href="/phongkhach/sofa">Sofa</a></li>
+                                    <li><a href="/phongkhach/sofa">Thanh diềm mái </a></li>
                                     <li class="divider"></li>
-                                    <li><a href="/phongan/ghean">Ghế ăn</a></li>
-                                    <li><a href="/phonglamviec/ghelamviec">Ghế làm việc</a></li>
+                                
+                                    <li><a href="/phonglamviec/ghelamviec">Thanh trang trí trần</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="/phongkhach/kephongkhach">Kệ phòng khách</a></li>
-                                    <li><a href="/phonglamviec/kesach">Kệ sách</a></li>
+                                    <li><a href="/phongkhach/kephongkhach">Thanh ốp tường G-Series</a></li>
+                                    <li><a href="/phonglamviec/kesach">Thanh ốp trang trí tường</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="/phongngu/giuongngu">Giường ngủ</a></li>
-                                    <li><a href="/phongngu/nem">Nệm</a></li>
+                                    <li><a href="/phongngu/giuongngu">Tấm ốp trang trí tường</a></li>
+                                    <li><a href="/phongngu/nem">Thanh ốp tường Siding</a></li>
                                 </ul>
                             </div>
                             <div class="col-sm-4">
                                 <ul class="multi-column-dropdown">
-                                    <li><a href="/phongkhach/bannuoc">Bàn nước</a></li>
-                                    <li><a href="/phongan/banan">Bàn ăn</a></li>
-                                    <li><a href="/phonglamviec/banlamviec">Bàn làm việc </a></li>
+                                    <li><a href="/phongkhach/bannuoc">Tấm ốp trang trí tường</a></li>
+                                    <li><a href="/phongan/banan">Thanh lát sàn</a></li>
+                                    <li><a href="/phonglamviec/banlamviec">Thanh trang trí sàn </a></li>
                                     <li class="divider"></li>
-                                    <li><a href="/phongkhach/tutivi">Tủ tivi</a></li>
-                                    <li><a href="/phongan/tubep">Tủ bếp</a></li>
-                                    <li><a href="/phongan/tuly">Tủ ly </a></li>
-                                    <li><a href="/phongngu/tuao">Tủ áo</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-4">
-                                <ul class="multi-column-dropdown">
-                                    <li><a href="/phongngu/goi">Gối</a></li>
-                                    <li><a href="/phongngu/men">Mền</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="/hangtrangtri/binh">Bình trang trí</a></li>
-                                    <li><a href="/hangtrangtri/den">Đèn trang trí</a></li>
-                                    <li><a href="/hangtrangtri/tranh">Tranh</a></li>
+                                    <li><a href="/phongkhach/tutivi">Thanh trang trí cầu thang</a></li>
+                                    <li><a href="/phongan/tubep">Thanh hàng rào</a></li>
+                                    <li><a href="/phongan/tuly">Thanh trang trí  </a></li>
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -131,22 +121,25 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="/phongkhach" id="roomDropdown" role="button"
                         aria-expanded="false">
-                        PHÒNG
+                        HẠNG MỤC
                     </a>
                     <ul class="dropdown-menu multi-column columns-3">
                         <div class="row">
                             <div class="col-sm-4">
                                 <ul class="multi-column-dropdown">
-                                    <li><a href="/phongkhach">Phòng khách</a></li>
-                                    <li><a href="/phongan">Phòng ăn</a></li>
-                                    <li><a href="/phongngu">Phòng ngủ</a></li>
-                                    <li><a href="/phonglamviec">Phòng làm việc</a></li>
+                                    <li><a href="/phongkhach">Trần</a></li>
+                                    <li><a href="/phongan">Lam</a></li>
+                                    <li><a href="/phongngu">Sàn</a></li>
+                                    <li><a href="/phonglamviec">Tường</a></li>
+                                    <li><a href="/phongngu">Vách</a></li>
+                                    <li><a href="/phonglamviec">Cửa</a></li>
                                 </ul>
                             </div>
                         </div>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="/bosuutap">BỘ SƯU TẬP</a></li>
+                <li class="nav-item"><a class="nav-link" href="/bosuutap">TIN TỨC</a></li>
+                <li class="nav-item"><a class="nav-link" href="/bosuutap">KHÁC</a></li>
                 <li class="nav-item"><a class="nav-link" href="/lienhe">LIÊN HỆ CHÚNG TÔI</a></li>
             </ul>
 
