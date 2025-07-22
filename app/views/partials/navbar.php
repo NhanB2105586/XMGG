@@ -29,7 +29,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white py-0 fixed-top">
     <div class="container">
         <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0" href="/">
-            <img src="/images/logo.jpg" alt="Logo" style="width: 70px;">
+            <img src="/images/logo2.jpg" alt="Logo" style="width: 70px;">
         </a>
 
         <div class="order-lg-2 nav-btns d-flex">
@@ -87,13 +87,12 @@
                         aria-expanded="false">
                         SẢN PHẨM
                     </a>
-                    <ul class="dropdown-menu multi-column columns-3">
-                        <div class="row">
+                    <ul class="dropdown-menu multi-column columns-3 sanpham-style">
+                        <div class="row w-100">
                             <div class="col-sm-4">
                                 <ul class="multi-column-dropdown">
                                     <li><a href="/phongkhach/sofa">Thanh diềm mái </a></li>
                                     <li class="divider"></li>
-                                
                                     <li><a href="/phonglamviec/ghelamviec">Thanh trang trí trần</a></li>
                                     <li class="divider"></li>
                                     <li><a href="/phongkhach/kephongkhach">Thanh ốp tường G-Series</a></li>
@@ -103,7 +102,7 @@
                                     <li><a href="/phongngu/nem">Thanh ốp tường Siding</a></li>
                                 </ul>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-4 ms-5">
                                 <ul class="multi-column-dropdown">
                                     <li><a href="/phongkhach/bannuoc">Tấm ốp trang trí tường</a></li>
                                     <li><a href="/phongan/banan">Thanh lát sàn</a></li>
@@ -119,23 +118,16 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="/phongkhach" id="roomDropdown" role="button"
-                        aria-expanded="false">
-                        HẠNG MỤC
+                <a class="nav-link dropdown-toggle" href="#" id="roomDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    HẠNG MỤC
                     </a>
-                    <ul class="dropdown-menu multi-column columns-3">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <ul class="multi-column-dropdown">
-                                    <li><a href="/phongkhach">Trần</a></li>
-                                    <li><a href="/phongan">Lam</a></li>
-                                    <li><a href="/phongngu">Sàn</a></li>
-                                    <li><a href="/phonglamviec">Tường</a></li>
-                                    <li><a href="/phongngu">Vách</a></li>
-                                    <li><a href="/phonglamviec">Cửa</a></li>
-                                </ul>
-                            </div>
-                        </div>
+                    <ul class="dropdown-menu hangmuc-style" aria-labelledby="roomDropdown">
+                        <li><a href="/tran">Trần</a></li>
+                        <li><a href="/lam">Lam</a></li>
+                        <li><a href="/san">Sàn</a></li>
+                        <li><a href="/tuong">Tường</a></li>
+                        <li><a href="/vach">Vách</a></li>
+                        <li><a href="/cua">Cửa</a></li>
                     </ul>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="/bosuutap">TIN TỨC</a></li>

@@ -131,8 +131,8 @@ footer p {
   height: 60%;
 }
 
-.phone-btn, .zalo-btn, .messenger-btn, .top-btn {
-  background-color: rgba(255, 255, 255, 0.403);
+.phone-btn, .zalo-btn, .messenger-btn, .facebook-btn, .top-btn {
+  background-color: rgba(255, 255, 255, 0.403) !important;
 }
 .price-old{
   text-decoration: line-through;
@@ -501,4 +501,52 @@ img{
     pointer-events: none;
 }
 
+/* Kiểu tổng thể cho menu hạng mục */
+.hangmuc-style {
+  min-width: 200px; /* hoặc bạn có thể tăng lên nếu chữ dài */
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  font-size: 16px;
+}
+
+/* Các mục trong menu */
+.hangmuc-style li a {
+  display: block;
+  padding: 8px 20px;
+  color: #000 !important;
+  text-decoration: none !important;
+  white-space: nowrap; /* Không cho xuống dòng */
+}
+
+/* Hover đẹp */
+.hangmuc-style li a:hover {
+  background-color: #000;
+  color: #fff !important;
+  font-weight: 500;
+}
+/* Menu sản phẩm nhiều cột */
+.sanpham-style {
+  min-width: 600px; /* đủ cho 2–3 cột */
+  padding: 20px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+}
+
+/* Các mục bên trong */
+.sanpham-style li a {
+  display: block;
+  padding: 8px 20px;
+  color: #000 !important;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+
+/* Hover đẹp */
+.sanpham-style li a:hover {
+  background-color: #000;
+  color: #fff !important;
+  font-weight: 500;
+}
 

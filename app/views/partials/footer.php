@@ -12,9 +12,7 @@
                 <p>Hotline: 093 930 39 78</p>
                 <p>Email: daiquandecor@gmail.com</p>
                 <div class="social-icons mt-3">
-                    <a href="#"><img src="/images/zalo-icon.png" alt="Zalo" style="width: 30px;"></a>
-                    <a href="#"><img src="/images/facebook.png" alt="Facebook" style="width: 30px;"></a>
-                    <a href="#"><img src="/images/instagram.png" alt="Instagram" style="width: 30px;"></a>
+                    
                     <!-- Thêm các icon mạng xã hội khác -->
                 </div>
             </div>
@@ -23,10 +21,10 @@
             <div class="col-md-3">
                 <h5>HỖ TRỢ KHÁCH HÀNG</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-light">Đổi trả - bảo hành</a></li>
-                    <li><a href="#" class="text-light">Hình thức thanh toán</a></li>
-                    <li><a href="#" class="text-light">Vận chuyển - giao nhận</a></li>
-                    <li><a href="#" class="text-light">Chính sách bảo mật</a></li>
+                    <li><a href="#" class="text-light">Thông tin về xi măng giả gỗ</a></li>
+                    <li><a href="#" class="text-light">Chính sách bảo hành</a></li>
+                    <li><a href="#" class="text-light">Quy trình thi công</a></li>
+                    <li><a href="#" class="text-light"></a></li>
                 </ul>
             </div>
 

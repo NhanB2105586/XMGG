@@ -23,30 +23,30 @@ include_once __DIR__ . '/../partials/header.php';
             <div class="carousel-inner">
                 <!-- Slide 1 -->
                 <div class="carousel-item active">
-                    <a href="/sanpham"> <img src="/images/slider/Home1.png" class="d-block w-100 " alt="Home Slide"></a>
+                   <img src="/images/slider/Home1.png" class="d-block w-100 img-fluid" alt="Home Slide">
+
                 </div>
                 <!-- Slide 2 -->
                 <div class="carousel-item">
-                    <img src="/images/slider/Our Story1.png" class="d-block w-100 " alt="Story Slide">
+                    <img src="/images/slider/Our Story1.png" class="d-block w-100 img-fluid " alt="Story Slide">
                 </div>
 
                 <!-- Slide 3 -->
                 <div class="carousel-item">
                     <a href="/bosuatap">
-                        <img src="/images/slider/Our Collections1.png" class="d-block w-100 "
-                            alt="Collections Slide">
+                        <img src="/images/slider/Our Collections1.png" class="d-block w-100 img-fluid" alt="Collections Slide">
                     </a>
 
                 </div>
 
                 <!-- Slide 4 -->
                 <div class="carousel-item">
-                    <img src="/images/slider/Our Clients1.png" class="d-block w-100 " alt="Clients Slide">
+                    <img src="/images/slider/Our Clients1.png" class="d-block w-100 img-fluid " alt="Clients Slide">
                 </div>
                 <!-- Slide 5 -->
                 <div class="carousel-item">
                     <a href="/lienhe">
-                        <img src="/images/slider/Contact Details1.png" class="d-block w-100 " alt="Contact Slide">
+                        <img src="/images/slider/Contact Details1.png" class="d-block w-100 img-fluid " alt="Contact Slide">
                     </a>
 
                 </div>
@@ -78,7 +78,7 @@ include_once __DIR__ . '/../partials/header.php';
                         <div class="col-md-6 mb-4 col-lg-6">
                             <div class="position-relative">
                                 <a href="/phongan/banan">
-                                    <img src="/images/ban-an-grace-11.jpg" class="img-fluid" alt="Bàn Ăn">
+                                    <img src="/images/lam.jpg" class="img-fluid" alt="Bàn Ăn">
                                     <h3 class="position-absolute text-light" style="bottom: 10px; left: 20px;">LAM</h3>
                                 </a>
                             </div>
@@ -86,7 +86,7 @@ include_once __DIR__ . '/../partials/header.php';
                         <div class="col-md-6 mb-4 col-lg-6">
                             <div class="position-relative">
                                 <a href="/phongngu/giuongngu">
-                                    <img src="/images/giuong.png" class="img-fluid" alt="Giường">
+                                    <img src="/images/tran.JPG" class="img-fluid" alt="Giường">
                                     <h3 class="position-absolute text-light" style="bottom: 10px; left: 20px;">TRẦN</h3>
                                 </a>
 
@@ -95,7 +95,7 @@ include_once __DIR__ . '/../partials/header.php';
                         <div class="col-md-6 mb-4 col-lg-6">
                             <div class="position-relative">
                                 <a href="/phongngu/tuao">
-                                    <img src="/images/tu-quan-ao-wddct05.jpg" class="img-fluid" alt="Arm Chair">
+                                    <img src="/images/vach.jpg" class="img-fluid" alt="Arm Chair">
                                     <h3 class="position-absolute text-light" style="bottom: 10px; left: 20px;">VÁCH</h3>
                                 </a>
 
@@ -104,7 +104,7 @@ include_once __DIR__ . '/../partials/header.php';
                         <div class="col-md-6 mb-4 col-lg-6">
                             <div class="position-relative">
                                 <a href="/phongan/ghean">
-                                    <img src="/images/ghe-an-hien-dai-ga22-5-.jpg" class="img-fluid" alt="Ghế Ăn">
+                                    <img src="/images/mattien.png" class="img-fluid" alt="Ghế Ăn">
                                     <h3 class="position-absolute text-light" style="bottom: 10px; left: 20px;">MẶT TIỀN</h3>
                                 </a>
                             </div>
@@ -237,10 +237,10 @@ include_once __DIR__ . '/../partials/header.php';
                     <div class="col-md-3 mb-3 product-item">
                         <div class="mt-3">
                             <a href="/phongkhach">
-                                <img src="/images/GIF/phongkhach.gif" class="card-img-top" alt="Phòng Khách">
+                                <img src="/images/cua.png" class="card-img-top" alt="Phòng Khách">
                             </a>
                             <div class="card-body text-center ">
-                                <h5 class="card-title mt-3" style="  font-size: 18px;font-weight: bold;">TRẦN</h5>
+                                <h5 class="card-title mt-3" style="  font-size: 18px;font-weight: bold;">CỬA</h5>
                                 <p class="card-tex mt-3" style="text-align: center;">Thiết kế trần hiện đại, điểm nhấn cho không gian sống.</p>
                             </div>
                         </div>
@@ -248,10 +248,10 @@ include_once __DIR__ . '/../partials/header.php';
                     <div class="col-md-3 mb-3 product-item">
                         <div class="mt-3">
                             <a href="/phongngu">
-                                <img src="/images/GIF/phongngu.gif" class="card-img-top" alt="Phòng Ngủ">
+                                <img src="/images/banghe.png" class="card-img-top" alt="Phòng Ngủ">
                             </a>
                             <div class="card-body text-center">
-                                <h5 class="card-title mt-3" style="  font-size: 18px;font-weight: bold;">LAM</h5>
+                                <h5 class="card-title mt-3" style="  font-size: 18px;font-weight: bold;">BÀN GHẾ</h5>
                                 <p class="card-text mt-3" style="text-align: center;">Tạo điểm nhấn kiến trúc với hệ lam mạnh mẽ và tinh tế.</p>
                             </div>
                         </div>
@@ -259,7 +259,7 @@ include_once __DIR__ . '/../partials/header.php';
                     <div class="col-md-3 mb-3 product-item">
                         <div class="mt-3" style="background-color: white; box-shadow: none">
                             <a href="/phongan">
-                                <img src="/images/GIF/phongan.gif" class="card-img-top" alt="Phòng Ăn">
+                                <img src="/images/san.png" class="card-img-top" alt="Phòng Ăn">
                             </a>
                             <div class="card-body text-center">
                                 <h5 class="card-title mt-3" style="  font-size: 18px;font-weight: bold;">SÀN</h5>
@@ -270,7 +270,7 @@ include_once __DIR__ . '/../partials/header.php';
                     <div class="col-md-3 mb-3 product-item">
                         <div class="mt-3">
                             <a href="/phongan">
-                                <img src="/images/GIF/phonglv.gif" class="card-img-top" alt="Phòng Ăn">
+                                <img src="/images/banghieu.png" class="card-img-top" alt="Phòng Ăn">
                             </a>
                             <div class="card-body text-center">
                                 <h5 class="card-title mt-3" style="  font-size:18px;font-weight: bold;">BẢNG HIỆU</h5>
