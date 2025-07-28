@@ -1,30 +1,30 @@
 <!-- navbar -->
 <style>
-/* CSS cho modal nhỏ */
-.user-info-modal {
-    display: none;
-    position: absolute;
-    top: 40px;
-    left: -20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    width: 200px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
-}
+    /* CSS cho modal nhỏ */
+    .user-info-modal {
+        display: none;
+        position: absolute;
+        top: 40px;
+        left: -20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        width: 200px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+    }
 
-.user-info-modal p {
-    margin: 5px 0;
-}
+    .user-info-modal p {
+        margin: 5px 0;
+    }
 
-/* Hiển thị modal khi hover vào avatar */
-#avatar:hover+.user-info-modal,
-.user-info-modal:hover {
-    color: black;
-    display: block;
-}
+    /* Hiển thị modal khi hover vào avatar */
+    #avatar:hover+.user-info-modal,
+    .user-info-modal:hover {
+        color: black;
+        display: block;
+    }
 </style>
 <nav class="navbar navbar-expand-lg navbar-light bg-white py-0 fixed-top">
     <div class="container">
@@ -41,34 +41,34 @@
                 </button>
             </form>
             <button type="button" class="btn icon-btn position-relative">
-                <a href="/giohang" class="text-black"><i class="fa fa-shopping-cart"></i>
+                <a href="/giohang" class="text-black"><i class="fa fa-heart"></i>
                     <?php if (isset($_SESSION['cart_product_count'])): ?>
-                    <span
-                        class="position-absolute top-0 start-100 translate-middle badge bg-primary"><?= $_SESSION['cart_product_count'] ?></span>
+                        <span
+                            class="position-absolute top-0 start-100 translate-middle badge bg-primary"><?= $_SESSION['cart_product_count'] ?></span>
                     <?php endif; ?>
                 </a>
             </button>
             <button type="button" class="btn icon-btn position-relative">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                <!-- Hiển thị ảnh đại diện nếu người dùng đã đăng nhập -->
-                <a href="/hoso" class="text-black position-relative" id="avatar">
-                    <img src="<?= $_SESSION['avatar'] ?? '/images/avatar.jpg' ?>" alt="User Avatar"
-                        style="width: 30px; height: 30px; border-radius: 50%;">
-                </a>
+                    <!-- Hiển thị ảnh đại diện nếu người dùng đã đăng nhập -->
+                    <a href="/hoso" class="text-black position-relative" id="avatar">
+                        <img src="<?= $_SESSION['avatar'] ?? '/images/avatar.jpg' ?>" alt="User Avatar"
+                            style="width: 30px; height: 30px; border-radius: 50%;">
+                    </a>
 
-                <!-- Modal nhỏ chứa thông tin người dùng -->
-                <div class="user-info-modal" id="user-info-modal">
-                    <p style="font-style: italic;">Hi, <?= htmlspecialchars($_SESSION['username'] ?? 'Người dùng') ?>
-                    </p>
-                    <p class="divider"></p>
-                    <p><a href="/hoso" style="color:black; ">Hồ sơ của bạn</a></p>
-                    <p class="divider"></p>
-                    <p class="divider"></p>
-                    <p><a href="/showallorders" style="color:black; ">Đơn mua</a></p>
-                    <a href="/logout" class="btn btn-danger btn-sm mt-2"> <i class="fas fa-sign-out-alt"></i></a>
-                </div>
+                    <!-- Modal nhỏ chứa thông tin người dùng -->
+                    <div class="user-info-modal" id="user-info-modal">
+                        <p style="font-style: italic;">Hi, <?= htmlspecialchars($_SESSION['username'] ?? 'Người dùng') ?>
+                        </p>
+                        <p class="divider"></p>
+                        <p><a href="/hoso" style="color:black; ">Hồ sơ của bạn</a></p>
+                        <p class="divider"></p>
+                        <p class="divider"></p>
+                        <p><a href="/showallorders" style="color:black; ">Đơn mua</a></p>
+                        <a href="/logout" class="btn btn-danger btn-sm mt-2"> <i class="fas fa-sign-out-alt"></i></a>
+                    </div>
                 <?php else: ?>
-                <a href="/dangnhap" class="text-black"><i class="fa fa-user"></i></a>
+                    <a href="/dangnhap" class="text-black"><i class="fa fa-user"></i></a>
                 <?php endif; ?>
             </button>
 
@@ -110,16 +110,16 @@
                                     <li class="divider"></li>
                                     <li><a href="/phongkhach/tutivi">Thanh trang trí cầu thang</a></li>
                                     <li><a href="/phongan/tubep">Thanh hàng rào</a></li>
-                                    <li><a href="/phongan/tuly">Thanh trang trí  </a></li>
-                                    
+                                    <li><a href="/phongan/tuly">Thanh trang trí </a></li>
+
                                 </ul>
                             </div>
                         </div>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="roomDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    HẠNG MỤC
+                    <a class="nav-link dropdown-toggle" href="#" id="roomDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        HẠNG MỤC
                     </a>
                     <ul class="dropdown-menu hangmuc-style" aria-labelledby="roomDropdown">
                         <li><a href="/tran">Trần</a></li>
@@ -141,21 +141,21 @@
 </nav>
 
 <script>
-// Tắt modal khi rê chuột ra ngoài
-document.addEventListener('click', function(event) {
-    var avatar = document.getElementById('avatar');
-    var modal = document.getElementById('user-info-modal');
-    if (!avatar.contains(event.target) && !modal.contains(event.target)) {
-        modal.style.display = 'none';
-    }
-});
+    // Tắt modal khi rê chuột ra ngoài
+    document.addEventListener('click', function(event) {
+        var avatar = document.getElementById('avatar');
+        var modal = document.getElementById('user-info-modal');
+        if (!avatar.contains(event.target) && !modal.contains(event.target)) {
+            modal.style.display = 'none';
+        }
+    });
 
-// Hiển thị modal khi hover vào avatar
-document.getElementById('avatar').addEventListener('mouseenter', function() {
-    document.getElementById('user-info-modal').style.display = 'block';
-});
+    // Hiển thị modal khi hover vào avatar
+    document.getElementById('avatar').addEventListener('mouseenter', function() {
+        document.getElementById('user-info-modal').style.display = 'block';
+    });
 
-document.getElementById('user-info-modal').addEventListener('mouseleave', function() {
-    document.getElementById('user-info-modal').style.display = 'none';
-});
+    document.getElementById('user-info-modal').addEventListener('mouseleave', function() {
+        document.getElementById('user-info-modal').style.display = 'none';
+    });
 </script>

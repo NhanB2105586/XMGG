@@ -27,7 +27,7 @@ include_once __DIR__ . '/../../models/Product.php';
     <!-- Phần bộ lọc sản phẩm -->
     <div class="filter-section">
         <div class="filter-item">
-            <label for="price-filter">Giá:</label>
+            <label for="price-filter">Lọc:</label>
             <select id="price-filter">
                 <option value="popular" <?= ($filter === 'popular') ? 'selected' : '' ?>>Theo mức độ phổ biến</option>
                 <option value="low-to-high" <?= ($filter === 'low-to-high') ? 'selected' : '' ?>>Giá từ thấp đến cao</option>
@@ -63,23 +63,14 @@ include_once __DIR__ . '/../../models/Product.php';
                         </div>
                         <div class="text-start m-1">
                             <p class="text-capitalize mt-3 mb-1"><?php echo htmlspecialchars($product['product_name']); ?></p>
-                            <div class="d-flex">
-                                <span class="fw-bold d-block">
-                                    <?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?>
-                                </span>
-                                <?php if (!empty($product['old_price'])) : ?>
-                                    <span class="price-old ms-2">
-                                        <?php echo number_format($product['old_price'], 0, ',', '.') . 'đ'; ?>
-                                    </span>
-                                <?php endif; ?>
-                            </div>
+                        
                         </div>
 
                         <div class="d-flex justify-content-around">
                             <form action="/cart/add" method="POST" style="width: 45%;">
                                 <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['product_id']); ?>">
                                 <input type="hidden" name="quantity" value="1"> <!-- Số lượng mặc định là 1 -->
-                                <button type="submit" class="btn btn-product mt-3 p-2 w-100">Thêm Vào Giỏ</button>
+                                <button type="submit" class="btn btn-product mt-3 p-2 w-100">Yêu Thích</button>
                             </form>
                             <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 45%;">Chi Tiết</a>
                         </div>
