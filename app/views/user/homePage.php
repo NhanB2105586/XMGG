@@ -231,7 +231,7 @@ include_once __DIR__ . '/../partials/header.php';
             <div>
                 <!-- Thiết kế thêm 1 số giao diện đẹp tại đây có thể có hinh ảnh để đi tới phòng khách, phòng ngủ,...-->
                 <div class="title text-center py-3">
-                    <h2 class="position-relative d-inline-block">Không Gian Phòng Đa Dạng Sản Phẩm</h2>
+                    <h2 class="position-relative d-inline-block">Hạng mục nổi bật</h2>
                 </div>
                 <div class="row">
                     <div class="col-md-3 mb-3 product-item">

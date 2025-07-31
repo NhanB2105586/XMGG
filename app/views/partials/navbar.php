@@ -1,3 +1,4 @@
+
 <!-- navbar -->
 <style>
     /* CSS cho modal nhỏ */
@@ -41,11 +42,30 @@
                 </button>
             </form>
             <button type="button" class="btn icon-btn position-relative">
-                <a href="/giohang" class="text-black"><i class="fa fa-heart"></i>
-                    <?php if (isset($_SESSION['cart_product_count'])): ?>
-                        <span
-                            class="position-absolute top-0 start-100 translate-middle badge bg-primary"><?= $_SESSION['cart_product_count'] ?></span>
-                    <?php endif; ?>
+                <a href="/favorites" class="text-black"><i class="fa fa-heart"></i>
+                    <?php 
+                    if (isset($_SESSION['user_id'])) {
+                        try {
+                            $pdo = new PDO('mysql:host=localhost;dbname=project', 'root', '');
+                            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                            $favoriteModel = new \App\Models\Favorite($pdo);
+                            $favoriteCount = $favoriteModel->getFavoriteCount($_SESSION['user_id']);
+                            if ($favoriteCount > 1): ?>
+                                <span class="position-absolute top-0 start-100 translate-middle badge bg-danger favorite-badge"><?= $favoriteCount ?></span>
+                            <?php endif;
+                        } catch (Exception $e) {
+                            // Nếu có lỗi, không hiển thị badge
+                        }
+                    }
+                    ?>
+                </a>
+            </button>
+            <button type="button" class="btn icon-btn position-relative">
+                <a href="/giohang" class="text-black"><i class="fa fa-shopping-cart"></i>
+                                    <?php if (isset($_SESSION['cart_product_count']) && $_SESSION['cart_product_count'] > 1): ?>
+                    <span
+                        class="position-absolute top-0 start-100 translate-middle badge bg-primary cart-badge"><?= $_SESSION['cart_product_count'] ?></span>
+                <?php endif; ?>
                 </a>
             </button>
             <button type="button" class="btn icon-btn position-relative">
@@ -130,8 +150,8 @@
                         <li><a href="/cua">Cửa</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="/bosuutap">TIN TỨC</a></li>
-                <li class="nav-item"><a class="nav-link" href="/bosuutap">KHÁC</a></li>
+                <li class="nav-item"><a class="nav-link" href="/tintuc">TIN TỨC</a></li>
+                <li class="nav-item"><a class="nav-link" href="/khac">KHÁC</a></li>
                 <li class="nav-item"><a class="nav-link" href="/lienhe">LIÊN HỆ CHÚNG TÔI</a></li>
             </ul>
 

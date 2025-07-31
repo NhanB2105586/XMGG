@@ -64,12 +64,19 @@ use App\Models\Product;
                             </div>
                         </div>
                      <div class="d-flex justify-content-around">
-                            <form action="/cart/add" method="POST" style="width: 45%;">
+                            <button class="btn btn-favorite mt-3 p-2 add-favorite" data-product-id="<?php echo htmlspecialchars($product['product_id']); ?>" style="width: 30%;">
+                                Yêu thích
+                            </button>
+                            <form action="/cart/add" method="POST" style="width: 30%;">
                                 <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['product_id']); ?>">
-                                <input type="hidden" name="quantity" value="1"> <!-- Số lượng mặc định là 1 -->
-                                <button type="submit" class="btn btn-product mt-3 p-2 w-100">Thêm Vào Giỏ</button>
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="btn btn-product mt-3 p-2 w-100">
+                                    Thêm Vào Giỏ
+                                </button>
                             </form>
-                            <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 45%;">Chi Tiết</a>
+                            <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 30%;">
+                                Chi Tiết
+                            </a>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -80,4 +87,81 @@ use App\Models\Product;
     <!-- Footer -->
     <?php include_once __DIR__ . '/../../partials/app.php'; ?>
     <?php include_once __DIR__ . '/../../partials/footer.php'; ?>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Xử lý thêm vào yêu thích
+    document.querySelectorAll('.add-favorite').forEach(button => {
+        button.addEventListener('click', function() {
+            const productId = this.getAttribute('data-product-id');
+            
+            fetch('/add-favorite', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'product_id=' + productId
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Đã thêm vào danh sách yêu thích!');
+                    updateFavoriteCount();
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Có lỗi xảy ra');
+            });
+        });
+    });
+    
+    // Xử lý thêm vào giỏ hàng
+    document.querySelectorAll('form[action="/cart/add"]').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const productId = formData.get('product_id');
+            const quantity = formData.get('quantity');
+            
+            fetch('/cart/add', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Đã thêm vào giỏ hàng!');
+                    updateCartCount();
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Có lỗi xảy ra');
+            });
+        });
+    });
+});
+
+function updateFavoriteCount() {
+    const favoriteBadge = document.querySelector('.favorite-badge');
+    if (favoriteBadge) {
+        const currentCount = parseInt(favoriteBadge.textContent) || 0;
+        favoriteBadge.textContent = currentCount + 1;
+    }
+}
+
+function updateCartCount() {
+    const cartBadge = document.querySelector('.cart-badge');
+    if (cartBadge) {
+        const currentCount = parseInt(cartBadge.textContent) || 0;
+        cartBadge.textContent = currentCount + 1;
+    }
+}
+</script>
 </body>

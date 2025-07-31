@@ -49,6 +49,11 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                     value="<?php echo htmlspecialchars($old['phone_number'] ?? ''); ?>">
             </div>
             <button type="submit" class="btn btn-primary btn-block mt-3">Thêm Khách Hàng</button>
+            <div class="mb-3">
+                <a href="/admin/viewCategory" class="btn btn-secondary">
+                    ← Quay lại
+                </a>
+            </div>
         </form>
     </div>
 
