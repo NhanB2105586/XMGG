@@ -64,8 +64,19 @@ use App\Models\Product;
                             </div>
                         </div>
                         <div class="d-flex justify-content-around">
-                            <a href="#" class="btn btn-product mt-3 p-2" style="width: 45%;">Thêm Vào Giỏ</a>
-                            <a href="/products/<?php echo $product['product_id']; ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 45%;">Chi Tiết</a>
+                            <button class="btn btn-product-action add-favorite" data-product-id="<?php echo htmlspecialchars($product['product_id']); ?>">
+                                Yêu thích
+                            </button>
+                            <form action="/cart/add" method="POST">
+                                <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['product_id']); ?>">
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="btn btn-product-action">
+                                    Thêm Vào Giỏ
+                                </button>
+                            </form>
+                            <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product-action btn-detail-product">
+                                Chi Tiết
+                            </a>
                         </div>
                     </div>
                 <?php endforeach; ?>

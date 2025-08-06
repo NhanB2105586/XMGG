@@ -27,7 +27,7 @@ include_once __DIR__ . '/../../models/Product.php';
     <!-- Phần bộ lọc sản phẩm -->
     <div class="filter-section">
         <div class="filter-item">
-            <label for="price-filter">Giá:</label>
+            <label for="price-filter">Lọc:</label>
             <select id="price-filter">
                 <option value="popular" <?= ($filter === 'popular') ? 'selected' : '' ?>>Theo mức độ phổ biến</option>
                 <option value="low-to-high" <?= ($filter === 'low-to-high') ? 'selected' : '' ?>>Giá từ thấp đến cao</option>
@@ -63,25 +63,19 @@ include_once __DIR__ . '/../../models/Product.php';
                         </div>
                         <div class="text-start m-1">
                             <p class="text-capitalize mt-3 mb-1"><?php echo htmlspecialchars($product['product_name']); ?></p>
-                            <div class="d-flex">
-                                <span class="fw-bold d-block">
-                                    <?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?>
-                                </span>
-                                <?php if (!empty($product['old_price'])) : ?>
-                                    <span class="price-old ms-2">
-                                        <?php echo number_format($product['old_price'], 0, ',', '.') . 'đ'; ?>
-                                    </span>
-                                <?php endif; ?>
-                            </div>
+                        
                         </div>
 
-                        <div class="d-flex justify-content-around">
-                            <form action="/cart/add" method="POST" style="width: 45%;">
-                                <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['product_id']); ?>">
-                                <input type="hidden" name="quantity" value="1"> <!-- Số lượng mặc định là 1 -->
-                                <button type="submit" class="btn btn-product mt-3 p-2 w-100">Thêm Vào Giỏ</button>
-                            </form>
-                            <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 45%;">Chi Tiết</a>
+                        <div class="d-flex justify-content-between gap-2">
+                            <button class="btn btn-product mt-3 p-2 add-favorite" data-product-id="<?php echo htmlspecialchars($product['product_id']); ?>" style="flex: 1;">
+                                Yêu thích
+                            </button>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="<?php echo htmlspecialchars($product['product_id']); ?>" style="flex: 1;">
+                                Thêm Vào Giỏ
+                            </button>
+                            <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
+                                Chi Tiết
+                            </a>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -115,6 +109,82 @@ include_once __DIR__ . '/../../models/Product.php';
             const filterValue = document.getElementById('price-filter').value;
             window.location.href = '?filter=' + filterValue; // Chuyển hướng với bộ lọc
         });
+
+        // Xử lý nút yêu thích
+        document.querySelectorAll('.add-favorite').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productId = this.getAttribute('data-product-id');
+                
+                fetch('/add-favorite', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'product_id=' + encodeURIComponent(productId)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message);
+                        updateFavoriteCount();
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra');
+                });
+            });
+        });
+
+        // Xử lý nút thêm vào giỏ hàng
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productId = this.getAttribute('data-product-id');
+                
+                fetch('/ajax-add-to-cart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'product_id=' + encodeURIComponent(productId) + '&quantity=1'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Đã thêm vào giỏ hàng!');
+                        updateCartCount();
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra');
+                });
+            });
+        });
+
+        // Cập nhật số lượng yêu thích
+        function updateFavoriteCount() {
+            const favoriteBadge = document.querySelector('.favorite-badge');
+            if (favoriteBadge) {
+                const currentCount = parseInt(favoriteBadge.textContent) || 0;
+                favoriteBadge.textContent = currentCount + 1;
+            }
+        }
+
+        // Cập nhật số lượng giỏ hàng
+        function updateCartCount() {
+            const cartBadge = document.querySelector('.cart-badge');
+            if (cartBadge) {
+                const currentCount = parseInt(cartBadge.textContent) || 0;
+                cartBadge.textContent = currentCount + 1;
+            }
+        }
     </script>
 </body>
 

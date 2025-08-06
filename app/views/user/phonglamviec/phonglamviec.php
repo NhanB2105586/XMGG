@@ -3,6 +3,7 @@ include_once __DIR__ . '../../../../core/PDOFactory.php';
 include_once __DIR__ . '/../../partials/header.php';
 ?>
 <link href="/css/stylephong.css" rel="stylesheet">
+<link href="/css/image-resize.css" rel="stylesheet">
 
 <body>
     <!-- Navbar -->
@@ -49,53 +50,148 @@ include_once __DIR__ . '/../../partials/header.php';
             </div>
 
 
-            <!-- Nội dung chính - Các sản phẩm phòng khách -->
+            <!-- Nội dung chính - Các sản phẩm phòng làm việc -->
             <div class="col-md-9">
                 <div class="product-grid">
                     <!-- Sản phẩm 1 -->
                     <div class="product-item">
-                        <img class="product-image" src="/images/bosuutap/1.png" alt="Phòng khách Ogami">
-                        <div class="product-name">Độc đáo, trẻ trung với phòng làm việc Ogami</div>
-                        <p class="product-description">Ogami thổi một làn gió trẻ trung vào không gian [...]</p>
-                        <button class="view-more-btn">XEM CHI TIẾT</button>
+                        <div class="special-img position-relative overflow-hidden">
+                            <a href="/chitietsanpham/19">
+                                <img class="product-image" src="/images/bosuutap/1.png" alt="Phòng làm việc Ogami">
+                            </a>
+                        </div>
+                        <div class="text-start m-1">
+                            <p class="text-capitalize mt-3 mb-1">Độc đáo, trẻ trung với phòng làm việc Ogami</p>
+                            <p class="product-description">Ogami thổi một làn gió trẻ trung vào không gian [...]</p>
+                        </div>
+                        <div class="d-flex justify-content-between gap-2">
+                            <button class="btn btn-product mt-3 p-2 add-favorite" data-product-id="19" style="flex: 1;">
+                                Yêu thích
+                            </button>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="19" style="flex: 1;">
+                                Thêm Vào Giỏ
+                            </button>
+                            <a href="/chitietsanpham/19" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
+                                Chi Tiết
+                            </a>
+                        </div>
                     </div>
 
                     <!-- Sản phẩm 2 -->
                     <div class="product-item">
-                        <img class="product-image" src="/images/bosuutap/2.png" alt="Phòng khách Orientale">
-                        <div class="product-name">Phòng làm việc Orientale – Không gian của cảm hứng và sự bình yên</div>
-                        <p class="product-description">Với sự chăm chút tỉ mỉ trong từng chi tiết, [...]</p>
-                        <button class="view-more-btn">XEM CHI TIẾT</button>
+                        <div class="special-img position-relative overflow-hidden">
+                            <a href="/chitietsanpham/20">
+                                <img class="product-image" src="/images/bosuutap/2.png" alt="Phòng làm việc Orientale">
+                            </a>
+                        </div>
+                        <div class="text-start m-1">
+                            <p class="text-capitalize mt-3 mb-1">Phòng làm việc Orientale – Không gian của cảm hứng và sự bình yên</p>
+                            <p class="product-description">Với sự chăm chút tỉ mỉ trong từng chi tiết, [...]</p>
+                        </div>
+                        <div class="d-flex justify-content-between gap-2">
+                            <button class="btn btn-product mt-3 p-2 add-favorite" data-product-id="20" style="flex: 1;">
+                                Yêu thích
+                            </button>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="20" style="flex: 1;">
+                                Thêm Vào Giỏ
+                            </button>
+                            <a href="/chitietsanpham/20" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
+                                Chi Tiết
+                            </a>
+                        </div>
                     </div>
 
                     <!-- Sản phẩm 3 -->
                     <div class="product-item">
-                        <div class="content"></div>
-                        <img class="product-image" src="/images/bosuutap/3.png" alt="Phòng khách hiện đại">
-                        <div class="product-name">Phòng làm việc Modern – Đơn giản nhưng không kém phần sang trọng</div>
-                        <p class="product-description">Thiết kế đơn giản, hiện đại với màu sắc nhẹ nhàng [...]</p>
-                        <button class="view-more-btn">XEM CHI TIẾT</button>
+                        <div class="special-img position-relative overflow-hidden">
+                            <a href="/chitietsanpham/21">
+                                <img class="product-image" src="/images/bosuutap/3.png" alt="Phòng làm việc hiện đại">
+                            </a>
+                        </div>
+                        <div class="text-start m-1">
+                            <p class="text-capitalize mt-3 mb-1">Phòng làm việc Modern – Đơn giản nhưng không kém phần sang trọng</p>
+                            <p class="product-description">Thiết kế đơn giản, hiện đại với màu sắc nhẹ nhàng [...]</p>
+                        </div>
+                        <div class="d-flex justify-content-between gap-2">
+                            <button class="btn btn-product mt-3 p-2 add-favorite" data-product-id="21" style="flex: 1;">
+                                Yêu thích
+                            </button>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="21" style="flex: 1;">
+                                Thêm Vào Giỏ
+                            </button>
+                            <a href="/chitietsanpham/21" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
+                                Chi Tiết
+                            </a>
+                        </div>
                     </div>
+                    
                     <div class="product-item">
-                        <div class="content"></div>
-                        <img class="product-image" src="/images/bosuutap/4.png" alt="Phòng khách hiện đại">
-                        <div class="product-name">Phòng làm việc Modern – Đơn giản nhưng không kém phần sang trọng</div>
-                        <p class="product-description">Thiết kế đơn giản, hiện đại với màu sắc nhẹ nhàng [...]</p>
-                        <button class="view-more-btn">XEM CHI TIẾT</button>
+                        <div class="special-img position-relative overflow-hidden">
+                            <a href="/chitietsanpham/22">
+                                <img class="product-image" src="/images/bosuutap/4.png" alt="Phòng làm việc hiện đại">
+                            </a>
+                        </div>
+                        <div class="text-start m-1">
+                            <p class="text-capitalize mt-3 mb-1">Phòng làm việc Modern – Đơn giản nhưng không kém phần sang trọng</p>
+                            <p class="product-description">Thiết kế đơn giản, hiện đại với màu sắc nhẹ nhàng [...]</p>
+                        </div>
+                        <div class="d-flex justify-content-between gap-2">
+                            <button class="btn btn-product mt-3 p-2 add-favorite" data-product-id="22" style="flex: 1;">
+                                Yêu thích
+                            </button>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="22" style="flex: 1;">
+                                Thêm Vào Giỏ
+                            </button>
+                            <a href="/chitietsanpham/22" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
+                                Chi Tiết
+                            </a>
+                        </div>
                     </div>
+                    
                     <div class="product-item">
-                        <div class="content"></div>
-                        <img class="product-image" src="/images/bosuutap/1.png" alt="Phòng khách hiện đại">
-                        <div class="product-name">Phòng làm việc Modern – Đơn giản nhưng không kém phần sang trọng</div>
-                        <p class="product-description">Thiết kế đơn giản, hiện đại với màu sắc nhẹ nhàng [...]</p>
-                        <button class="view-more-btn">XEM CHI TIẾT</button>
+                        <div class="special-img position-relative overflow-hidden">
+                            <a href="/chitietsanpham/23">
+                                <img class="product-image" src="/images/bosuutap/1.png" alt="Phòng làm việc hiện đại">
+                            </a>
+                        </div>
+                        <div class="text-start m-1">
+                            <p class="text-capitalize mt-3 mb-1">Phòng làm việc Modern – Đơn giản nhưng không kém phần sang trọng</p>
+                            <p class="product-description">Thiết kế đơn giản, hiện đại với màu sắc nhẹ nhàng [...]</p>
+                        </div>
+                        <div class="d-flex justify-content-between gap-2">
+                            <button class="btn btn-product mt-3 p-2 add-favorite" data-product-id="23" style="flex: 1;">
+                                Yêu thích
+                            </button>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="23" style="flex: 1;">
+                                Thêm Vào Giỏ
+                            </button>
+                            <a href="/chitietsanpham/23" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
+                                Chi Tiết
+                            </a>
+                        </div>
                     </div>
+                    
                     <div class="product-item">
-                        <div class="content"></div>
-                        <img class="product-image" src="/images/bosuutap/2.png" alt="Phòng khách hiện đại">
-                        <div class="product-name">Phòng làm việc Modern – Đơn giản nhưng không kém phần sang trọng</div>
-                        <p class="product-description">Thiết kế đơn giản, hiện đại với màu sắc nhẹ nhàng [...]</p>
-                        <button class="view-more-btn">XEM CHI TIẾT</button>
+                        <div class="special-img position-relative overflow-hidden">
+                            <a href="/chitietsanpham/24">
+                                <img class="product-image" src="/images/bosuutap/2.png" alt="Phòng làm việc hiện đại">
+                            </a>
+                        </div>
+                        <div class="text-start m-1">
+                            <p class="text-capitalize mt-3 mb-1">Phòng làm việc Modern – Đơn giản nhưng không kém phần sang trọng</p>
+                            <p class="product-description">Thiết kế đơn giản, hiện đại với màu sắc nhẹ nhàng [...]</p>
+                        </div>
+                        <div class="d-flex justify-content-between gap-2">
+                            <button class="btn btn-product mt-3 p-2 add-favorite" data-product-id="24" style="flex: 1;">
+                                Yêu thích
+                            </button>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="24" style="flex: 1;">
+                                Thêm Vào Giỏ
+                            </button>
+                            <a href="/chitietsanpham/24" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
+                                Chi Tiết
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -106,6 +202,87 @@ include_once __DIR__ . '/../../partials/header.php';
     <!-- Footer -->
     <?php include_once __DIR__ . '/../../partials/app.php'; ?>
     <?php include_once __DIR__ . '/../../partials/footer.php'; ?>
+
+    <!-- Scripts -->
+    <script src="/js/script.js"></script>
+
+    <script>
+        // Xử lý nút yêu thích
+        document.querySelectorAll('.add-favorite').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productId = this.getAttribute('data-product-id');
+                
+                fetch('/add-favorite', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'product_id=' + encodeURIComponent(productId)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message);
+                        updateFavoriteCount();
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra');
+                });
+            });
+        });
+
+        // Xử lý nút thêm vào giỏ hàng
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productId = this.getAttribute('data-product-id');
+                
+                fetch('/ajax-add-to-cart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'product_id=' + encodeURIComponent(productId) + '&quantity=1'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Đã thêm vào giỏ hàng!');
+                        updateCartCount();
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra');
+                });
+            });
+        });
+
+        // Cập nhật số lượng yêu thích
+        function updateFavoriteCount() {
+            const favoriteBadge = document.querySelector('.favorite-badge');
+            if (favoriteBadge) {
+                const currentCount = parseInt(favoriteBadge.textContent) || 0;
+                favoriteBadge.textContent = currentCount + 1;
+            }
+        }
+
+        // Cập nhật số lượng giỏ hàng
+        function updateCartCount() {
+            const cartBadge = document.querySelector('.cart-badge');
+            if (cartBadge) {
+                const currentCount = parseInt(cartBadge.textContent) || 0;
+                cartBadge.textContent = currentCount + 1;
+            }
+        }
+    </script>
 </body>
 
 </html>

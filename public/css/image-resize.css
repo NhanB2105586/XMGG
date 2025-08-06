@@ -1,0 +1,112 @@
+/* CSS cho việc tự động resize hình ảnh */
+.product-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    max-height: 300px;
+}
+
+.category-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    max-height: 250px;
+}
+
+.slider-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    max-height: 500px;
+}
+
+.detail-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    max-height: 400px;
+}
+
+.thumbnail-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center;
+    max-height: 80px;
+}
+
+/* Responsive cho hình ảnh */
+@media (max-width: 768px) {
+    .product-image {
+        max-height: 250px;
+    }
+    
+    .category-image {
+        max-height: 200px;
+    }
+    
+    .slider-image {
+        max-height: 300px;
+    }
+    
+    .detail-image {
+        max-height: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    .product-image {
+        max-height: 200px;
+    }
+    
+    .category-image {
+        max-height: 150px;
+    }
+    
+    .slider-image {
+        max-height: 200px;
+    }
+    
+    .detail-image {
+        max-height: 250px;
+    }
+}
+
+/* Hiệu ứng hover cho hình ảnh */
+.product-image:hover,
+.category-image:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+/* Đảm bảo hình ảnh không bị méo */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Container cho hình ảnh */
+.image-container {
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+/* Loading state cho hình ảnh */
+.image-loading {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+} 

@@ -10,7 +10,11 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
 
     <div class="container mt-3" id="main-content">
         <h2 class="text-center">Thêm Danh Mục Mới</h2>
-
+            <div class="mb-3">
+                    <a href="/../admin/viewCategory" class="btn btn-secondary">
+                        ← Quay lại
+                    </a>
+                </div>
         <!-- Hiển thị thông báo lỗi nếu có -->
         <?php if (!empty($errors)): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">

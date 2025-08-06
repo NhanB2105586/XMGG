@@ -16,7 +16,7 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                 </form>
             </div>
-            <a href="/admin/addCategory" class="btn btn-primary btn-add">Thêm Danh Mục</a>
+            <a href="/admin/addCategory" class="btn btn-primary btn-add">Thêm Hạng mục</a>
         </div>
         <div class="table-responsive">
             <?php if (!empty($essage)): ?>
@@ -58,7 +58,7 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                 <thead>
                     <tr>
                         <th class="text-center">STT</th>
-                        <th class="text-center">Tên Danh Mục</th>
+                        <th class="text-center">Tên Hạng mục</th>
                         <th class="text-center">Hành Động</th>
                     </tr>
                 </thead>
@@ -70,8 +70,7 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                         <td><?= htmlspecialchars($category["category_name"]) ?></td>
                         <td class="text-center">
                             <a href="/admin/editCategory/<?= $category['category_id'] ?>"
-                                class="btn btn-warning btn-sm">Chỉnh
-                                Sửa</a>
+                                class="btn btn-warning btn-sm">Chỉnh Sửa</a>
                             <form action="/admin/deleteCategory" method="POST" style="display:inline;">
                                 <input type="hidden" name="id" value="<?= $category['category_id'] ?>">
                                 <button type="submit" class="btn btn-danger btn-sm"
@@ -83,7 +82,7 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                     <?php endforeach; ?>
                     <?php else: ?>
                     <tr>
-                        <td colspan="3" class="text-center">Không có danh mục nào.</td>
+                        <td colspan="3" class="text-center">Không có hạng mục nào.</td>
                     </tr>
                     <?php endif; ?>
                 </tbody>

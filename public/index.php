@@ -20,8 +20,12 @@ require_once __DIR__ . '/../app/routes/home.php';
 require_once __DIR__ . '/../app/routes/cart.php';
 require_once __DIR__ . '/../app/routes/user.php';
 require_once __DIR__ . '/../app/routes/orders.php';
+require_once __DIR__ . '/../app/routes/contact.php';
+require_once __DIR__ . '/../app/routes/manageContact.php';
+require_once __DIR__ . '/../app/routes/favorite.php';
+require_once __DIR__ . '/../app/routes/news.php';
+require_once __DIR__ . '/../app/routes/pages.php';
+
 
 $router->set404('\App\Controllers\Controller@sendNotFound');
 $router->run();
-
-

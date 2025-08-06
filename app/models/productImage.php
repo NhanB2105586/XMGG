@@ -38,6 +38,16 @@ class ProductImage extends Model
     {
         return $this->delete($this->table, 'image_id', $imageId);
     }
+
+    // Lấy hình ảnh theo image_id
+    public function getImageById($image_id)
+    {
+        $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE image_id = :image_id");
+        $stmt->bindValue(':image_id', $image_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ?: null;
+    }
 }
 
 

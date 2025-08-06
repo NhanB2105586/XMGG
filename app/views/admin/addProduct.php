@@ -10,7 +10,11 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
 
     <div class="container mt-3" id="main-content">
         <h2 class="text-center">Thêm Sản Phẩm Mới</h2>
-
+        <div class="mb-3">
+            <a href="/../admin/viewProducts" class="btn btn-secondary">
+                ← Quay lại
+            </a>
+        </div>
         <!-- Hiển thị thông báo lỗi nếu có -->
         <?php if (!empty($errors)): ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -63,16 +67,38 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
             </div>
             <div class="form-group">
                 <label for="images">Hình Ảnh</label>
-                <input type="file" class="form-control" id="images" name="images[]" multiple required>
-                <small class="form-text text-muted">Chọn nhiều hình ảnh (tối đa 5MB mỗi file).</small>
+                <input type="file" class="form-control" id="images" name="images[]" multiple accept="image/*" required>
+                <div id="preview-images" class="mt-2"></div>
             </div>
             <button type="submit" class="btn btn-primary btn-block mt-3">Thêm Sản Phẩm</button>
         </form>
     </div>
-
     <?php
     include_once __DIR__ . '/../partials/footAdmin.php';
     ?>
+    <script>
+    // Preview ảnh trước khi upload
+    document.getElementById('images').addEventListener('change', function(e) {
+        const files = e.target.files;
+        const preview = document.getElementById('preview-images');
+        preview.innerHTML = '';
+        for (let i = 0; i < files.length; i++) {
+            if (files[i].type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    const img = document.createElement('img');
+                    img.src = ev.target.result;
+                    img.style.width = '100px';
+                    img.style.margin = '5px';
+                    img.style.border = '1px solid #ddd';
+                    img.style.borderRadius = '5px';
+                    preview.appendChild(img);
+                };
+                reader.readAsDataURL(files[i]);
+            }
+        }
+    });
+    </script>
 </body>
 
 </html>

@@ -17,10 +17,10 @@ use App\Models\Product;
         <!-- Phần hình ảnh trên cùng -->
         <div class="top-banner">
             <div class="banner-text">
-                Kệ phòng khách
+                Ốp trần
                 <div class="breadcrumb">
-                    <a href="/">Trang chủ</a>&nbsp;/&nbsp; <a href="/phongkhach">Phòng khách</a>/&nbsp<a
-                        href="/phongkhach/kephongkhach"> <strong class="current-page">Kệ phòng khách</strong></a>
+                    <a href="/">Trang chủ</a>&nbsp;</a>/&nbsp<a
+                        href="/phonglamviec/kesach"> <strong class="current-page">Ốp trần</strong></a>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@ use App\Models\Product;
             <div class="special-list row g-0 ">
                 <?php foreach ($products as $product): ?>
                     <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                            <div class="special-img position-relative overflow-hidden">
+                        <div class="special-img position-relative overflow-hidden">
                             <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>">
                                 <?php
                                 // Hiển thị hình ảnh đầu tiên nếu có, nếu không, hiển thị một ảnh mặc định
@@ -63,13 +63,16 @@ use App\Models\Product;
                                 <span class="price-old"><?php echo number_format($product['old_price'], 0, ',', '.') . 'đ'; ?></span>
                             </div>
                         </div>
-                     <div class="d-flex justify-content-around">
-                            <form action="/cart/add" method="POST" style="width: 45%;">
-                                <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['product_id']); ?>">
-                                <input type="hidden" name="quantity" value="1"> <!-- Số lượng mặc định là 1 -->
-                                <button type="submit" class="btn btn-product mt-3 p-2 w-100">Thêm Vào Giỏ</button>
-                            </form>
-                            <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 45%;">Chi Tiết</a>
+                        <div class="d-flex justify-content-between gap-2">
+                            <button class="btn btn-product mt-3 p-2 add-favorite" data-product-id="<?php echo htmlspecialchars($product['product_id']); ?>" style="flex: 1;">
+                                Yêu thích
+                            </button>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="<?php echo htmlspecialchars($product['product_id']); ?>" style="flex: 1;">
+                                Thêm Vào Giỏ
+                            </button>
+                            <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
+                                Chi Tiết
+                            </a>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -80,4 +83,89 @@ use App\Models\Product;
     <!-- Footer -->
     <?php include_once __DIR__ . '/../../partials/app.php'; ?>
     <?php include_once __DIR__ . '/../../partials/footer.php'; ?>
+
+    <!-- Scripts -->
+    <script>
+        // Xử lý nút yêu thích
+        document.querySelectorAll('.add-favorite').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productId = this.getAttribute('data-product-id');
+                
+                fetch('/add-favorite', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'product_id=' + encodeURIComponent(productId)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message);
+                        updateFavoriteCount();
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra');
+                });
+            });
+        });
+
+        // Xử lý nút thêm vào giỏ hàng
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productId = this.getAttribute('data-product-id');
+                
+                fetch('/ajax-add-to-cart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'product_id=' + encodeURIComponent(productId) + '&quantity=1'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Đã thêm vào giỏ hàng!');
+                        updateCartCount();
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra');
+                });
+            });
+        });
+
+        // Cập nhật số lượng yêu thích
+        function updateFavoriteCount() {
+            fetch('/get-favorite-count')
+                .then(response => response.json())
+                .then(data => {
+                    const favoriteBadge = document.querySelector('.favorite-badge');
+                    if (favoriteBadge) {
+                        favoriteBadge.textContent = data.count;
+                    }
+                });
+        }
+
+        // Cập nhật số lượng giỏ hàng
+        function updateCartCount() {
+            fetch('/get-cart-count')
+                .then(response => response.json())
+                .then(data => {
+                    const cartBadge = document.querySelector('.cart-badge');
+                    if (cartBadge) {
+                        cartBadge.textContent = data.count;
+                    }
+                });
+        }
+    </script>
 </body>

@@ -99,11 +99,27 @@
 
 .carousel-inner .carousel-item img {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 500px; /* Chiều cao cố định cho slide */
+    object-fit: cover; /* Đảm bảo ảnh vừa khung */
+    width: 100%;
 }
 
 .carousel-inner .carousel-item img:hover {
-    transform: scale(1.05); /* Phóng to ảnh nhẹ khi rê chuột vào */
+    transform: scale(1.02); /* Phóng to ảnh nhẹ khi rê chuột vào */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Tạo hiệu ứng đổ bóng */
+}
+
+/* Responsive cho slide */
+@media (max-width: 768px) {
+    .carousel-inner .carousel-item img {
+        height: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    .carousel-inner .carousel-item img {
+        height: 200px;
+    }
 }
 
 

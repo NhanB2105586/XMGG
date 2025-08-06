@@ -21,8 +21,7 @@
     <a class="navbar-brand" href="/admin">
         <img src="/images/admin/logo.png" width="60" height="60" alt="Swiss Collection">
     </a>
-    <span class="navbar-text text-white active" style="font-size: 28px;">QUẢN TRỊ NỘI THẤT QUÝ
-        NHÂN</span>
+    <span class="navbar-text text-white active" style="font-size: 28px;">QUẢN TRỊ ĐẠI QUÂN - XI MĂNG GIẢ GỖ</span>
 
     <ul class="navbar-nav flex-grow-1"></ul>
 

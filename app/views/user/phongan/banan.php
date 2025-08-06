@@ -62,13 +62,16 @@ use App\Models\Product;
                                 <span class="price-old"><?php echo number_format($product['old_price'], 0, ',', '.') . 'đ'; ?></span>
                             </div>
                         </div>
-                     <div class="d-flex justify-content-around">
-                            <form action="/cart/add" method="POST" style="width: 45%;">
-                                <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['product_id']); ?>">
-                                <input type="hidden" name="quantity" value="1"> <!-- Số lượng mặc định là 1 -->
-                                <button type="submit" class="btn btn-product mt-3 p-2 w-100">Thêm Vào Giỏ</button>
-                            </form>
-                            <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 45%;">Chi Tiết</a>
+                        <div class="d-flex justify-content-between gap-2">
+                            <button class="btn btn-product mt-3 p-2 add-favorite" data-product-id="<?php echo htmlspecialchars($product['product_id']); ?>" style="flex: 1;">
+                                Yêu thích
+                            </button>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="<?php echo htmlspecialchars($product['product_id']); ?>" style="flex: 1;">
+                                Thêm Vào Giỏ
+                            </button>
+                            <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
+                                Chi Tiết
+                            </a>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -79,4 +82,99 @@ use App\Models\Product;
     <!-- Footer -->
     <?php include_once __DIR__ . '/../../partials/app.php'; ?>
     <?php include_once __DIR__ . '/../../partials/footer.php'; ?>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Xử lý thêm vào yêu thích
+            document.querySelectorAll('.add-favorite').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-product-id');
+                    
+                    fetch('/add-favorite', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'product_id=' + productId
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Đã thêm vào danh sách yêu thích!');
+                            updateFavoriteCount();
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Có lỗi xảy ra');
+                    });
+                });
+            });
+            
+            // Xử lý nút thêm vào giỏ hàng
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const productId = this.getAttribute('data-product-id');
+                    
+                    fetch('/ajax-add-to-cart', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'product_id=' + encodeURIComponent(productId) + '&quantity=1'
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Đã thêm vào giỏ hàng!');
+                            updateCartCount();
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Có lỗi xảy ra');
+                    });
+                });
+            });
+        });
+
+        function updateFavoriteCount() {
+            let favoriteBadge = document.querySelector('.favorite-badge');
+            if (favoriteBadge) {
+                const currentCount = parseInt(favoriteBadge.textContent) || 0;
+                favoriteBadge.textContent = currentCount + 1;
+            } else {
+                // Nếu chưa có badge, tạo mới
+                const btn = document.querySelector('.fa-heart');
+                if (btn) {
+                    const span = document.createElement('span');
+                    span.className = 'position-absolute top-0 start-100 translate-middle badge bg-danger favorite-badge';
+                    span.textContent = '1';
+                    btn.parentNode.appendChild(span);
+                }
+            }
+        }
+
+        function updateCartCount() {
+            let cartBadge = document.querySelector('.cart-badge');
+            if (cartBadge) {
+                const currentCount = parseInt(cartBadge.textContent) || 0;
+                cartBadge.textContent = currentCount + 1;
+            } else {
+                // Nếu chưa có badge, tạo mới
+                const btn = document.querySelector('.fa-shopping-cart');
+                if (btn) {
+                    const span = document.createElement('span');
+                    span.className = 'position-absolute top-0 start-100 translate-middle badge bg-primary cart-badge';
+                    span.textContent = '1';
+                    btn.parentNode.appendChild(span);
+                }
+            }
+        }
+    </script>
 </body>

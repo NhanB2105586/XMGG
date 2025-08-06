@@ -192,6 +192,51 @@ class ProductController extends Controller
         $this->showProductsByCategory(19); // category_id cho tranh
     }
 
+    public function showtran()
+    {
+        $this->sendPage('user/tran');
+    }
+
+    public function showlam()
+    {
+        $this->sendPage('user/lam');
+    }
+
+    public function showsan()
+    {
+        $this->sendPage('user/san');
+    }
+
+    public function showtuong()
+    {
+        $this->sendPage('user/tuong');
+    }
+
+    public function showvach()
+    {
+        $this->sendPage('user/vach');
+    }
+
+    public function showcua()
+    {
+        $this->sendPage('user/cua');
+    }
+
+    public function showhangrao()
+    {
+        $this->sendPage('user/hangrao');
+    }
+
+    public function showcauthang()
+    {
+        $this->sendPage('user/cauthang');
+    }
+
+    public function showbonhoa()
+    {
+        $this->sendPage('user/bonhoa');
+    }
+
     public function showsanpham()
     {
         $productModel = new Product($this->db);

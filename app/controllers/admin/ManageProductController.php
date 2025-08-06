@@ -49,36 +49,44 @@ class ManageProductController extends Controller
 
     public function create()
     {
-        // Lấy danh sách danh mục
         $categories = $this->categoryModel->getAllCategories();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = $_POST;
 
-            // Tạo sản phẩm
+            if (empty($data['category_id'])) {
+                $_SESSION['error_messages'] = ['Vui lòng chọn danh mục sản phẩm.'];
+                $this->sendPage('admin/addProduct', ['categories' => $categories, 'old' => $data]);
+                return;
+            }
+
             $this->productModel->createProduct($data);
             $productId = $this->productModel->getPDO()->lastInsertId();
 
-            // Xử lý upload hình ảnh
+            $hasImage = false;
             if (!empty($_FILES['images']['name'][0])) {
                 foreach ($_FILES['images']['name'] as $index => $name) {
-                    if ($_FILES['images']['error'][$index] === UPLOAD_ERR_OK) {
-                        // Lưu hình ảnh vào thư mục
-                        $imagePath = 'C:/Users/Phu Qui/OneDrive/CNWeb/project/public/images/upload/' . basename($name);
-                        move_uploaded_file($_FILES['images']['tmp_name'][$index], $imagePath);
-
-                        // Chỉ lưu tên tệp vào cơ sở dữ liệu
-                        $this->productImageModel->addImage(['product_id' => $productId, 'image_url' => basename($name)]);
+                    if (!empty($name) && $_FILES['images']['error'][$index] === UPLOAD_ERR_OK) {
+                        $ext = pathinfo($name, PATHINFO_EXTENSION);
+                        $base = pathinfo($name, PATHINFO_FILENAME);
+                        $uniqueName = $base . '_' . uniqid() . '.' . $ext;
+                        $imagePath = dirname(__DIR__, 2) . '/public/images/upload/' . $uniqueName;
+                        if (move_uploaded_file($_FILES['images']['tmp_name'][$index], $imagePath)) {
+                            $this->productImageModel->addImage(['product_id' => $productId, 'image_url' => $uniqueName]);
+                            $hasImage = true;
+                        }
                     }
                 }
             }
-
+            // Nếu không upload ảnh nào, thêm ảnh mặc định
+            if (!$hasImage) {
+                $this->productImageModel->addImage(['product_id' => $productId, 'image_url' => 'default.jpg']);
+            }
 
             header('Location: /admin/viewProducts');
             exit;
         }
 
-        // Gọi view cho form tạo sản phẩm
         $this->sendPage('admin/addProduct', ['categories' => $categories]);
     }
 
@@ -90,7 +98,6 @@ class ManageProductController extends Controller
             exit;
         }
 
-        // Lấy danh mục và sản phẩm từ database
         $categories = $this->categoryModel->getAllCategories();
         $product = $this->productModel->getProductCategoryById($id);
         if (!$product) {
@@ -99,51 +106,68 @@ class ManageProductController extends Controller
             exit;
         }
 
-        // Lấy hình ảnh của sản phẩm
         $product['images'] = $this->productImageModel->getImagesByProductId($id);
 
-        // Kiểm tra khi form được gửi
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-            // Lọc dữ liệu form
             $data = $this->filterData(['product_id', 'category_id', 'product_name', 'old_price', 'price', 'description', 'in_stock'], $_POST);
 
-            // Validate dữ liệu form trước khi cập nhật
             if ($this->validateProductData($data)) {
-                // Cập nhật sản phẩm
                 $this->productModel->updateProduct($id, $data);
+
+                // Xử lý upload ảnh mới
                 if (!empty($_FILES['images']['name'][0])) {
                     foreach ($_FILES['images']['name'] as $index => $name) {
-                        if ($_FILES['images']['error'][$index] === UPLOAD_ERR_OK) {
-                            // Lưu hình ảnh vào thư mục
-                            $imagePath = 'C:/Users/Phu Qui/OneDrive/CNWeb/project/public/images/upload/' . basename($name);
-                            move_uploaded_file($_FILES['images']['tmp_name'][$index], $imagePath);
-
-                            // Chỉ lưu tên tệp vào cơ sở dữ liệu
-                            $this->productImageModel->addImage([
-                                'product_id' => $id,
-                                'image_url' => basename($imagePath) // Chỉ lưu tên tệp
-                            ]);
+                        // Chỉ xử lý nếu thực sự có file được chọn và là file upload từ máy
+                        if (!empty($name) && $_FILES['images']['error'][$index] === UPLOAD_ERR_OK) {
+                            $ext = pathinfo($name, PATHINFO_EXTENSION);
+                            $base = pathinfo($name, PATHINFO_FILENAME);
+                            // Loại bỏ mọi đường dẫn thư mục (chỉ lấy tên file)
+                            $base = basename($base);
+                            $uniqueName = $base . '_' . uniqid() . '.' . $ext;
+                            $uploadDir = dirname(__DIR__, 2) . '/public/images/upload/';
+                            if (!is_dir($uploadDir)) {
+                                mkdir($uploadDir, 0777, true);
+                            }
+                            $imagePath = $uploadDir . $uniqueName;
+                            // Chỉ move_uploaded_file nếu là file upload thực sự (không phải đường dẫn cũ)
+                            if (is_uploaded_file($_FILES['images']['tmp_name'][$index])) {
+                                if (move_uploaded_file($_FILES['images']['tmp_name'][$index], $imagePath)) {
+                                    $this->productImageModel->addImage([
+                                        'product_id' => $id,
+                                        'image_url' => $uniqueName
+                                    ]);
+                                }
+                            }
                         }
                     }
                 }
-            
+
+                // Nếu sản phẩm không có ảnh nào (cả cũ lẫn mới), thêm ảnh mặc định
+                $currentImages = $this->productImageModel->getImagesByProductId($id);
+                if (empty($currentImages)) {
+                    $this->productImageModel->addImage(['product_id' => $id, 'image_url' => 'default.jpg']);
+                }
+
                 // Xử lý xóa hình ảnh nếu có
                 if (isset($_POST['delete_images'])) {
                     foreach ($_POST['delete_images'] as $image_id) {
-                        $this->deleteProductImage($image_id, $id);  // Xóa từng ảnh
+                        $this->deleteProductImage($image_id, $id);
+                    }
+                    // Nếu sau khi xóa không còn ảnh nào, thêm ảnh mặc định
+                    $currentImages = $this->productImageModel->getImagesByProductId($id);
+                    if (empty($currentImages)) {
+                        $this->productImageModel->addImage(['product_id' => $id, 'image_url' => 'default.jpg']);
                     }
                 }
 
                 $_SESSION['success_message'] = 'Sản phẩm đã được cập nhật thành công.';
-                header('Location: /admin/viewProducts');
+                header('Location: /admin/editProducts?id=' . $id);
                 exit;
             } else {
                 $_SESSION['error_messages'] = ['Dữ liệu sản phẩm không hợp lệ.'];
             }
         }
 
-        // Gửi dữ liệu đến view
         $this->sendPage('admin/editProduct', [
             'product' => $product,
             'categories' => $categories,
@@ -157,17 +181,10 @@ class ManageProductController extends Controller
 
         if ($image) {
             // Xóa tệp hình ảnh khỏi thư mục
-            $image_path = __DIR__ . "/../../public/images/upload/" . $image['image_url'];
-
+            $image_path = dirname(__DIR__, 2) . "/public/images/upload/" . $image['image_url'];
             if (file_exists($image_path)) {
-                // Thực hiện xóa ảnh trong thư mục
-                if (unlink($image_path)) {
-                    echo "Ảnh đã được xóa thành công"; // Debug thông báo xóa
-                } else {
-                    echo "Lỗi khi xóa ảnh"; // Debug lỗi khi xóa
-                }
+                unlink($image_path);
             }
-
             // Xóa ảnh khỏi cơ sở dữ liệu
             $this->productImageModel->deleteImage($image_id);
         }

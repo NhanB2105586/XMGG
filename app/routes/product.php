@@ -107,4 +107,34 @@ $router->get(
     '\App\Controllers\User\ProductController@showmen'
 );
 
+$router->get(
+    '/tran',
+    '\App\Controllers\User\ProductController@showtran'
+);
+
+$router->get(
+    '/lam',
+    '\App\Controllers\User\ProductController@showlam'
+);
+
+$router->get(
+    '/san',
+    '\App\Controllers\User\ProductController@showsan'
+);
+
+$router->get(
+    '/tuong',
+    '\App\Controllers\User\ProductController@showtuong'
+);
+
+$router->get(
+    '/vach',
+    '\App\Controllers\User\ProductController@showvach'
+);
+
+$router->get(
+    '/cua',
+    '\App\Controllers\User\ProductController@showcua'
+);
+
 

@@ -12,9 +12,7 @@
                 <p>Hotline: 093 930 39 78</p>
                 <p>Email: daiquandecor@gmail.com</p>
                 <div class="social-icons mt-3">
-                    <a href="#"><img src="/images/zalo-icon.png" alt="Zalo" style="width: 30px;"></a>
-                    <a href="#"><img src="/images/facebook.png" alt="Facebook" style="width: 30px;"></a>
-                    <a href="#"><img src="/images/instagram.png" alt="Instagram" style="width: 30px;"></a>
+                    
                     <!-- Thêm các icon mạng xã hội khác -->
                 </div>
             </div>
@@ -23,10 +21,10 @@
             <div class="col-md-3">
                 <h5>HỖ TRỢ KHÁCH HÀNG</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-light">Đổi trả - bảo hành</a></li>
-                    <li><a href="#" class="text-light">Hình thức thanh toán</a></li>
-                    <li><a href="#" class="text-light">Vận chuyển - giao nhận</a></li>
-                    <li><a href="#" class="text-light">Chính sách bảo mật</a></li>
+                    <li><a href="#" class="text-light">Thông tin về xi măng giả gỗ</a></li>
+                    <li><a href="#" class="text-light">Chính sách bảo hành</a></li>
+                    <li><a href="#" class="text-light">Quy trình thi công</a></li>
+                    <li><a href="#" class="text-light"></a></li>
                 </ul>
             </div>
 
@@ -42,9 +40,10 @@
 
             <!-- Xưởng sản xuất -->
             <div class=" col-md-3">
-                <h5> </h5>
+                <h5>  </h5>
+                <br> <!-- Thêm dòng trống để đều độ cao -->
                 <h6>VĂN PHÒNG KIÊN GIANG</h6>
-                <p>621A, Nguyễn Trung Trực, Phường An Hòa, An Giang, Việt Nam</p>
+                <p>621A Nguyễn Trung Trực, Phường An Hòa, An Giang, Việt Nam</p>
                 <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.4110188137633!2d105.10304889999999!3d9.982866499999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a0b5006563f853%3A0x7e9ea46816ec2003!2zxJDhuqFpIFF1w6JuIE9mZmljZSAmIENvZmZlZSAy!5e0!3m2!1svi!2s!4v1752201382209!5m2!1svi!2s"
                     width="250" height="200" style="border:0;" allowfullscreen="" loading="lazy"></iframe>

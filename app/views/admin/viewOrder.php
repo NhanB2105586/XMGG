@@ -61,13 +61,13 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                 <thead>
                     <tr>
                         <th class="text-center">STT</th>
-                        <th class="text-center">Mã Đơn Hàng</th>
-                        <th class="text-center">Tên Người Dùng</th>
-                        <th class="text-center">Ngày Đặt Hàng</th>
-                        <th class="text-center">Tổng Tiền</th>
-                        <th class="text-center">Trạng Thái</th>
-                        <th class="text-center">Chi Tiết</th>
-                        <th class="text-center">Hành Động</th>
+                        <th class="text-center">Mã đơn hàng</th>
+                        <th class="text-center">Tên khách hàng</th>
+                        <th class="text-center">Ngày đặt hàng</th>
+                        <th class="text-center">Tổng tiền</th>
+                        <th class="text-center">Trạng thái</th>
+                        <th class="text-center">Hành động</th>
+                        <th class="text-center">Xóa</th>
                     </tr>
                 </thead>
                 <tbody>
