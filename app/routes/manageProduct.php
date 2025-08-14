@@ -27,3 +27,8 @@ $router->post('/admin/deleteProducts', function () use ($PDO) {
     $productController = new App\Controllers\Admin\ManageProductController($PDO);
     $productController->delete($_POST['id']);
 });
+
+$router->post('/admin/deleteMultipleProducts', function () use ($PDO) {
+    $productController = new App\Controllers\Admin\ManageProductController($PDO);
+    $productController->deleteMultipleProducts();
+});

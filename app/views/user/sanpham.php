@@ -54,11 +54,7 @@ include_once __DIR__ . '/../../models/Product.php';
                     <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
                         <div class="special-img position-relative overflow-hidden">
                             <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>">
-                                <?php
-                                // Hiển thị hình ảnh đầu tiên nếu có, nếu không, hiển thị một ảnh mặc định
-                                $image_url = !empty($product['images'][0]['image_url']) ? $product['images'][0]['image_url'] : 'default.jpg';
-                                ?>
-                                <img src="/images/upload/<?php echo htmlspecialchars($image_url); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                                <img src="/images/upload/<?php echo htmlspecialchars($product['main_image']); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
                             </a>
                         </div>
                         <div class="text-start m-1">

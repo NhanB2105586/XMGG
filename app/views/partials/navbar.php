@@ -110,12 +110,12 @@
                         <div class="row w-100">
           <div class="col-sm-4">
               <ul class="multi-column-dropdown">
-                  <li><a href="/phongkhach/sofa">Bồn cây, bàn, ghế</a></li>
-                  <li><a href="/phonglamviec/ghelamviec">Ốp sàn</a></li>
-                  <li><a href="/phongkhach/kephongkhach">Ốp trần</a></li>
-                  <li><a href="/phonglamviec/kesach">Diềm mái</a></li>
-                  <li><a href="/phongngu/giuongngu">Trang trí tường, vách</a></li>
-                  <li><a href="/phongan/ghean">Hàng rào</a></li>
+                  <li><a href="/xmgg/thanhlath">Thanh Lath</a></li>
+                  <li><a href="/xmgg/lapsiding">Thanh Lapsiding</a></li>
+                  <li><a href="/xmgg/array">Thanh Array</a></li>
+                  <li><a href="/xmgg/deck">Thanh Deck</a></li>
+                  <li><a href="/xmgg/mould">Thanh Mould</a></li>
+                  <li><a href="/xmgg/plank">Thanh Plank</a></li>
               </ul>
           </div>
           <div class="col-sm-4">
@@ -145,7 +145,7 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="/bosuutap" id="productDropdown" role="button"
                         aria-expanded="false">
-                        HẠNG MỤC
+                        DANH MỤC
                     </a>
                     <ul class="dropdown-menu hangmuc-style" aria-labelledby="roomDropdown">
                         <li><a href="/tran">Trần</a></li>

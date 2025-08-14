@@ -1,0 +1,114 @@
+/* CSS cho thông báo tự động tắt - Áp dụng cho tất cả trang */
+
+/* Biến CSS */
+:root {
+    --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --success: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --danger: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
+    --warning: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --info: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --shadow: 0 8px 30px rgba(0,0,0,0.12);
+    --radius: 12px;
+}
+
+/* Thông báo tự động tắt */
+.auto-hide {
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: none;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    animation: slideInDown 0.5s ease-out;
+    z-index: 1050;
+}
+
+.auto-hide.alert-success {
+    background: var(--success);
+    color: white;
+}
+
+.auto-hide.alert-danger {
+    background: var(--danger);
+    color: white;
+}
+
+.auto-hide.alert-warning {
+    background: var(--warning);
+    color: white;
+}
+
+.auto-hide.alert-info {
+    background: var(--info);
+    color: white;
+}
+
+/* Progress bar cho auto-hide */
+.auto-hide::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: rgba(255,255,255,0.3);
+    animation: progressBar 2s linear;
+}
+
+/* Nút đóng */
+.auto-hide .close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+}
+
+.auto-hide .close:hover {
+    opacity: 1;
+}
+
+/* Animations */
+@keyframes progressBar {
+    from { width: 100%; }
+    to { width: 0%; }
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideOutUp {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .auto-hide {
+        margin: 0.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .auto-hide .close {
+        font-size: 1.2rem;
+    }
+}

@@ -31,12 +31,15 @@ body {
   flex-direction: column;
   min-height: 100vh;
   margin-bottom: 60px; /* Margin bottom by footer height */
+  margin-top: 0; /* Bỏ margin top để slide sát navbar */
 }
 
 .main-content {
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
 }
 .footer {
   position: relative;
@@ -77,7 +80,9 @@ footer p {
 }
 
 .container {
-  max-width: 1150px;
+  max-width: 100%;
+  width: 100%;
+  overflow: visible !important;
 }
 /* End of sticky footer styles */
 .special-img span {
@@ -93,9 +98,20 @@ footer p {
 }
 /* Carousel */
 .carousel-item img {
-  width: 100vw;
-  height:100vh;
+  width: 100%;
+  height: 500px;
   object-fit: cover;
+  z-index: 1 !important;
+}
+
+.carousel {
+  z-index: 1 !important;
+  position: relative !important;
+}
+
+.carousel-inner {
+  z-index: 1 !important;
+  position: relative !important;
 }
 .carousel-item-product img{
   width: 100%;
@@ -153,7 +169,23 @@ footer p {
 }
 
 .navbar {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000 !important;
   box-shadow: 0 3px 9px 3px rgba(0, 0, 0, 0.5);
+  background-color: #fff !important;
+  overflow: visible !important;
+  height: 80px;
+}
+
+.navbar-collapse {
+  overflow: visible !important;
+}
+
+.navbar-nav {
+  overflow: visible !important;
 }
 
 .navbar-brand img {
@@ -171,6 +203,23 @@ footer p {
 
 .nav-item {
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.05);
+  position: relative !important;
+  overflow: visible !important;
+}
+
+.nav-item.dropdown {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+.nav-item.dropdown .dropdown-menu {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  overflow: visible !important;
 }
 .btn:not(.nav-btns button) {
   background-color: #fff;
@@ -180,8 +229,20 @@ footer p {
   border: 1px solid rgb(85, 85, 85);
 }
 .nav-item.dropdown:hover .dropdown-menu {
-	display: block;
+	display: block !important;
 	margin-top: 0;
+	z-index: 99999 !important; /* Cao hơn tất cả, kể cả slide */
+	position: absolute !important;
+	top: 100%;
+	left: 0;
+	background-color: #fff !important;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+	pointer-events: auto !important;
+	opacity: 1 !important;
+	visibility: visible !important;
+	overflow: visible !important;
+	max-height: none !important;
+	transform: none !important;
 }
 
 img{
@@ -192,14 +253,30 @@ img{
 }
 .dropdown-menu {
 	min-width: 200px;
+	z-index: 99999 !important; /* Cao hơn tất cả, kể cả slide */
+	position: absolute !important;
+	background-color: #fff !important;
+	border: 1px solid rgba(0, 0, 0, 0.1) !important;
+	border-radius: 8px !important;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+	pointer-events: auto !important;
+	opacity: 1 !important;
+	visibility: visible !important;
+	overflow: visible !important;
+	max-height: none !important;
+	transform: none !important;
 }
 
 .dropdown-menu.columns-2 {
 	min-width: 400px;
+	z-index: 1001; /* Cao hơn navbar */
+	position: relative;
 }
 
 .dropdown-menu.columns-3 {
 	min-width: 600px;
+	z-index: 1001; /* Cao hơn navbar */
+	position: relative;
 }
 
 .dropdown-menu li a {
@@ -506,9 +583,16 @@ img{
 .hangmuc-style {
   min-width: 200px; /* hoặc bạn có thể tăng lên nếu chữ dài */
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
   padding: 10px 0;
   font-size: 16px;
+  z-index: 99999 !important; /* Cao hơn tất cả, kể cả slide */
+  position: absolute !important;
+  background-color: #fff !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  pointer-events: auto !important;
+  overflow: visible !important;
+  max-height: none !important;
 }
 
 /* Các mục trong menu */
@@ -518,6 +602,8 @@ img{
   color: #000 !important;
   text-decoration: none !important;
   white-space: nowrap; /* Không cho xuống dòng */
+  background-color: #fff !important;
+  transition: all 0.3s ease;
 }
 
 /* Hover đẹp */
@@ -531,8 +617,15 @@ img{
   min-width: 600px; /* đủ cho 2–3 cột */
   padding: 20px 0;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
   font-size: 16px;
+  z-index: 99999 !important; /* Cao hơn tất cả, kể cả slide */
+  position: absolute !important;
+  background-color: #fff !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  pointer-events: auto !important;
+  overflow: visible !important;
+  max-height: none !important;
 }
 
 /* Các mục bên trong */
@@ -542,13 +635,89 @@ img{
   color: #000 !important;
   text-decoration: none !important;
   white-space: nowrap;
+  background-color: #fff !important;
+  transition: all 0.3s ease;
 }
 
 /* Hover đẹp */
 .sanpham-style li a:hover {
-  background-color: #000;
+  background-color: #000 !important;
   color: #fff !important;
   font-weight: 500;
+}
+
+/* Đảm bảo dropdown menu hiển thị */
+.nav-item.dropdown .dropdown-menu {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: none !important;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 99999 !important;
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  background-color: #fff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  pointer-events: auto !important;
+  transition: all 0.3s ease !important;
+  transform: none !important;
+}
+
+/* Đảm bảo dropdown menu hiển thị cho tất cả loại */
+.nav-item.dropdown:hover .sanpham-style,
+.nav-item.dropdown:hover .hangmuc-style {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 99999 !important;
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  background-color: #fff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  pointer-events: auto !important;
+}
+
+/* Đảm bảo tất cả dropdown menu hiển thị trên slide */
+.dropdown-menu,
+.sanpham-style,
+.hangmuc-style {
+  z-index: 99999 !important;
+  position: absolute !important;
+  background-color: #fff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  pointer-events: auto !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+  overflow: visible !important;
+  max-height: none !important;
+  transform: none !important;
+}
+
+/* Đảm bảo dropdown menu hiển thị khi hover */
+.nav-item.dropdown:hover .dropdown-menu,
+.nav-item.dropdown:hover .sanpham-style,
+.nav-item.dropdown:hover .hangmuc-style {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 99999 !important;
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  background-color: #fff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  pointer-events: auto !important;
+  overflow: visible !important;
+  max-height: none !important;
+  transform: none !important;
 }
 
 .btn-product-action {
@@ -569,4 +738,535 @@ img{
   background: var(--color-product1);
   color: #fff;
 }
+
+/* Responsive Design - Fix cho toàn bộ website */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Container responsive */
+.container, .container-fluid {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Images responsive toàn cục */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Text responsive */
+h1, h2, h3, h4, h5, h6 {
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+/* Responsive breakpoints chính */
+@media (max-width: 1200px) {
+  .container {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+  
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
+}
+
+@media (max-width: 992px) {
+  .container {
+    padding: 0 10px;
+  }
+  
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+  
+  /* Navbar responsive */
+.navbar-nav {
+  text-align: center;
+  overflow: visible !important;
+}
+
+/* Đảm bảo dropdown menu hiển thị đúng */
+.nav-item.dropdown {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+.nav-item.dropdown .dropdown-menu {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  overflow: visible !important;
+  transform: none !important;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 99999 !important;
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  background-color: #fff !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  pointer-events: auto !important;
+  overflow: visible !important;
+  max-height: none !important;
+  transform: none !important;
+}
+  
+  .navbar-nav .nav-link {
+    padding: 10px 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 8px;
+  }
+  
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.25rem; }
+  h3 { font-size: 1.1rem; }
+  
+  /* Buttons responsive */
+  .btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+  
+  /* Grid responsive */
+  .row {
+    margin: 0;
+  }
+  
+  .col-md-6, .col-lg-6 {
+    padding: 5px;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding: 0 5px;
+  }
+  
+  h1 { font-size: 1.25rem; }
+  h2 { font-size: 1.1rem; }
+  h3 { font-size: 1rem; }
+  
+  /* Small screen adjustments */
+  .btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .col-md-6, .col-lg-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 15px;
+  }
+}
+
+/* Fix cho slider và carousel */
+.carousel-inner {
+  overflow: hidden;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Fix cho product items */
+.product-item {
+  margin-bottom: 20px;
+  max-width: 100%;
+}
+
+.product-item img {
+  width: 100%;
+  height: auto;
+}
+
+/* Định dạng chung cho tất cả tiêu đề chính */
+.title h2,
+.title h2 span {
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+  color: #2c3e50 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1.5px !important;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+  text-align: center !important;
+  margin-bottom: 20px !important;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1) !important;
+}
+
+/* Đảm bảo tất cả tiêu đề có cùng style */
+.title h2 {
+  position: relative;
+  display: inline-block;
+}
+
+/* Responsive cho tiêu đề */
+@media (max-width: 768px) {
+  .title h2,
+  .title h2 span {
+    font-size: 1.6rem !important;
+    letter-spacing: 1px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .title h2,
+  .title h2 span {
+    font-size: 1.3rem !important;
+    letter-spacing: 0.5px !important;
+  }
+}
+
+/* Chatbot Tư vấn chuyên nghiệp */
+.chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9998;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.chatbot-toggle {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.chatbot-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+}
+
+.chatbot-toggle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.chatbot-toggle:hover::before {
+  left: 100%;
+}
+
+.chatbot-toggle i {
+  color: white;
+  font-size: 24px;
+  z-index: 1;
+}
+
+.chatbot-toggle .notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: #ff4757;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.chatbot-window {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  width: 350px;
+  height: 500px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chatbot-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chatbot-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.chatbot-header .status {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+.status .dot {
+  width: 8px;
+  height: 8px;
+  background: #4CAF50;
+  border-radius: 50%;
+  margin-right: 5px;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.3; }
+}
+
+.chatbot-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+.chatbot-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.chatbot-messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background: #f8f9fa;
+}
+
+.message {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.message.user {
+  justify-content: flex-end;
+}
+
+.message-content {
+  max-width: 80%;
+  padding: 10px 15px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.message.bot .message-content {
+  background: white;
+  color: #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: 5px;
+}
+
+.message.user .message-content {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-bottom-right-radius: 5px;
+}
+
+.message-time {
+  font-size: 11px;
+  color: #999;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.chatbot-input {
+  padding: 15px;
+  background: white;
+  border-top: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.chatbot-input input {
+  flex: 1;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 15px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.chatbot-input input:focus {
+  border-color: #667eea;
+}
+
+.chatbot-input button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.chatbot-input button:hover {
+  transform: scale(1.1);
+}
+
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.quick-action {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 8px 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  color: #333;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.quick-action:hover {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+  transform: translateY(-2px);
+}
+
+.contact-info {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 10px 0;
+  text-align: center;
+}
+
+.contact-info h4 {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+}
+
+.contact-info p {
+  margin: 5px 0;
+  font-size: 13px;
+}
+
+.contact-info a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive cho chatbot */
+@media (max-width: 768px) {
+  .chatbot-window {
+    width: 300px;
+    height: 450px;
+    bottom: 70px;
+    left: 10px;
+  }
+  
+  .chatbot-toggle {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .chatbot-toggle i {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chatbot-window {
+    width: 280px;
+    height: 400px;
+    left: 5px;
+  }
+  
+  .chatbot-container {
+    bottom: 15px;
+    left: 15px;
+  }
+}
+
+
 

@@ -1,9 +1,8 @@
 <?php
+include_once __DIR__ . '../../../core/PDOFactory.php';
 include_once __DIR__ . '/../partials/header.php';
 ?>
-
 <link href="/css/stylebosuutap.css" rel="stylesheet">
-<link href="/css/stylesanpham.css" rel="stylesheet">
 
 <body>
     <!-- Navbar -->
@@ -11,131 +10,70 @@ include_once __DIR__ . '/../partials/header.php';
 
     <!-- Main Page Content -->
     <div class="container-fluid main-content mt-3">
-
         <!-- Phần hình ảnh trên cùng -->
-        <div class="top-banner-sp">
+        <div class="top-banner-phongkhach">
             <div class="banner-text">
-                Tường
+                Cầu Thang Xi Măng Giả Gỗ
                 <div class="breadcrumb">
-                    <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/tuong"> <strong class="current-page">Tường</strong></a>
+                    <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/cauthang"> <strong class="current-page">Cầu Thang Xi Măng Giả Gỗ</strong></a>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Phần bộ lọc sản phẩm -->
-    <div class="filter-section">
-        <div class="filter-item">
-            <label for="price-filter">Lọc:</label>
-            <select id="price-filter">
-                <option value="popular">Theo mức độ phổ biến</option>
-                <option value="low-to-high">Giá từ thấp đến cao</option>
-                <option value="high-to-low">Giá từ cao đến thấp</option>
-            </select>
-        </div>
-
-        <button class="btn apply-filter-btn" id="apply-filter">ÁP DỤNG</button>
-    </div>
-
-    <!-- Danh sách sản phẩm -->
-    <div class="container mb-3 mt-3">
-        <div class="title text-center py-3">
-            <h2 class="position-relative d-inline-block">Sản phẩm Tường</h2>
-        </div>
-        <p class="text-center">Khám phá các sản phẩm tường chất lượng cao</p>
-        
-        <div class="special-list row g-0">
-            <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                <div class="special-img position-relative overflow-hidden">
-                    <a href="/chitietsanpham/1">
-                        <img src="/images/upload/tuong1.jpg" class="product-image" alt="Tường xi măng giả gỗ">
-                    </a>
-                </div>
-                <div class="text-start m-1">
-                    <p class="text-capitalize mt-3 mb-1">Tường xi măng giả gỗ cao cấp</p>
-                    <div class="d-flex">
-                        <span class="fw-bold d-block">1.500.000đ</span>
-                        <span class="price-old ms-2">1.800.000đ</span>
-                    </div>
-                </div>
-                <div class="product-actions">
-                    <button class="btn btn-product-action add-favorite" data-product-id="1">Yêu thích</button>
-                    <button class="btn btn-product-action add-to-cart" data-product-id="1">Thêm Vào Giỏ</button>
-                    <a href="/chitietsanpham/1" class="btn btn-product-action btn-detail-product">Chi Tiết</a>
+        <!-- Sidebar danh mục sản phẩm -->
+        <div class="row mt-4 nd">
+            <div class="col-md-3">
+                <div class="category-sidebar p-4 bg-light border rounded shadow-sm">
+                    <h4 class="fw-bold mb-3">Đại Quân</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item bg-transparent border-0"><a href="#" class="text-decoration-none text-dark">Cầu thang trong nhà</a></li>
+                        <li class="list-group-item bg-transparent border-0"><a href="#" class="text-decoration-none text-dark">Cầu thang ngoài trời</a></li>
+                        <li class="list-group-item bg-transparent border-0"><a href="#" class="text-decoration-none text-dark">Cầu thang xoắn</a></li>
+                        <li class="list-group-item bg-transparent border-0"><a href="#" class="text-decoration-none text-dark">Cầu thang thẳng</a></li>
+                        <li class="list-group-item bg-transparent border-0"><a href="#" class="text-decoration-none text-dark">Cầu thang tùy chỉnh</a></li>
+                    </ul>
                 </div>
             </div>
-            
-            <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                <div class="special-img position-relative overflow-hidden">
-                    <a href="/chitietsanpham/2">
-                        <img src="/images/upload/tuong2.jpg" class="product-image" alt="Tường trang trí">
-                    </a>
-                </div>
-                <div class="text-start m-1">
-                    <p class="text-capitalize mt-3 mb-1">Tường trang trí hiện đại</p>
-                    <div class="d-flex">
-                        <span class="fw-bold d-block">1.600.000đ</span>
-                        <span class="price-old ms-2">2.000.000đ</span>
+
+            <!-- Nội dung chính - Các sản phẩm -->
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="product-card">
+                            <img src="/images/cauthang/1.png" alt="Product" class="img-fluid rounded">
+                            <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Cầu thang</h6>
+                            <p class="text-muted">Cầu thang xi măng giả gỗ không chỉ mang lại vẻ đẹp tự nhiên mà còn tạo cảm giác ấm áp và thân thiện cho cả không gian nội thất lẫn ngoại thất.</p>
+                        </div>
                     </div>
-                </div>
-                <div class="product-actions">
-                    <button class="btn btn-product-action add-favorite" data-product-id="2">Yêu thích</button>
-                    <button class="btn btn-product-action add-to-cart" data-product-id="2">Thêm Vào Giỏ</button>
-                    <a href="/chitietsanpham/2" class="btn btn-product-action btn-detail-product">Chi Tiết</a>
-                </div>
-            </div>
-            
-            <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                <div class="special-img position-relative overflow-hidden">
-                    <a href="/chitietsanpham/3">
-                        <img src="/images/upload/tuong3.jpg" class="product-image" alt="Tường phòng khách">
-                    </a>
-                </div>
-                <div class="text-start m-1">
-                    <p class="text-capitalize mt-3 mb-1">Tường phòng khách sang trọng</p>
-                    <div class="d-flex">
-                        <span class="fw-bold d-block">1.700.000đ</span>
-                        <span class="price-old ms-2">2.100.000đ</span>
+                    <div class="col-md-6 mb-4">
+                        <div class="product-card">
+                            <img src="/images/cauthang/2.png" alt="Product" class="img-fluid rounded">
+                            <h6 class="mt-3 fw-bold">Cầu thang trong nhà xi măng giả gỗ</h6>
+                            <p class="text-muted">Cầu thang trong nhà với thiết kế sang trọng, tạo điểm nhấn cho không gian nội thất. Vật liệu xi măng giả gỗ bền bỉ và dễ bảo trì.</p>
+                        </div>
                     </div>
-                </div>
-                <div class="product-actions">
-                    <button class="btn btn-product-action add-favorite" data-product-id="3">Yêu thích</button>
-                    <button class="btn btn-product-action add-to-cart" data-product-id="3">Thêm Vào Giỏ</button>
-                    <a href="/chitietsanpham/3" class="btn btn-product-action btn-detail-product">Chi Tiết</a>
-                </div>
-            </div>
-            
-            <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                <div class="special-img position-relative overflow-hidden">
-                    <a href="/chitietsanpham/4">
-                        <img src="/images/upload/tuong4.jpg" class="product-image" alt="Tường phòng ngủ">
-                    </a>
-                </div>
-                <div class="text-start m-1">
-                    <p class="text-capitalize mt-3 mb-1">Tường phòng ngủ ấm cúng</p>
-                    <div class="d-flex">
-                        <span class="fw-bold d-block">1.800.000đ</span>
-                        <span class="price-old ms-2">2.200.000đ</span>
+                    <div class="col-md-6 mb-4">
+                        <div class="product-card">
+                            <img src="/images/cauthang/3.png" alt="Product" class="img-fluid rounded">
+                            <h6 class="mt-3 fw-bold">Cầu thang ngoài trời xi măng giả gỗ</h6>
+                            <p class="text-muted">Cầu thang ngoài trời chống chịu tốt với thời tiết, phù hợp với không gian sân vườn. Thiết kế đa dạng với nhiều kiểu dáng.</p>
+                        </div>
                     </div>
-                </div>
-                <div class="product-actions">
-                    <button class="btn btn-product-action add-favorite" data-product-id="4">Yêu thích</button>
-                    <button class="btn btn-product-action add-to-cart" data-product-id="4">Thêm Vào Giỏ</button>
-                    <a href="/chitietsanpham/4" class="btn btn-product-action btn-detail-product">Chi Tiết</a>
+                    <div class="col-md-6 mb-4">
+                        <div class="product-card">
+                            <img src="/images/cauthang/4.png" alt="Product" class="img-fluid rounded">
+                            <h6 class="mt-3 fw-bold">Cầu thang xoắn xi măng giả gỗ</h6>
+                            <p class="text-muted">Cầu thang xoắn với thiết kế độc đáo, tiết kiệm không gian. Vật liệu xi măng giả gỗ đảm bảo độ bền và an toàn.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
+    <?php include_once __DIR__ . '/../partials/app.php'; ?>
     <?php include_once __DIR__ . '/../partials/footer.php'; ?>
-
-    <script>
-        document.getElementById('apply-filter').addEventListener('click', function() {
-            const filterValue = document.getElementById('price-filter').value;
-            window.location.href = '?filter=' + filterValue;
-        });
-    </script>
 </body>
 
 </html>

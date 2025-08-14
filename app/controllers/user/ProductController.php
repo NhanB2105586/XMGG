@@ -18,35 +18,36 @@ class ProductController extends Controller
 
         // Kiểm tra xem có sản phẩm nào không
         if (empty($products)) {
-            // Có thể thông báo hoặc chuyển hướng
-            $this->sendPage('user/phongkhach/phongkhach');
-            return;
+            // Nếu không có sản phẩm, vẫn hiển thị trang nhưng với mảng rỗng
+            $products = [];
         }
 
         // Lấy hình ảnh cho từng sản phẩm
         foreach ($products as &$product) {
             $product['images'] = $productImageModel->getImagesByProductId($product['product_id']);
+            $mainImage = $productImageModel->getMainImageForDisplay($product['product_id']);
+            $product['main_image'] = $mainImage ? $mainImage['image_url'] : 'default.jpg';
         }
 
         // Xác định view page dựa trên categoryId
         switch ($categoryId) {
-            case 1: // Sofa
-                $viewPage = 'user/phongkhach/sofa';
+            case 1: // Thanh Lath (thay thế cho Sofa)
+                $viewPage = 'user/xmgg/thanhlath';
                 break;
-            case 2: // Ghế ăn
-                $viewPage = 'user/phongan/ghean';
+            case 2: // Thanh Plank (thay thế cho Ghế ăn)
+                $viewPage = 'user/xmgg/plank';
                 break;
-            case 3: // Ghế làm việc
-                $viewPage = 'user/phonglamviec/ghelamviec';
+            case 3: // Thanh Lapsiding (thay thế cho Ghế làm việc)
+                $viewPage = 'user/xmgg/lapsiding';
                 break;
-            case 4: // Kệ phòng khách
-                $viewPage = 'user/phongkhach/kephongkhach';
+            case 4: // Thanh Array (thay thế cho Kệ phòng khách)
+                $viewPage = 'user/xmgg/array';
                 break;
-            case 5: // Kệ sách
-                $viewPage = 'user/phonglamviec/kesach';
+            case 5: // Thanh Deck (thay thế cho Kệ sách)
+                $viewPage = 'user/xmgg/deck';
                 break;
-            case 6: // Giường ngủ
-                $viewPage = 'user/phongngu/giuongngu';
+            case 6: // Thanh Mould (thay thế cho Giường ngủ)
+                $viewPage = 'user/xmgg/mould';
                 break;
             case 7: // Nệm
                 $viewPage = 'user/phongngu/nem';
@@ -97,34 +98,34 @@ class ProductController extends Controller
 
 
 
-    public function showsofa()
+    public function showthanhlath()
     {
-        $this->showProductsByCategory(1); // category_id cho sofa
+        $this->showProductsByCategory(1); // category_id cho thanh lath (thay thế cho sofa)
     }
 
-    public function showghean()
+    public function showplank()
     {
-        $this->showProductsByCategory(2); // category_id cho ghế ăn
+        $this->showProductsByCategory(2); // category_id cho thanh plank (thay thế cho ghế ăn)
     }
 
-    public function showghelamviec()
+    public function showlapsiding()
     {
-        $this->showProductsByCategory(3); // category_id cho ghế làm việc
+        $this->showProductsByCategory(3); // category_id cho thanh lapsiding (thay thế cho ghế làm việc)
     }
 
-    public function showkephongkhach()
+    public function showarray()
     {
-        $this->showProductsByCategory(4); // category_id cho kệ phòng khách
+        $this->showProductsByCategory(4); // category_id cho thanh array (thay thế cho kệ phòng khách)
     }
 
-    public function showkesach()
+    public function showdeck()
     {
-        $this->showProductsByCategory(5); // category_id cho kệ sách
+        $this->showProductsByCategory(5); // category_id cho thanh deck (thay thế cho kệ sách)
     }
 
-    public function showgiuongngu()
+    public function showmould()
     {
-        $this->showProductsByCategory(6); // category_id cho giường ngủ
+        $this->showProductsByCategory(6); // category_id cho thanh mould (thay thế cho giường ngủ)
     }
 
     public function shownem()
@@ -258,6 +259,8 @@ class ProductController extends Controller
         // Lấy hình ảnh cho từng sản phẩm
         foreach ($products as &$product) {
             $product['images'] = $productImageModel->getImagesByProductId($product['product_id']);
+            $mainImage = $productImageModel->getMainImageForDisplay($product['product_id']);
+            $product['main_image'] = $mainImage ? $mainImage['image_url'] : 'default.jpg';
         }
 
         // Gửi dữ liệu đến view 'user/sanpham'
@@ -285,6 +288,8 @@ class ProductController extends Controller
         if ($product) {
             // Lấy hình ảnh cho sản phẩm dựa vào `product_id`
             $product['images'] = $productImageModel->getImagesByProductId($id);
+            $mainImage = $productImageModel->getMainImageForDisplay($id);
+            $product['main_image'] = $mainImage ? $mainImage['image_url'] : 'default.jpg';
 
             // Lấy danh sách sản phẩm liên quan dựa trên cùng loại (`category_id`)
             $categoryId = $product['category_id'];
@@ -293,6 +298,8 @@ class ProductController extends Controller
             // Lấy hình ảnh cho từng sản phẩm liên quan
             foreach ($relatedProducts as &$relatedProduct) {
                 $relatedProduct['images'] = $productImageModel->getImagesByProductId($relatedProduct['product_id']);
+                $mainImage = $productImageModel->getMainImageForDisplay($relatedProduct['product_id']);
+                $relatedProduct['main_image'] = $mainImage ? $mainImage['image_url'] : 'default.jpg';
             }
 
             // Gửi dữ liệu sản phẩm và sản phẩm liên quan đến view 'user/chitietsanpham'

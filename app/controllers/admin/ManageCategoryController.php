@@ -151,4 +151,43 @@ class ManageCategoryController extends Controller
             exit;
         }
     }
+
+    // Bulk update categories theo yêu cầu
+    public function bulkUpdateCategories()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $updates = [
+                2 => 'Thanh Plank',
+                3 => 'Thanh Lapsiding', 
+                4 => 'Thanh Array',
+                5 => 'Thanh Deck',
+                6 => 'Thanh Mould'
+            ];
+
+            $successCount = 0;
+            $errorCount = 0;
+
+            foreach ($updates as $categoryId => $newName) {
+                try {
+                    $result = $this->categoryModel->updateCategory($categoryId, ['category_name' => $newName]);
+                    if ($result) {
+                        $successCount++;
+                    } else {
+                        $errorCount++;
+                    }
+                } catch (Exception $e) {
+                    $errorCount++;
+                }
+            }
+
+            if ($errorCount === 0) {
+                $_SESSION['success_message'] = "Đã cập nhật thành công {$successCount} danh mục!";
+            } else {
+                $_SESSION['error_message'] = "Cập nhật {$successCount} danh mục thành công, {$errorCount} danh mục lỗi.";
+            }
+
+            header('Location: /admin/viewCategory');
+            exit;
+        }
+    }
 }

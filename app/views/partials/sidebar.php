@@ -35,10 +35,14 @@
             </a>
             <a href="/admin/viewCategory" class="menu-item">
                 <i class="fa fa-th"></i>
-                <span>Hạng mục</span>
+                <span>Danh mục</span>
                 <?php if (!empty($countNewCategories)): ?>
                     <span class="badge badge-notify ms-auto"><?php echo $countNewCategories; ?></span>
                 <?php endif; ?>
+            </a>
+            <a href="/admin/hangmuc" class="menu-item">
+                <i class="fa fa-cogs"></i>
+                <span>Danh mục</span>
             </a>
             <a href="/admin/viewOrders" class="menu-item">
                 <i class="fa fa-shopping-cart"></i>

@@ -6,8 +6,8 @@ $router->get(
 );
 
 $router->get(
-    '/phongkhach/sofa',
-    '\App\Controllers\User\ProductController@showsofa'
+    '/xmgg/thanhlath',
+    '\App\Controllers\User\ProductController@showthanhlath'
 );
 
 $router->get(
@@ -18,28 +18,28 @@ $router->get(
 
 
 $router->get(
-    '/phongan/ghean',
-    '\App\Controllers\User\ProductController@showghean'
+    '/xmgg/plank',
+    '\App\Controllers\User\ProductController@showplank'
 );
 
 $router->get(
-    '/phonglamviec/ghelamviec',
-    '\App\Controllers\User\ProductController@showghelamviec'
+    '/xmgg/lapsiding',
+    '\App\Controllers\User\ProductController@showlapsiding'
 );
 
 $router->get(
-    '/phongkhach/kephongkhach',
-    '\App\Controllers\User\ProductController@showkephongkhach'
+    '/xmgg/array',
+    '\App\Controllers\User\ProductController@showarray'
 );
 
 $router->get(
-    '/phonglamviec/kesach',
-    '\App\Controllers\User\ProductController@showkesach'
+    '/xmgg/deck',
+    '\App\Controllers\User\ProductController@showdeck'
 );
 
 $router->get(
-    '/phongngu/giuongngu',
-    '\App\Controllers\User\ProductController@showgiuongngu'
+    '/xmgg/mould',
+    '\App\Controllers\User\ProductController@showmould'
 );
 
 $router->get(
@@ -75,6 +75,11 @@ $router->get(
 $router->get(
     '/phongan/tuly',
     '\App\Controllers\User\ProductController@showtuly'
+);
+
+$router->get(
+    '/phongan/tuao',
+    '\App\Controllers\User\ProductController@showtuao'
 );
 
 $router->get(

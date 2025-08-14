@@ -8,7 +8,7 @@ include_once __DIR__ . '/../partials/header.php';
 
 <body>
     <!-- Navbar -->
-    <div class="container mb-3"> <?php include_once __DIR__ . '/../partials/navbar.php'; ?></div>
+    <?php include_once __DIR__ . '/../partials/navbar.php'; ?>
 
 
     <!-- Main Page Content -->
@@ -79,7 +79,7 @@ include_once __DIR__ . '/../partials/header.php';
                         <div class="col-md-6 mb-4 col-lg-6">
                             <div class="position-relative">
                                 <a href="/lam">
-                                    <img src="/images/hangmuc/lam/lam.jpg" class="img-fluid" alt="Bàn Ăn">
+                                    <img src="/images/hangmuc/lam/lam.JPG" class="img-fluid" alt="Bàn Ăn">
                                     <h3 class="position-absolute text-light" style="bottom: 10px; left: 20px;">LAM</h3>
                                 </a>
                             </div>
@@ -87,7 +87,7 @@ include_once __DIR__ . '/../partials/header.php';
                         <div class="col-md-6 mb-4 col-lg-6">
                             <div class="position-relative">
                                 <a href="/tran">
-                                    <img src="/images/hangmuc/tran/tran.JPG" class="img-fluid" alt="Giường">
+                                    <img src="/images/hangmuc/tran/tran1.JPG" class="img-fluid" alt="Giường">
                                     <h3 class="position-absolute text-light" style="bottom: 10px; left: 20px;">TRẦN</h3>
                                 </a>
 
@@ -96,7 +96,7 @@ include_once __DIR__ . '/../partials/header.php';
                         <div class="col-md-6 mb-4 col-lg-6">
                             <div class="position-relative">
                                 <a href="/vach">
-                                    <img src="/images/hangmuc/vach/vach.jpg" class="img-fluid" alt="Arm Chair">
+                                    <img src="/images/hangmuc/vach/vach.JPG" class="img-fluid" alt="Arm Chair">
                                     <h3 class="position-absolute text-light" style="bottom: 10px; left: 20px;">VÁCH</h3>
                                 </a>
 
@@ -105,7 +105,7 @@ include_once __DIR__ . '/../partials/header.php';
                         <div class="col-md-6 mb-4 col-lg-6">
                             <div class="position-relative">
                                 <a href="/cua">
-                                    <img src="/images/hangmuc/cua/cua1.png" class="img-fluid" alt="Ghế Ăn">
+                                    <img src="/images/hangmuc/cua/mattien.png" class="img-fluid" alt="Ghế Ăn">
                                     <h3 class="position-absolute text-light" style="bottom: 10px; left: 20px;">CỬA</h3>
                                 </a>
                             </div>
@@ -117,7 +117,10 @@ include_once __DIR__ . '/../partials/header.php';
 
         <div class="container mb-3">
             <div class="title text-center py-3">
-                <h2 class="position-relative d-inline-block"> <img src="/images/GIF/new-blinking.gif" alt="Hot" class="gif-icon">Sản phẩm<img src="/images/GIF/new-blinking.gif" alt="Hot" class="gif-icon">
+                <h2 class="position-relative d-flex align-items-center justify-content-center"> 
+                    <img src="/images/GIF/new-blinking.gif" alt="Hot" class="gif-icon me-3">
+                    <span>Sản Phẩm Xi Măng Giả Gỗ</span>
+                    <img src="/images/GIF/new-blinking.gif" alt="Hot" class="gif-icon ms-3">
                 </h2>
             </div>
             <div id="newProductsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
@@ -177,8 +180,10 @@ include_once __DIR__ . '/../partials/header.php';
 
         <div class="container mb-3">
             <div class="title text-center py-3">
-                <h2
-                    class="position-relative d-inline-block"> <img src="/images/GIF/ban_chay.gif" alt="Hot" class="gif-icon-2"> Sản Phẩm Bán Chạy<img src="/images/GIF/ban_chay.gif" alt="Hot" class="gif-icon-2">
+                <h2 class="position-relative d-flex align-items-center justify-content-center">
+                    <img src="/images/GIF/ban_chay.gif" alt="Hot" class="gif-icon-2 me-3">
+                    <span>Nội Thất</span>
+                    <img src="/images/GIF/ban_chay.gif" alt="Hot" class="gif-icon-2 ms-3">
                 </h2>
             </div>
             <div id="bestsellersCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
@@ -234,6 +239,7 @@ include_once __DIR__ . '/../partials/header.php';
             </div>
 
 
+        </div>
 
             <div>
                 <!-- Thiết kế thêm 1 số giao diện đẹp tại đây có thể có hinh ảnh để đi tới phòng khách, phòng ngủ,...-->
@@ -244,7 +250,7 @@ include_once __DIR__ . '/../partials/header.php';
                     <div class="col-md-3 mb-3 product-item">
                         <div class="mt-3">
                             <a href="/cua">
-                                <img src="/images/hangmuc/cua/cua.png" class="card-img-top" alt="Phòng Khách">
+                                <img src="/images/hangmuc/cua/cua1.png" class="card-img-top" alt="Phòng Khách">
                             </a>
                             <div class="card-body text-center ">
                                 <h5 class="card-title mt-3" style="  font-size: 18px;font-weight: bold;">CỬA</h5>
@@ -255,7 +261,7 @@ include_once __DIR__ . '/../partials/header.php';
                     <div class="col-md-3 mb-3 product-item">
                         <div class="mt-3">
                             <a href="/bonhoa">
-                                <img src="/images/banghe.png" class="card-img-top" alt="Phòng Ngủ">
+                                <img src="/images/hangmuc/bonhoa/banghe.png" class="card-img-top" alt="Phòng Ngủ">
                             </a>
                             <div class="card-body text-center">
                                 <h5 class="card-title mt-3" style="  font-size: 18px;font-weight: bold;">BÀN GHẾ</h5>
@@ -277,7 +283,7 @@ include_once __DIR__ . '/../partials/header.php';
                     <div class="col-md-3 mb-3 product-item">
                         <div class="mt-3">
                             <a href="/phongan">
-                                <img src="/images/banghieu.png" class="card-img-top" alt="Phòng Ăn">
+                                <img src="/images/hangmuc/bonhoa/banghieu.png" class="card-img-top" alt="Phòng Ăn">
                             </a>
                             <div class="card-body text-center">
                                 <h5 class="card-title mt-3" style="  font-size:18px;font-weight: bold;">BẢNG HIỆU</h5>
@@ -296,92 +302,6 @@ include_once __DIR__ . '/../partials/header.php';
 
     <!-- Scripts -->
     <script src="/js/script.js"></script>
-
-    <script>
-        // Tự động ẩn thông báo sau 2 giây
-        setTimeout(function() {
-            const alert = document.getElementById('success-alert');
-            if (alert) {
-                alert.style.display = 'none';
-            }
-        }, 3000); // 2000ms = 2 giây
-
-        // Xử lý nút yêu thích
-        document.querySelectorAll('.add-favorite').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const productId = this.getAttribute('data-product-id');
-                
-                fetch('/add-favorite', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: 'product_id=' + encodeURIComponent(productId)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert(data.message);
-                        updateFavoriteCount();
-                    } else {
-                        alert(data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Có lỗi xảy ra');
-                });
-            });
-        });
-
-        // Xử lý nút thêm vào giỏ hàng
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const productId = this.getAttribute('data-product-id');
-                
-                fetch('/ajax-add-to-cart', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: 'product_id=' + encodeURIComponent(productId) + '&quantity=1'
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Đã thêm vào giỏ hàng!');
-                        updateCartCount();
-                    } else {
-                        alert(data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Có lỗi xảy ra');
-                });
-            });
-        });
-
-        // Cập nhật số lượng yêu thích
-        function updateFavoriteCount() {
-            const favoriteBadge = document.querySelector('.favorite-badge');
-            if (favoriteBadge) {
-                const currentCount = parseInt(favoriteBadge.textContent) || 0;
-                favoriteBadge.textContent = currentCount + 1;
-            }
-        }
-
-        // Cập nhật số lượng giỏ hàng
-        function updateCartCount() {
-            const cartBadge = document.querySelector('.cart-badge');
-            if (cartBadge) {
-                const currentCount = parseInt(cartBadge.textContent) || 0;
-                cartBadge.textContent = currentCount + 1;
-            }
-        }
-    </script>
 </body>
 
 </html>

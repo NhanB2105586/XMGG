@@ -24,11 +24,13 @@ class UserController extends Controller
         // Lấy hình ảnh cho từng sản phẩm mới
         foreach ($newProducts as &$product) {
             $product['images'] = $productImageModel->getImagesByProductId($product['product_id']);
+            $product['main_image'] = $productImageModel->getMainImageForDisplay($product['product_id']);
         }
 
         // Lấy hình ảnh cho từng sản phẩm bán chạy
         foreach ($bestsellers as &$product) {
             $product['images'] = $productImageModel->getImagesByProductId($product['product_id']);
+            $product['main_image'] = $productImageModel->getMainImageForDisplay($product['product_id']);
         }
 
         // Gửi dữ liệu đến view
@@ -80,6 +82,47 @@ class UserController extends Controller
     public function showbosuutap()
     {
         $this->sendPage('user/bosuutap');
+    }
+
+    // Methods cho các hạng mục mới
+    public function showvach()
+    {
+        $this->sendPage('user/vach');
+    }
+
+    public function showcua()
+    {
+        $this->sendPage('user/cua');
+    }
+
+    public function showhangrao()
+    {
+        $this->sendPage('user/hangrao');
+    }
+
+    public function showlam()
+    {
+        $this->sendPage('user/lam');
+    }
+
+    public function showsan()
+    {
+        $this->sendPage('user/san');
+    }
+
+    public function showtran()
+    {
+        $this->sendPage('user/tran');
+    }
+
+    public function showcauthang()
+    {
+        $this->sendPage('user/cauthang');
+    }
+
+    public function showbonhoa()
+    {
+        $this->sendPage('user/bonhoa');
     }
 
     public function showhoso()

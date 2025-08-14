@@ -116,3 +116,45 @@ function retrieveTypeItem(int $type): string
 
     return $typeName;
 }
+
+# get image path for product images
+function getImagePath(string $imageUrl): string
+{
+    // Nếu imageUrl đã có đường dẫn đầy đủ, trả về nguyên bản
+    if (strpos($imageUrl, 'http') === 0) {
+        return $imageUrl;
+    }
+
+    // Nếu imageUrl chỉ là tên file, thêm đường dẫn upload
+    if (strpos($imageUrl, '/') !== 0) {
+        return '/images/upload/' . $imageUrl;
+    }
+
+    // Trả về nguyên bản nếu đã có đường dẫn tương đối
+    return $imageUrl;
+}
+
+# get main image for product display
+function getMainImage($product): ?string
+{
+    // Nếu có main_image được set
+    if (isset($product['main_image']) && $product['main_image']) {
+        return getImagePath($product['main_image']['image_url']);
+    }
+    
+    // Nếu có images array, lấy ảnh đầu tiên
+    if (isset($product['images']) && !empty($product['images'])) {
+        return getImagePath($product['images'][0]['image_url']);
+    }
+    
+    // Trả về ảnh mặc định
+    return '/images/upload/default.jpg';
+}
+
+# check if image is main image (ảnh đầu tiên)
+function isMainImage($productId, $imageId): bool
+{
+    // Đơn giản: ảnh chính là ảnh đầu tiên trong danh sách
+    // Logic này sẽ được xử lý trong Model, helper chỉ để tương thích
+    return false; // Sẽ được override bởi Model
+}

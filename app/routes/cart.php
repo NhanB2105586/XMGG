@@ -27,4 +27,38 @@ $router->post('/cart/buynow', function () {
     $cartController->buyNow($userId, $productId, $quantity);
 });
 
+$router->post(
+    '/ajax-add-to-cart',
+    '\App\Controllers\User\AjaxCartController@addToCart'
+);
+
+$router->post(
+    '/add-favorite',
+    '\App\Controllers\User\FavoriteController@addFavorite'
+);
+
+$router->get(
+    '/get-favorite-count',
+    '\App\Controllers\User\FavoriteController@getFavoriteCount'
+);
+
+$router->get(
+    '/get-cart-count',
+    '\App\Controllers\User\AjaxCartController@getCartCount'
+);
+
+$router->get(
+    '/get-product-stock/(\d+)',
+    '\App\Controllers\User\AjaxCartController@getProductStock'
+);
+
+$router->post(
+    '/update-product-stock',
+    '\App\Controllers\User\AjaxCartController@updateProductStock'
+);
+
+$router->post('/confirm-purchase', function() use ($PDO) {
+$ajaxCartController = new App\Controllers\User\AjaxCartController();
+$ajaxCartController->confirmPurchase();
+});
 ?>

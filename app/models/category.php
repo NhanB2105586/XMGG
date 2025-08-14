@@ -50,4 +50,23 @@ class Category extends Model
         return $this->getTotalItemsCategories('categories', $searchTerm);
     }
 
+    // Kiểm tra xem danh mục đã tồn tại chưa
+    public function categoryExists($categoryName, $excludeId = null)
+    {
+        $sql = "SELECT COUNT(*) FROM categories WHERE category_name = :category_name";
+        $params = [':category_name' => $categoryName];
+        
+        if ($excludeId) {
+            $sql .= " AND category_id != :exclude_id";
+            $params[':exclude_id'] = $excludeId;
+        }
+        
+        $stmt = $this->db->prepare($sql);
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value);
+        }
+        $stmt->execute();
+        
+        return $stmt->fetchColumn() > 0;
+    }
 }

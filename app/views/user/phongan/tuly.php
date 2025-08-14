@@ -17,10 +17,10 @@ use App\Models\Product;
         <!-- Phần hình ảnh trên cùng -->
         <div class="top-banner">
             <div class="banner-text">
-                Tủ ly
+                Tủ Ly
                 <div class="breadcrumb">
-                    <a href="/">Trang chủ</a>&nbsp;/&nbsp; <a href="/phongan">Phòng ăn</a>/&nbsp<a
-                        href="/phongan/tuly"> <strong class="current-page">Tủ ly</strong></a>
+                    <a href="/">Trang chủ</a>&nbsp;</a>/&nbsp<a
+                        href="/phongan/SUBphongan"> <strong class="current-page">Tủ Ly</strong></a>
                 </div>
             </div>
         </div>
@@ -36,8 +36,6 @@ use App\Models\Product;
                 </select>
             </div>
 
-
-
             <button class="btn apply-filter-btn">ÁP DỤNG</button>
         </div>
 
@@ -46,13 +44,13 @@ use App\Models\Product;
             <div class="special-list row g-0 ">
                 <?php foreach ($products as $product): ?>
                     <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                            <div class="special-img position-relative overflow-hidden">
+                        <div class="special-img position-relative overflow-hidden">
                             <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>">
                                 <?php
                                 // Hiển thị hình ảnh đầu tiên nếu có, nếu không, hiển thị một ảnh mặc định
                                 $image_url = !empty($product['images'][0]['image_url']) ? $product['images'][0]['image_url'] : 'default.jpg';
                                 ?>
-                                <img src="/images/upload/<?php echo htmlspecialchars($image_url); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                                <img src="<?php echo htmlspecialchars(getImagePath($image_url)); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
                             </a>
 
                         </div>
@@ -61,15 +59,20 @@ use App\Models\Product;
                             <div class="d-flex">
                                 <span class="fw-bold d-block"><?php echo number_format($product['price'], 0, ',', '.') . 'đ'; ?></span>
                                 <span class="price-old"><?php echo number_format($product['old_price'], 0, ',', '.') . 'đ'; ?></span>
-                            </div>
-                        </div>
+                            </div></div>
                         <div class="d-flex justify-content-between gap-2">
                             <button class="btn btn-product mt-3 p-2 add-favorite" data-product-id="<?php echo htmlspecialchars($product['product_id']); ?>" style="flex: 1;">
                                 Yêu thích
                             </button>
-                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="<?php echo htmlspecialchars($product['product_id']); ?>" style="flex: 1;">
-                                Thêm Vào Giỏ
-                            </button>
+                            <?php if ($product['in_stock'] > 0): ?>
+                                <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="<?php echo htmlspecialchars($product['product_id']); ?>" style="flex: 1;">
+                                    Thêm Vào Giỏ
+                                </button>
+                            <?php else: ?>
+                                <button class="btn btn-secondary mt-3 p-2" disabled style="flex: 1;">
+                                    Hết Hàng
+                                </button>
+                            <?php endif; ?>
                             <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
                                 Chi Tiết
                             </a>
@@ -85,6 +88,7 @@ use App\Models\Product;
     <?php include_once __DIR__ . '/../../partials/footer.php'; ?>
 
     <!-- Scripts -->
+    
     <script>
         // Xử lý nút yêu thích
         document.querySelectorAll('.add-favorite').forEach(button => {
@@ -103,7 +107,8 @@ use App\Models\Product;
                 .then(data => {
                     if (data.success) {
                         alert(data.message);
-                        updateFavoriteCount();
+                        // Tự động reset trang để cập nhật
+                        location.reload();
                     } else {
                         alert(data.message);
                     }
@@ -132,7 +137,8 @@ use App\Models\Product;
                 .then(data => {
                     if (data.success) {
                         alert('Đã thêm vào giỏ hàng!');
-                        updateCartCount();
+                        // Tự động reset trang để cập nhật
+                        location.reload();
                     } else {
                         alert(data.message);
                     }
@@ -166,6 +172,7 @@ use App\Models\Product;
                         cartBadge.textContent = data.count;
                     }
                 });
-        }
-    </script>
+        }</script>
+
 </body>
+</html>

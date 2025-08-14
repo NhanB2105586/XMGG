@@ -16,7 +16,15 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                 </form>
             </div>
-            <a href="/admin/addCategory" class="btn btn-primary btn-add">Thêm Hạng mục</a>
+            <div>
+                <form action="/admin/bulkUpdateCategories" method="POST" style="display: inline;" 
+                      onsubmit="return confirm('Bạn có chắc chắn muốn cập nhật tên các danh mục theo yêu cầu?')">
+                    <button type="submit" class="btn btn-warning me-2">
+                        <i class="fas fa-sync-alt"></i> Cập nhật tên danh mục
+                    </button>
+                </form>
+                <a href="/admin/addCategory" class="btn btn-primary btn-add">Thêm Danh mục</a>
+            </div>
         </div>
         <div class="table-responsive">
             <?php if (!empty($essage)): ?>
@@ -58,7 +66,7 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                 <thead>
                     <tr>
                         <th class="text-center">STT</th>
-                        <th class="text-center">Tên Hạng mục</th>
+                        <th class="text-center">Tên Danh mục</th>
                         <th class="text-center">Hành Động</th>
                     </tr>
                 </thead>
@@ -82,7 +90,7 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                     <?php endforeach; ?>
                     <?php else: ?>
                     <tr>
-                        <td colspan="3" class="text-center">Không có hạng mục nào.</td>
+                        <td colspan="3" class="text-center">Không có danh mục nào.</td>
                     </tr>
                     <?php endif; ?>
                 </tbody>

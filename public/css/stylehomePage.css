@@ -99,9 +99,16 @@
 
 .carousel-inner .carousel-item img {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 500px; /* Chiều cao cố định cho slide */
+    height: 500px; /* Chiều cao cố định */
     object-fit: cover; /* Đảm bảo ảnh vừa khung */
     width: 100%;
+}
+
+/* Đảm bảo carousel không đè lên navbar */
+#carouselExample {
+    position: relative;
+    z-index: 1;
+    margin-top: 0;
 }
 
 .carousel-inner .carousel-item img:hover {
@@ -121,5 +128,192 @@
         height: 200px;
     }
 }
+
+/* Responsive cho HomePage - Fix phóng to/thu nhỏ */
+.mainHomePage {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Fix cho category images trong homePage - using viewport units */
+@media (max-width: 1200px) {
+    .mainHomePage .col-md-6 {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 992px) {
+    .mainHomePage .col-md-6 {
+        padding: 6px;
+    }
+    
+    .mainHomePage h3 {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .mainHomePage .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+        padding: 4px;
+    }
+    
+    .mainHomePage h3 {
+        font-size: 1rem;
+        bottom: 5px !important;
+        left: 10px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .mainHomePage .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding: 3px;
+        margin-bottom: 10px;
+    }
+    
+    .mainHomePage h3 {
+        font-size: 0.9rem;
+        bottom: 3px !important;
+        left: 8px !important;
+    }
+}
+
+/* Fix cho product sections */
+.product-item {
+    overflow: hidden;
+    max-width: 100%;
+}
+
+.product-item img {
+    transition: transform 0.3s ease;
+}
+
+.product-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Fix responsive cho homePage - Tương tự stylesanpham.css */
+/* Đảm bảo container responsive */
+.container-fluid {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Fix cho carousel */
+.carousel-inner,
+.carousel-item {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Fix cho sections khác */
+.card, .card-body {
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+/* Grid system như stylesanpham.css */
+@media (max-width: 768px) {
+    .mainHomePage .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    
+    /* Fix cho các elements cố định */
+    .carousel-item img {
+        height: auto;
+        min-height: 200px;
+    }
+    
+    /* Đảm bảo text không overflow */
+    h1, h2, h3, h4, h5, h6 {
+        word-break: break-word;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .mainHomePage .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    /* Stack tất cả columns trên mobile */
+    .col-md-3, .col-md-4, .col-md-6, .col-lg-3, .col-lg-4, .col-lg-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    .carousel-item img {
+        height: auto;
+        min-height: 150px;
+    }
+}
+
+/* Fix đặc biệt cho zoom issues */
+@media (min-width: 1200px) and (max-width: 1600px) {
+    .container {
+        max-width: 95%;
+    }
+}
+
+@media (min-width: 1600px) {
+    .container {
+        max-width: 90%;
+    }
+}
+
+/* Định dạng chung cho tất cả tiêu đề chính */
+.title h2,
+.title h2 span {
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+    color: #2c3e50 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    text-align: center !important;
+    margin-bottom: 20px !important;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1) !important;
+}
+
+/* Đảm bảo tất cả tiêu đề có cùng style */
+.title h2 {
+    position: relative;
+    display: inline-block;
+}
+
+/* Responsive cho tiêu đề */
+@media (max-width: 768px) {
+    .title h2,
+    .title h2 span {
+        font-size: 1.6rem !important;
+        letter-spacing: 1px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .title h2,
+    .title h2 span {
+        font-size: 1.3rem !important;
+        letter-spacing: 0.5px !important;
+    }
+}
+
+
+
+
+
+
 
 

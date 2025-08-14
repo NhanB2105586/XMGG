@@ -18,6 +18,11 @@ class PDOFactory
         $dbpass = $_ENV['DB_PASS'];
 
         $dsn = "mysql:host={$dbhost};dbname={$dbname};charset=utf8mb4";
-        return new PDO($dsn, $dbuser, $dbpass);
+        $options = [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci"
+        ];
+        return new PDO($dsn, $dbuser, $dbpass, $options);
     }
 }

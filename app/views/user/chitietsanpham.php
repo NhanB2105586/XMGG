@@ -16,6 +16,14 @@ include_once __DIR__ . '/../partials/header.php';
             <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="#"><strong
                     class="current-page"><?php echo htmlspecialchars($product['product_name']); ?></strong></a>
         </div>
+        
+        <!-- Nút Quay về trang trước -->
+        <div class="back-button-container mb-3">
+            <button type="button" class="btn btn-outline-secondary back-btn" onclick="goBack()" title="Quay về trang trước">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+        </div>
+        
         <div class="row detail-product-first">
 
             <div id="carouselExample" class="detail-product-slider carousel slide col-lg-6 col-sm-12"
@@ -56,7 +64,7 @@ include_once __DIR__ . '/../partials/header.php';
                     <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="<?php echo $index; ?>"
                         class="<?php echo $index === 0 ? 'active' : ''; ?>" aria-current="true"
                         aria-label="Slide <?php echo $index + 1; ?>" style="width: 100px;">
-                        <img src="/images/upload/<?php echo htmlspecialchars($image['image_url']); ?>"
+                        <img src="<?php echo htmlspecialchars(getImagePath($image['image_url'])); ?>"
                             class="d-block img-thumbnail img-fluid" />
                     </button>
                     <?php endforeach; ?>
@@ -170,7 +178,7 @@ include_once __DIR__ . '/../partials/header.php';
                             <p><?php echo $content; ?></p>
 
                             <?php if (isset($product['images'][$index])): ?>
-                                <img src="/images/upload/<?php echo htmlspecialchars($product['images'][$index]['image_url'] ?? ''); ?>"
+                                <img src="<?php echo htmlspecialchars(getImagePath($product['images'][$index]['image_url'] ?? '')); ?>"
                                     alt="<?php echo htmlspecialchars($product['images'][$index]['alt_text'] ?? 'No description'); ?>"
                                     class="d-block w-100 h-100 img-fluid">
                                 <br>
@@ -200,7 +208,7 @@ include_once __DIR__ . '/../partials/header.php';
                                     <div class="product-item col-md-3">
                                         <div class="special-img position-relative overflow-hidden">
                                             <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>">
-                                                <img src="/images/upload/<?php echo htmlspecialchars($product['images'][0]['image_url']); ?>" class="" alt="<?php echo htmlspecialchars($product['product_name']); ?>" style="height: 200px;">
+                                                <img src="<?php echo htmlspecialchars(getImagePath($product['images'][0]['image_url'])); ?>" class="" alt="<?php echo htmlspecialchars($product['product_name']); ?>" style="height: 200px;">
                                             </a>
                                         </div>
                                         <div class="text-start m-1">
@@ -338,10 +346,46 @@ include_once __DIR__ . '/../partials/header.php';
         buyNowBtn.addEventListener('click', () => {
             let quantity = parseInt(quantityInput.value) || 1;
             if (quantity <= inStock) {
-                buyNowQuantityInput.value = quantity;
-                buyNowForm.submit();
+                // Sử dụng confirmPurchase thay vì submit form
+                fetch('/confirm-purchase', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'product_id=' + encodeURIComponent(<?php echo htmlspecialchars($product['product_id']); ?>) + '&quantity=' + quantity
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Đã mua hàng thành công!');
+                        // Cập nhật hiển thị số lượng
+                        document.getElementById('inStockDisplay').textContent = 'Số lượng còn lại: ' + data.new_stock;
+                        // Cập nhật biến inStock
+                        window.inStock = data.new_stock;
+                        // Nếu hết hàng, vô hiệu hóa nút
+                        if (data.new_stock <= 0) {
+                            document.getElementById('inStockDisplay').textContent = 'Hết hàng';
+                            document.getElementById('inStockDisplay').className = 'fw-bold text-danger';
+                            addToCartBtn.disabled = true;
+                            buyNowBtn.disabled = true;
+                        }
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra khi mua hàng');
+                });
+            } else {
+                alert('Số lượng vượt quá hàng trong kho!');
             }
         });
+
+        // Hàm để quay về trang trước
+        function goBack() {
+            window.history.back();
+        }
     </script>
 
 </body>

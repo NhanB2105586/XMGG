@@ -45,12 +45,17 @@ class AdminController extends Controller
         }
         // Lấy số liệu thống kê
         $data = $this->getStatistics();
+        
+        // Lấy doanh thu theo tháng
+        $monthlyRevenue = $this->model->getMonthlyRevenue();
+        
         $this->sendPage('/admin/dashboard', [
             'admin' => $_SESSION['admin'],
             'userCount' => $data['userCount'],
             'orderCount' => $data['orderCount'],
             'successfulOrders' => $data['successfulOrders'],
             'revenue' => $data['revenue'],
+            'monthlyRevenue' => $monthlyRevenue,
         ]);
     }
     // Hiển thị trang đăng nhập
@@ -101,6 +106,37 @@ class AdminController extends Controller
 
         header('Location: /admin/login');
         exit;
+    }
+
+    // API để lấy hóa đơn theo tháng
+    public function getOrdersByMonth()
+    {
+        if (!isset($_SESSION['admin'])) {
+            http_response_code(401);
+            echo json_encode(['error' => 'Unauthorized']);
+            return;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo json_encode(['error' => 'Method not allowed']);
+            return;
+        }
+
+        $input = json_decode(file_get_contents('php://input'), true);
+        $month = isset($input['month']) ? (int)$input['month'] : null;
+        $year = isset($input['year']) ? (int)$input['year'] : date('Y');
+
+        if (!$month || $month < 1 || $month > 12) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Invalid month']);
+            return;
+        }
+
+        $orders = $this->model->getOrdersByMonth($month, $year);
+        
+        header('Content-Type: application/json');
+        echo json_encode(['orders' => $orders]);
     }
     
 }

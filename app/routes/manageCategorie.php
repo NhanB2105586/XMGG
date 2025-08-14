@@ -32,3 +32,9 @@ $router->post('/admin/deleteCategory', function () use ($PDO) {
     $categoryController = new App\Controllers\Admin\ManageCategoryController($PDO);
     $categoryController->deletecategory();
 });
+
+// Bulk update categories
+$router->post('/admin/bulkUpdateCategories', function () use ($PDO) {
+    $categoryController = new App\Controllers\Admin\ManageCategoryController($PDO);
+    $categoryController->bulkUpdateCategories();
+});

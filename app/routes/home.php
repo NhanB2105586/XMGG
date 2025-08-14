@@ -46,5 +46,14 @@ $router->get(
     '\App\Controllers\User\UserController@showbosuutap'
 );
 
+// Routes cho các hạng mục mới
+$router->get('/vach', '\App\Controllers\User\UserController@showvach');
+$router->get('/cua', '\App\Controllers\User\UserController@showcua');
+$router->get('/hangrao', '\App\Controllers\User\UserController@showhangrao');
+$router->get('/lam', '\App\Controllers\User\UserController@showlam');
+$router->get('/san', '\App\Controllers\User\UserController@showsan');
+$router->get('/tran', '\App\Controllers\User\UserController@showtran');
+$router->get('/cauthang', '\App\Controllers\User\UserController@showcauthang');
+$router->get('/bonhoa', '\App\Controllers\User\UserController@showbonhoa');
 
 ?>

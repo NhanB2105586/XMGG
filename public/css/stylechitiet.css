@@ -60,3 +60,37 @@ button[disabled] {
     background-color: #c9c8c8 !important;
     cursor: not-allowed;
 }
+
+/* CSS cho nút quay về trang trước */
+.back-button-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.back-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #6c757d;
+    background: transparent;
+    color: #6c757d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn:hover {
+    background: #6c757d;
+    color: white;
+    transform: translateX(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.back-btn i {
+    font-size: 18px;
+    font-weight: 600;
+}

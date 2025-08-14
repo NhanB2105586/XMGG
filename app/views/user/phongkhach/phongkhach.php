@@ -34,8 +34,8 @@ include_once __DIR__ . '/../../partials/header.php';
                         </li>
                         <li class="list-group-item bg-transparent border-0 fw-bold"><a href="#"
                                 class="text-decoration-none text-dark">Mẫu phòng khách</a></li>
-                        <li class="list-group-item bg-transparent border-0"><a href="/phongkhach/sofa"
-                                class="text-decoration-none text-dark">Sofa</a></li>
+                                        <li class="list-group-item bg-transparent border-0"><a href="/xmgg/thanhlath"
+                        class="text-decoration-none text-dark">Thanh Lath</a></li>
                         <li class="list-group-item bg-transparent border-0"><a href="/phongkhach/bannuoc"
                                 class="text-decoration-none text-dark">Bàn nước</a></li>
                         <li class="list-group-item bg-transparent border-0"><a href="/phongkhach/tutivi"

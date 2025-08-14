@@ -8,7 +8,6 @@ include_once __DIR__ . '/../partials/header.php';
     <!-- Navbar -->
     <?php include_once __DIR__ . '/../partials/navbar.php'; ?>
 
-
     <!-- Main Page Content -->
     <div class="container-fluid main-content mt-3">
         <!-- Phần hình ảnh trên cùng -->
@@ -78,8 +77,22 @@ include_once __DIR__ . '/../partials/header.php';
                     <div class="col-md-6 mb-4">
                         <div class="product-card">
                             <img src="/images/bosuutap/4.png" alt="Product 2" class="img-fluid rounded">
-                            <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Tường</h6>
-                            <p class="text-muted">Ốp tường bằng xi măng giả gỗ không chỉ mang lại vẻ đẹp tự nhiên mà còn tạo cảm giác ấm áp và thân thiện cho cả không gian nội thất lẫn ngoại thất.[...]</p>
+                            <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Cầu thang</h6>
+                            <p class="text-muted">Cầu thang xi măng giả gỗ không chỉ mang lại vẻ đẹp tự nhiên mà còn tạo cảm giác ấm áp và thân thiện cho cả không gian nội thất lẫn ngoại thất.[...]</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="product-card">
+                            <img src="/images/bosuutap/4.png" alt="Product 2" class="img-fluid rounded">
+                            <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Hàng rào</h6>
+                            <p class="text-muted">Hàng rào xi măng giả gỗ là giải pháp lý tưởng cho không gian ngoài trời với độ bền cao, tạo sự riêng tư và an toàn cho công trình.[...]</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="product-card">
+                            <img src="/images/bosuutap/4.png" alt="Product 2" class="img-fluid rounded">
+                            <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Bồn hoa, bàn, ghế</h6>
+                            <p class="text-muted">Bồn hoa, bàn ghế xi măng giả gỗ là giải pháp lý tưởng cho không gian ngoài trời với độ bền cao, tạo không gian xanh và thân thiện.[...]</p>
                         </div>
                     </div>
                       <!-- Thêm các sản phẩm khác -->
@@ -87,8 +100,6 @@ include_once __DIR__ . '/../partials/header.php';
             </div>
         </div>
     </div>
-
-
 
     <!-- Footer -->
     <?php include_once __DIR__ . '/../partials/app.php'; ?>
