@@ -3,8 +3,27 @@ define('ROOTDIR', __DIR__ . DIRECTORY_SEPARATOR);
 
 require_once ROOTDIR . 'vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(ROOTDIR);
-$dotenv->load();
+// Kiểm tra file .env tồn tại trước khi load
+if (file_exists(ROOTDIR . '.env')) {
+    try {
+        $dotenv = Dotenv\Dotenv::createImmutable(ROOTDIR);
+        $dotenv->load();
+    } catch (Exception $e) {
+        // Nếu file .env lỗi, sử dụng giá trị mặc định
+        $_ENV['DB_HOST'] = 'localhost';
+        $_ENV['DB_NAME'] = 'project';
+        $_ENV['DB_USER'] = 'root';
+        $_ENV['DB_PASS'] = '';
+        $_ENV['APP_ENV'] = 'development';
+    }
+} else {
+    // Sử dụng giá trị mặc định nếu không có file .env
+    $_ENV['DB_HOST'] = 'localhost';
+    $_ENV['DB_NAME'] = 'project';
+    $_ENV['DB_USER'] = 'root';
+    $_ENV['DB_PASS'] = '';
+    $_ENV['APP_ENV'] = 'development';
+}
 
 try {
   // Kết nối đến cơ sở dữ liệu
