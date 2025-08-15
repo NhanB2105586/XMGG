@@ -4,18 +4,27 @@ namespace App\Controllers\User;
 
 use App\Controllers\Controller;
 use App\Models\Cart;
+<<<<<<< HEAD
 use App\Models\Product;
+=======
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
 
 class AjaxCartController extends Controller
 {
     private $cartModel;
+<<<<<<< HEAD
     private $productModel;
+=======
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
 
     public function __construct()
     {
         parent::__construct();
         $this->cartModel = new Cart($this->db);
+<<<<<<< HEAD
         $this->productModel = new Product($this->db);
+=======
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
     }
 
     public function addToCart()
@@ -37,6 +46,7 @@ class AjaxCartController extends Controller
             }
 
             try {
+<<<<<<< HEAD
                 // Kiểm tra số lượng sản phẩm hiện có
                 $product = $this->productModel->getProductById($productId);
                 
@@ -51,16 +61,23 @@ class AjaxCartController extends Controller
                 }
 
                 // Thêm sản phẩm vào giỏ hàng (KHÔNG trừ số lượng)
+=======
+                // Thêm sản phẩm vào giỏ hàng
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
                 $this->cartModel->addProduct($_SESSION['user_id'], $productId, $quantity);
                 
                 // Cập nhật lại số loại sản phẩm trong session
                 $_SESSION['cart_product_count'] = $this->cartModel->getProductCountByUserId($_SESSION['user_id']);
                 
+<<<<<<< HEAD
                 echo json_encode([
                     'success' => true, 
                     'message' => 'Đã thêm vào giỏ hàng',
                     'current_stock' => $product['in_stock']
                 ]);
+=======
+                echo json_encode(['success' => true, 'message' => 'Đã thêm vào giỏ hàng']);
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
             } catch (Exception $e) {
                 echo json_encode(['success' => false, 'message' => 'Lỗi: ' . $e->getMessage()]);
             }
@@ -68,6 +85,7 @@ class AjaxCartController extends Controller
             echo json_encode(['success' => false, 'message' => 'Phương thức không được hỗ trợ']);
         }
     }
+<<<<<<< HEAD
 
     public function getCartCount()
     {
@@ -168,3 +186,6 @@ class AjaxCartController extends Controller
         }
     }
 } 
+=======
+} 
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b

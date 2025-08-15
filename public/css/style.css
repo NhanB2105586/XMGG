@@ -98,8 +98,13 @@ footer p {
 }
 /* Carousel */
 .carousel-item img {
+<<<<<<< HEAD
   width: 100%;
   height: 500px;
+=======
+  width: 100vw;
+  height:100vh;
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
   object-fit: cover;
   z-index: 1 !important;
 }
@@ -583,6 +588,7 @@ img{
 .hangmuc-style {
   min-width: 200px; /* hoặc bạn có thể tăng lên nếu chữ dài */
   border-radius: 8px;
+<<<<<<< HEAD
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
   padding: 10px 0;
   font-size: 16px;
@@ -593,6 +599,11 @@ img{
   pointer-events: auto !important;
   overflow: visible !important;
   max-height: none !important;
+=======
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+  font-size: 16px;
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
 }
 
 /* Các mục trong menu */
@@ -602,8 +613,11 @@ img{
   color: #000 !important;
   text-decoration: none !important;
   white-space: nowrap; /* Không cho xuống dòng */
+<<<<<<< HEAD
   background-color: #fff !important;
   transition: all 0.3s ease;
+=======
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
 }
 
 /* Hover đẹp */
@@ -617,6 +631,7 @@ img{
   min-width: 600px; /* đủ cho 2–3 cột */
   padding: 20px 0;
   border-radius: 8px;
+<<<<<<< HEAD
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
   font-size: 16px;
   z-index: 99999 !important; /* Cao hơn tất cả, kể cả slide */
@@ -626,6 +641,10 @@ img{
   pointer-events: auto !important;
   overflow: visible !important;
   max-height: none !important;
+=======
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
 }
 
 /* Các mục bên trong */
@@ -635,12 +654,16 @@ img{
   color: #000 !important;
   text-decoration: none !important;
   white-space: nowrap;
+<<<<<<< HEAD
   background-color: #fff !important;
   transition: all 0.3s ease;
+=======
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
 }
 
 /* Hover đẹp */
 .sanpham-style li a:hover {
+<<<<<<< HEAD
   background-color: #000 !important;
   color: #fff !important;
   font-weight: 500;
@@ -1269,4 +1292,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+=======
+  background-color: #000;
+  color: #fff !important;
+  font-weight: 500;
+}
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
 

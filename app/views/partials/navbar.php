@@ -1,3 +1,4 @@
+
 <!-- navbar -->
 <style>
     /* CSS cho modal nhỏ */
@@ -49,7 +50,11 @@
                             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                             $favoriteModel = new \App\Models\Favorite($pdo);
                             $favoriteCount = $favoriteModel->getFavoriteCount($_SESSION['user_id']);
+<<<<<<< HEAD
                             if ($favoriteCount > 0): ?>
+=======
+                            if ($favoriteCount > 1): ?>
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
                                 <span class="position-absolute top-0 start-100 translate-middle badge bg-danger favorite-badge"><?= $favoriteCount ?></span>
                             <?php endif;
                         } catch (Exception $e) {
@@ -61,7 +66,11 @@
             </button>
             <button type="button" class="btn icon-btn position-relative">
                 <a href="/giohang" class="text-black"><i class="fa fa-shopping-cart"></i>
+<<<<<<< HEAD
                                     <?php if (isset($_SESSION['cart_product_count']) && $_SESSION['cart_product_count'] > 0): ?>
+=======
+                                    <?php if (isset($_SESSION['cart_product_count']) && $_SESSION['cart_product_count'] > 1): ?>
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
                     <span
                         class="position-absolute top-0 start-100 translate-middle badge bg-primary cart-badge"><?= $_SESSION['cart_product_count'] ?></span>
                 <?php endif; ?>
@@ -106,6 +115,7 @@
                         aria-expanded="false">
                         SẢN PHẨM
                     </a>
+<<<<<<< HEAD
                     <ul class="dropdown-menu multi-column columns-1 sanpham-style">
                         <div class="row w-100">
           <div class="col-sm-4">
@@ -146,16 +156,57 @@
                   <a class="nav-link dropdown-toggle" href="/bosuutap" id="productDropdown" role="button"
                         aria-expanded="false">
                         DANH MỤC
+=======
+                    <ul class="dropdown-menu multi-column columns-3 sanpham-style">
+                        <div class="row w-100">
+                            <div class="col-sm-4">
+                                <ul class="multi-column-dropdown">
+                                    <li><a href="/phongkhach/sofa">Thanh diềm mái </a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/phonglamviec/ghelamviec">Thanh trang trí trần</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/phongkhach/kephongkhach">Thanh ốp tường G-Series</a></li>
+                                    <li><a href="/phonglamviec/kesach">Thanh ốp trang trí tường</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/phongngu/giuongngu">Tấm ốp trang trí tường</a></li>
+                                    <li><a href="/phongngu/nem">Thanh ốp tường Siding</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-sm-4 ms-5">
+                                <ul class="multi-column-dropdown">
+                                    <li><a href="/phongkhach/bannuoc">Tấm ốp trang trí tường</a></li>
+                                    <li><a href="/phongan/banan">Thanh lát sàn</a></li>
+                                    <li><a href="/phonglamviec/banlamviec">Thanh trang trí sàn </a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="/phongkhach/tutivi">Thanh trang trí cầu thang</a></li>
+                                    <li><a href="/phongan/tubep">Thanh hàng rào</a></li>
+                                    <li><a href="/phongan/tuly">Thanh trang trí </a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="roomDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        HẠNG MỤC
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
                     </a>
                     <ul class="dropdown-menu hangmuc-style" aria-labelledby="roomDropdown">
                         <li><a href="/tran">Trần</a></li>
                         <li><a href="/lam">Lam</a></li>
                         <li><a href="/san">Sàn</a></li>
+<<<<<<< HEAD
                         <li><a href="/vach">Vách</a></li>
                         <li><a href="/cua">Cửa</a></li>
                          <li><a href="/cauthang">Cầu thang</a></li>
                          <li><a href="/hangrao">Hàng rào</a></li>
                         <li><a href="/bonhoa">Bồn hoa, bàn, ghế</a></li>
+=======
+                        <li><a href="/tuong">Tường</a></li>
+                        <li><a href="/vach">Vách</a></li>
+                        <li><a href="/cua">Cửa</a></li>
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
                     </ul>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="/tintuc">TIN TỨC</a></li>
@@ -186,4 +237,8 @@
     document.getElementById('user-info-modal').addEventListener('mouseleave', function() {
         document.getElementById('user-info-modal').style.display = 'none';
     });
+<<<<<<< HEAD
 </script>
+=======
+</script>
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b

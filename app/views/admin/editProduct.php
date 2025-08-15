@@ -4,10 +4,17 @@
     <?php require_once __DIR__ . "/../partials/headingAdmin.php"; require_once __DIR__ . "/../partials/sidebar.php"; ?>
 
     <div class="container mt-3" id="main-content">
+<<<<<<< HEAD
         <h2 class="text-center mb-4 modern-title">Chỉnh Sửa Sản Phẩm</h2>
         <div class="mb-4">
             <a href="/../admin/viewProducts" class="btn btn-elegant">
                 <i class="fas fa-arrow-left"></i> Quay lại
+=======
+        <h2 class="text-center">Chỉnh Sửa Sản Phẩm</h2>
+        <div class="mb-3">
+            <a href="/../admin/viewProducts" class="btn btn-secondary">
+                ← Quay lại
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
             </a>
         </div>
 

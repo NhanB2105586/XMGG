@@ -99,6 +99,7 @@
 
 .carousel-inner .carousel-item img {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+<<<<<<< HEAD
     height: 500px; /* Chiều cao cố định */
     object-fit: cover; /* Đảm bảo ảnh vừa khung */
     width: 100%;
@@ -109,6 +110,11 @@
     position: relative;
     z-index: 1;
     margin-top: 0;
+=======
+    height: 500px; /* Chiều cao cố định cho slide */
+    object-fit: cover; /* Đảm bảo ảnh vừa khung */
+    width: 100%;
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
 }
 
 .carousel-inner .carousel-item img:hover {
@@ -129,6 +135,7 @@
     }
 }
 
+<<<<<<< HEAD
 /* Responsive cho HomePage - Fix phóng to/thu nhỏ */
 .mainHomePage {
     max-width: 100%;
@@ -316,4 +323,6 @@
 
 
 
+=======
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
 

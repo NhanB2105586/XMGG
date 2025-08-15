@@ -29,4 +29,8 @@ $router->get('/favorite-status', function() use ($favoriteController) {
 // Thêm sản phẩm vào giỏ hàng (AJAX)
 $router->post('/ajax-add-to-cart', function() use ($ajaxCartController) {
     $ajaxCartController->addToCart();
+<<<<<<< HEAD
 }); 
+=======
+}); 
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b

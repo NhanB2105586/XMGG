@@ -4,6 +4,7 @@
     <?php require_once __DIR__ . "/../partials/headingAdmin.php"; require_once __DIR__ . "/../partials/sidebar.php"; ?>
 
     <div class="container mt-3" id="main-content">
+<<<<<<< HEAD
         <h2 class="text-center mb-4 modern-title">Thêm Sản Phẩm Mới</h2>
         <div class="mb-4">
             <a href="/../admin/viewProducts" class="btn btn-elegant">
@@ -11,6 +12,15 @@
             </a>
         </div>
         
+=======
+        <h2 class="text-center">Thêm Sản Phẩm Mới</h2>
+                <div class="mb-3">
+                    <a href="/../admin/viewProducts" class="btn btn-secondary">
+                        ← Quay lại
+                    </a>
+        </div>
+        <!-- Hiển thị thông báo lỗi nếu có -->
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
         <?php if (!empty($errors)): ?>
         <div class="alert alert-danger alert-dismissible fade show modern-alert" role="alert">
             <?php foreach ($errors as $error): ?>

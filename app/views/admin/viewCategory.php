@@ -16,6 +16,7 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                 </form>
             </div>
+<<<<<<< HEAD
             <div>
                 <form action="/admin/bulkUpdateCategories" method="POST" style="display: inline;" 
                       onsubmit="return confirm('Bạn có chắc chắn muốn cập nhật tên các danh mục theo yêu cầu?')">
@@ -25,6 +26,9 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                 </form>
                 <a href="/admin/addCategory" class="btn btn-primary btn-add">Thêm Danh mục</a>
             </div>
+=======
+            <a href="/admin/addCategory" class="btn btn-primary btn-add">Thêm Hạng mục</a>
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
         </div>
         <div class="table-responsive">
             <?php if (!empty($essage)): ?>
@@ -66,7 +70,11 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                 <thead>
                     <tr>
                         <th class="text-center">STT</th>
+<<<<<<< HEAD
                         <th class="text-center">Tên Danh mục</th>
+=======
+                        <th class="text-center">Tên Hạng mục</th>
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
                         <th class="text-center">Hành Động</th>
                     </tr>
                 </thead>
@@ -90,7 +98,7 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                     <?php endforeach; ?>
                     <?php else: ?>
                     <tr>
-                        <td colspan="3" class="text-center">Không có danh mục nào.</td>
+                        <td colspan="3" class="text-center">Không có hạng mục nào.</td>
                     </tr>
                     <?php endif; ?>
                 </tbody>

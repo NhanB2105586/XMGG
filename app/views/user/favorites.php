@@ -31,6 +31,7 @@ include_once __DIR__ . '/../partials/header.php';
                     <tbody>
                         <?php foreach ($favorites as $favorite) : ?>
                         <tr class="align-middle">
+<<<<<<< HEAD
                             <td class="text-center align-middle">
                                 <div style="display: flex; flex-direction: column; align-items: center;">
                                     <?php
@@ -64,6 +65,22 @@ include_once __DIR__ . '/../partials/header.php';
                                         <i class="fas fa-heart-broken"></i> Bỏ yêu thích
                                     </button>
                                 </div>
+=======
+                            <td>
+                                <img src="/images/upload/<?php echo htmlspecialchars($favorite['image_url'] ?? 'default.jpg'); ?>"
+                                    alt="Product Image" style="width: 50px; height: 50px;">
+                                <?php echo htmlspecialchars($favorite['product_name']); ?>
+                            </td>
+                            <td class="text-center"><?php echo number_format($favorite['price'], 0, ',', '.') . 'đ'; ?></td>
+                            <td class="text-center"><?php echo date('d/m/Y', strtotime($favorite['favorited_at'])); ?></td>
+                            <td class="text-center">
+                                <button class="btn btn-success btn-sm me-2" onclick="addToCart(<?php echo $favorite['product_id']; ?>)">
+                                    <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
+                                </button>
+                                <button class="btn btn-danger btn-sm" onclick="removeFavorite(<?php echo $favorite['product_id']; ?>)">
+                                    <i class="fas fa-heart-broken"></i> Bỏ yêu thích
+                                </button>
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -159,6 +176,7 @@ include_once __DIR__ . '/../partials/header.php';
             cartBadge.textContent = currentCount + 1;
         }
     }
+<<<<<<< HEAD
 
     // Gắn lại sự kiện cho các nút sau khi DOM đã sẵn sàng
     document.addEventListener('DOMContentLoaded', function() {
@@ -179,3 +197,10 @@ include_once __DIR__ . '/../partials/header.php';
     <!-- Footer -->
     <?php include_once __DIR__ . '/../partials/footer.php'; ?>
 </body>
+=======
+    </script>
+
+    <!-- Footer -->
+    <?php include_once __DIR__ . '/../partials/footer.php'; ?>
+</body> 
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b

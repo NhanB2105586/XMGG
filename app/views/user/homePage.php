@@ -78,16 +78,26 @@ include_once __DIR__ . '/../partials/header.php';
                     <div class="row">
                         <div class="col-md-6 mb-4 col-lg-6">
                             <div class="position-relative">
+<<<<<<< HEAD
                                 <a href="/lam">
                                     <img src="/images/hangmuc/lam/lam.JPG" class="img-fluid" alt="Bàn Ăn">
+=======
+                                <a href="/phongan/banan">
+                                    <img src="/images/lam.jpg" class="img-fluid" alt="Bàn Ăn">
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
                                     <h3 class="position-absolute text-light" style="bottom: 10px; left: 20px;">LAM</h3>
                                 </a>
                             </div>
                         </div>
                         <div class="col-md-6 mb-4 col-lg-6">
                             <div class="position-relative">
+<<<<<<< HEAD
                                 <a href="/tran">
                                     <img src="/images/hangmuc/tran/tran1.JPG" class="img-fluid" alt="Giường">
+=======
+                                <a href="/phongngu/giuongngu">
+                                    <img src="/images/tran.JPG" class="img-fluid" alt="Giường">
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
                                     <h3 class="position-absolute text-light" style="bottom: 10px; left: 20px;">TRẦN</h3>
                                 </a>
 
@@ -95,8 +105,13 @@ include_once __DIR__ . '/../partials/header.php';
                         </div>
                         <div class="col-md-6 mb-4 col-lg-6">
                             <div class="position-relative">
+<<<<<<< HEAD
                                 <a href="/vach">
                                     <img src="/images/hangmuc/vach/vach.JPG" class="img-fluid" alt="Arm Chair">
+=======
+                                <a href="/phongngu/tuao">
+                                    <img src="/images/vach.jpg" class="img-fluid" alt="Arm Chair">
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
                                     <h3 class="position-absolute text-light" style="bottom: 10px; left: 20px;">VÁCH</h3>
                                 </a>
 
@@ -104,9 +119,15 @@ include_once __DIR__ . '/../partials/header.php';
                         </div>
                         <div class="col-md-6 mb-4 col-lg-6">
                             <div class="position-relative">
+<<<<<<< HEAD
                                 <a href="/cua">
                                     <img src="/images/hangmuc/cua/mattien.png" class="img-fluid" alt="Ghế Ăn">
                                     <h3 class="position-absolute text-light" style="bottom: 10px; left: 20px;">CỬA</h3>
+=======
+                                <a href="/phongan/ghean">
+                                    <img src="/images/mattien.png" class="img-fluid" alt="Ghế Ăn">
+                                    <h3 class="position-absolute text-light" style="bottom: 10px; left: 20px;">MẶT TIỀN</h3>
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
                                 </a>
                             </div>
                         </div>
@@ -249,8 +270,13 @@ include_once __DIR__ . '/../partials/header.php';
                 <div class="row">
                     <div class="col-md-3 mb-3 product-item">
                         <div class="mt-3">
+<<<<<<< HEAD
                             <a href="/cua">
                                 <img src="/images/hangmuc/cua/cua1.png" class="card-img-top" alt="Phòng Khách">
+=======
+                            <a href="/phongkhach">
+                                <img src="/images/cua.png" class="card-img-top" alt="Phòng Khách">
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
                             </a>
                             <div class="card-body text-center ">
                                 <h5 class="card-title mt-3" style="  font-size: 18px;font-weight: bold;">CỬA</h5>
@@ -260,8 +286,13 @@ include_once __DIR__ . '/../partials/header.php';
                     </div>
                     <div class="col-md-3 mb-3 product-item">
                         <div class="mt-3">
+<<<<<<< HEAD
                             <a href="/bonhoa">
                                 <img src="/images/hangmuc/bonhoa/banghe.png" class="card-img-top" alt="Phòng Ngủ">
+=======
+                            <a href="/phongngu">
+                                <img src="/images/banghe.png" class="card-img-top" alt="Phòng Ngủ">
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
                             </a>
                             <div class="card-body text-center">
                                 <h5 class="card-title mt-3" style="  font-size: 18px;font-weight: bold;">BÀN GHẾ</h5>
@@ -271,8 +302,13 @@ include_once __DIR__ . '/../partials/header.php';
                     </div>
                     <div class="col-md-3 mb-3 product-item">
                         <div class="mt-3" style="background-color: white; box-shadow: none">
+<<<<<<< HEAD
                             <a href="/san">
                                 <img src="/images/hangmuc/san/san.png" class="card-img-top" alt="Phòng Ăn">
+=======
+                            <a href="/phongan">
+                                <img src="/images/san.png" class="card-img-top" alt="Phòng Ăn">
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
                             </a>
                             <div class="card-body text-center">
                                 <h5 class="card-title mt-3" style="  font-size: 18px;font-weight: bold;">SÀN</h5>
@@ -283,7 +319,11 @@ include_once __DIR__ . '/../partials/header.php';
                     <div class="col-md-3 mb-3 product-item">
                         <div class="mt-3">
                             <a href="/phongan">
+<<<<<<< HEAD
                                 <img src="/images/hangmuc/bonhoa/banghieu.png" class="card-img-top" alt="Phòng Ăn">
+=======
+                                <img src="/images/banghieu.png" class="card-img-top" alt="Phòng Ăn">
+>>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
                             </a>
                             <div class="card-body text-center">
                                 <h5 class="card-title mt-3" style="  font-size:18px;font-weight: bold;">BẢNG HIỆU</h5>
