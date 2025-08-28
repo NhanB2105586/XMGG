@@ -21,9 +21,9 @@
             <div class="col-md-3">
                 <h5>HỖ TRỢ KHÁCH HÀNG</h5>
                 <ul class="list-unstyled">
-                    <li><a href="#" class="text-light">Thông tin về xi măng giả gỗ</a></li>
-                    <li><a href="#" class="text-light">Chính sách bảo hành</a></li>
-                    <li><a href="#" class="text-light">Quy trình thi công</a></li>
+                    <li><a href="/thongtinsanpham" class="text-light">Thông tin về xi măng giả gỗ</a></li>
+                    <li><a href="/chinhsachbaohanh" class="text-light">Chính sách bảo hành</a></li>
+                    <li><a href="/quytrinhthicong" class="text-light">Quy trình thi công</a></li>
                     <li><a href="#" class="text-light"></a></li>
                 </ul>
             </div>
@@ -65,5 +65,8 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
 </script>
 
+<!-- Chatbot CSS -->
+<link rel="stylesheet" href="/css/chatbot.css?v=1.1">
+
 <!-- Chatbot Script -->
-<script src="/js/chatbot.js"></script>
+<script src="/js/chatbot.js?v=3.2"></script>

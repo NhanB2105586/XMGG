@@ -78,9 +78,7 @@ include_once __DIR__ . '/../../partials/header.php';
                             <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="13" style="flex: 1;">
                                 Thêm Vào Giỏ
                             </button>
-                            <a href="/chitietsanpham/13" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
-                                Chi Tiết
-                            </a>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="13" style="flex: 1;">Mua</button>
                         </div>
                     </div>
 
@@ -102,9 +100,7 @@ include_once __DIR__ . '/../../partials/header.php';
                             <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="14" style="flex: 1;">
                                 Thêm Vào Giỏ
                             </button>
-                            <a href="/chitietsanpham/14" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
-                                Chi Tiết
-                            </a>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="14" style="flex: 1;">Mua</button>
                         </div>
                     </div>
 
@@ -126,9 +122,7 @@ include_once __DIR__ . '/../../partials/header.php';
                             <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="15" style="flex: 1;">
                                 Thêm Vào Giỏ
                             </button>
-                            <a href="/chitietsanpham/15" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
-                                Chi Tiết
-                            </a>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="15" style="flex: 1;">Mua</button>
                         </div>
                     </div>
                     
@@ -149,9 +143,7 @@ include_once __DIR__ . '/../../partials/header.php';
                             <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="16" style="flex: 1;">
                                 Thêm Vào Giỏ
                             </button>
-                            <a href="/chitietsanpham/16" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
-                                Chi Tiết
-                            </a>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="16" style="flex: 1;">Mua</button>
                         </div>
                     </div>
                     
@@ -172,9 +164,7 @@ include_once __DIR__ . '/../../partials/header.php';
                             <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="17" style="flex: 1;">
                                 Thêm Vào Giỏ
                             </button>
-                            <a href="/chitietsanpham/17" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
-                                Chi Tiết
-                            </a>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="17" style="flex: 1;">Mua</button>
                         </div>
                     </div>
                     
@@ -195,9 +185,7 @@ include_once __DIR__ . '/../../partials/header.php';
                             <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="18" style="flex: 1;">
                                 Thêm Vào Giỏ
                             </button>
-                            <a href="/chitietsanpham/18" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
-                                Chi Tiết
-                            </a>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="18" style="flex: 1;">Mua</button>
                         </div>
                     </div>
                 </div>

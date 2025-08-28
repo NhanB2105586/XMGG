@@ -25,10 +25,11 @@ class ProductImage extends Model
     public function getMainImageForDisplay($productId)
     {
         // Lấy ảnh đầu tiên làm ảnh chính
-        $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE product_id = :product_id ORDER BY image_id ASC LIMIT 1");
+        $stmt = $this->db->prepare("SELECT image_url FROM {$this->table} WHERE product_id = :product_id ORDER BY image_id ASC LIMIT 1");
         $stmt->bindValue(':product_id', $productId, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? $result['image_url'] : 'default.jpg';
     }
 
     // Thêm hình ảnh mới cho sản phẩm

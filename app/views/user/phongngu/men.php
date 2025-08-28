@@ -48,9 +48,9 @@ use App\Models\Product;
                             <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>">
                                 <?php
                                 // Hiển thị hình ảnh đầu tiên nếu có, nếu không, hiển thị một ảnh mặc định
-                                $image_url = !empty($product['images'][0]['image_url']) ? $product['images'][0]['image_url'] : 'default.jpg';
+                                $image_url = $product['main_image'];
                                 ?>
-                                <img src="/images/upload/<?php echo htmlspecialchars($image_url); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                                <img src="/images/imageupload/<?php echo htmlspecialchars($image_url); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
                             </a>
 
                         </div>
@@ -73,9 +73,7 @@ use App\Models\Product;
                                     Hết Hàng
                                 </button>
                             <?php endif; ?>
-                            <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
-                                Chi Tiết
-                            </a>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="<?php echo htmlspecialchars($product['product_id']); ?>" style="flex: 1;">Mua</button>
                         </div>
                     </div>
                 <?php endforeach; ?>

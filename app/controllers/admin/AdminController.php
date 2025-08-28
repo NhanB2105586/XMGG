@@ -49,6 +49,9 @@ class AdminController extends Controller
         // Lấy doanh thu theo tháng
         $monthlyRevenue = $this->model->getMonthlyRevenue();
         
+        // Lấy đơn hàng gần đây
+        $recentOrders = $this->model->getRecentOrders();
+        
         $this->sendPage('/admin/dashboard', [
             'admin' => $_SESSION['admin'],
             'userCount' => $data['userCount'],
@@ -56,6 +59,7 @@ class AdminController extends Controller
             'successfulOrders' => $data['successfulOrders'],
             'revenue' => $data['revenue'],
             'monthlyRevenue' => $monthlyRevenue,
+            'recentOrders' => $recentOrders,
         ]);
     }
     // Hiển thị trang đăng nhập

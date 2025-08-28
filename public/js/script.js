@@ -1,63 +1,103 @@
 // Script chung cho website
 document.addEventListener('DOMContentLoaded', function() {
-    // Xử lý nút yêu thích
+    console.log('Script loaded successfully');
+    
+    // Xử lý nút yêu thích - Tránh duplicate event listeners
     document.querySelectorAll('.add-favorite').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const productId = this.getAttribute('data-product-id');
-            
-            fetch('/add-favorite', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'product_id=' + encodeURIComponent(productId)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert(data.message);
-                    // Tự động reset trang để cập nhật
-                    location.reload();
-                } else {
-                    alert(data.message);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Có lỗi xảy ra');
+        // Kiểm tra xem button đã có event listener chưa
+        if (!button.hasAttribute('data-favorite-initialized')) {
+            button.setAttribute('data-favorite-initialized', 'true');
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productId = this.getAttribute('data-product-id');
+                console.log('Click nút yêu thích - Product ID:', productId);
+                
+                fetch('/add-favorite', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'product_id=' + encodeURIComponent(productId)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(data.message);
+                        // Tự động reset trang để cập nhật
+                        location.reload();
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra');
+                });
             });
-        });
+        }
     });
 
-    // Xử lý nút thêm vào giỏ hàng
+    // Xử lý nút thêm vào giỏ hàng - Tránh duplicate event listeners
     document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const productId = this.getAttribute('data-product-id');
-            
-            fetch('/ajax-add-to-cart', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: 'product_id=' + encodeURIComponent(productId) + '&quantity=1'
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Đã thêm vào giỏ hàng!');
-                    // Tự động reset trang để cập nhật
-                    location.reload();
-                } else {
-                    alert(data.message);
+        // Kiểm tra xem button đã có event listener chưa
+        if (!button.hasAttribute('data-cart-initialized')) {
+            button.setAttribute('data-cart-initialized', 'true');
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productId = this.getAttribute('data-product-id');
+                const buttonText = this.textContent.trim();
+                console.log('Click nút:', buttonText, '- Product ID:', productId);
+                
+                            // Kiểm tra nếu là nút "Mua" (có text "Mua")
+            if (buttonText === 'Mua' || buttonText.includes('Mua')) {
+                console.log('Nút Mua được click - redirecting to /thanhtoan');
+                // Nút "Mua" - chuyển đến trang thanh toán
+                fetch('/ajax-add-to-cart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'product_id=' + encodeURIComponent(productId) + '&quantity=1'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Chuyển đến trang thanh toán
+                        window.location.href = '/thanhtoan';
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra');
+                });
+            } else {
+                    // Nút "Thêm Vào Giỏ" - thêm vào giỏ hàng bình thường
+                    fetch('/ajax-add-to-cart', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'product_id=' + encodeURIComponent(productId) + '&quantity=1'
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Đã thêm vào giỏ hàng!');
+                            // Tự động reset trang để cập nhật
+                            location.reload();
+                        } else {
+                            alert(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Có lỗi xảy ra');
+                    });
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Có lỗi xảy ra');
             });
-        });
+        }
     });
 
     // Cập nhật số lượng yêu thích
@@ -128,52 +168,33 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 3000);
 
-    // Xử lý modal user info
-    const avatar = document.getElementById('avatar');
-    const modal = document.getElementById('user-info-modal');
-    
-    if (avatar && modal) {
-        // Hiển thị modal khi hover vào avatar
-        avatar.addEventListener('mouseenter', function() {
-            modal.style.display = 'block';
+    // Modal user info được xử lý trong navbar.php để tránh xung đột
+
+    // Xử lý dropdown menu - Chỉ cho mobile, không can thiệp vào desktop hover
+    if (window.innerWidth <= 768) {
+        const dropdowns = document.querySelectorAll('.dropdown-toggle');
+        dropdowns.forEach(dropdown => {
+            dropdown.addEventListener('click', function(e) {
+                e.preventDefault();
+                const menu = this.nextElementSibling;
+                if (menu) {
+                    menu.classList.toggle('show');
+                }
+            });
         });
 
-        // Ẩn modal khi rời khỏi
-        modal.addEventListener('mouseleave', function() {
-            modal.style.display = 'none';
-        });
-
-        // Tắt modal khi click ra ngoài
-        document.addEventListener('click', function(event) {
-            if (!avatar.contains(event.target) && !modal.contains(event.target)) {
-                modal.style.display = 'none';
+        // Đóng dropdown khi click ra ngoài (chỉ mobile)
+        document.addEventListener('click', function(e) {
+            if (!e.target.matches('.dropdown-toggle')) {
+                const dropdowns = document.querySelectorAll('.dropdown-menu');
+                dropdowns.forEach(dropdown => {
+                    if (dropdown.classList.contains('show')) {
+                        dropdown.classList.remove('show');
+                    }
+                });
             }
         });
     }
-
-    // Xử lý dropdown menu
-    const dropdowns = document.querySelectorAll('.dropdown-toggle');
-    dropdowns.forEach(dropdown => {
-        dropdown.addEventListener('click', function(e) {
-            e.preventDefault();
-            const menu = this.nextElementSibling;
-            if (menu) {
-                menu.classList.toggle('show');
-            }
-        });
-    });
-
-    // Đóng dropdown khi click ra ngoài
-    document.addEventListener('click', function(e) {
-        if (!e.target.matches('.dropdown-toggle')) {
-            const dropdowns = document.querySelectorAll('.dropdown-menu');
-            dropdowns.forEach(dropdown => {
-                if (dropdown.classList.contains('show')) {
-                    dropdown.classList.remove('show');
-                }
-            });
-        }
-    });
 
     // Xử lý form tìm kiếm
     const searchForm = document.querySelector('form[action="/sanpham"]');
@@ -224,4 +245,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     images.forEach(img => imageObserver.observe(img));
+
+    // Xử lý responsive cho dropdown menu
+    window.addEventListener('resize', function() {
+        const dropdowns = document.querySelectorAll('.dropdown-menu');
+        if (window.innerWidth > 768) {
+            // Desktop: xóa class show để tránh xung đột với hover
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('show');
+            });
+        }
+    });
+    
+    console.log('Event listeners attached successfully');
 }); 

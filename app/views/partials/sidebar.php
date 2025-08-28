@@ -26,7 +26,7 @@
                     <span class="badge badge-notify ms-auto"><?php echo $countNewCustomers; ?></span>
                 <?php endif; ?>
             </a>
-            <a href="/admin/viewProducts" class="menu-item">
+            <a href="/admin/viewProduct" class="menu-item">
                 <i class="fa fa-th-large"></i>
                 <span>Sản phẩm</span>
                 <?php if (!empty($countNewProducts)): ?>
@@ -35,22 +35,15 @@
             </a>
             <a href="/admin/viewCategory" class="menu-item">
                 <i class="fa fa-th"></i>
-<<<<<<< HEAD
                 <span>Danh mục</span>
-=======
-                <span>Hạng mục</span>
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
                 <?php if (!empty($countNewCategories)): ?>
                     <span class="badge badge-notify ms-auto"><?php echo $countNewCategories; ?></span>
                 <?php endif; ?>
             </a>
-<<<<<<< HEAD
             <a href="/admin/hangmuc" class="menu-item">
                 <i class="fa fa-cogs"></i>
-                <span>Danh mục</span>
+                <span>Hạng mục</span>
             </a>
-=======
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
             <a href="/admin/viewOrders" class="menu-item">
                 <i class="fa fa-shopping-cart"></i>
                 <span>Đơn hàng</span>
@@ -244,8 +237,4 @@ window.addEventListener('click', function(e) {
         }
     }
 });
-<<<<<<< HEAD
 </script>
-=======
-</script>
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b

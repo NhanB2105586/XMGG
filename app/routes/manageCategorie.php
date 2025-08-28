@@ -16,15 +16,15 @@ $router->post('/admin/addCategory', function () use ($PDO) {
 });
 
 // Route để hiển thị form chỉnh sửa danh mục
-$router->get('/admin/editCategory/{id}', function($id) use ($PDO) {
+$router->get('/admin/editCategory/(\d+)', function($id) use ($PDO) {
 $categoryController = new App\Controllers\Admin\ManageCategoryController($PDO);
 $categoryController->edit($id);
 });
 
 // Route để xử lý cập nhật danh mục
-$router->post('/admin/editCategory/{id}', function($id) use ($PDO) {
+$router->post('/admin/editCategory/(\d+)', function($id) use ($PDO) {
 $categoryController = new App\Controllers\Admin\ManageCategoryController($PDO);
-$categoryController->edit($id);
+$categoryController->update($id);
 });
 
 //Xóa

@@ -47,7 +47,7 @@ use App\Models\Product;
                         <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
                             <div class="special-img position-relative overflow-hidden">
                                 <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>">
-                                    <img src="/images/upload/<?php echo htmlspecialchars($product['main_image']); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                                    <img src="/images/imageupload/<?php echo htmlspecialchars($product['main_image']); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
                                 </a>
 
                             </div>
@@ -69,9 +69,7 @@ use App\Models\Product;
                                         Hết Hàng
                                     </button>
                                 <?php endif; ?>
-                                <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
-                                    Chi Tiết
-                                </a>
+                                <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="<?php echo htmlspecialchars($product['product_id']); ?>" style="flex: 1;">Mua</button>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -90,94 +88,5 @@ use App\Models\Product;
     <?php include_once __DIR__ . '/../../partials/footer.php'; ?>
 
     <!-- Scripts -->
-    
-    <script>
-        // Xử lý nút yêu thích
-        document.querySelectorAll('.add-favorite').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const productId = this.getAttribute('data-product-id');
-                
-                fetch('/add-favorite', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: 'product_id=' + encodeURIComponent(productId)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert(data.message);
-                        // Tự động reset trang để cập nhật
-                        location.reload();
-                    } else {
-                        alert(data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Có lỗi xảy ra');
-                });
-            });
-        });
-
-        // Xử lý nút thêm vào giỏ hàng
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const productId = this.getAttribute('data-product-id');
-                
-                fetch('/ajax-add-to-cart', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: 'product_id=' + encodeURIComponent(productId) + '&quantity=1'
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Đã thêm vào giỏ hàng!');
-                        // Tự động reset trang để cập nhật
-                        location.reload();
-                    } else {
-                        alert(data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Có lỗi xảy ra');
-                });
-            });
-        });
-
-        // Cập nhật số lượng yêu thích
-        function updateFavoriteCount() {
-            fetch('/get-favorite-count')
-                .then(response => response.json())
-                .then(data => {
-                    const favoriteBadge = document.querySelector('.favorite-badge');
-                    if (favoriteBadge) {
-                        favoriteBadge.textContent = data.count;
-                    }
-                });
-        }
-
-        // Cập nhật số lượng giỏ hàng
-        function updateCartCount() {
-            fetch('/get-cart-count')
-                .then(response => response.json())
-                .then(data => {
-                    const cartBadge = document.querySelector('.cart-badge');
-                    if (cartBadge) {
-                        cartBadge.textContent = data.count;
-                    }
-                });
-        }
-
-
-    </script>
-
 </body>
 </html>

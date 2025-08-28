@@ -1,96 +1,174 @@
 <?php
-$router->get('/admin/login', function() use ($PDO)  {
-$adminController = new App\Controllers\Admin\AdminController($PDO);
+
+// Admin routes
+$router->get('/admin', function() use ($PDO) {
+    $adminController = new \App\Controllers\Admin\AdminController($PDO);
+    $adminController->index();
+});
+
+$router->get('/admin/login', function() use ($PDO) {
+    $adminController = new \App\Controllers\Admin\AdminController($PDO);
 $adminController->showLogin();
 });
 
-// Route để xử lý đăng nhập
 $router->post('/admin/login', function() use ($PDO) {
-$adminController = new App\Controllers\Admin\AdminController($PDO);
+    $adminController = new \App\Controllers\Admin\AdminController($PDO);
 $adminController->login();
 });
 
-// Route cho trang admin (chỉ có thể truy cập nếu đã đăng nhập)
-$router->get('/admin', function() use ($PDO) {
-$adminController = new App\Controllers\Admin\AdminController($PDO);
-$adminController->index();
-});
-
-// Route cho đăng xuất
 $router->get('/admin/logout', function() use ($PDO) {
-$adminController = new App\Controllers\Admin\AdminController($PDO);
+    $adminController = new \App\Controllers\Admin\AdminController($PDO);
 $adminController->logout();
 });
 
-// Route cho quản lý sản phẩm
-$router->get('/admin/viewProduct', function() use ($PDO) {
-$manageProductController = new App\Controllers\Admin\ManageProductController($PDO);
-$manageProductController->viewProducts();
+// Product management
+$router->get('/admin/products', function() use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageProductController($PDO);
+    $controller->index();
 });
 
-// Route cho thêm sản phẩm
 $router->get('/admin/addProduct', function() use ($PDO) {
-$manageProductController = new App\Controllers\Admin\ManageProductController($PDO);
-$manageProductController->showAddProduct();
+    $controller = new \App\Controllers\Admin\ManageProductController($PDO);
+    $controller->showAddProduct();
 });
 
-// Route để xử lý thêm sản phẩm
 $router->post('/admin/addProduct', function() use ($PDO) {
-$manageProductController = new App\Controllers\Admin\ManageProductController($PDO);
-$manageProductController->addProduct();
+    $controller = new \App\Controllers\Admin\ManageProductController($PDO);
+    $controller->addProduct();
 });
 
-// Route cho chỉnh sửa sản phẩm
-$router->get('/admin/editProduct/(\d+)', function($productId) use ($PDO) {
-$manageProductController = new App\Controllers\Admin\ManageProductController($PDO);
-$manageProductController->showEditProduct($productId);
+$router->get('/admin/editProduct/(\d+)', function($id) use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageProductController($PDO);
+    $controller->edit($id);
 });
 
-// Route để xử lý cập nhật sản phẩm
-$router->post('/admin/editProduct/(\d+)', function($productId) use ($PDO) {
-$manageProductController = new App\Controllers\Admin\ManageProductController($PDO);
-$manageProductController->updateProduct($productId);
+$router->post('/admin/editProduct/(\d+)', function($id) use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageProductController($PDO);
+    $controller->edit($id);
 });
 
-// Route để xóa sản phẩm
-$router->post('/admin/deleteProduct/(\d+)', function($productId) use ($PDO) {
-$manageProductController = new App\Controllers\Admin\ManageProductController($PDO);
-$manageProductController->deleteProduct($productId);
+$router->post('/admin/deleteProduct/(\d+)', function($id) use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageProductController($PDO);
+    $controller->deleteProduct($id);
+});
+
+$router->get('/admin/viewProduct', function() use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageProductController($PDO);
+    $controller->index();
+});
+
+// Category management
+
+
+
+
+
+
+
+
+
+
+// Hangmuc management
+$router->get('/admin/hangmuc', function() use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageHangmucController($PDO);
+    $controller->index();
+});
+
+$router->post('/admin/hangmuc/update/(\d+)', function($pageId) use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageHangmucController($PDO);
+    $controller->update($pageId);
+});
+
+$router->get('/admin/hangmuc/data/(\d+)', function($pageId) use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageHangmucController($PDO);
+    $controller->getPageData($pageId);
+});
+
+// Hangmuc Products management
+$router->get('/admin/hangmuc-products', function() use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageHangmucProductsController();
+    $controller->showHangmucProducts();
+});
+
+$router->get('/admin/hangmuc-products/get-product/(\d+)', function($id) use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageHangmucProductsController();
+    $controller->getProduct($id);
+});
+
+$router->get('/admin/hangmuc-products/([a-zA-Z0-9-]+)', function($slug) use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageHangmucProductsController();
+    $controller->showHangmucProducts($slug);
+});
+
+$router->post('/admin/hangmuc-products/create', function() use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageHangmucProductsController();
+    $controller->createProduct();
+});
+
+$router->post('/admin/hangmuc-products/update/(\d+)', function($id) use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageHangmucProductsController();
+    $controller->updateProduct($id);
+});
+
+$router->post('/admin/hangmuc-products/delete/(\d+)', function($id) use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageHangmucProductsController();
+    $controller->deleteProduct($id);
+});
+
+$router->post('/admin/hangmuc-products/toggle/(\d+)', function($id) use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageHangmucProductsController();
+    $controller->toggleActive($id);
+});
+
+$router->post('/admin/hangmuc-products/sort', function() use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageHangmucProductsController();
+    $controller->updateSortOrder();
+});
+
+// Order management
+
+
+
+
+// User management
+
+
+
+
+
+
+// Dashboard
+$router->get('/admin/dashboard', function() use ($PDO) {
+    $controller = new \App\Controllers\Admin\AdminController($PDO);
+    $controller->index();
+});
+
+$router->get('/admin/statistics', function() use ($PDO) {
+    $controller = new \App\Controllers\Admin\AdminController($PDO);
+    $controller->getStatistics();
+});
+
+// API để lấy hóa đơn theo tháng
+$router->post('/admin/getOrdersByMonth', function() use ($PDO) {
+    $controller = new \App\Controllers\Admin\AdminController($PDO);
+    $controller->getOrdersByMonth();
 });
 
 // Route để lấy thông tin số lượng sản phẩm
 $router->get('/get-product-stock/(\d+)', function($productId) use ($PDO) {
-$manageProductController = new App\Controllers\Admin\ManageProductController($PDO);
-$manageProductController->getProductStock($productId);
+    $controller = new \App\Controllers\Admin\ManageProductController($PDO);
+    $controller->getProductStock($productId);
 });
 
 // Route để cập nhật số lượng sản phẩm khi mua
 $router->post('/update-product-stock', function() use ($PDO) {
-$manageProductController = new App\Controllers\Admin\ManageProductController($PDO);
-$manageProductController->updateProductStock();
+    $controller = new \App\Controllers\Admin\ManageProductController($PDO);
+    $controller->updateProductStock();
 });
 
-// Route cho quản lý hạng mục
-$router->get('/admin/hangmuc', function() use ($PDO) {
-$manageHangmucController = new App\Controllers\Admin\ManageHangmucController($PDO);
-$manageHangmucController->index();
-});
-
-// Route để lấy dữ liệu hạng mục
-$router->get('/admin/hangmuc/data/(\d+)', function($pageId) use ($PDO) {
-$manageHangmucController = new App\Controllers\Admin\ManageHangmucController($PDO);
-$manageHangmucController->getPageData($pageId);
-});
-
-// Route để cập nhật hạng mục
-$router->post('/admin/hangmuc/update/(\d+)', function($pageId) use ($PDO) {
-$manageHangmucController = new App\Controllers\Admin\ManageHangmucController($PDO);
-$manageHangmucController->update($pageId);
-});
-
-// Route API để lấy hóa đơn theo tháng
-$router->post('/admin/getOrdersByMonth', function() use ($PDO) {
-$adminController = new App\Controllers\Admin\AdminController($PDO);
-$adminController->getOrdersByMonth();
+// Route để xóa nhiều sản phẩm
+$router->post('/admin/deleteMultipleProducts', function() use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageProductController($PDO);
+    $controller->deleteMultipleProducts();
 });
 ?>

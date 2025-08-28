@@ -6,7 +6,7 @@
     <div class="container mt-3" id="main-content">
         <h2 class="text-center mb-4 modern-title">Chỉnh Sửa Sản Phẩm</h2>
         <div class="mb-4">
-            <a href="/../admin/viewProducts" class="btn btn-elegant">
+            <a href="/../admin/viewProduct" class="btn btn-elegant">
                 <i class="fas fa-arrow-left"></i> Quay lại
             </a>
         </div>
@@ -20,7 +20,7 @@
         </div>
         <?php endif; ?>
 
-        <form action="/admin/editProducts" method="POST" enctype="multipart/form-data" class="modern-form">
+        <form action="/admin/editProduct/<?php echo htmlspecialchars($product['product_id']); ?>" method="POST" enctype="multipart/form-data" class="modern-form">
             <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
 
             <div class="row">
@@ -94,7 +94,7 @@
                             <div class="current-images-gallery">
                                 <?php foreach ($product['images'] as $image): ?>
                                 <div class="current-image-item">
-                                    <img src="/images/upload/<?= htmlspecialchars($image['image_url']) ?>" alt="Hình ảnh sản phẩm">
+                                                                         <img src="/images/imageupload/<?= htmlspecialchars($image['image_url']) ?>" alt="Hình ảnh sản phẩm">
                                     <div class="image-overlay">
                                         <label class="delete-checkbox">
                                             <input type="checkbox" name="delete_images[]" value="<?= $image['image_id'] ?>">

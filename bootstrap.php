@@ -1,23 +1,19 @@
 <?php
+// Set UTF-8 encoding
+header('Content-Type: text/html; charset=UTF-8');
+mb_internal_encoding('UTF-8');
+mb_http_output('UTF-8');
+
 define('ROOTDIR', __DIR__ . DIRECTORY_SEPARATOR);
 
 require_once ROOTDIR . 'vendor/autoload.php';
 
-// Kiểm tra file .env tồn tại trước khi load
+// Load environment variables if .env file exists
 if (file_exists(ROOTDIR . '.env')) {
-    try {
-        $dotenv = Dotenv\Dotenv::createImmutable(ROOTDIR);
-        $dotenv->load();
-    } catch (Exception $e) {
-        // Nếu file .env lỗi, sử dụng giá trị mặc định
-        $_ENV['DB_HOST'] = 'localhost';
-        $_ENV['DB_NAME'] = 'project';
-        $_ENV['DB_USER'] = 'root';
-        $_ENV['DB_PASS'] = '';
-        $_ENV['APP_ENV'] = 'development';
-    }
+    $dotenv = Dotenv\Dotenv::createImmutable(ROOTDIR);
+    $dotenv->load();
 } else {
-    // Sử dụng giá trị mặc định nếu không có file .env
+    // Set default environment variables
     $_ENV['DB_HOST'] = 'localhost';
     $_ENV['DB_NAME'] = 'project';
     $_ENV['DB_USER'] = 'root';
@@ -27,6 +23,7 @@ if (file_exists(ROOTDIR . '.env')) {
 
 try {
   // Kết nối đến cơ sở dữ liệu
+    global $PDO;
     $PDO = (new App\Core\PDOFactory())->create([
         'dbhost' => $_ENV['DB_HOST'],
         'dbname' => $_ENV['DB_NAME'],

@@ -4,27 +4,18 @@ namespace App\Controllers\User;
 
 use App\Controllers\Controller;
 use App\Models\Cart;
-<<<<<<< HEAD
 use App\Models\Product;
-=======
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
 
 class AjaxCartController extends Controller
 {
     private $cartModel;
-<<<<<<< HEAD
     private $productModel;
-=======
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
 
     public function __construct()
     {
         parent::__construct();
         $this->cartModel = new Cart($this->db);
-<<<<<<< HEAD
         $this->productModel = new Product($this->db);
-=======
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
     }
 
     public function addToCart()
@@ -46,8 +37,7 @@ class AjaxCartController extends Controller
             }
 
             try {
-<<<<<<< HEAD
-                // Kiểm tra số lượng sản phẩm hiện có
+                // Kiểm tra sản phẩm có tồn tại không
                 $product = $this->productModel->getProductById($productId);
                 
                 if (!$product) {
@@ -55,29 +45,23 @@ class AjaxCartController extends Controller
                     return;
                 }
 
+                // Kiểm tra số lượng tồn kho
                 if ($product['in_stock'] < $quantity) {
-                    echo json_encode(['success' => false, 'message' => 'Số lượng sản phẩm không đủ. Chỉ còn ' . $product['in_stock'] . ' sản phẩm']);
+                    echo json_encode(['success' => false, 'message' => 'Số lượng sản phẩm không đủ']);
                     return;
                 }
 
-                // Thêm sản phẩm vào giỏ hàng (KHÔNG trừ số lượng)
-=======
-                // Thêm sản phẩm vào giỏ hàng
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
+                // Thêm vào giỏ hàng
                 $this->cartModel->addProduct($_SESSION['user_id'], $productId, $quantity);
                 
                 // Cập nhật lại số loại sản phẩm trong session
                 $_SESSION['cart_product_count'] = $this->cartModel->getProductCountByUserId($_SESSION['user_id']);
                 
-<<<<<<< HEAD
                 echo json_encode([
                     'success' => true, 
                     'message' => 'Đã thêm vào giỏ hàng',
                     'current_stock' => $product['in_stock']
                 ]);
-=======
-                echo json_encode(['success' => true, 'message' => 'Đã thêm vào giỏ hàng']);
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
             } catch (Exception $e) {
                 echo json_encode(['success' => false, 'message' => 'Lỗi: ' . $e->getMessage()]);
             }
@@ -85,7 +69,6 @@ class AjaxCartController extends Controller
             echo json_encode(['success' => false, 'message' => 'Phương thức không được hỗ trợ']);
         }
     }
-<<<<<<< HEAD
 
     public function getCartCount()
     {
@@ -165,18 +148,17 @@ class AjaxCartController extends Controller
                 }
 
                 if ($product['in_stock'] < $quantity) {
-                    echo json_encode(['success' => false, 'message' => 'Số lượng sản phẩm không đủ. Chỉ còn ' . $product['in_stock'] . ' sản phẩm']);
+                    echo json_encode(['success' => false, 'message' => 'Số lượng sản phẩm không đủ']);
                     return;
                 }
 
-                // Trừ số lượng sản phẩm trong kho khi xác nhận mua
-                $newStock = $product['in_stock'] - $quantity;
-                $this->productModel->updateStock($productId, $newStock);
+                // Trừ số lượng sản phẩm
+                $this->productModel->updateStock($productId, $product['in_stock'] - $quantity);
                 
                 echo json_encode([
                     'success' => true,
-                    'message' => 'Đã mua hàng thành công',
-                    'new_stock' => $newStock
+                    'message' => 'Mua hàng thành công',
+                    'remaining_stock' => $product['in_stock'] - $quantity
                 ]);
             } catch (Exception $e) {
                 echo json_encode(['success' => false, 'message' => 'Lỗi: ' . $e->getMessage()]);
@@ -186,6 +168,3 @@ class AjaxCartController extends Controller
         }
     }
 } 
-=======
-} 
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b

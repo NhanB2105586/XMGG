@@ -80,22 +80,8 @@ class FavoriteController extends Controller
             return;
         }
 
-<<<<<<< HEAD
         $favorites = $this->favoriteModel->getFavoritesWithImage($_SESSION['user_id']);
-        $this->sendPage('user/favorites', ['favorites' => $favorites]);
-=======
-        $favorites = $this->favoriteModel->getUserFavorites($_SESSION['user_id']);
-        
-        // Debug: Kiểm tra dữ liệu
-        error_log("Favorites count: " . count($favorites));
-        
-        // Sử dụng include trực tiếp thay vì sendPage
-        include_once __DIR__ . '/../../views/partials/header.php';
-        include_once __DIR__ . '/../../views/partials/navbar.php';
-        include_once __DIR__ . '/../../views/user/favorites.php';
-        include_once __DIR__ . '/../../views/partials/footer.php';
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
-    }
+        $this->sendPage('user/favorites', ['favorites' => $favorites]);    }
 
     public function getFavoriteStatus()
     {
@@ -114,8 +100,4 @@ class FavoriteController extends Controller
         $isFavorite = $this->favoriteModel->isFavorite($_SESSION['user_id'], $productId);
         echo json_encode(['isFavorite' => $isFavorite]);
     }
-<<<<<<< HEAD
-}
-=======
-} 
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
+}

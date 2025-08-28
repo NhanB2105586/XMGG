@@ -5,7 +5,6 @@ include_once __DIR__ . '/../partials/header.php';
 <body>
     <!-- Navbar -->
     <?php include_once __DIR__ . '/../partials/navbar.php'; ?>
-    <?php include_once __DIR__ . '/../partials/navbar.php'; ?>
     <?php if (isset($_SESSION['error_message'])) : ?>
         <div class="alert alert-danger">
             <?php echo $_SESSION['error_message']; ?>
@@ -41,8 +40,30 @@ include_once __DIR__ . '/../partials/header.php';
                         <?php foreach ($orderDetails as $item) : ?>
                             <tr>
                                 <td>
-                                    <img src="/images/upload/<?php echo htmlspecialchars($item['image_url'] ?? 'default.jpg'); ?>"
-                                        alt="Product Image" style="width: 50px; height: 50px;">
+                                    <?php
+                                    // Sửa đường dẫn hình ảnh
+                                    $img = '';
+                                    if (!empty($item['image_url'])) {
+                                        // Kiểm tra nếu là URL tuyệt đối
+                                        if (strpos($item['image_url'], 'http') === 0) {
+                                            $img = $item['image_url'];
+                                        } 
+                                        // Kiểm tra nếu đã có /images/ trong đường dẫn
+                                        elseif (strpos($item['image_url'], '/images/') === 0) {
+                                            $img = $item['image_url'];
+                                        }
+                                        // Thêm /images/imageupload/ nếu chưa có
+                                        else {
+                                            // Loại bỏ dấu / ở đầu nếu có
+                                            $imagePath = ltrim($item['image_url'], '/');
+                                            $img = '/images/imageupload/' . $imagePath;
+                                        }
+                                    } else {
+                                        $img = '/images/default.jpg';
+                                    }
+                                    ?>
+                                    <img src="<?php echo htmlspecialchars($img); ?>"
+                                        alt="Product Image" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
                                     <?php echo htmlspecialchars($item['product_name']); ?>
                                 </td>
                                 <td class="text-center"><?php echo $item['quantity']; ?></td>

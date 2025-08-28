@@ -4,17 +4,10 @@
     <?php require_once __DIR__ . "/../partials/headingAdmin.php"; require_once __DIR__ . "/../partials/sidebar.php"; ?>
 
     <div class="container mt-3" id="main-content">
-<<<<<<< HEAD
         <h2 class="text-center mb-4 modern-title">Chỉnh Sửa Sản Phẩm</h2>
         <div class="mb-4">
-            <a href="/../admin/viewProducts" class="btn btn-elegant">
+            <a href="/../admin/viewProduct" class="btn btn-elegant">
                 <i class="fas fa-arrow-left"></i> Quay lại
-=======
-        <h2 class="text-center">Chỉnh Sửa Sản Phẩm</h2>
-        <div class="mb-3">
-            <a href="/../admin/viewProducts" class="btn btn-secondary">
-                ← Quay lại
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
             </a>
         </div>
 
@@ -55,7 +48,7 @@
             </ul>
         </div>
 
-        <form action="/admin/editProducts" method="POST" enctype="multipart/form-data" class="modern-form">
+        <form action="/admin/editProduct/<?php echo htmlspecialchars($product['product_id']); ?>" method="POST" enctype="multipart/form-data" class="modern-form">
             <input type="hidden" name="product_id" value="<?php echo $product['product_id']; ?>">
 
             <div class="row">
@@ -67,7 +60,7 @@
                         <div class="card-body">
             <div class="form-group">
                                 <label class="form-label">Danh Mục</label>
-                                <select class="form-control modern-select" name="category_id" required>
+                                <select class="form-control modern-select" name="category_id" id="categorySelect" required>
                     <option value="">Chọn danh mục</option>
                     <?php foreach ($categories as $category): ?>
                     <option value="<?= htmlspecialchars($category['category_id']) ?>"
@@ -76,6 +69,21 @@
                     </option>
                     <?php endforeach; ?>
                 </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Loại Sản Phẩm</label>
+                <div class="form-control-plaintext" id="productType" style="background-color: #f8f9fa; padding: 0.75rem; border-radius: 8px; border: 2px solid #e1e8ed;">
+                    <?php 
+                    $categoryId = $product['category_id'] ?? 0;
+                    if ($categoryId >= 1 && $categoryId <= 6): ?>
+                        <span class="badge bg-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">Xi măng giả gỗ</span>
+                    <?php elseif ($categoryId > 0): ?>
+                        <span class="badge bg-info" style="font-size: 1rem; padding: 0.5rem 1rem;">Nội thất</span>
+                    <?php else: ?>
+                        <span class="text-muted">Chọn danh mục để xem loại sản phẩm</span>
+                    <?php endif; ?>
+                </div>
             </div>
 
             <div class="form-group">
@@ -130,7 +138,7 @@
                                 <?php foreach ($product['images'] as $index => $image): ?>
                                 <div class="col-md-3 mb-3">
                                     <div class="card current-image-card">
-                                        <img src="/images/upload/<?= htmlspecialchars($image['image_url']) ?>" 
+                                                                                 <img src="/images/imageupload/<?= htmlspecialchars($image['image_url']) ?>"  
                                              class="card-img-top current-image" alt="Hình ảnh sản phẩm">
                                         <div class="card-body text-center p-2">
                                             <div class="image-actions">
@@ -553,6 +561,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }, delay);
     });
     
+    // Cập nhật loại sản phẩm khi chọn danh mục
+    document.getElementById('categorySelect').addEventListener('change', function() {
+        const categoryId = parseInt(this.value);
+        const productTypeElement = document.getElementById('productType');
+        
+        if (categoryId >= 1 && categoryId <= 6) {
+            productTypeElement.innerHTML = '<span class="badge bg-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">Xi măng giả gỗ</span>';
+        } else if (categoryId > 0) {
+            productTypeElement.innerHTML = '<span class="badge bg-info" style="font-size: 1rem; padding: 0.5rem 1rem;">Nội thất</span>';
+        } else {
+            productTypeElement.innerHTML = '<span class="text-muted">Chọn danh mục để xem loại sản phẩm</span>';
+        }
+    });
 
 });
     </script>

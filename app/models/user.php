@@ -84,4 +84,16 @@ class User extends Model
         ]);
     }
 
+    public function updateUserProfileWithAvatar($userId, $fullName, $phoneNumber, $address, $avatar)
+    {
+        $stmt = $this->db->prepare("UPDATE users SET fullname = :fullname, phone_number = :phone_number, address = :address, avatar = :avatar WHERE user_id = :user_id");
+        return $stmt->execute([
+            'fullname' => $fullName,
+            'phone_number' => $phoneNumber,
+            'address' => $address,
+            'avatar' => $avatar,
+            'user_id' => $userId
+        ]);
+    }
+
 }

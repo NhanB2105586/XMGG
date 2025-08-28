@@ -41,6 +41,18 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                 <input type="text" class="form-control" id="category_name" name="category_name"
                     value="<?php echo htmlspecialchars($category['category_name']); ?>" required>
             </div>
+            <div class="form-group mt-3">
+                <label for="category_type">Loại Danh Mục</label>
+                <select class="form-control" id="category_type" name="category_type" required>
+                    <option value="">Chọn loại danh mục</option>
+                    <option value="noithat" <?php echo (isset($category['category_type']) && $category['category_type'] == 'noithat') ? 'selected' : ''; ?>>Nội thất</option>
+                    <option value="ximang" <?php echo (isset($category['category_type']) && $category['category_type'] == 'ximang') ? 'selected' : ''; ?>>Xi măng giả gỗ</option>
+                </select>
+                <small class="form-text text-muted">
+                    <strong>Xi măng giả gỗ:</strong> Sẽ hiển thị ở cột đầu tiên trong navbar<br>
+                    <strong>Nội thất:</strong> Sẽ hiển thị ở các cột sau trong navbar
+                </small>
+            </div>
             <button type="submit" class="btn btn-primary btn-block mt-3">Cập Nhật Danh Mục</button>
         </form>
     </div>

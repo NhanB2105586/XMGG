@@ -47,8 +47,4 @@ class Contact extends Model {
         return $result['count'];
     }
 }
-<<<<<<< HEAD
 ?> 
-=======
-?> 
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b

@@ -9,19 +9,17 @@ class PDOFactory
 {
     public function create(): PDO
     {
-        $dotenv = Dotenv::createImmutable(__DIR__ . '/../../'); // Đảm bảo đường dẫn đúng
-        $dotenv->load();
+        // Sử dụng environment variables đã được set từ bootstrap.php
+        $dbhost = $_ENV['DB_HOST'] ?? 'localhost';
+        $dbname = $_ENV['DB_NAME'] ?? 'project';
+        $dbuser = $_ENV['DB_USER'] ?? 'root';
+        $dbpass = $_ENV['DB_PASS'] ?? '';
 
-        $dbhost = $_ENV['DB_HOST'];
-        $dbname = $_ENV['DB_NAME'];
-        $dbuser = $_ENV['DB_USER'];
-        $dbpass = $_ENV['DB_PASS'];
-
-        $dsn = "mysql:host={$dbhost};dbname={$dbname};charset=utf8mb4";
+        $dsn = "mysql:host={$dbhost};dbname={$dbname};charset=utf8";
         $options = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci"
+            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
         ];
         return new PDO($dsn, $dbuser, $dbpass, $options);
     }

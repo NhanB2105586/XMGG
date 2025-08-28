@@ -127,7 +127,7 @@ function getImagePath(string $imageUrl): string
 
     // Nếu imageUrl chỉ là tên file, thêm đường dẫn upload
     if (strpos($imageUrl, '/') !== 0) {
-        return '/images/upload/' . $imageUrl;
+        return '/images/imageupload/' . $imageUrl;
     }
 
     // Trả về nguyên bản nếu đã có đường dẫn tương đối
@@ -148,7 +148,7 @@ function getMainImage($product): ?string
     }
     
     // Trả về ảnh mặc định
-    return '/images/upload/default.jpg';
+    return '/images/imageupload/default.jpg';
 }
 
 # check if image is main image (ảnh đầu tiên)

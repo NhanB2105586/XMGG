@@ -71,9 +71,7 @@ include_once __DIR__ . '/../../partials/header.php';
                             <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="19" style="flex: 1;">
                                 Thêm Vào Giỏ
                             </button>
-                            <a href="/chitietsanpham/19" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
-                                Chi Tiết
-                            </a>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="19" style="flex: 1;">Mua</button>
                         </div>
                     </div>
 
@@ -95,9 +93,7 @@ include_once __DIR__ . '/../../partials/header.php';
                             <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="20" style="flex: 1;">
                                 Thêm Vào Giỏ
                             </button>
-                            <a href="/chitietsanpham/20" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
-                                Chi Tiết
-                            </a>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="20" style="flex: 1;">Mua</button>
                         </div>
                     </div>
 
@@ -119,9 +115,7 @@ include_once __DIR__ . '/../../partials/header.php';
                             <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="21" style="flex: 1;">
                                 Thêm Vào Giỏ
                             </button>
-                            <a href="/chitietsanpham/21" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
-                                Chi Tiết
-                            </a>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="21" style="flex: 1;">Mua</button>
                         </div>
                     </div>
                     
@@ -142,9 +136,7 @@ include_once __DIR__ . '/../../partials/header.php';
                             <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="22" style="flex: 1;">
                                 Thêm Vào Giỏ
                             </button>
-                            <a href="/chitietsanpham/22" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
-                                Chi Tiết
-                            </a>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="22" style="flex: 1;">Mua</button>
                         </div>
                     </div>
                     
@@ -165,9 +157,7 @@ include_once __DIR__ . '/../../partials/header.php';
                             <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="23" style="flex: 1;">
                                 Thêm Vào Giỏ
                             </button>
-                            <a href="/chitietsanpham/23" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
-                                Chi Tiết
-                            </a>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="23" style="flex: 1;">Mua</button>
                         </div>
                     </div>
                     
@@ -188,9 +178,7 @@ include_once __DIR__ . '/../../partials/header.php';
                             <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="24" style="flex: 1;">
                                 Thêm Vào Giỏ
                             </button>
-                            <a href="/chitietsanpham/24" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
-                                Chi Tiết
-                            </a>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="24" style="flex: 1;">Mua</button>
                         </div>
                     </div>
                 </div>
@@ -205,84 +193,6 @@ include_once __DIR__ . '/../../partials/header.php';
 
     <!-- Scripts -->
     <script src="/js/script.js"></script>
-
-    <script>
-        // Xử lý nút yêu thích
-        document.querySelectorAll('.add-favorite').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const productId = this.getAttribute('data-product-id');
-                
-                fetch('/add-favorite', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: 'product_id=' + encodeURIComponent(productId)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert(data.message);
-                        updateFavoriteCount();
-                    } else {
-                        alert(data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Có lỗi xảy ra');
-                });
-            });
-        });
-
-        // Xử lý nút thêm vào giỏ hàng
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const productId = this.getAttribute('data-product-id');
-                
-                fetch('/ajax-add-to-cart', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: 'product_id=' + encodeURIComponent(productId) + '&quantity=1'
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Đã thêm vào giỏ hàng!');
-                        updateCartCount();
-                    } else {
-                        alert(data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Có lỗi xảy ra');
-                });
-            });
-        });
-
-        // Cập nhật số lượng yêu thích
-        function updateFavoriteCount() {
-            const favoriteBadge = document.querySelector('.favorite-badge');
-            if (favoriteBadge) {
-                const currentCount = parseInt(favoriteBadge.textContent) || 0;
-                favoriteBadge.textContent = currentCount + 1;
-            }
-        }
-
-        // Cập nhật số lượng giỏ hàng
-        function updateCartCount() {
-            const cartBadge = document.querySelector('.cart-badge');
-            if (cartBadge) {
-                const currentCount = parseInt(cartBadge.textContent) || 0;
-                cartBadge.textContent = currentCount + 1;
-            }
-        }
-    </script>
-</body>
+ </body>
 
 </html>

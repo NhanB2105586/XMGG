@@ -42,29 +42,21 @@ include_once __DIR__ . '/../partials/header.php';
         
         <div class="special-list row g-0">
             <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                <div class="special-img position-relative overflow-hidden">
-                    <a href="#">
-                        <img src="/images/news/news1.jpg" class="w-100" alt="Về xi măng giả gỗ">
-                    </a>
-                </div>
+               
                 <div class="text-start m-1">
                     <p class="text-capitalize mt-3 mb-1">Về xi măng giả gỗ</p>
                     <div class="d-flex">
                         <span class="fw-bold d-block">Thông tin chi tiết</span>
                     </div>
-                    <p class="text-muted small">Tìm hiểu về lịch sử phát triển, đặc tính kỹ thuật và ứng dụng đa dạng của xi măng giả gỗ trong xây dựng hiện đại...</p>
+                    <p class="text-muted small">Tìm hiểu về lịch sử, đặc tính kỹ thuật và ứng dụng đa dạng của xi măng giả gỗ trong xây dựng hiện đại...</p>
                 </div>
                 <div class="d-flex justify-content-around">
-                    <a href="#" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 100%;">Xem chi tiết</a>
+                    <a href="/thongtinsanpham" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 100%;">Xem chi tiết</a>
                 </div>
             </div>
             
             <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                <div class="special-img position-relative overflow-hidden">
-                    <a href="#">
-                        <img src="/images/news/news2.jpg" class="w-100" alt="Chính sách bảo hành">
-                    </a>
-                </div>
+               
                 <div class="text-start m-1">
                     <p class="text-capitalize mt-3 mb-1">Chính sách bảo hành</p>
                     <div class="d-flex">
@@ -73,16 +65,12 @@ include_once __DIR__ . '/../partials/header.php';
                     <p class="text-muted small">Chính sách bảo hành toàn diện với thời gian bảo hành lên đến 10 năm, dịch vụ hỗ trợ 24/7...</p>
                 </div>
                 <div class="d-flex justify-content-around">
-                    <a href="#" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 100%;">Xem chi tiết</a>
+                    <a href="/chinhsachbaohanh" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 100%;">Xem chi tiết</a>
                 </div>
             </div>
             
             <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                <div class="special-img position-relative overflow-hidden">
-                    <a href="#">
-                        <img src="/images/news/news3.jpg" class="w-100" alt="Quy trình thi công">
-                    </a>
-                </div>
+             
                 <div class="text-start m-1">
                     <p class="text-capitalize mt-3 mb-1">Quy trình thi công</p>
                     <div class="d-flex">
@@ -91,7 +79,7 @@ include_once __DIR__ . '/../partials/header.php';
                     <p class="text-muted small">Quy trình thi công chuẩn từ chuẩn bị bề mặt, lắp đặt đến hoàn thiện, đảm bảo chất lượng tối ưu...</p>
                 </div>
                 <div class="d-flex justify-content-around">
-                    <a href="#" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 100%;">Xem chi tiết</a>
+                    <a href="/quytrinhthicong" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 100%;">Xem chi tiết</a>
                 </div>
             </div>
         </div>
@@ -102,8 +90,4 @@ include_once __DIR__ . '/../partials/header.php';
 
 
 </body>
-<<<<<<< HEAD
          
-=======
-         
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b

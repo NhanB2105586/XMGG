@@ -49,105 +49,19 @@ class ManageProductController extends Controller
             'products' => $products,
             'currentPage' => $page,
             'totalPages' => $totalPages,
+            'totalProducts' => $totalProducts,
             'searchTerm' => $searchTerm,
             'categories' => $categories,
         ]);
     }
 
-    public function create()
-    {
-        $categories = $this->categoryModel->getAllCategories();
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $data = $_POST;
-
-            if (empty($data['category_id'])) {
-                $_SESSION['error_messages'] = ['Vui lòng chọn danh mục sản phẩm.'];
-                $this->sendPage('admin/addProduct', ['categories' => $categories, 'old' => $data]);
-                return;
-            }
-
-            $this->productModel->createProduct($data);
-            $productId = $this->productModel->getPDO()->lastInsertId();
-
-            $hasImage = false;
-            if (!empty($_FILES['images']['name'][0])) {
-                $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/images/upload/';
-                
-                // Tạo thư mục nếu chưa tồn tại
-                if (!is_dir($uploadDir)) {
-                    mkdir($uploadDir, 0777, true);
-                }
-                
-                // Debug: Kiểm tra thư mục upload
-                if (!is_writable($uploadDir)) {
-                    $_SESSION['error_messages'] = ['Thư mục upload không có quyền ghi: ' . $uploadDir];
-                    $this->sendPage('admin/addProduct', ['categories' => $categories, 'old' => $data]);
-                    return;
-                }
-                
-                foreach ($_FILES['images']['name'] as $index => $name) {
-                    if (!empty($name) && $_FILES['images']['error'][$index] === UPLOAD_ERR_OK) {
-                        // Kiểm tra loại file
-                        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-                        $fileType = $_FILES['images']['type'][$index];
-                        
-                        if (!in_array($fileType, $allowedTypes)) {
-                            continue; // Bỏ qua file không hợp lệ
-                        }
-                        
-                        // Kiểm tra kích thước file (tối đa 10MB)
-                        $maxSize = 10 * 1024 * 1024;
-                        if ($_FILES['images']['size'][$index] > $maxSize) {
-                            continue; // Bỏ qua file quá lớn
-                        }
-                        
-                        $ext = strtolower(pathinfo($name, PATHINFO_EXTENSION));
-                        $base = pathinfo($name, PATHINFO_FILENAME);
-                        // Loại bỏ ký tự đặc biệt và dấu cách, chỉ giữ lại tên file gốc
-                        $base = preg_replace('/[^a-zA-Z0-9_-]/', '_', $base);
-                        // Tạo tên file duy nhất với timestamp
-                        $uniqueName = $base . '_' . time() . '_' . uniqid() . '.' . $ext;
-                        $imagePath = $uploadDir . $uniqueName;
-                        
-                        // Kiểm tra file có phải là upload thực sự không
-                        if (is_uploaded_file($_FILES['images']['tmp_name'][$index])) {
-                            if (move_uploaded_file($_FILES['images']['tmp_name'][$index], $imagePath)) {
-                                // Kiểm tra file đã được tạo thành công
-                                if (file_exists($imagePath)) {
-                                    // Chỉ lưu tên file vào database, không lưu đường dẫn đầy đủ
-                                    $this->productImageModel->addImage(['product_id' => $productId, 'image_url' => $uniqueName]);
-                                    $hasImage = true;
-                                    echo "Upload thành công: " . $uniqueName . "\n";
-                                } else {
-                                    $_SESSION['error_messages'] = ['Không thể tạo file: ' . $imagePath];
-                                }
-                            } else {
-                                $_SESSION['error_messages'] = ['Không thể upload file: ' . $name];
-                            }
-                        } else {
-                            $_SESSION['error_messages'] = ['File không phải là upload hợp lệ: ' . $name];
-                        }
-                    }
-                }
-            }
-            // Nếu không upload ảnh nào, thêm ảnh mặc định
-            if (!$hasImage) {
-                $this->productImageModel->addImage(['product_id' => $productId, 'image_url' => 'default.jpg']);
-            }
-
-            header('Location: /admin/viewProducts');
-            exit;
-        }
-
-        $this->sendPage('admin/addProduct', ['categories' => $categories]);
-    }
 
     public function edit($id)
     {
         if (!is_numeric($id) || $id <= 0) {
             $_SESSION['error_message'] = 'ID sản phẩm không hợp lệ.';
-            header('Location: /admin/viewProducts');
+            header('Location: /admin/viewProduct');
             exit;
         }
 
@@ -155,7 +69,7 @@ class ManageProductController extends Controller
         $product = $this->productModel->getProductCategoryById($id);
         if (!$product) {
             $_SESSION['error_message'] = 'Không tìm thấy sản phẩm.';
-            header('Location: /admin/viewProducts');
+            header('Location: /admin/viewProduct');
             exit;
         }
 
@@ -169,7 +83,7 @@ class ManageProductController extends Controller
 
                 // Xử lý upload ảnh mới - Sửa lỗi duplicate
                 if (!empty($_FILES['images']['name'][0])) {
-                    $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/images/upload/';
+                    $uploadDir = __DIR__ . '/../../../public/images/imageupload/';
                     
                     // Tạo thư mục nếu chưa tồn tại
                     if (!is_dir($uploadDir)) {
@@ -270,7 +184,7 @@ class ManageProductController extends Controller
                 $this->productImageModel->ensureMainImage($id);
 
                 $_SESSION['success_message'] = 'Sản phẩm đã được cập nhật thành công.';
-                header('Location: /admin/editProducts?id=' . $id);
+                header('Location: /admin/editProduct/' . $id);
                 exit;
             } else {
                 $_SESSION['error_messages'] = ['Dữ liệu sản phẩm không hợp lệ.'];
@@ -280,6 +194,7 @@ class ManageProductController extends Controller
         $this->sendPage('admin/editProduct', [
             'product' => $product,
             'categories' => $categories,
+            'old' => $_POST ?? []
         ]);
     }
 
@@ -290,7 +205,7 @@ class ManageProductController extends Controller
 
         if ($image) {
             // Xóa tệp hình ảnh khỏi thư mục
-             $image_path = $_SERVER['DOCUMENT_ROOT'] . "/images/upload/" . $image['image_url'];
+             $image_path = __DIR__ . '/../../../public/images/imageupload/' . $image['image_url'];
             if (file_exists($image_path)) {
                 unlink($image_path);
             }
@@ -305,7 +220,7 @@ class ManageProductController extends Controller
     {
         if (!is_numeric($id) || $id <= 0) {
             $_SESSION['error_message'] = 'ID sản phẩm không hợp lệ roi.';
-            header('Location: /admin/viewProducts');
+            header('Location: /admin/viewProduct');
             exit;
         }
         if ($this->productModel->existsInTable('order_details','product_id',$id)) {
@@ -315,7 +230,7 @@ class ManageProductController extends Controller
                 $this->productModel->deleteProduct($id);
                 $_SESSION['success_message'] = 'Sản phẩm đã được xóa thành công!';
             }
-        header('Location: /admin/viewProducts');
+        header('Location: /admin/viewProduct');
         exit;
     }
 
@@ -391,6 +306,7 @@ class ManageProductController extends Controller
             'products' => $products,
             'currentPage' => $page,
             'totalPages' => $totalPages,
+            'totalProducts' => $totalProducts,
             'searchTerm' => $searchTerm,
             'categoryId' => $categoryId,
             'categories' => $categories,
@@ -423,49 +339,81 @@ class ManageProductController extends Controller
 
             $hasImage = false;
             if (!empty($_FILES['images']['name'][0])) {
-                $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/images/upload/';
+                $uploadDir = __DIR__ . '/../../../public/images/imageupload/';
                 
+                // Tạo thư mục nếu chưa tồn tại
                 if (!is_dir($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
                 }
                 
+                // Debug: Kiểm tra thư mục upload
+                if (!is_writable($uploadDir)) {
+                    $_SESSION['error_messages'] = ['Thư mục upload không có quyền ghi: ' . $uploadDir];
+                    $this->sendPage('admin/addProduct', ['categories' => $categories, 'old' => $data]);
+                    return;
+                }
+                
+                // Đếm số ảnh đã upload thành công để tránh duplicate
+                $uploadedCount = 0;
+                
                 foreach ($_FILES['images']['name'] as $index => $name) {
+                    // Chỉ xử lý nếu thực sự có file được chọn và là file upload từ máy
                     if (!empty($name) && $_FILES['images']['error'][$index] === UPLOAD_ERR_OK) {
+                        // Kiểm tra loại file
                         $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
                         $fileType = $_FILES['images']['type'][$index];
                         
                         if (!in_array($fileType, $allowedTypes)) {
-                            continue;
+                            continue; // Bỏ qua file không hợp lệ
                         }
                         
+                        // Kiểm tra kích thước file (tối đa 10MB)
                         $maxSize = 10 * 1024 * 1024;
                         if ($_FILES['images']['size'][$index] > $maxSize) {
-                            continue;
+                            continue; // Bỏ qua file quá lớn
                         }
                         
                         $ext = strtolower(pathinfo($name, PATHINFO_EXTENSION));
                         $base = pathinfo($name, PATHINFO_FILENAME);
-                        $base = preg_replace('/[^a-zA-Z0-9]/', '', $base);
-                        $filename = $base . '_' . time() . '_' . $index . '.' . $ext;
+                        // Loại bỏ ký tự đặc biệt và dấu cách
+                        $base = preg_replace('/[^a-zA-Z0-9_-]/', '_', $base);
+                        $uniqueName = $base . '_' . uniqid() . '.' . $ext;
+                        $imagePath = $uploadDir . $uniqueName;
                         
-                        $uploadPath = $uploadDir . $filename;
-                        
-                        if (move_uploaded_file($_FILES['images']['tmp_name'][$index], $uploadPath)) {
-                            $this->productImageModel->addImage([
-                                'product_id' => $productId,
-                                'image_url' => $filename
-                            ]);
-                            $hasImage = true;
+                        // Kiểm tra xem file có phải là file upload thực sự không
+                        if (is_uploaded_file($_FILES['images']['tmp_name'][$index])) {
+                            if (move_uploaded_file($_FILES['images']['tmp_name'][$index], $imagePath)) {
+                                // Kiểm tra file đã được tạo thành công
+                                if (file_exists($imagePath)) {
+                                    // Kiểm tra xem ảnh này đã tồn tại chưa để tránh duplicate
+                                    $existingImage = $this->productImageModel->getImageByUrl($uniqueName);
+                                    if (!$existingImage) {
+                                        $this->productImageModel->addImage([
+                                            'product_id' => $productId,
+                                            'image_url' => $uniqueName
+                                        ]);
+                                        $uploadedCount++;
+                                        $hasImage = true;
+                                    }
+                                } else {
+                                    $_SESSION['error_messages'] = ['Không thể tạo file: ' . $imagePath];
+                                }
+                            } else {
+                                $_SESSION['error_messages'] = ['Không thể upload file: ' . $name];
+                            }
                         }
                     }
                 }
+                
+                // Thông báo số ảnh đã upload thành công
+                if ($uploadedCount > 0) {
+                    $_SESSION['success_message'] = "Đã upload thành công {$uploadedCount} ảnh mới.";
+                }
             }
 
+            // Nếu không có ảnh nào được upload, thêm ảnh mặc định
             if (!$hasImage) {
-                $this->productImageModel->addImage([
-                    'product_id' => $productId,
-                    'image_url' => 'default.jpg'
-                ]);
+                $this->productImageModel->addImage(['product_id' => $productId, 'image_url' => 'default.jpg']);
             }
 
             $_SESSION['success_message'] = 'Sản phẩm đã được thêm thành công.';
@@ -517,7 +465,7 @@ public function updateProduct($productId)
             // Cập nhật thông tin sản phẩm
             $this->productModel->updateProduct($productId, $data);
 
-            $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/images/upload/';
+            $uploadDir = __DIR__ . '/../../../public/images/imageupload/';
             if (!is_dir($uploadDir)) mkdir($uploadDir, 0777, true);
             if (!is_writable($uploadDir)) {
                 $_SESSION['error_messages'][] = 'Thư mục upload không có quyền ghi: ' . $uploadDir;
@@ -531,8 +479,7 @@ public function updateProduct($productId)
             // Lấy danh sách ảnh hiện tại
             $currentImages = $this->productImageModel->getImagesByProductId($productId);
 
-            /** ======================
-             * Xử lý xóa ảnh được tick
+            /** ===============             * Xử lý xóa ảnh được tick
              * ====================== */
             if (!empty($_POST['delete_images'])) {
                 foreach ($_POST['delete_images'] as $image_id) {
@@ -550,8 +497,7 @@ public function updateProduct($productId)
                 $currentImages = $this->productImageModel->getImagesByProductId($productId);
             }
 
-            /** ======================
-             * Xử lý upload ảnh mới
+            /** ===============             * Xử lý upload ảnh mới
              * ====================== */
             if (!empty($_FILES['images']['name'][0])) {
                 // Xóa default.jpg khỏi DB nếu đang dùng
@@ -586,8 +532,7 @@ public function updateProduct($productId)
                 }
             }
 
-            /** ======================
-             * Nếu không còn ảnh nào → thêm default.jpg
+            /** ===============             * Nếu không còn ảnh nào → thêm default.jpg
              * ====================== */
             $currentImages = $this->productImageModel->getImagesByProductId($productId);
             if (empty($currentImages)) {

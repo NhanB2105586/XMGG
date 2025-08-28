@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo Banner</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+            background: #f0f0f0;
+        }
+        
+        .banner-container {
+            margin: 20px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .banner {
+            width: 1200px;
+            height: 400px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .banner-content {
+            z-index: 2;
+            position: relative;
+        }
+        
+        .banner-content h1 {
+            font-size: 3.5rem;
+            margin: 0 0 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            font-weight: bold;
+        }
+        
+        .banner-content p {
+            font-size: 1.5rem;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 1;
+        }
+        
+        .banner-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+        
+        .banner-warranty {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+        
+        .banner-product {
+            background: linear-gradient(135deg, #27ae60, #2ecc71);
+        }
+        
+        .banner-construction {
+            background: linear-gradient(135deg, #e67e22, #f39c12);
+        }
+        
+        .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .download-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            background: white;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: #333; margin-bottom: 30px;">Tạo Banner cho Website</h1>
+    
+    <!-- Banner Chính sách bảo hành -->
+    <div class="banner-container">
+        <div class="banner banner-warranty">
+            <div class="banner-content">
+                <span class="icon">🛡️</span>
+                <h1>CHÍNH SÁCH BẢO HÀNH</h1>
+                <p>Cam kết chất lượng - Dịch vụ tận tâm</p>
+                <a href="#" class="download-btn" onclick="downloadBanner('warranty')">Tải ảnh</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Banner Thông tin sản phẩm -->
+    <div class="banner-container">
+        <div class="banner banner-product">
+            <div class="banner-content">
+                <span class="icon">🌳</span>
+                <h1>THÔNG TIN SẢN PHẨM</h1>
+                <p>Xi măng giả gỗ - Chất lượng vượt trội</p>
+                <a href="#" class="download-btn" onclick="downloadBanner('product')">Tải ảnh</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Banner Quy trình thi công -->
+    <div class="banner-container">
+        <div class="banner banner-construction">
+            <div class="banner-content">
+                <span class="icon">🔨</span>
+                <h1>QUY TRÌNH THI CÔNG</h1>
+                <p>Chuyên nghiệp - Chất lượng - Tiến độ</p>
+                <a href="#" class="download-btn" onclick="downloadBanner('construction')">Tải ảnh</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function downloadBanner(type) {
+            // Tạo canvas để xuất ảnh
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 1200;
+            canvas.height = 400;
+            
+            // Vẽ gradient background
+            let gradient;
+            if (type === 'warranty') {
+                gradient = ctx.createLinearGradient(0, 0, 1200, 400);
+                gradient.addColorStop(0, '#3498db');
+                gradient.addColorStop(1, '#2980b9');
+            } else if (type === 'product') {
+                gradient = ctx.createLinearGradient(0, 0, 1200, 400);
+                gradient.addColorStop(0, '#27ae60');
+                gradient.addColorStop(1, '#2ecc71');
+            } else if (type === 'construction') {
+                gradient = ctx.createLinearGradient(0, 0, 1200, 400);
+                gradient.addColorStop(0, '#e67e22');
+                gradient.addColorStop(1, '#f39c12');
+            }
+            
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 1200, 400);
+            
+            // Vẽ overlay
+            ctx.fillStyle = 'rgba(0,0,0,0.4)';
+            ctx.fillRect(0, 0, 1200, 400);
+            
+            // Vẽ text
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.font = 'bold 80px Arial';
+            ctx.fillText(type === 'warranty' ? 'CHÍNH SÁCH BẢO HÀNH' : 
+                        type === 'product' ? 'THÔNG TIN SẢN PHẨM' : 'QUY TRÌNH THI CÔNG', 600, 200);
+            
+            ctx.font = '30px Arial';
+            ctx.fillText(type === 'warranty' ? 'Cam kết chất lượng - Dịch vụ tận tâm' :
+                        type === 'product' ? 'Xi măng giả gỗ - Chất lượng vượt trội' :
+                        'Chuyên nghiệp - Chất lượng - Tiến độ', 600, 250);
+            
+            // Tải xuống
+            const link = document.createElement('a');
+            link.download = `banner-${type}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+    </script>
+</body>
+</html>

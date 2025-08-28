@@ -15,7 +15,7 @@ include_once __DIR__ . '/../partials/header.php';
             <div class="banner-text">
                 Công trình đã thi công
                 <div class="breadcrumb">
-                    <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/bosuutap"> <strong class="current-page">Tin tức</strong></a>
+                    <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/bosuutap"> <strong class="current-page">Hạng mục</strong></a>
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@ include_once __DIR__ . '/../partials/header.php';
                 <div class="row">
                     <div class="col-md-6 mb-4">
                         <div class="product-card">
-                            <img src="/images/bosuutap/1.png" alt="Product 1" class="img-fluid rounded">
+                            <img src="/images/hangmuc/hangmuc/lam_lam4.jpg" alt="Product 1" class="img-fluid rounded">
                             <h6 class="mt-3 fw-bold">
                                 Những công trình mà Đại Quân đã thi công - Hạng mục Lam</h6>
                             <p class="text-muted">Các công trình sử dụng lam xi măng giả gỗ không chỉ giúp chắn nắng mà còn mang lại tính thẩm mỹ hiện đại, mạch lạc cho không gian ngoại thất. [...]</p>
@@ -48,56 +48,51 @@ include_once __DIR__ . '/../partials/header.php';
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="product-card">
-                            <img src="/images/bosuutap/2.png" alt="Product 2" class="img-fluid rounded">
+                            <img src="/images/hangmuc/hangmuc/tran_tran2.png" alt="Product 2" class="img-fluid rounded">
                             <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Trần</h6>
                             <p class="text-muted">Hệ trần sử dụng vật liệu xi măng giả gỗ mang lại cảm giác ấm áp và sang trọng, bền vững với thời gian.[...]</p>
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="product-card">
-                            <img src="/images/bosuutap/3.png" alt="Product 2" class="img-fluid rounded">
+                            <img src="/images/hangmuc/hangmuc/vach_vach2.jpg" alt="Product 2" class="img-fluid rounded">
                             <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Vách</h6>
                             <p class="text-muted">Các vách xi măng giả gỗ được thiết kế để phân tách không gian một cách nhẹ nhàng, vẫn đảm bảo sự thông thoáng và tính thẩm mỹ cao.[...]</p>
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="product-card">
-                            <img src="/images/bosuutap/4.png" alt="Product 2" class="img-fluid rounded">
+                            <img src="/images/hangmuc/hangmuc/cua_cua.png" alt="Product 2" class="img-fluid rounded">
                             <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Cửa</h6>
                             <p class="text-muted">Cửa làm từ khung sắt ốp xi măng giả gỗ giúp tăng độ chắc chắn, tạo điểm nhấn mạnh mẽ và sang trọng cho công trình.[...]</p>
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="product-card">
-                            <img src="/images/bosuutap/4.png" alt="Product 2" class="img-fluid rounded">
+                            <img src="/images/hangmuc/hangmuc/san_san3.jpg" alt="Product 2" class="img-fluid rounded">
                             <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Sàn</h6>
                             <p class="text-muted">Sàn xi măng giả gỗ là giải pháp lý tưởng cho không gian ngoài trời với độ bền cao, không bị cong vênh hay mục nát như gỗ thật.[...]</p>
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="product-card">
-                            <img src="/images/bosuutap/4.png" alt="Product 2" class="img-fluid rounded">
-<<<<<<< HEAD
+                            <img src="/images/hangmuc/hangmuc/cauthang_cauthang3.jpg" alt="Product 2" class="img-fluid rounded">
                             <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Cầu thang</h6>
                             <p class="text-muted">Cầu thang xi măng giả gỗ không chỉ mang lại vẻ đẹp tự nhiên mà còn tạo cảm giác ấm áp và thân thiện cho cả không gian nội thất lẫn ngoại thất.[...]</p>
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="product-card">
-                            <img src="/images/bosuutap/4.png" alt="Product 2" class="img-fluid rounded">
+                            <img src="/images/hangmuc/hangmuc/hangrao_hg1.jpg" alt="Product 2" class="img-fluid rounded">
                             <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Hàng rào</h6>
                             <p class="text-muted">Hàng rào xi măng giả gỗ là giải pháp lý tưởng cho không gian ngoài trời với độ bền cao, tạo sự riêng tư và an toàn cho công trình.[...]</p>
                         </div>
                     </div>
                     <div class="col-md-6 mb-4">
                         <div class="product-card">
-                            <img src="/images/bosuutap/4.png" alt="Product 2" class="img-fluid rounded">
+                            <img src="/images/hangmuc/hangmuc/bonhoa_banghe.png" alt="Product 2" class="img-fluid rounded">
                             <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Bồn hoa, bàn, ghế</h6>
                             <p class="text-muted">Bồn hoa, bàn ghế xi măng giả gỗ là giải pháp lý tưởng cho không gian ngoài trời với độ bền cao, tạo không gian xanh và thân thiện.[...]</p>
-=======
-                            <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Tường</h6>
-                            <p class="text-muted">Ốp tường bằng xi măng giả gỗ không chỉ mang lại vẻ đẹp tự nhiên mà còn tạo cảm giác ấm áp và thân thiện cho cả không gian nội thất lẫn ngoại thất.[...]</p>
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
                         </div>
                     </div>
                       <!-- Thêm các sản phẩm khác -->

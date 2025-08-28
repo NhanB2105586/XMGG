@@ -962,7 +962,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Chatbot Tư vấn chuyên nghiệp */
+/* Chatbot Tư vấn chuyên nghiệp XMGG */
 .chatbot-container {
   position: fixed;
   bottom: 20px;
@@ -972,19 +972,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .chatbot-toggle {
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  background: white;
+  border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
-  border: none;
+  border: 2px solid #28a745;
   position: relative;
   overflow: hidden;
+  padding: 8px;
 }
 
 .chatbot-toggle:hover {
@@ -1007,10 +1008,81 @@ h1, h2, h3, h4, h5, h6 {
   left: 100%;
 }
 
-.chatbot-toggle i {
-  color: white;
-  font-size: 24px;
-  z-index: 1;
+/* Logo styles */
+.chatbot-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.logo-shapes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2px;
+  position: relative;
+}
+
+.logo-red-shape {
+  width: 12px;
+  height: 12px;
+  background: #dc3545;
+  border-radius: 2px;
+  position: relative;
+  margin-right: 2px;
+}
+
+.logo-red-shape::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-bottom: 4px solid #dc3545;
+}
+
+.logo-green-shape {
+  width: 12px;
+  height: 12px;
+  border: 2px solid #28a745;
+  border-radius: 2px;
+  position: relative;
+  border-bottom: none;
+  border-right: none;
+}
+
+.logo-green-shape::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 0;
+  height: 0;
+  border-left: 4px solid #28a745;
+  border-bottom: 4px solid transparent;
+}
+
+.logo-text {
+  text-align: center;
+  line-height: 1;
+}
+
+.logo-title {
+  font-size: 6px;
+  font-weight: bold;
+  color: #28a745;
+  letter-spacing: 0.5px;
+}
+
+.logo-subtitle {
+  font-size: 4px;
+  color: #28a745;
+  letter-spacing: 0.3px;
 }
 
 .chatbot-toggle .notification-badge {
@@ -1062,7 +1134,55 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .chatbot-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 15px 15px 0 0;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-logo .logo-shapes {
+  margin-bottom: 0;
+}
+
+.header-logo .logo-red-shape {
+  width: 16px;
+  height: 16px;
+}
+
+.header-logo .logo-green-shape {
+  width: 16px;
+  height: 16px;
+}
+
+.header-logo .logo-title {
+  font-size: 10px;
+  color: white;
+}
+
+.header-logo .logo-subtitle {
+  font-size: 8px;
+  color: white;
+}
+
+.header-info h3 {
+  color: white;
+  margin: 0 0 5px 0;
+  font-size: 14px;
+}
   color: white;
   padding: 15px 20px;
   display: flex;

@@ -31,16 +31,37 @@ include_once __DIR__ . '/../partials/header.php';
                     <tbody>
                         <?php foreach ($favorites as $favorite) : ?>
                         <tr class="align-middle">
-<<<<<<< HEAD
                             <td class="text-center align-middle">
                                 <div style="display: flex; flex-direction: column; align-items: center;">
                                     <?php
-                                    $img = !empty($favorite['image_url']) ? $favorite['image_url'] : 'default.jpg';
+                                    // Sửa đường dẫn hình ảnh
+                                    $img = '';
+                                    if (!empty($favorite['image_url'])) {
+                                        // Kiểm tra nếu là URL tuyệt đối
+                                        if (strpos($favorite['image_url'], 'http') === 0) {
+                                            $img = $favorite['image_url'];
+                                        } 
+                                        // Kiểm tra nếu đã có /images/ trong đường dẫn
+                                        elseif (strpos($favorite['image_url'], '/images/') === 0) {
+                                            $img = $favorite['image_url'];
+                                        }
+                                                                                    // Thêm /images/imageupload/ nếu chưa có
+                                            else {
+                                                // Loại bỏ dấu / ở đầu nếu có
+                                                $imagePath = ltrim($favorite['image_url'], '/');
+                                                $img = '/images/imageupload/' . $imagePath;
+                                            }
+                                    } else {
+                                        $img = '/images/default.jpg';
+                                    }
+                                    
+                                    // Debug: In ra đường dẫn hình ảnh
+                                    echo "<!-- Debug: Image path = " . htmlspecialchars($img) . " -->";
                                     ?>
-                                    <img src="/images/upload/<?php echo htmlspecialchars($img); ?>"
-                                        alt="Product Image"
-                                        style="width: 100px; height: 100px; object-fit:cover; border-radius:8px; border:1px solid #eee; margin-bottom: 6px;">
-                                    <div style="font-size: 14px; font-weight: 500; color: #333; margin-top: 4px; word-break: break-word; max-width: 120px; text-align: center;">
+                                                                         <img src="<?php echo htmlspecialchars($img); ?>"
+                                         alt="Product Image"
+                                         style="width: 100px; height: 100px; object-fit:cover; border-radius:8px; border:1px solid #eee; margin-bottom: 6px;">
+                                                                         <div style="font-size: 14px; font-weight: 500; color: #333; margin-top: 4px; word-break: break-word; max-width: 120px; text-align: center;">
                                         <?php echo htmlspecialchars($favorite['product_name']); ?>
                                     </div>
                                 </div>
@@ -57,30 +78,14 @@ include_once __DIR__ . '/../partials/header.php';
                                 ?>
                             </td>
                             <td class="text-center">
-                                <div class="d-flex justify-content-center align-items-center gap-2" style="gap: 8px;">
-                                    <button class="btn btn-success btn-sm" onclick="addToCart(<?php echo $favorite['product_id']; ?>)">
-                                        <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
-                                    </button>
-                                    <button class="btn btn-danger btn-sm" onclick="removeFavorite(<?php echo $favorite['product_id']; ?>)">
-                                        <i class="fas fa-heart-broken"></i> Bỏ yêu thích
-                                    </button>
-                                </div>
-=======
-                            <td>
-                                <img src="/images/upload/<?php echo htmlspecialchars($favorite['image_url'] ?? 'default.jpg'); ?>"
-                                    alt="Product Image" style="width: 50px; height: 50px;">
-                                <?php echo htmlspecialchars($favorite['product_name']); ?>
-                            </td>
-                            <td class="text-center"><?php echo number_format($favorite['price'], 0, ',', '.') . 'đ'; ?></td>
-                            <td class="text-center"><?php echo date('d/m/Y', strtotime($favorite['favorited_at'])); ?></td>
-                            <td class="text-center">
-                                <button class="btn btn-success btn-sm me-2" onclick="addToCart(<?php echo $favorite['product_id']; ?>)">
-                                    <i class="fas fa-shopping-cart"></i> Thêm vào giỏ
-                                </button>
-                                <button class="btn btn-danger btn-sm" onclick="removeFavorite(<?php echo $favorite['product_id']; ?>)">
-                                    <i class="fas fa-heart-broken"></i> Bỏ yêu thích
-                                </button>
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
+                                                                 <div class="d-flex justify-content-center align-items-center gap-2" style="gap: 6px;">
+                                     <button class="btn btn-success btn-sm" style="width: 36px; height: 36px; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center;" onclick="addToCart(<?php echo $favorite['product_id']; ?>)" title="Thêm vào giỏ hàng">
+                                         <i class="fas fa-shopping-cart"></i>
+                                     </button>
+                                     <button class="btn btn-danger btn-sm" style="width: 36px; height: 36px; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center;" onclick="removeFavorite(<?php echo $favorite['product_id']; ?>)" title="Bỏ yêu thích">
+                                         <i class="fas fa-heart-broken"></i>
+                                     </button>
+                                 </div>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -176,8 +181,6 @@ include_once __DIR__ . '/../partials/header.php';
             cartBadge.textContent = currentCount + 1;
         }
     }
-<<<<<<< HEAD
-
     // Gắn lại sự kiện cho các nút sau khi DOM đã sẵn sàng
     document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.btn-danger').forEach(btn => {
@@ -197,10 +200,3 @@ include_once __DIR__ . '/../partials/header.php';
     <!-- Footer -->
     <?php include_once __DIR__ . '/../partials/footer.php'; ?>
 </body>
-=======
-    </script>
-
-    <!-- Footer -->
-    <?php include_once __DIR__ . '/../partials/footer.php'; ?>
-</body> 
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b

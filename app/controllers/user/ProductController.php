@@ -5,6 +5,7 @@ namespace App\Controllers\User;
 use App\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductImage;
+use PDO;
 
 class ProductController extends Controller
 {
@@ -25,8 +26,7 @@ class ProductController extends Controller
         // Lấy hình ảnh cho từng sản phẩm
         foreach ($products as &$product) {
             $product['images'] = $productImageModel->getImagesByProductId($product['product_id']);
-            $mainImage = $productImageModel->getMainImageForDisplay($product['product_id']);
-            $product['main_image'] = $mainImage ? $mainImage['image_url'] : 'default.jpg';
+            $product['main_image'] = $productImageModel->getMainImageForDisplay($product['product_id']);
         }
 
         // Xác định view page dựa trên categoryId
@@ -87,6 +87,12 @@ class ProductController extends Controller
                 break;
             case 19: // Tranh
                 $viewPage = 'user/hangtrangtri/tranh';
+                break;
+            case 70: // Khang
+                $viewPage = 'user/hangtrangtri/khang';
+                break;
+            case 71: // Khang xm
+                $viewPage = 'user/hangtrangtri/khang-xm';
                 break;
             default:
                 $viewPage = 'user/phongkhach/default'; // Giá trị mặc định
@@ -193,6 +199,16 @@ class ProductController extends Controller
         $this->showProductsByCategory(19); // category_id cho tranh
     }
 
+    public function showkhang()
+    {
+        $this->showProductsByCategory(70); // category_id cho khang
+    }
+
+    public function showkhangxm()
+    {
+        $this->showProductsByCategory(71); // category_id cho khang xm
+    }
+
     public function showtran()
     {
         $this->sendPage('user/tran');
@@ -259,8 +275,7 @@ class ProductController extends Controller
         // Lấy hình ảnh cho từng sản phẩm
         foreach ($products as &$product) {
             $product['images'] = $productImageModel->getImagesByProductId($product['product_id']);
-            $mainImage = $productImageModel->getMainImageForDisplay($product['product_id']);
-            $product['main_image'] = $mainImage ? $mainImage['image_url'] : 'default.jpg';
+            $product['main_image'] = $productImageModel->getMainImageForDisplay($product['product_id']);
         }
 
         // Gửi dữ liệu đến view 'user/sanpham'
@@ -288,8 +303,16 @@ class ProductController extends Controller
         if ($product) {
             // Lấy hình ảnh cho sản phẩm dựa vào `product_id`
             $product['images'] = $productImageModel->getImagesByProductId($id);
-            $mainImage = $productImageModel->getMainImageForDisplay($id);
-            $product['main_image'] = $mainImage ? $mainImage['image_url'] : 'default.jpg';
+            $product['main_image'] = $productImageModel->getMainImageForDisplay($id);
+
+            // Kiểm tra xem sản phẩm có thuộc loại ximang không
+            $isXimangProduct = false;
+            if (isset($product['category_id'])) {
+                $stmt = $this->db->prepare("SELECT category_type FROM categories WHERE category_id = ?");
+                $stmt->execute([$product['category_id']]);
+                $category = $stmt->fetch(PDO::FETCH_ASSOC);
+                $isXimangProduct = $category && $category['category_type'] === 'ximang';
+            }
 
             // Lấy danh sách sản phẩm liên quan dựa trên cùng loại (`category_id`)
             $categoryId = $product['category_id'];
@@ -298,14 +321,14 @@ class ProductController extends Controller
             // Lấy hình ảnh cho từng sản phẩm liên quan
             foreach ($relatedProducts as &$relatedProduct) {
                 $relatedProduct['images'] = $productImageModel->getImagesByProductId($relatedProduct['product_id']);
-                $mainImage = $productImageModel->getMainImageForDisplay($relatedProduct['product_id']);
-                $relatedProduct['main_image'] = $mainImage ? $mainImage['image_url'] : 'default.jpg';
+                $relatedProduct['main_image'] = $productImageModel->getMainImageForDisplay($relatedProduct['product_id']);
             }
 
             // Gửi dữ liệu sản phẩm và sản phẩm liên quan đến view 'user/chitietsanpham'
             $this->sendPage('user/chitietsanpham', [
                 'product' => $product,
-                'relatedProducts' => $relatedProducts
+                'relatedProducts' => $relatedProducts,
+                'isXimangProduct' => $isXimangProduct
             ]);
         } else {
             return $this->sendPage('errors/404'); // Giả sử bạn có một trang lỗi 404

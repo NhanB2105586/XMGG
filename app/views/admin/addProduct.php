@@ -4,23 +4,13 @@
     <?php require_once __DIR__ . "/../partials/headingAdmin.php"; require_once __DIR__ . "/../partials/sidebar.php"; ?>
 
     <div class="container mt-3" id="main-content">
-<<<<<<< HEAD
         <h2 class="text-center mb-4 modern-title">Thêm Sản Phẩm Mới</h2>
         <div class="mb-4">
-            <a href="/../admin/viewProducts" class="btn btn-elegant">
+            <a href="/../admin/viewProduct" class="btn btn-elegant">
                 <i class="fas fa-arrow-left"></i> Quay lại
             </a>
         </div>
         
-=======
-        <h2 class="text-center">Thêm Sản Phẩm Mới</h2>
-                <div class="mb-3">
-                    <a href="/../admin/viewProducts" class="btn btn-secondary">
-                        ← Quay lại
-                    </a>
-        </div>
-        <!-- Hiển thị thông báo lỗi nếu có -->
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
         <?php if (!empty($errors)): ?>
         <div class="alert alert-danger alert-dismissible fade show modern-alert" role="alert">
             <?php foreach ($errors as $error): ?>
@@ -30,7 +20,7 @@
         </div>
         <?php endif; ?>
 
-        <form action="/admin/addProducts" method="POST" enctype="multipart/form-data" class="modern-form">
+        <form action="/admin/addProduct" method="POST" enctype="multipart/form-data" class="modern-form">
             <div class="row">
                 <div class="col-md-8">
                     <div class="card modern-card">
@@ -40,12 +30,19 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label class="form-label">Danh Mục</label>
-                                <select class="form-control modern-select" name="category_id" required>
+                                <select class="form-control modern-select" name="category_id" id="categorySelect" required>
                                     <option value="">Chọn danh mục</option>
                                     <?php foreach ($categories as $category): ?>
                                     <option value="<?= htmlspecialchars($category['category_id']) ?>"><?= htmlspecialchars($category['category_name']) ?></option>
                                     <?php endforeach; ?>
                                 </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Loại Sản Phẩm</label>
+                                <div class="form-control-plaintext" id="productType" style="background-color: #f8f9fa; padding: 0.75rem; border-radius: 8px; border: 2px solid #e1e8ed;">
+                                    <span class="text-muted">Chọn danh mục để xem loại sản phẩm</span>
+                                </div>
                             </div>
 
                             <div class="form-group">
@@ -227,6 +224,20 @@ class ModernUploader {
 }
 
 document.addEventListener('DOMContentLoaded', () => { window.uploader = new ModernUploader(); });
+
+// Cập nhật loại sản phẩm khi chọn danh mục
+document.getElementById('categorySelect').addEventListener('change', function() {
+    const categoryId = parseInt(this.value);
+    const productTypeElement = document.getElementById('productType');
+    
+    if (categoryId >= 1 && categoryId <= 6) {
+        productTypeElement.innerHTML = '<span class="badge bg-primary" style="font-size: 1rem; padding: 0.5rem 1rem;">Xi măng giả gỗ</span>';
+    } else if (categoryId > 0) {
+        productTypeElement.innerHTML = '<span class="badge bg-info" style="font-size: 1rem; padding: 0.5rem 1rem;">Nội thất</span>';
+    } else {
+        productTypeElement.innerHTML = '<span class="text-muted">Chọn danh mục để xem loại sản phẩm</span>';
+    }
+});
 </script>
 </body>
 </html>

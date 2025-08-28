@@ -220,7 +220,8 @@
 
 .product-card img {
     width: 100%;
-    height: auto;
+    height: 250px;
+    object-fit: cover;
     border-radius: 5px;
     transition: transform 0.3s ease;
 }
@@ -249,4 +250,17 @@
 .nd{
    padding-left: 40px; /* Tạo khoảng cách bên trái */
     padding-right: 40px; /* Tạo khoảng cách bên phải */
+}
+
+/* Responsive cho product-card */
+@media (max-width: 768px) {
+    .product-card img {
+        height: 200px;
+    }
+}
+
+@media (max-width: 576px) {
+    .product-card img {
+        height: 180px;
+    }
 }

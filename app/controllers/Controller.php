@@ -12,7 +12,8 @@ class Controller
     public function __construct()
     {
         $this->view = new Engine(ROOTDIR . 'app/views');
-        $this->db = new PDO('mysql:host=localhost;dbname=project', 'root', '');
+        // Sử dụng kết nối UTF-8 từ PDOFactory
+        $this->db = (new \App\Core\PDOFactory())->create();
         $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 

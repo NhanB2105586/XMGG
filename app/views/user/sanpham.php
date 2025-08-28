@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__ . '/../partials/header.php';
 include_once __DIR__ . '/../../models/Product.php';
+include_once __DIR__ . '/../../helpers.php';
 ?>
 
 <link href="/css/stylesanpham.css" rel="stylesheet">
@@ -54,7 +55,13 @@ include_once __DIR__ . '/../../models/Product.php';
                     <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
                         <div class="special-img position-relative overflow-hidden">
                             <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>">
-                                <img src="/images/upload/<?php echo htmlspecialchars($product['main_image']); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                                <?php if (!empty($product['main_image']) && $product['main_image'] !== 'default.jpg'): ?>
+                                    <img src="/images/imageupload/<?php echo htmlspecialchars($product['main_image']); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                                <?php else: ?>
+                                    <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                                        <span class="text-muted">Chưa có ảnh</span>
+                                    </div>
+                                <?php endif; ?>
                             </a>
                         </div>
                         <div class="text-start m-1">
@@ -69,9 +76,7 @@ include_once __DIR__ . '/../../models/Product.php';
                             <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="<?php echo htmlspecialchars($product['product_id']); ?>" style="flex: 1;">
                                 Thêm Vào Giỏ
                             </button>
-                            <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
-                                Chi Tiết
-                            </a>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="<?php echo htmlspecialchars($product['product_id']); ?>" style="flex: 1;">Mua</button>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -105,82 +110,6 @@ include_once __DIR__ . '/../../models/Product.php';
             const filterValue = document.getElementById('price-filter').value;
             window.location.href = '?filter=' + filterValue; // Chuyển hướng với bộ lọc
         });
-
-        // Xử lý nút yêu thích
-        document.querySelectorAll('.add-favorite').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const productId = this.getAttribute('data-product-id');
-                
-                fetch('/add-favorite', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: 'product_id=' + encodeURIComponent(productId)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert(data.message);
-                        updateFavoriteCount();
-                    } else {
-                        alert(data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Có lỗi xảy ra');
-                });
-            });
-        });
-
-        // Xử lý nút thêm vào giỏ hàng
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const productId = this.getAttribute('data-product-id');
-                
-                fetch('/ajax-add-to-cart', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: 'product_id=' + encodeURIComponent(productId) + '&quantity=1'
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Đã thêm vào giỏ hàng!');
-                        updateCartCount();
-                    } else {
-                        alert(data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Có lỗi xảy ra');
-                });
-            });
-        });
-
-        // Cập nhật số lượng yêu thích
-        function updateFavoriteCount() {
-            const favoriteBadge = document.querySelector('.favorite-badge');
-            if (favoriteBadge) {
-                const currentCount = parseInt(favoriteBadge.textContent) || 0;
-                favoriteBadge.textContent = currentCount + 1;
-            }
-        }
-
-        // Cập nhật số lượng giỏ hàng
-        function updateCartCount() {
-            const cartBadge = document.querySelector('.cart-badge');
-            if (cartBadge) {
-                const currentCount = parseInt(cartBadge.textContent) || 0;
-                cartBadge.textContent = currentCount + 1;
-            }
-        }
     </script>
 </body>
 

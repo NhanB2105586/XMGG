@@ -1,6 +1,7 @@
 <?php
 include_once __DIR__ . '/../../partials/header.php';
 include_once __DIR__ . '/../../../models/Product.php';
+include_once __DIR__ . '/../../../helpers.php';
 
 use App\Core\PDOFactory;
 use App\Models\Product;
@@ -47,7 +48,13 @@ use App\Models\Product;
                         <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
                             <div class="special-img position-relative overflow-hidden">
                                 <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>">
-                                    <img src="/images/upload/<?php echo htmlspecialchars($product['main_image']); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                                    <?php if (!empty($product['main_image']) && $product['main_image'] !== 'default.jpg'): ?>
+                                        <img src="/images/imageupload/<?php echo htmlspecialchars($product['main_image']); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                                    <?php else: ?>
+                                        <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                                            <span class="text-muted">Chưa có ảnh</span>
+                                        </div>
+                                    <?php endif; ?>
                                 </a>
 
                             </div>
@@ -69,9 +76,7 @@ use App\Models\Product;
                                         Hết Hàng
                                     </button>
                                 <?php endif; ?>
-                                <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="flex: 1;">
-                                    Chi Tiết
-                                </a>
+                                <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="<?php echo htmlspecialchars($product['product_id']); ?>" style="flex: 1;">Mua</button>
                             </div>
                         </div>
                     <?php endforeach; ?>

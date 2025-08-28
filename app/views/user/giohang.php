@@ -51,9 +51,35 @@ $total = 0;
                             <?php foreach ($cartItems as $item) : ?>
                             <tr class="align-middle">
                                 <td>
-                                    <img src="/images/upload/<?php echo htmlspecialchars($item['image_url'] ?? 'default.jpg'); ?>"
-                                        alt="Product Image" style="width: 50px; height: 50px;">
-                                    <?php echo htmlspecialchars($item['product_name']); ?>
+                                    <?php
+                                    // Sửa đường dẫn hình ảnh
+                                    $img = '';
+                                    if (!empty($item['image_url'])) {
+                                        // Kiểm tra nếu là URL tuyệt đối
+                                        if (strpos($item['image_url'], 'http') === 0) {
+                                            $img = $item['image_url'];
+                                        } 
+                                        // Kiểm tra nếu đã có /images/ trong đường dẫn
+                                        elseif (strpos($item['image_url'], '/images/') === 0) {
+                                            $img = $item['image_url'];
+                                        }
+                                        // Thêm /images/imageupload/ nếu chưa có
+                                        else {
+                                            // Loại bỏ dấu / ở đầu nếu có
+                                            $imagePath = ltrim($item['image_url'], '/');
+                                            $img = '/images/imageupload/' . $imagePath;
+                                        }
+                                    } else {
+                                        $img = '/images/default.jpg';
+                                    }
+                                    ?>
+                                                                         <div style="display: flex; flex-direction: column; align-items: center; text-align: center;">
+                                         <img src="<?php echo htmlspecialchars($img); ?>"
+                                             alt="Product Image" style="width: 100px; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #eee; margin-bottom: 8px;">
+                                         <div style="font-size: 14px; font-weight: 500; color: #333; word-break: break-word; max-width: 120px;">
+                                             <?php echo htmlspecialchars($item['product_name']); ?>
+                                         </div>
+                                     </div>
                                 </td>
                                 <td class="text-center"><?php echo number_format($item['price'], 0, ',', '.') . 'đ'; ?>
                                 </td>

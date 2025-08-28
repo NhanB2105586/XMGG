@@ -11,7 +11,7 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
     <div class="container mt-3" id="main-content">
         <h2 class="text-center">Thêm Sản Phẩm Mới</h2>
         <div class="mb-3">
-            <a href="/../admin/viewProducts" class="btn btn-secondary">
+            <a href="/../admin/viewProduct" class="btn btn-secondary">
                 ← Quay lại
             </a>
         </div>
@@ -28,7 +28,7 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
         </div>
         <?php endif; ?>
 
-        <form action="/admin/addProducts" method="POST" enctype="multipart/form-data">
+        <form action="/admin/addProduct" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="category_id">Danh Mục</label>
                 <select class="form-control" id="category_id" name="category_id" required>

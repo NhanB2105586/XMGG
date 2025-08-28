@@ -1,0 +1,364 @@
+/* Chatbot Tư vấn chuyên nghiệp XMGG */
+.chatbot-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9998;
+  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.chatbot-toggle {
+  width: 65px;
+  height: 65px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  border: 2px solid #28a745;
+  position: relative;
+  overflow: hidden;
+  padding: 6px;
+}
+
+.chatbot-toggle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Logo styles */
+.chatbot-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.logo-image {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 2px;
+}
+
+.logo-text {
+  text-align: center;
+  line-height: 1;
+}
+
+.logo-title {
+  font-size: 5px;
+  font-weight: 700;
+  color: #28a745;
+  letter-spacing: 0.3px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.logo-subtitle {
+  font-size: 3px;
+  color: #28a745;
+  letter-spacing: 0.2px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.chatbot-toggle .notification-badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  background: #ff4757;
+  color: white;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s infinite;
+  font-weight: 600;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.chatbot-window {
+  position: absolute;
+  bottom: 75px;
+  left: 0;
+  width: 320px;
+  height: 450px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideIn 0.3s ease;
+  border: 2px solid #28a745;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chatbot-header {
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px 12px 0 0;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.header-logo-image {
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.header-logo .logo-title {
+  font-size: 8px;
+  color: white;
+  font-weight: 700;
+}
+
+.header-logo .logo-subtitle {
+  font-size: 6px;
+  color: white;
+}
+
+.header-info h3 {
+  color: white;
+  margin: 0 0 3px 0;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Roboto', sans-serif;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: white;
+  font-size: 10px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background: #4ade80;
+  border-radius: 50%;
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.4; }
+}
+
+.chatbot-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chatbot-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.chatbot-messages {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  background: #f8f9fa;
+}
+
+.message {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.message.bot {
+  align-items: flex-start;
+}
+
+.message.user {
+  align-items: flex-end;
+}
+
+.message-content {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  line-height: 1.4;
+  word-wrap: break-word;
+  font-family: 'Roboto', sans-serif;
+}
+
+.message.bot .message-content {
+  background: white;
+  color: #333;
+  border: 1px solid #e9ecef;
+  border-radius: 16px 16px 16px 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.message.user .message-content {
+  background: #28a745;
+  color: white;
+  border-radius: 16px 16px 4px 16px;
+  font-weight: 500;
+}
+
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.quick-action {
+  background: white;
+  border: 1.5px solid #28a745;
+  color: #28a745;
+  padding: 6px 10px;
+  border-radius: 16px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+}
+
+.quick-action:hover {
+  background: #28a745;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+}
+
+.chatbot-input {
+  padding: 12px;
+  background: white;
+  border-top: 1px solid #e9ecef;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.chatbot-input input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid #e9ecef;
+  border-radius: 20px;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  font-family: 'Roboto', sans-serif;
+}
+
+.chatbot-input input:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.1);
+}
+
+.chatbot-input input::placeholder {
+  color: #999;
+  font-size: 12px;
+}
+
+.chatbot-input button {
+  background: #28a745;
+  color: white;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.chatbot-input button:hover {
+  background: #218838;
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .chatbot-window {
+    width: 280px;
+    height: 400px;
+    bottom: 70px;
+  }
+  
+  .chatbot-toggle {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .logo-image {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .logo-title {
+    font-size: 4px;
+  }
+  
+  .logo-subtitle {
+    font-size: 2.5px;
+  }
+  
+  .notification-badge {
+    width: 14px;
+    height: 14px;
+    font-size: 9px;
+  }
+}

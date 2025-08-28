@@ -12,11 +12,10 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
             <div class="search-form me-auto">
                 <form method="GET" action="" class="d-flex">
                     <input type="text" name="search" class="form-control" placeholder="Tìm kiếm theo tên"
-                        value="<?php echo htmlspecialchars($searchTerm); ?>">
+                        value="<?php echo htmlspecialchars($searchTerm ?? ''); ?>">
                     <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                 </form>
             </div>
-<<<<<<< HEAD
             <div>
                 <form action="/admin/bulkUpdateCategories" method="POST" style="display: inline;" 
                       onsubmit="return confirm('Bạn có chắc chắn muốn cập nhật tên các danh mục theo yêu cầu?')">
@@ -26,12 +25,19 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                 </form>
                 <a href="/admin/addCategory" class="btn btn-primary btn-add">Thêm Danh mục</a>
             </div>
-=======
-            <a href="/admin/addCategory" class="btn btn-primary btn-add">Thêm Hạng mục</a>
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
+        </div>
+        
+        <!-- Thông tin phân trang -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="text-muted">
+                Hiển thị <?= count($categories) ?> trong tổng số <?= $totalCategories ?? 0 ?> danh mục
+            </div>
+            <div class="text-muted">
+                Trang <?= $currentPage ?? 1 ?> / <?= $totalPages ?? 1 ?>
+            </div>
         </div>
         <div class="table-responsive">
-            <?php if (!empty($essage)): ?>
+            <?php if (!empty($message ?? '')): ?>
             <div class="alert alert-success" role="alert">
                 <?php echo htmlspecialchars($message); ?>
             </div>
@@ -70,11 +76,8 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                 <thead>
                     <tr>
                         <th class="text-center">STT</th>
-<<<<<<< HEAD
                         <th class="text-center">Tên Danh mục</th>
-=======
-                        <th class="text-center">Tên Hạng mục</th>
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
+                        <th class="text-center">Loại</th>
                         <th class="text-center">Hành Động</th>
                     </tr>
                 </thead>
@@ -84,6 +87,15 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                     <tr>
                         <td class="text-center"><?= $index + 1 ?></td>
                         <td><?= htmlspecialchars($category["category_name"]) ?></td>
+                        <td class="text-center">
+                            <?php 
+                            $categoryType = $category['category_type'] ?? 'noithat';
+                            if ($categoryType == 'ximang'): ?>
+                                <span class="badge bg-primary">Xi măng giả gỗ</span>
+                            <?php else: ?>
+                                <span class="badge bg-info">Nội thất</span>
+                            <?php endif; ?>
+                        </td>
                         <td class="text-center">
                             <a href="/admin/editCategory/<?= $category['category_id'] ?>"
                                 class="btn btn-warning btn-sm">Chỉnh Sửa</a>
@@ -98,35 +110,63 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                     <?php endforeach; ?>
                     <?php else: ?>
                     <tr>
-                        <td colspan="3" class="text-center">Không có hạng mục nào.</td>
+                        <td colspan="4" class="text-center">Không có hạng mục nào.</td>
                     </tr>
                     <?php endif; ?>
                 </tbody>
             </table>
             <!-- Phân trang -->
+            <?php if (($totalPages ?? 1) > 1): ?>
             <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-center">
-                    <?php if ($currentPage > 1): ?>
+                    <?php if (($currentPage ?? 1) > 1): ?>
                     <li class="page-item">
                         <a class="page-link"
-                            href="?page=<?php echo $currentPage - 1; ?>&search=<?php echo urlencode($searchTerm); ?>"
+                            href="?page=<?php echo ($currentPage ?? 1) - 1; ?>&search=<?php echo urlencode($searchTerm ?? ''); ?>"
                             aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
                     <?php endif; ?>
 
-                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                    <li class="page-item <?php echo ($i === $currentPage) ? 'active' : ''; ?>">
+                    <?php 
+                    // Hiển thị tối đa 5 trang
+                    $startPage = max(1, ($currentPage ?? 1) - 2);
+                    $endPage = min(($totalPages ?? 1), ($currentPage ?? 1) + 2);
+                    
+                    if ($startPage > 1): ?>
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1&search=<?php echo urlencode($searchTerm ?? ''); ?>">1</a>
+                    </li>
+                    <?php if ($startPage > 2): ?>
+                    <li class="page-item disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                    <?php endif; ?>
+                    <?php endif; ?>
+
+                    <?php for ($i = $startPage; $i <= $endPage; $i++): ?>
+                    <li class="page-item <?php echo ($i === ($currentPage ?? 1)) ? 'active' : ''; ?>">
                         <a class="page-link"
-                            href="?page=<?php echo $i; ?>&search=<?php echo urlencode($searchTerm); ?>"><?php echo $i; ?></a>
+                            href="?page=<?php echo $i; ?>&search=<?php echo urlencode($searchTerm ?? ''); ?>"><?php echo $i; ?></a>
                     </li>
                     <?php endfor; ?>
 
-                    <?php if ($currentPage < $totalPages): ?>
+                    <?php if ($endPage < ($totalPages ?? 1)): ?>
+                    <?php if ($endPage < ($totalPages ?? 1) - 1): ?>
+                    <li class="page-item disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                    <?php endif; ?>
+                    <li class="page-item">
+                        <a class="page-link" href="?page=<?php echo ($totalPages ?? 1); ?>&search=<?php echo urlencode($searchTerm ?? ''); ?>"><?php echo ($totalPages ?? 1); ?></a>
+                    </li>
+                    <?php endif; ?>
+
+                    <?php if (($currentPage ?? 1) < ($totalPages ?? 1)): ?>
                     <li class="page-item">
                         <a class="page-link"
-                            href="?page=<?php echo $currentPage + 1; ?>&search=<?php echo urlencode($searchTerm); ?>"
+                            href="?page=<?php echo ($currentPage ?? 1) + 1; ?>&search=<?php echo urlencode($searchTerm ?? ''); ?>"
                             aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
@@ -134,6 +174,7 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                     <?php endif; ?>
                 </ul>
             </nav>
+            <?php endif; ?>
         </div>
     </div>
     <?php

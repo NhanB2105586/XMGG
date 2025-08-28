@@ -108,6 +108,16 @@ $router->get(
 );
 
 $router->get(
+    '/hangtrangtri/khang',
+    '\App\Controllers\User\ProductController@showkhang'
+);
+
+$router->get(
+    '/hangtrangtri/khang-xm',
+    '\App\Controllers\User\ProductController@showkhangxm'
+);
+
+$router->get(
     '/phongngu/men',
     '\App\Controllers\User\ProductController@showmen'
 );
@@ -143,3 +153,15 @@ $router->get(
 );
 
 
+
+// Route động cho tất cả danh mục xi măng giả gỗ (đặt cuối để xử lý các URL không match)
+$router->get(
+    '/xmgg/([a-zA-Z0-9\-]+)',
+    '\App\\Controllers\\User\\DynamicXimangController@showCategoryBySlug'
+);
+
+// Route động cho tất cả danh mục nội thất (đặt cuối để xử lý các URL không match)
+$router->get(
+    '/hangtrangtri/([a-zA-Z0-9\-]+)',
+    '\App\\Controllers\\User\\DynamicNoithatController@showCategoryBySlug'
+);

@@ -1,5 +1,6 @@
 <?php
 include_once __DIR__ . '/../partials/header.php';
+include_once __DIR__ . '/../../helpers.php';
 ?>
 <link href="/css/stylesanpham.css" rel="stylesheet">
 <link href="/css/stylechitiet.css" rel="stylesheet">
@@ -32,14 +33,16 @@ include_once __DIR__ . '/../partials/header.php';
                     <?php if (!empty($product['images'])) : ?>
                     <?php foreach ($product['images'] as $index => $image): ?>
                     <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
-                        <img src="/images/upload/<?php echo htmlspecialchars($image['image_url']); ?>"
+                        <img src="<?php echo htmlspecialchars(getImagePath($image['image_url'])); ?>"
                             class="d-block img-fluid" alt="Product Image">
                     </div>
                     <?php endforeach; ?>
                     <?php else: ?>
                     <!-- Trường hợp không có hình ảnh nào -->
                     <div class="carousel-item active">
-                        <img src="/images/upload/default.jpg" class="d-block img-fluid" alt="No Image Available">
+                        <div class="d-block img-fluid bg-light d-flex align-items-center justify-content-center" style="height: 400px;">
+                            <span class="text-muted">Chưa có hình ảnh</span>
+                        </div>
                     </div>
                     <?php endif; ?>
                 </div>
@@ -69,10 +72,12 @@ include_once __DIR__ . '/../partials/header.php';
                     </button>
                     <?php endforeach; ?>
                     <?php else: ?>
-                    <!-- Trường hợp không có hình ảnh nào, hiển thị một ảnh mặc định -->
+                    <!-- Trường hợp không có hình ảnh nào, hiển thị placeholder -->
                     <button type="button" data-bs-target="#carouselExample" data-bs-slide-to="0" class="active"
                         aria-current="true" aria-label="No Image Available" style="width: 100px;">
-                        <img src="/images/upload/default.jpg" class="d-block img-thumbnail img-fluid" />
+                        <div class="d-block img-thumbnail img-fluid bg-light d-flex align-items-center justify-content-center" style="height: 80px;">
+                            <span class="text-muted small">Chưa có ảnh</span>
+                        </div>
                     </button>
                     <?php endif; ?>
                 </div>
@@ -93,6 +98,18 @@ include_once __DIR__ . '/../partials/header.php';
                         <del class="m-1"><?php echo number_format($product['old_price'], 0, ',', '.') . 'đ'; ?></del>
                         <?php endif; ?>
                     </div>
+                    
+                    <?php if ($isXimangProduct): ?>
+                    <!-- Thông tin cho sản phẩm ximang -->
+                    <div>
+                        <span class="fw-bold">Đơn vị:</span>
+                        <span>Thanh</span>
+                    </div>
+                    <div class="mt-3">
+                        <p class="fw-bold text-primary">Muốn thi công thì liên hệ: <a href="tel:0939496469" class="text-decoration-none">093 949 64 69</a></p>
+                    </div>
+                    <?php else: ?>
+                    <!-- Thông tin cho sản phẩm thường -->
                     <div>
                         <span class="fw-bold">Kích thước:</span>
                         <span>D200cm x R70cm x C74cm</span>
@@ -101,6 +118,8 @@ include_once __DIR__ . '/../partials/header.php';
                         <span class="fw-bold">Chất liệu:</span>
                         <span>Gỗ tự nhiên</span>
                     </div>
+                    <?php endif; ?>
+                    
                     <div class="quantity ">
                         <button class="decrease" id="button-decrement">-</button>
                         <input class="text-center" id="quantityInput" type="number" value="1" min="1"
@@ -138,16 +157,16 @@ include_once __DIR__ . '/../partials/header.php';
                         <button class="btn hidden-btn " id="addToCartBtn"
                             <?php echo $product['in_stock'] <= 0 ? 'disabled' : ''; ?>>THÊM VÀO GIỎ</button>
                         <button class="btn hidden-btn" id="buyNowBtn"
-                            <?php echo $product['in_stock'] <= 0 ? 'disabled' : ''; ?>>MUA NGAY</button>
+                            <?php echo $product['in_stock'] <= 0 ? 'disabled' : ''; ?>>Mua</button>
                     </div>
 
 
                     <div class="product-notes mt-3">
                         <p>✔ Miễn phí giao hàng & lắp đặt tại tất cả quận huyện thuộc TP.Cần Thơ, Hậu Giang, Vĩnh Long
                             (*)</p>
-                        <p>✔ Miễn phí 1 đổi 1 - Bảo hành 2 năm - Bảo trì trọn đời (**) </p>
+                        <p>✔ Miễn phí 1 đổi 1 - <a href="/chinhsachbaohanh">Bảo hành</a> 2 năm - Bảo trì trọn đời (**) </p>
                         <p>(*) Không áp dụng cho danh mục Đồ Trang Trí</p>
-                        <p>(**) Không áp dụng cho các sản phẩm Clearance. Chỉ bảo hành 01 năm cho khung ghế đối với Ghế Văn Phòng</p>
+                        <p>(**) Không áp dụng cho các sản phẩm Clearance. Chỉ <a href="/chinhsachbaohanh">bảo hành</a> 01 năm cho khung ghế đối với Ghế Văn Phòng</p>
 
                     </div>
 
@@ -207,9 +226,22 @@ include_once __DIR__ . '/../partials/header.php';
                                 <?php foreach ($productsChunk as $product): ?>
                                     <div class="product-item col-md-3">
                                         <div class="special-img position-relative overflow-hidden">
+                                            <!-- Nút yêu thích -->
+                                            <button class="btn btn-sm btn-outline-primary add-favorite" 
+                                                    data-product-id="<?php echo htmlspecialchars($product['product_id']); ?>"
+                                                    title="Thêm vào yêu thích">
+                                                Yêu thích
+                                            </button>
+                                            
                                             <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>">
-                                                <img src="<?php echo htmlspecialchars(getImagePath($product['images'][0]['image_url'])); ?>" class="" alt="<?php echo htmlspecialchars($product['product_name']); ?>" style="height: 200px;">
-                                            </a>
+                                                 <?php if (!empty($product['images'])): ?>
+                                                     <img src="<?php echo htmlspecialchars(getImagePath($product['images'][0]['image_url'])); ?>" class="" alt="<?php echo htmlspecialchars($product['product_name']); ?>" style="height: 200px;">
+                                                 <?php else: ?>
+                                                     <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                                                         <span class="text-muted">Chưa có ảnh</span>
+                                                     </div>
+                                                 <?php endif; ?>
+                                             </a>
                                         </div>
                                         <div class="text-start m-1">
                                             <p class="text-capitalize mt-3 mb-1"><?php echo htmlspecialchars($product['product_name']); ?></p>
@@ -232,7 +264,7 @@ include_once __DIR__ . '/../partials/header.php';
                                                 <button type="submit" class="btn btn-product mt-3 p-2 w-100">Thêm Vào Giỏ</button>
                                             </form>
                                             <!-- Nút Chi Tiết -->
-                                            <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 45%;">Chi Tiết</a>
+                                            <button class="btn btn-product mt-3 p-2 btn-detail-product add-to-cart" data-product-id="<?php echo htmlspecialchars($product['product_id']); ?>" style="flex: 1;">Mua</button>
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
@@ -346,8 +378,8 @@ include_once __DIR__ . '/../partials/header.php';
         buyNowBtn.addEventListener('click', () => {
             let quantity = parseInt(quantityInput.value) || 1;
             if (quantity <= inStock) {
-                // Sử dụng confirmPurchase thay vì submit form
-                fetch('/confirm-purchase', {
+                // Thêm vào giỏ hàng trước, sau đó chuyển đến trang thanh toán
+                fetch('/ajax-add-to-cart', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -357,29 +389,40 @@ include_once __DIR__ . '/../partials/header.php';
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        alert('Đã mua hàng thành công!');
-                        // Cập nhật hiển thị số lượng
-                        document.getElementById('inStockDisplay').textContent = 'Số lượng còn lại: ' + data.new_stock;
-                        // Cập nhật biến inStock
-                        window.inStock = data.new_stock;
-                        // Nếu hết hàng, vô hiệu hóa nút
-                        if (data.new_stock <= 0) {
-                            document.getElementById('inStockDisplay').textContent = 'Hết hàng';
-                            document.getElementById('inStockDisplay').className = 'fw-bold text-danger';
-                            addToCartBtn.disabled = true;
-                            buyNowBtn.disabled = true;
-                        }
+                        // Chuyển đến trang thanh toán
+                        window.location.href = '/thanhtoan';
                     } else {
                         alert(data.message);
                     }
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('Có lỗi xảy ra khi mua hàng');
+                    alert('Có lỗi xảy ra khi thêm vào giỏ hàng');
                 });
             } else {
                 alert('Số lượng vượt quá hàng trong kho!');
             }
+        });
+
+        // Xử lý nút yêu thích
+        document.querySelectorAll('.add-favorite').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const productId = this.getAttribute('data-product-id');
+                
+                // Toggle trạng thái yêu thích
+                if (this.textContent.trim() === 'Yêu thích') {
+                    this.textContent = 'Đã yêu thích';
+                    this.classList.remove('btn-outline-primary');
+                    this.classList.add('btn-primary');
+                    alert('Đã thêm vào danh sách yêu thích!');
+                } else {
+                    this.textContent = 'Yêu thích';
+                    this.classList.remove('btn-primary');
+                    this.classList.add('btn-outline-primary');
+                    alert('Đã xóa khỏi danh sách yêu thích!');
+                }
+            });
         });
 
         // Hàm để quay về trang trước

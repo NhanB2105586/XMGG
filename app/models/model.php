@@ -260,19 +260,20 @@ class Model
             $year = date('Y');
         }
         
+        // Debug: Log the parameters
+        error_log("getOrdersByMonth called with month: $month, year: $year");
+        
         $query = "SELECT 
                     o.order_id,
                     o.order_date,
-                    SUM(od.quantity * od.price) as total_amount,
+                    o.total_amount,
                     o.status,
-                    u.full_name as customer_name,
+                    u.fullname as customer_name,
                     u.email
                   FROM orders o
-                  JOIN order_details od ON o.order_id = od.order_id
                   JOIN users u ON o.user_id = u.user_id
                   WHERE MONTH(o.order_date) = :month 
                   AND YEAR(o.order_date) = :year
-                  GROUP BY o.order_id, o.order_date, o.status, u.full_name, u.email
                   ORDER BY o.order_date DESC";
         
         $stmt = $this->db->prepare($query);
@@ -285,11 +286,18 @@ class Model
     //Category
     protected function getItemsCategories($table, $limit, $offset, $searchTerm = '')
     {
-        $sql = "SELECT * FROM $table WHERE category_name LIKE :searchTerm LIMIT :limit OFFSET :offset";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
-        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        if (!empty($searchTerm)) {
+            $sql = "SELECT * FROM $table WHERE category_name LIKE :searchTerm LIMIT :limit OFFSET :offset";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
+            $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        } else {
+            $sql = "SELECT * FROM $table LIMIT :limit OFFSET :offset";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        }
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -297,9 +305,14 @@ class Model
 
     protected function getTotalItemsCategories($table, $searchTerm = '')
     {
-        $sql = "SELECT COUNT(*) FROM $table WHERE category_name LIKE :searchTerm";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
+        if (!empty($searchTerm)) {
+            $sql = "SELECT COUNT(*) FROM $table WHERE category_name LIKE :searchTerm";
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(':searchTerm', '%' . $searchTerm . '%', PDO::PARAM_STR);
+        } else {
+            $sql = "SELECT COUNT(*) FROM $table";
+            $stmt = $this->db->prepare($sql);
+        }
         $stmt->execute();
 
         return $stmt->fetchColumn();
@@ -427,6 +440,22 @@ class Model
         $statement = $this->db->prepare("select * from products p join categories c on p.category_id=c.category_id where product_id= :id");
         $statement->execute([':id' => $id]);
         return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // Lấy đơn hàng gần đây cho dashboard
+    public function getRecentOrders($limit = 5)
+    {
+        $query = "SELECT o.*, u.fullname AS customer_name, u.email 
+                  FROM orders o 
+                  JOIN users u ON o.user_id = u.user_id 
+                  ORDER BY o.order_date DESC 
+                  LIMIT :limit";
+        
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }

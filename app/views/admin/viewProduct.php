@@ -20,7 +20,7 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                         <p class="text-muted fs-5 mb-0">Quản lý tất cả sản phẩm của Đại Quân Decor</p>
                     </div>
                     <div>
-                        <a href="/admin/addProducts" class="btn btn-primary-modern">
+                        <a href="/admin/addProduct" class="btn btn-primary-modern">
                             <i class="fas fa-plus me-2"></i>Thêm sản phẩm mới
                         </a>
                     </div>
@@ -64,10 +64,10 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <select class="form-select modern-select" id="statusFilter">
-                                    <option value="">Tất cả trạng thái</option>
-                                    <option value="active">Đang bán</option>
-                                    <option value="inactive">Ngừng bán</option>
+                                <select class="form-select modern-select" id="typeFilter">
+                                    <option value="">Tất cả loại</option>
+                                    <option value="ximang">Xi măng giả gỗ</option>
+                                    <option value="noithat">Nội thất</option>
                                 </select>
                             </div>
                         </div>
@@ -114,7 +114,7 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                                         <th>Danh mục</th>
                                         <th>Giá</th>
                                         <th>Số lượng</th>
-                                        <th>Trạng thái</th>
+                                        <th>Loại</th>
                                         <th>Thao tác</th>
                                     </tr>
                                 </thead>
@@ -131,9 +131,15 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                                                         <?php 
                                                         $imageUrl = $product['main_image'] ?? 'default.jpg';
                                                         ?>
-                                                        <img src="/images/upload/<?php echo htmlspecialchars($imageUrl); ?>" 
-                                                             alt="<?php echo htmlspecialchars($product['product_name']); ?>"
-                                                             class="rounded product-image" style="width: 60px; height: 60px; object-fit: cover;">
+                                                        <?php if (!empty($imageUrl) && $imageUrl !== 'default.jpg'): ?>
+                                                            <img src="/images/imageupload/<?php echo htmlspecialchars($imageUrl); ?>" 
+                                                                 alt="<?php echo htmlspecialchars($product['product_name']); ?>"
+                                                                 class="rounded product-image" style="width: 60px; height: 60px; object-fit: cover;">
+                                                        <?php else: ?>
+                                                            <div class="bg-light d-flex align-items-center justify-content-center rounded" style="width: 60px; height: 60px;">
+                                                                <span class="text-muted small">Chưa có ảnh</span>
+                                                            </div>
+                                                        <?php endif; ?>
                                                     </div>
                                                 </td>
                                                 <td>
@@ -164,15 +170,17 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                                                     <?php endif; ?>
                                                 </td>
                                                 <td>
-                                                    <?php if ($product['status'] == 'active'): ?>
-                                                        <span class="badge bg-success">Đang bán</span>
+                                                    <?php 
+                                                    $categoryId = $product['category_id'] ?? 0;
+                                                    if ($categoryId >= 1 && $categoryId <= 6): ?>
+                                                        <span class="badge bg-primary">Xi măng giả gỗ</span>
                                                     <?php else: ?>
-                                                        <span class="badge bg-secondary">Ngừng bán</span>
+                                                        <span class="badge bg-info">Nội thất</span>
                                                     <?php endif; ?>
                                                 </td>
                                                 <td>
                                                     <div class="btn-group" role="group">
-                                                        <a href="/admin/editProducts?id=<?php echo htmlspecialchars($product['product_id']); ?>" 
+                                                        <a href="/admin/editProduct/<?php echo htmlspecialchars($product['product_id']); ?>" 
                                                            class="btn btn-sm btn-outline-primary-modern" title="Chỉnh sửa">
                                                             <i class="fas fa-edit"></i>
                                                         </a>
@@ -195,7 +203,7 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                                                     <i class="fas fa-box-open fa-3x mb-3"></i>
                                                     <h5>Chưa có sản phẩm nào</h5>
                                                     <p>Bắt đầu bằng cách thêm sản phẩm đầu tiên</p>
-                                                    <a href="/admin/addProducts" class="btn btn-primary-modern">
+                                                    <a href="/admin/addProduct" class="btn btn-primary-modern">
                                                         <i class="fas fa-plus me-2"></i>Thêm sản phẩm
                                                     </a>
                                                 </div>
@@ -217,7 +225,6 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                                     <li class="page-item <?= ($i == $currentPage) ? 'active' : '' ?>">
                                         <a class="page-link" href="?page=<?php echo $i; ?><?php 
                                             echo !empty($searchTerm) ? '&search=' . urlencode($searchTerm) : ''; 
-                                            echo isset($categoryId) ? '&category_id=' . $categoryId : ''; 
                                         ?>"><?php echo $i; ?></a>
                                     </li>
                                 <?php endfor; ?>
@@ -423,19 +430,19 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
             });
         });
 
-        // Status filter
-        document.getElementById('statusFilter').addEventListener('change', function() {
-            const selectedStatus = this.value;
+        // Type filter
+        document.getElementById('typeFilter').addEventListener('change', function() {
+            const selectedType = this.value;
             const rows = document.querySelectorAll('.product-row');
             
             rows.forEach(row => {
-                const statusElement = row.querySelector('td:nth-child(6)');
-                if (statusElement) {
-                    const status = statusElement.textContent.trim();
+                const typeElement = row.querySelector('td:nth-child(7)');
+                if (typeElement) {
+                    const type = typeElement.textContent.trim();
                     
-                    if (!selectedStatus || 
-                        (selectedStatus === 'active' && status === 'Đang bán') ||
-                        (selectedStatus === 'inactive' && status === 'Ngừng bán')) {
+                    if (!selectedType || 
+                        (selectedType === 'ximang' && type === 'Xi măng giả gỗ') ||
+                        (selectedType === 'noithat' && type === 'Nội thất')) {
                         row.style.display = '';
                     } else {
                         row.style.display = 'none';
@@ -457,9 +464,8 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                 const formData = new FormData();
                 formData.append('id', productIdToDelete);
                 
-                fetch('/admin/deleteProducts', {
-                    method: 'POST',
-                    body: formData
+                fetch('/admin/deleteProduct/' + productIdToDelete, {
+                    method: 'POST'
                 })
                 .then(response => {
                     if (response.redirected) {

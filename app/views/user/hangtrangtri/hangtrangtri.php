@@ -52,9 +52,15 @@ include_once __DIR__ . '/../../../models/Product.php';
                             <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>">
                                 <?php
                                 // Hiển thị hình ảnh đầu tiên nếu có, nếu không, hiển thị một ảnh mặc định
-                                $image_url = !empty($product['images'][0]['image_url']) ? $product['images'][0]['image_url'] : 'default.jpg';
+                                $image_url = $product['main_image'];
                                 ?>
-                                <img src="/images/upload/<?php echo htmlspecialchars($image_url); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                                <?php if (!empty($image_url) && $image_url !== 'default.jpg'): ?>
+                                    <img src="/images/imageupload/<?php echo htmlspecialchars($image_url); ?>" class="w-100" alt="<?php echo htmlspecialchars($product['product_name']); ?>">
+                                <?php else: ?>
+                                    <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                                        <span class="text-muted">Chưa có ảnh</span>
+                                    </div>
+                                <?php endif; ?>
                             </a>
                         </div>
                         <div class="text-start m-1">
@@ -77,7 +83,7 @@ include_once __DIR__ . '/../../../models/Product.php';
                                 <input type="hidden" name="quantity" value="1"> <!-- Số lượng mặc định là 1 -->
                                 <button type="submit" class="btn btn-product mt-3 p-2 w-100">Thêm Vào Giỏ</button>
                             </form>
-                            <a href="/chitietsanpham/<?php echo htmlspecialchars($product['product_id']); ?>" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 45%;">Chi Tiết</a>
+                            <button class="btn btn-product mt-3 p-2 add-to-cart" data-product-id="<?php echo htmlspecialchars($product['product_id']); ?>" style="flex: 1;">Mua</button>
                         </div>
                     </div>
                 <?php endforeach; ?>

@@ -1,212 +1,65 @@
 <?php
+include_once __DIR__ . '../../../core/PDOFactory.php';
 include_once __DIR__ . '/../partials/header.php';
 ?>
-
-<link href="/css/stylesanpham.css" rel="stylesheet">
-
+<link href="/css/stylebosuutap.css" rel="stylesheet">
 <body>
     <!-- Navbar -->
     <?php include_once __DIR__ . '/../partials/navbar.php'; ?>
 
     <!-- Main Page Content -->
     <div class="container-fluid main-content mt-3">
-
         <!-- Phần hình ảnh trên cùng -->
-        <div class="top-banner-sp">
+        <div class="top-banner-phongkhach">
             <div class="banner-text">
-                Tin tức
+                Tin tức & Sự kiện
                 <div class="breadcrumb">
                     <a href="/">Trang chủ</a>&nbsp;/&nbsp;<a href="/tintuc"> <strong class="current-page">Tin tức</strong></a>
                 </div>
             </div>
         </div>
-    </div>
 
-
-
-    <!-- Danh sách tin tức -->
-    <div class="container mb-3 mt-3">
-        <div class="title text-center py-3">
-            <h2 class="position-relative d-inline-block">Tin tức & Sự kiện</h2>
-        </div>
-        <p class="text-center mb-4">Cập nhật những tin tức mới nhất về sản phẩm, xu hướng thiết kế và các sự kiện đặc biệt của chúng tôi</p>
-        
-        <div class="row">
+        <!-- Nội dung chính - Các tin tức -->
+        <div class="row mt-4 nd">
             <div class="col-12">
-                <div class="news-intro text-center mb-4">
-                    <h4 class="text-primary">📰 Tin tức mới nhất</h4>
-                    <p class="text-muted">Khám phá những xu hướng thiết kế, công nghệ mới và dự án tiêu biểu</p>
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="product-card">
+                            <img src="/images/tintuc/tintuc1.jpg" alt="Xu hướng thiết kế 2024" class="img-fluid rounded">
+                            <h6 class="mt-3 fw-bold">Xu hướng thiết kế nội thất 2024 với xi măng giả gỗ</h6>
+                            <p class="text-muted">Khám phá những xu hướng thiết kế mới nhất năm 2024, với sự kết hợp hoàn hảo giữa xi măng giả gỗ và các vật liệu hiện đại. Thiết kế hiện đại với các mẫu đa dạng phù hợp với mọi không gian nội thất.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="product-card">
+                            <img src="/images/tintuc/tintuc2.png" alt="Công trình tiêu biểu" class="img-fluid rounded">
+                            <h6 class="mt-3 fw-bold">Dự án biệt thự cao cấp sử dụng xi măng giả gỗ</h6>
+                            <p class="text-muted">Khám phá dự án biệt thự 500m² tại Vĩnh Long, nơi xi măng giả gỗ được ứng dụng một cách nghệ thuật. Vật liệu xi măng giả gỗ đảm bảo độ bền cao và dễ bảo trì.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="product-card">
+                            <img src="/images/tintuc/tintuc3.jpg" alt="Hướng dẫn thi công" class="img-fluid rounded">
+                            <h6 class="mt-3 fw-bold">Showroom được xây dựng 80% từ xi măng giả gỗ</h6>
+                            <p class="text-muted">Xây dựng toàn bộ showroom bằng xi măng giả gỗ với thiết kế hiện đại và bền vững. Màu sắc tự nhiên giúp tạo không gian trưng bày lý tưởng.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="product-card">
+                            <img src="/images/tintuc/tintuc4.jpg" alt="Công nghệ 3D" class="img-fluid rounded">
+                            <h6 class="mt-3 fw-bold">Công nghệ cắt CNC từ file 3D</h6>
+                            <p class="text-muted">Áp dụng file 3D cho tấm bord. Cắt hoa văn theo yêu cầu của khách hàng với độ chính xác cao. Vật liệu xi măng giả gỗ đảm bảo an toàn cho không gian sử dụng.</p>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
-        </div>
-        
-            <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                <div class="special-img position-relative overflow-hidden">
-                    <a href="#">
-<<<<<<< HEAD
-                        <img src="/images/tintuc/tintuc1.png" class="w-100" alt="Xu hướng thiết kế 2024">
-=======
-                        <img src="/images/news/news1.jpg" class="w-100" alt="Xu hướng thiết kế 2024">
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
-                    </a>
-                </div>
-                <div class="text-start m-1">
-                    <p class="text-capitalize mt-3 mb-1">Xu hướng thiết kế nội thất 2024 với xi măng giả gỗ</p>
-                    <div class="d-flex">
-<<<<<<< HEAD
-                        <span class="fw-bold d-block">15/08/2025</span>
-=======
-                        <span class="fw-bold d-block">15/12/2024</span>
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
-                    </div>
-                    <p class="text-muted small">Khám phá những xu hướng thiết kế mới nhất năm 2024, với sự kết hợp hoàn hảo giữa xi măng giả gỗ và các vật liệu hiện đại...</p>
-                </div>
-                <div class="d-flex justify-content-around">
-                    <a href="#" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 100%;">Đọc thêm</a>
-                </div>
-            </div>
-            
-            <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                <div class="special-img position-relative overflow-hidden">
-                    <a href="#">
-<<<<<<< HEAD
-                        <img src="/images/tintuc/tintuc2.png" class="w-100" alt="Công trình tiêu biểu">
-=======
-                        <img src="/images/news/news2.jpg" class="w-100" alt="Công trình tiêu biểu">
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
-                    </a>
-                </div>
-                <div class="text-start m-1">
-                    <p class="text-capitalize mt-3 mb-1">Dự án biệt thự cao cấp sử dụng xi măng giả gỗ</p>
-                    <div class="d-flex">
-<<<<<<< HEAD
-                        <span class="fw-bold d-block">10/02/2025</span>
-                    </div>
-                    <p class="text-muted small">Khám phá dự án biệt thự 500m² tại Vĩnh Long, nơi xi măng giả gỗ được ứng dụng một cách nghệ thuật...</p>
-=======
-                        <span class="fw-bold d-block">10/12/2024</span>
-                    </div>
-                    <p class="text-muted small">Khám phá dự án biệt thự 500m² tại Vinhomes Central Park, nơi xi măng giả gỗ được ứng dụng một cách nghệ thuật...</p>
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
-                </div>
-                <div class="d-flex justify-content-around">
-                    <a href="#" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 100%;">Đọc thêm</a>
-                </div>
-            </div>
-            
-            <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                <div class="special-img position-relative overflow-hidden">
-                    <a href="#">
-<<<<<<< HEAD
-                        <img src="/images/tintuc/tintuc3.png" class="w-100" alt="Hướng dẫn thi công">
-                    </a>
-                </div>
-                <div class="text-start m-1">
-                    <p class="text-capitalize mt-3 mb-1">Showroom được xây dựng 80% từ xi măng giả gỗ</p>
-                    <div class="d-flex">
-                        <span class="fw-bold d-block">05/12/2024</span>
-                    </div>
-                    <p class="text-muted small">Xây dựng toàn bộ showroom bằng xi măng giả gỗ...</p>
-                </div>
-                <div class="d-flex justify-content-around">
-                    <a href="#" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 100%;">Đọc thêm</a>
-                </div>
-            </div>
-           
-            <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                <div class="special-img position-relative overflow-hidden">
-                    <a href="#">
-                        <img src="/images/tintuc/3d.jpg" class="w-100" alt="Hướng dẫn thi công">
-                    </a>
-                </div>
-                <div class="text-start m-1">
-                    <p class="text-capitalize mt-3 mb-1">Công nghệ cắt CNC từ file 3D3D</p>
-                    <div class="d-flex">
-                        <span class="fw-bold d-block">02/08/2025</span>
-                    </div>
-                    <p class="text-muted small">Áp dụng file 3D cho tấm bord. Cắt hoa văn theo yêu cầu của khách hàng...</p>
-=======
-                        <img src="/images/news/news3.jpg" class="w-100" alt="Hướng dẫn thi công">
-                    </a>
-                </div>
-                <div class="text-start m-1">
-                    <p class="text-capitalize mt-3 mb-1">Hướng dẫn thi công xi măng giả gỗ đúng chuẩn</p>
-                    <div class="d-flex">
-                        <span class="fw-bold d-block">05/12/2024</span>
-                    </div>
-                    <p class="text-muted small">Bộ hướng dẫn chi tiết từ A-Z về cách thi công xi măng giả gỗ, từ chuẩn bị bề mặt đến hoàn thiện...</p>
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
-                </div>
-                <div class="d-flex justify-content-around">
-                    <a href="#" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 100%;">Đọc thêm</a>
-                </div>
-            </div>
-            
-<<<<<<< HEAD
-=======
-            <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                <div class="special-img position-relative overflow-hidden">
-                    <a href="#">
-                        <img src="/images/news/news4.jpg" class="w-100" alt="Bảo hành sản phẩm">
-                    </a>
-                </div>
-                <div class="text-start m-1">
-                    <p class="text-capitalize mt-3 mb-1">Chính sách bảo hành mới - Cam kết chất lượng</p>
-                    <div class="d-flex">
-                        <span class="fw-bold d-block">01/12/2024</span>
-                    </div>
-                    <p class="text-muted small">Cập nhật chính sách bảo hành mới với thời gian bảo hành lên đến 10 năm cho tất cả sản phẩm...</p>
-                </div>
-                <div class="d-flex justify-content-around">
-                    <a href="#" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 100%;">Đọc thêm</a>
-                </div>
-            </div>
-            
-            <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                <div class="special-img position-relative overflow-hidden">
-                    <a href="#">
-                        <img src="/images/news/news5.jpg" class="w-100" alt="Sự kiện triển lãm">
-                    </a>
-                </div>
-                <div class="text-start m-1">
-                    <p class="text-capitalize mt-3 mb-1">Triển lãm sản phẩm xi măng giả gỗ tại Hà Nội</p>
-                    <div class="d-flex">
-                        <span class="fw-bold d-block">25/11/2024</span>
-                    </div>
-                    <p class="text-muted small">Sự kiện triển lãm quy mô lớn tại Trung tâm Triển lãm Quốc tế Hà Nội với hơn 100 mẫu sản phẩm mới...</p>
-                </div>
-                <div class="d-flex justify-content-around">
-                    <a href="#" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 100%;">Đọc thêm</a>
-                </div>
-            </div>
-            
-            <div class="product-item col-md-6 col-lg-4 col-xl-3 p-2 mb-3">
-                <div class="special-img position-relative overflow-hidden">
-                    <a href="#">
-                        <img src="/images/news/news6.jpg" class="w-100" alt="Công nghệ mới">
-                    </a>
-                </div>
-                <div class="text-start m-1">
-                    <p class="text-capitalize mt-3 mb-1">Công nghệ sản xuất xi măng giả gỗ thế hệ mới</p>
-                    <div class="d-flex">
-                        <span class="fw-bold d-block">20/11/2024</span>
-                    </div>
-                    <p class="text-muted small">Giới thiệu công nghệ sản xuất 4.0 với máy móc tự động hóa, đảm bảo chất lượng đồng đều...</p>
-                </div>
-                <div class="d-flex justify-content-around">
-                    <a href="#" class="btn btn-product mt-3 p-2 btn-detail-product" style="width: 100%;">Đọc thêm</a>
-                </div>
-            </div>
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
         </div>
     </div>
 
     <!-- Footer -->
+    <?php include_once __DIR__ . '/../partials/app.php'; ?>
     <?php include_once __DIR__ . '/../partials/footer.php'; ?>
+</body>
 
-
-<<<<<<< HEAD
-</body> 
-=======
-</body> 
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
+</html>

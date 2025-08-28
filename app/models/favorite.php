@@ -58,8 +58,6 @@ class Favorite extends Model
         $stmt->execute([$userId]);
         return $stmt->fetchColumn();
     }
-<<<<<<< HEAD
-
     /**
      * Lấy danh sách sản phẩm yêu thích kèm ảnh đại diện (ảnh đầu tiên)
      * @param int $user_id
@@ -76,7 +74,4 @@ class Favorite extends Model
         $stmt->execute([$user_id]);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
-}
-=======
-} 
->>>>>>> 7c425505595b6e785662ce5f53f9fbc09bd1405b
+}
