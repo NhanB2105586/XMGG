@@ -24,7 +24,7 @@ $adminController->logout();
 // Product management
 $router->get('/admin/products', function() use ($PDO) {
     $controller = new \App\Controllers\Admin\ManageProductController($PDO);
-    $controller->index();
+    $controller->viewProducts();
 });
 
 $router->get('/admin/addProduct', function() use ($PDO) {
@@ -54,7 +54,7 @@ $router->post('/admin/deleteProduct/(\d+)', function($id) use ($PDO) {
 
 $router->get('/admin/viewProduct', function() use ($PDO) {
     $controller = new \App\Controllers\Admin\ManageProductController($PDO);
-    $controller->index();
+    $controller->viewProducts();
 });
 
 // Category management
@@ -82,6 +82,16 @@ $router->post('/admin/hangmuc/update/(\d+)', function($pageId) use ($PDO) {
 $router->get('/admin/hangmuc/data/(\d+)', function($pageId) use ($PDO) {
     $controller = new \App\Controllers\Admin\ManageHangmucController($PDO);
     $controller->getPageData($pageId);
+});
+
+$router->post('/admin/hangmuc/delete/(\d+)', function($pageId) use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageHangmucController($PDO);
+    $controller->delete($pageId);
+});
+
+$router->post('/admin/hangmuc/create', function() use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageHangmucController($PDO);
+    $controller->create();
 });
 
 // Hangmuc Products management
@@ -123,6 +133,11 @@ $router->post('/admin/hangmuc-products/toggle/(\d+)', function($id) use ($PDO) {
 $router->post('/admin/hangmuc-products/sort', function() use ($PDO) {
     $controller = new \App\Controllers\Admin\ManageHangmucProductsController();
     $controller->updateSortOrder();
+});
+
+$router->post('/admin/hangmuc-products/swap', function() use ($PDO) {
+    $controller = new \App\Controllers\Admin\ManageHangmucProductsController();
+    $controller->swapProducts();
 });
 
 // Order management

@@ -43,7 +43,7 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                                              <i class="fas fa-search"></i>
                                          </button>
                                          <?php if (!empty($searchTerm)): ?>
-                                             <a href="?<?php echo isset($categoryId) ? 'category_id=' . $categoryId : ''; ?>" class="btn btn-outline-secondary">
+                                             <a href="?<?php echo !empty($categoryId) ? 'category_id=' . $categoryId : ''; ?>" class="btn btn-outline-secondary">
                                                  <i class="fas fa-times"></i>
                                              </a>
                                          <?php endif; ?>
@@ -80,11 +80,31 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                          <div class="d-flex justify-content-between align-items-center">
                              <h5 class="mb-0 fw-bold text-white">
                                  <i class="fas fa-list me-2"></i>Danh sách sản phẩm
-                                 <?php if (!empty($searchTerm)): ?>
+                                 <?php if (!empty($searchTerm) || !empty($categoryId)): ?>
                                      <span class="badge bg-light text-dark ms-2">
-                                         <i class="fas fa-search me-1"></i>
-                                         "<?php echo htmlspecialchars($searchTerm); ?>"
+                                         <?php if (!empty($searchTerm)): ?>
+                                             <i class="fas fa-search me-1"></i>
+                                             "<?php echo htmlspecialchars($searchTerm); ?>"
+                                         <?php endif; ?>
+                                         <?php if (!empty($categoryId) && isset($categories)): ?>
+                                             <?php 
+                                             $selectedCategory = null;
+                                             foreach ($categories as $category) {
+                                                 if ($category['category_id'] == $categoryId) {
+                                                     $selectedCategory = $category;
+                                                     break;
+                                                 }
+                                             }
+                                             ?>
+                                             <?php if ($selectedCategory): ?>
+                                                 <i class="fas fa-filter me-1"></i>
+                                                 <?php echo htmlspecialchars($selectedCategory['category_name']); ?>
+                                             <?php endif; ?>
+                                         <?php endif; ?>
                                          (<?php echo $totalProducts; ?> kết quả)
+                                         <a href="?" class="text-danger ms-2" title="Xóa tất cả bộ lọc">
+                                             <i class="fas fa-times"></i>
+                                         </a>
                                      </span>
                                  <?php endif; ?>
                              </h5>
@@ -225,6 +245,7 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                                     <li class="page-item <?= ($i == $currentPage) ? 'active' : '' ?>">
                                         <a class="page-link" href="?page=<?php echo $i; ?><?php 
                                             echo !empty($searchTerm) ? '&search=' . urlencode($searchTerm) : ''; 
+                                            echo !empty($categoryId) ? '&category_id=' . $categoryId : '';
                                         ?>"><?php echo $i; ?></a>
                                     </li>
                                 <?php endfor; ?>
@@ -315,9 +336,15 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
              const currentUrl = new URL(window.location);
              
              if (searchTerm) {
-             currentUrl.searchParams.set('search', searchTerm);
+                 currentUrl.searchParams.set('search', searchTerm);
              } else {
                  currentUrl.searchParams.delete('search');
+             }
+             
+             // Giữ lại category_id nếu có
+             const categoryId = currentUrl.searchParams.get('category_id');
+             if (categoryId) {
+                 currentUrl.searchParams.set('category_id', categoryId);
              }
              
              currentUrl.searchParams.set('page', '1'); // Reset to first page
@@ -388,6 +415,12 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                 currentUrl.searchParams.set('category_id', selectedCategoryId);
             } else {
                 currentUrl.searchParams.delete('category_id');
+            }
+            
+            // Giữ lại search term nếu có
+            const searchTerm = currentUrl.searchParams.get('search');
+            if (searchTerm) {
+                currentUrl.searchParams.set('search', searchTerm);
             }
             
             // Reset về trang 1 khi thay đổi filter

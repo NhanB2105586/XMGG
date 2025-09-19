@@ -104,6 +104,44 @@ class HangmucProducts
         ]);
     }
 
+    public function swapProducts($productId1, $productId2)
+    {
+        try {
+            $this->db->beginTransaction();
+            
+            // Get current sort orders
+            $sql1 = "SELECT sort_order FROM hangmuc_products WHERE id = :id1";
+            $stmt1 = $this->db->prepare($sql1);
+            $stmt1->bindValue(':id1', $productId1, PDO::PARAM_INT);
+            $stmt1->execute();
+            $sortOrder1 = $stmt1->fetchColumn();
+            
+            $sql2 = "SELECT sort_order FROM hangmuc_products WHERE id = :id2";
+            $stmt2 = $this->db->prepare($sql2);
+            $stmt2->bindValue(':id2', $productId2, PDO::PARAM_INT);
+            $stmt2->execute();
+            $sortOrder2 = $stmt2->fetchColumn();
+            
+            if ($sortOrder1 === false || $sortOrder2 === false) {
+                $this->db->rollBack();
+                return false;
+            }
+            
+            // Swap the sort orders
+            $updateSql = "UPDATE hangmuc_products SET sort_order = :new_sort_order, updated_at = NOW() WHERE id = :id";
+            
+            $stmt = $this->db->prepare($updateSql);
+            $stmt->execute([':id' => $productId1, ':new_sort_order' => $sortOrder2]);
+            $stmt->execute([':id' => $productId2, ':new_sort_order' => $sortOrder1]);
+            
+            $this->db->commit();
+            return true;
+        } catch (Exception $e) {
+            $this->db->rollBack();
+            return false;
+        }
+    }
+
     public function toggleActive($id)
     {
         $sql = "UPDATE hangmuc_products SET is_active = NOT is_active, updated_at = NOW() WHERE id = :id";

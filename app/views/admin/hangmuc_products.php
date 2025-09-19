@@ -44,6 +44,20 @@
     background-color: #28a745 !important;
     border-color: #28a745 !important;
 }
+
+/* Sort control styles */
+.sort-control {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+}
+
+.sort-control:hover {
+    background-color: #e9ecef;
+    color: #007bff;
+    transform: scale(1.1);
+}
 </style>
 
 <div class="container-fluid">
@@ -57,6 +71,10 @@
                             Quản lý sản phẩm - <?php echo htmlspecialchars($hangmucPage['title'] ?? $slug); ?>
                         </h4>
                         <p class="text-muted mb-0">Quản lý nội dung và hình ảnh cho các sản phẩm trong hạng mục</p>
+                        <small class="text-info">
+                            <i class="fas fa-info-circle me-1"></i>
+                            Nhấn vào icon mũi tên để thay đổi thứ tự hiển thị
+                        </small>
                     </div>
                     <div>
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">
@@ -103,7 +121,7 @@
                     <div class="row">
                         <?php if (!empty($products)): ?>
                             <?php foreach ($products as $product): ?>
-                                <div class="col-md-6 col-lg-4 mb-4" data-product-id="<?php echo $product['id']; ?>">
+                                <div class="col-md-6 col-lg-4 mb-4" data-product-id="<?php echo $product['id']; ?>" data-sort-order="<?php echo $product['sort_order']; ?>">
                                     <div class="card h-100">
                                         <div class="position-relative">
                                             <?php if ($product['image_path']): ?>
@@ -133,10 +151,12 @@
                                             </p>
                                             
                                             <div class="d-flex justify-content-between align-items-center">
-                                                <small class="text-muted">
-                                                    <i class="fas fa-sort me-1"></i>
-                                                    Thứ tự: <?php echo $product['sort_order']; ?>
-                                                </small>
+                                                <small class="text-muted sort-order-display">
+                                                    <i class="fas fa-sort me-1 sort-control" 
+                                                       data-product-id="<?php echo $product['id']; ?>"
+                                                       title="Nhấn để thay đổi thứ tự"></i>
+                                                        Thứ tự: <?php echo $product['sort_order']; ?>
+                                                    </small>
                                                 <div class="btn-group btn-group-sm">
                                                     <button class="btn btn-outline-primary" 
                                                             onclick="editProduct(<?php echo $product['id']; ?>)"
@@ -299,6 +319,206 @@
 </div>
 
 <script>
+// Initialize sort control functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Add event listeners for sort control icons
+    document.querySelectorAll('.sort-control').forEach(icon => {
+        icon.addEventListener('click', function(e) {
+            e.preventDefault();
+            const productId = this.dataset.productId;
+            showSortMenu(productId, this);
+        });
+    });
+});
+
+// Function to show sort menu
+function showSortMenu(productId, iconElement) {
+    // Remove any existing sort menu
+    const existingMenu = document.querySelector('.sort-menu');
+    if (existingMenu) {
+        existingMenu.remove();
+    }
+    
+    // Create sort menu
+    const menu = document.createElement('div');
+    menu.className = 'sort-menu position-absolute bg-white border rounded shadow-sm p-2';
+    menu.style.zIndex = '1000';
+    menu.style.minWidth = '120px';
+    
+    menu.innerHTML = `
+        <div class="d-flex flex-column gap-1">
+            <button class="btn btn-sm btn-outline-secondary move-up-btn" data-product-id="${productId}">
+                <i class="fas fa-arrow-up me-1"></i>Di chuyển lên
+            </button>
+            <button class="btn btn-sm btn-outline-secondary move-down-btn" data-product-id="${productId}">
+                <i class="fas fa-arrow-down me-1"></i>Di chuyển xuống
+            </button>
+        </div>
+    `;
+    
+    // Position menu near the icon
+    const rect = iconElement.getBoundingClientRect();
+    menu.style.left = rect.left + 'px';
+    menu.style.top = (rect.bottom + 5) + 'px';
+    
+    document.body.appendChild(menu);
+    
+    // Add event listeners to menu buttons
+    menu.querySelector('.move-up-btn').addEventListener('click', function() {
+        moveProduct(productId, 'up');
+        menu.remove();
+    });
+    
+    menu.querySelector('.move-down-btn').addEventListener('click', function() {
+        moveProduct(productId, 'down');
+        menu.remove();
+    });
+    
+    // Close menu when clicking outside
+    setTimeout(() => {
+        document.addEventListener('click', function closeMenu(e) {
+            if (!menu.contains(e.target) && e.target !== iconElement) {
+                menu.remove();
+                document.removeEventListener('click', closeMenu);
+            }
+        });
+    }, 100);
+}
+
+// Function to move product up or down
+function moveProduct(productId, direction) {
+    const productElement = document.querySelector(`[data-product-id="${productId}"]`);
+    if (!productElement) return;
+    
+    const currentSortOrder = parseInt(productElement.dataset.sortOrder);
+    let targetSortOrder;
+    
+    if (direction === 'up') {
+        targetSortOrder = currentSortOrder - 1;
+        if (targetSortOrder < 1) {
+            showErrorToast('Sản phẩm đã ở vị trí đầu tiên');
+            return;
+        }
+    } else {
+        targetSortOrder = currentSortOrder + 1;
+        const totalProducts = document.querySelectorAll('[data-product-id]').length;
+        if (targetSortOrder > totalProducts) {
+            showErrorToast('Sản phẩm đã ở vị trí cuối cùng');
+            return;
+        }
+    }
+    
+    // Find the product with target sort order
+    const targetProduct = document.querySelector(`[data-sort-order="${targetSortOrder}"]`);
+    if (!targetProduct) {
+        showErrorToast('Không tìm thấy sản phẩm để hoán đổi');
+        return;
+    }
+    
+    const targetProductId = targetProduct.dataset.productId;
+    
+    // Swap products on server
+    swapProductsOnServer(productId, targetProductId);
+}
+
+// Function to swap products on server
+function swapProductsOnServer(productId1, productId2) {
+    // Show loading indicator
+    const loadingToast = showLoadingToast('Đang hoán đổi vị trí sản phẩm...');
+    
+    fetch('/admin/hangmuc-products/swap', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            product_id1: productId1,
+            product_id2: productId2
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        hideLoadingToast(loadingToast);
+        if (data.success) {
+            showSuccessToast('Đã hoán đổi vị trí sản phẩm thành công!');
+            // Reload page to show updated order
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
+        } else {
+            showErrorToast('Có lỗi xảy ra khi hoán đổi vị trí: ' + (data.error || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        hideLoadingToast(loadingToast);
+        showErrorToast('Có lỗi xảy ra khi hoán đổi vị trí: ' + error.message);
+    });
+}
+
+// Toast notification functions
+function showLoadingToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast align-items-center text-white bg-primary border-0 position-fixed top-0 end-0 m-3';
+    toast.style.zIndex = '9999';
+    toast.innerHTML = `
+        <div class="d-flex">
+            <div class="toast-body">
+                <i class="fas fa-spinner fa-spin me-2"></i>${message}
+            </div>
+        </div>
+    `;
+    document.body.appendChild(toast);
+    
+    const bsToast = new bootstrap.Toast(toast, { autohide: false });
+    bsToast.show();
+    
+    return { toast, bsToast };
+}
+
+function hideLoadingToast(toastObj) {
+    if (toastObj && toastObj.bsToast) {
+        toastObj.bsToast.hide();
+        setTimeout(() => {
+            if (toastObj.toast && toastObj.toast.parentNode) {
+                toastObj.toast.parentNode.removeChild(toastObj.toast);
+            }
+        }, 500);
+    }
+}
+
+function showSuccessToast(message) {
+    showToast(message, 'success');
+}
+
+function showErrorToast(message) {
+    showToast(message, 'danger');
+}
+
+function showToast(message, type) {
+    const toast = document.createElement('div');
+    toast.className = `toast align-items-center text-white bg-${type} border-0 position-fixed top-0 end-0 m-3`;
+    toast.style.zIndex = '9999';
+    toast.innerHTML = `
+        <div class="d-flex">
+            <div class="toast-body">
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-triangle'} me-2"></i>${message}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+    `;
+    document.body.appendChild(toast);
+    
+    const bsToast = new bootstrap.Toast(toast, { autohide: true, delay: 3000 });
+    bsToast.show();
+    
+    // Remove from DOM after hiding
+    toast.addEventListener('hidden.bs.toast', () => {
+        if (toast.parentNode) {
+            toast.parentNode.removeChild(toast);
+        }
+    });
+}
+
 // Toggle active status
 document.querySelectorAll('.toggle-active').forEach(toggle => {
     toggle.addEventListener('change', function() {

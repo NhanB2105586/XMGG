@@ -431,4 +431,5 @@ include_once __DIR__ . '/../../helpers.php';
         }
     </script>
 
+    <?php include_once __DIR__ . '/../partials/foot.php'; ?>
 </body>

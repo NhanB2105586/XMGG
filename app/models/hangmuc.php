@@ -146,6 +146,14 @@ class Hangmuc
         return $successCount;
     }
 
+    public function deleteHangmucPage($id)
+    {
+        $sql = "DELETE FROM hangmuc_pages WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
     public function checkTableExists()
     {
         $sql = "SHOW TABLES LIKE 'hangmuc_pages'";

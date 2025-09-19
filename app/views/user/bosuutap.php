@@ -1,8 +1,6 @@
 <?php
-include_once __DIR__ . '../../../core/PDOFactory.php';
 include_once __DIR__ . '/../partials/header.php';
 ?>
-<link href="/css/stylebosuutap.css" rel="stylesheet">
 
 <body>
     <!-- Navbar -->
@@ -37,65 +35,59 @@ include_once __DIR__ . '/../partials/header.php';
 
             <!-- Nội dung chính - Các sản phẩm -->
             <div class="col-md-9">
+                
                 <div class="row">
+                    <?php if (!empty($hangmucPages)): ?>
+                        <?php foreach ($hangmucPages as $hangmuc): ?>
                     <div class="col-md-6 mb-4">
                         <div class="product-card">
-                            <img src="/images/hangmuc/hangmuc/lam_lam4.jpg" alt="Product 1" class="img-fluid rounded">
-                            <h6 class="mt-3 fw-bold">
-                                Những công trình mà Đại Quân đã thi công - Hạng mục Lam</h6>
-                            <p class="text-muted">Các công trình sử dụng lam xi măng giả gỗ không chỉ giúp chắn nắng mà còn mang lại tính thẩm mỹ hiện đại, mạch lạc cho không gian ngoại thất. [...]</p>
+                                    <a href="/<?php echo htmlspecialchars($hangmuc['slug']); ?>" class="text-decoration-none d-block">
+                                        <?php if ($hangmuc['image_path']): ?>
+                                            <img src="<?php echo htmlspecialchars($hangmuc['image_path']); ?>" 
+                                                 alt="<?php echo htmlspecialchars($hangmuc['title']); ?>" 
+                                                 class="img-fluid rounded">
+                                        <?php else: ?>
+                                            <div class="bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
+                                                <i class="fas fa-image fa-3x text-muted"></i>
+                        </div>
+                                        <?php endif; ?>
+                                        
+                                        <h6 class="mt-3 fw-bold text-dark">
+                                            Những công trình mà Đại Quân đã thi công - Hạng mục <?php echo htmlspecialchars($hangmuc['title']); ?>
+                                        </h6>
+                                    </a>
+                                    
+                                    <!-- Description nằm bên ngoài link, màu rõ ràng hơn -->
+                                    <div class="card-body p-3">
+                                        <p class="text-dark mb-0" style="font-size: 0.95rem; line-height: 1.5;">
+                                            <?php echo htmlspecialchars($hangmuc['description']); ?> [...]
+                                        </p>
+                                        <?php if (!empty($hangmuc['content'])): ?>
+                                            <div class="content-preview mt-2">
+                                                <p class="text-muted small">
+                                                    <?php 
+                                                    // Hiển thị 150 ký tự đầu của content
+                                                    $content = strip_tags($hangmuc['content']);
+                                                    echo htmlspecialchars(mb_substr($content, 0, 150)) . (mb_strlen($content) > 150 ? '...' : '');
+                                                    ?>
+                                                </p>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
                         </div>
                     </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="product-card">
-                            <img src="/images/hangmuc/hangmuc/tran_tran2.png" alt="Product 2" class="img-fluid rounded">
-                            <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Trần</h6>
-                            <p class="text-muted">Hệ trần sử dụng vật liệu xi măng giả gỗ mang lại cảm giác ấm áp và sang trọng, bền vững với thời gian.[...]</p>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="col-12">
+                            <div class="text-center py-5">
+                                <div class="text-muted">
+                                    <i class="fas fa-boxes fa-4x mb-4"></i>
+                                    <h4>Chưa có hạng mục nào</h4>
+                                    <p class="mb-4">Hãy thêm hạng mục đầu tiên từ trang quản trị</p>
                         </div>
                     </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="product-card">
-                            <img src="/images/hangmuc/hangmuc/vach_vach2.jpg" alt="Product 2" class="img-fluid rounded">
-                            <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Vách</h6>
-                            <p class="text-muted">Các vách xi măng giả gỗ được thiết kế để phân tách không gian một cách nhẹ nhàng, vẫn đảm bảo sự thông thoáng và tính thẩm mỹ cao.[...]</p>
                         </div>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="product-card">
-                            <img src="/images/hangmuc/hangmuc/cua_cua.png" alt="Product 2" class="img-fluid rounded">
-                            <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Cửa</h6>
-                            <p class="text-muted">Cửa làm từ khung sắt ốp xi măng giả gỗ giúp tăng độ chắc chắn, tạo điểm nhấn mạnh mẽ và sang trọng cho công trình.[...]</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="product-card">
-                            <img src="/images/hangmuc/hangmuc/san_san3.jpg" alt="Product 2" class="img-fluid rounded">
-                            <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Sàn</h6>
-                            <p class="text-muted">Sàn xi măng giả gỗ là giải pháp lý tưởng cho không gian ngoài trời với độ bền cao, không bị cong vênh hay mục nát như gỗ thật.[...]</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="product-card">
-                            <img src="/images/hangmuc/hangmuc/cauthang_cauthang3.jpg" alt="Product 2" class="img-fluid rounded">
-                            <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Cầu thang</h6>
-                            <p class="text-muted">Cầu thang xi măng giả gỗ không chỉ mang lại vẻ đẹp tự nhiên mà còn tạo cảm giác ấm áp và thân thiện cho cả không gian nội thất lẫn ngoại thất.[...]</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="product-card">
-                            <img src="/images/hangmuc/hangmuc/hangrao_hg1.jpg" alt="Product 2" class="img-fluid rounded">
-                            <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Hàng rào</h6>
-                            <p class="text-muted">Hàng rào xi măng giả gỗ là giải pháp lý tưởng cho không gian ngoài trời với độ bền cao, tạo sự riêng tư và an toàn cho công trình.[...]</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="product-card">
-                            <img src="/images/hangmuc/hangmuc/bonhoa_banghe.png" alt="Product 2" class="img-fluid rounded">
-                            <h6 class="mt-3 fw-bold">Những công trình mà Đại Quân đã thi công - Hạng mục Bồn hoa, bàn, ghế</h6>
-                            <p class="text-muted">Bồn hoa, bàn ghế xi măng giả gỗ là giải pháp lý tưởng cho không gian ngoài trời với độ bền cao, tạo không gian xanh và thân thiện.[...]</p>
-                        </div>
-                    </div>
-                      <!-- Thêm các sản phẩm khác -->
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
@@ -104,6 +96,69 @@ include_once __DIR__ . '/../partials/header.php';
     <!-- Footer -->
     <?php include_once __DIR__ . '/../partials/app.php'; ?>
     <?php include_once __DIR__ . '/../partials/footer.php'; ?>
+
+    <style>
+        .product-card {
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: white;
+            border: 1px solid #e9ecef;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+        
+        .product-card a {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .product-card a:hover {
+            color: inherit;
+            text-decoration: none;
+        }
+        
+        .product-card img {
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .card-body {
+            background: white;
+            border-top: 1px solid #f8f9fa;
+        }
+        
+        .card-body p {
+            color: #333 !important;
+            font-weight: 500;
+        }
+    </style>
+    
+    <script>
+        // Simple hover effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const productCards = document.querySelectorAll('.product-card');
+            
+            productCards.forEach((card) => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.transition = 'transform 0.3s ease';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
+lam

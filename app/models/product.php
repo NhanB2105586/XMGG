@@ -64,7 +64,7 @@ class Product extends Model
         }
         
         // Thêm điều kiện lọc theo danh mục
-        if (!empty($categoryId)) {
+        if (!empty($categoryId) && $categoryId > 0) {
             $whereConditions[] = "p.category_id = :categoryId";
             $params[':categoryId'] = $categoryId;
         }
@@ -109,7 +109,7 @@ class Product extends Model
         }
         
         // Thêm điều kiện lọc theo danh mục
-        if (!empty($categoryId)) {
+        if (!empty($categoryId) && $categoryId > 0) {
             $whereConditions[] = "p.category_id = :categoryId";
             $params[':categoryId'] = $categoryId;
         }

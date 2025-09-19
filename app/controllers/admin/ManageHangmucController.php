@@ -63,6 +63,88 @@ class ManageHangmucController extends Controller
         }
     }
 
+    public function create()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $title = trim($_POST['title'] ?? '');
+            $description = trim($_POST['description'] ?? '');
+            $content = trim($_POST['content'] ?? '');
+            $slug = trim($_POST['slug'] ?? '');
+            
+            // Validation
+            if (empty($title) || empty($slug)) {
+                $_SESSION['error_message'] = 'Tiêu đề và slug không được để trống!';
+                header('Location: /admin/hangmuc');
+                exit;
+            }
+            
+            // Check if slug already exists
+            $existingPage = $this->hangmucModel->getHangmucPageBySlug($slug);
+            if ($existingPage) {
+                $_SESSION['error_message'] = 'Slug đã tồn tại! Vui lòng chọn slug khác.';
+                header('Location: /admin/hangmuc');
+                exit;
+            }
+            
+            // Handle image upload
+            $imagePath = null;
+            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                $uploadResult = $this->handleImageUpload($_FILES['image']);
+                if ($uploadResult['success']) {
+                    $imagePath = $uploadResult['path'];
+                } else {
+                    $_SESSION['error_message'] = $uploadResult['error'];
+                    header('Location: /admin/hangmuc');
+                    exit;
+                }
+            }
+            
+            $result = $this->hangmucModel->createHangmucPage($slug, $title, $description, $content, $imagePath);
+            
+            if ($result) {
+                // Tự động tạo trang web cho hạng mục mới
+                $this->createHangmucPage($slug);
+                
+                $_SESSION['success_message'] = 'Tạo hạng mục thành công! Trang web đã được tạo tự động.';
+            } else {
+                $_SESSION['error_message'] = 'Có lỗi xảy ra khi tạo hạng mục!';
+            }
+            
+            header('Location: /admin/hangmuc');
+            exit;
+        }
+    }
+
+    public function delete($pageId)
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Get page data before deletion
+            $pageData = $this->hangmucModel->getHangmucPageById($pageId);
+            
+            if (!$pageData) {
+                header('Content-Type: application/json');
+                echo json_encode(['success' => false, 'error' => 'Không tìm thấy hạng mục']);
+                exit;
+            }
+            
+            $slug = $pageData['slug'];
+            
+            // Delete from database
+            $result = $this->hangmucModel->deleteHangmucPage($pageId);
+            
+            if ($result) {
+                // Delete the page file
+                $this->deleteHangmucPage($slug);
+                
+                header('Content-Type: application/json');
+                echo json_encode(['success' => true, 'message' => 'Xóa hạng mục thành công']);
+            } else {
+                header('Content-Type: application/json');
+                echo json_encode(['success' => false, 'error' => 'Có lỗi xảy ra khi xóa hạng mục']);
+            }
+        }
+    }
+
     public function getPageData($pageId)
     {
         $pageData = $this->hangmucModel->getHangmucPageById($pageId);
@@ -73,6 +155,36 @@ class ManageHangmucController extends Controller
             http_response_code(404);
             header('Content-Type: application/json');
             echo json_encode(['error' => 'Không tìm thấy trang']);
+        }
+    }
+
+    private function createHangmucPage($slug)
+    {
+        $pagePath = __DIR__ . '/../../../app/views/user/' . $slug . '.php';
+        $pageContent = '<?php
+include_once __DIR__ . "/../partials/header.php";
+include_once __DIR__ . "/../partials/navbar.php";
+?>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center mb-5">' . ucfirst($slug) . '</h1>
+            <p class="text-center">Trang ' . $slug . ' đang được phát triển...</p>
+        </div>
+    </div>
+</div>
+
+<?php include_once __DIR__ . "/../partials/footer.php"; ?>';
+        
+        file_put_contents($pagePath, $pageContent);
+    }
+
+    private function deleteHangmucPage($slug)
+    {
+        $pagePath = __DIR__ . '/../../../app/views/user/' . $slug . '.php';
+        if (file_exists($pagePath)) {
+            unlink($pagePath);
         }
     }
 

@@ -188,4 +188,21 @@ class ManageHangmucProductsController extends Controller
             }
         }
     }
+
+    public function swapProducts()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = json_decode(file_get_contents('php://input'), true);
+            
+            if (isset($data['product_id1']) && isset($data['product_id2'])) {
+                if ($this->hangmucProductsModel->swapProducts($data['product_id1'], $data['product_id2'])) {
+                    echo json_encode(['success' => true]);
+                } else {
+                    echo json_encode(['success' => false, 'error' => 'Failed to swap products']);
+                }
+            } else {
+                echo json_encode(['success' => false, 'error' => 'Missing parameters']);
+            }
+        }
+    }
 }

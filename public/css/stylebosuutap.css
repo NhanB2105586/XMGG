@@ -246,6 +246,43 @@
     border-color: #ccc;
 }
 
+/* CSS cho link sản phẩm */
+.product-card-link {
+    text-decoration: none !important;
+    color: inherit !important;
+    display: block;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+}
+
+.product-card-link:hover {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+.product-card-link .product-card {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.product-card-link:hover .product-card {
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
+    border-color: #007bff;
+    transform: translateY(-2px);
+}
+
+/* Đảm bảo link có thể click được */
+.product-card-link * {
+    pointer-events: none;
+}
+
+.product-card-link {
+    pointer-events: auto;
+}
+
 
 .nd{
    padding-left: 40px; /* Tạo khoảng cách bên trái */

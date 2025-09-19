@@ -91,5 +91,6 @@ use App\Models\Product;
     <?php include_once __DIR__ . '/../../partials/footer.php'; ?>
 
     <!-- Scripts -->
+    <?php include_once __DIR__ . '/../partials/foot.php'; ?>
 </body>
 </html>

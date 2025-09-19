@@ -12,9 +12,12 @@ class Controller
     public function __construct()
     {
         $this->view = new Engine(ROOTDIR . 'app/views');
-        // Sử dụng kết nối UTF-8 từ PDOFactory
-        $this->db = (new \App\Core\PDOFactory())->create();
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // Sử dụng kết nối global từ bootstrap.php
+        global $PDO;
+        $this->db = $PDO;
+        if ($this->db) {
+            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        }
     }
 
     // Gửi trang với dữ liệu đi kèm

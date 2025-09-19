@@ -168,4 +168,5 @@ function updateCartCount() {
     }
 }
 </script>
+    <?php include_once __DIR__ . '/../partials/foot.php'; ?>
 </body>

@@ -118,7 +118,13 @@ class UserController extends Controller
 
     public function showbosuutap()
     {
-        $this->sendPage('user/bosuutap');
+        // Lấy tất cả hạng mục từ database
+        $hangmucModel = new \App\Models\Hangmuc($this->db);
+        $hangmucPages = $hangmucModel->getAllHangmucPages();
+        
+        $this->sendPage('user/bosuutap', [
+            'hangmucPages' => $hangmucPages
+        ]);
     }
 
     // Methods cho các hạng mục mới

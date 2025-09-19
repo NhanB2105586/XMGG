@@ -119,6 +119,11 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                                                                title="Quản lý sản phẩm">
                                                                 <i class="fas fa-boxes"></i>
                                                             </a>
+                                                            <button class="btn btn-sm btn-outline-danger" 
+                                                                    onclick="deleteHangmuc(<?php echo $page['id']; ?>, '<?php echo htmlspecialchars($page['title']); ?>')"
+                                                                    title="Xóa hạng mục">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -184,9 +189,9 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
                                     </div>
                                     
                                     <div class="mb-3">
-                                        <label for="content" class="form-label fw-bold">Nội dung chi tiết</label>
+                                        <label for="content" class="form-label fw-bold">Nội dung chi tiết <span class="text-danger">*</span></label>
                                         <textarea class="form-control" id="content" name="content" rows="8"
-                                                  placeholder="Nội dung chi tiết về hạng mục..."></textarea>
+                                                  placeholder="Nội dung chi tiết về hạng mục..." required></textarea>
                                         <div class="form-text">Nội dung chi tiết sẽ hiển thị trên trang web chính</div>
                                     </div>
                                 </div>
@@ -273,9 +278,115 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
         </div>
     </div>
 
+    <!-- Create New Hangmuc Modal -->
+    <div class="modal fade" id="createHangmucModal" tabindex="-1" aria-labelledby="createHangmucModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="createHangmucModalLabel">
+                        <i class="fas fa-plus me-2"></i>Tạo Hạng mục Mới
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" onclick="closeCreateModal()" aria-label="Close"></button>
+                </div>
+                <form id="createHangmucForm" method="POST" action="/admin/hangmuc/create" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <!-- Basic Information -->
+                                <div class="mb-4">
+                                    <h6 class="fw-bold mb-3">
+                                        <i class="fas fa-info-circle me-2"></i>Thông tin cơ bản
+                                    </h6>
+                                    
+                                    <div class="mb-3">
+                                        <label for="create_title" class="form-label fw-bold">Tiêu đề <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form-control-lg" id="create_title" name="title" required
+                                               placeholder="Nhập tiêu đề hạng mục...">
+                                        <div class="form-text">Tiêu đề sẽ hiển thị trên trang web chính</div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="create_slug" class="form-label fw-bold">Slug <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="create_slug" name="slug" required
+                                               placeholder="nhap-slug-hang-muc">
+                                        <div class="form-text">URL sẽ là: /nhap-slug-hang-muc</div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="create_description" class="form-label fw-bold">Mô tả ngắn</label>
+                                        <textarea class="form-control" id="create_description" name="description" rows="3"
+                                                  placeholder="Mô tả ngắn gọn về hạng mục..."></textarea>
+                                        <div class="form-text">Mô tả ngắn sẽ hiển thị trong danh sách</div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="create_content" class="form-label fw-bold">Nội dung chi tiết <span class="text-danger">*</span></label>
+                                        <textarea class="form-control" id="create_content" name="content" rows="8"
+                                                  placeholder="Nội dung chi tiết về hạng mục..." required></textarea>
+                                        <div class="form-text">Nội dung chi tiết sẽ hiển thị trên trang web chính</div>
+                                    </div>
+                                    
+                                    <!-- Debug: Trường này phải hiển thị -->
+                                    <div class="alert alert-info">
+                                        <strong>Debug:</strong> Trường "Nội dung chi tiết" đã được thêm vào form!
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <!-- Image Upload -->
+                                <div class="mb-4">
+                                    <h6 class="fw-bold mb-3">
+                                        <i class="fas fa-image me-2"></i>Hình ảnh
+                                    </h6>
+                                    
+                                    <div class="mb-3">
+                                        <label for="create_image" class="form-label fw-bold">Chọn hình ảnh</label>
+                                        <input type="file" class="form-control" id="create_image" name="image" 
+                                               accept="image/*" onchange="previewCreateImage(this)">
+                                        <div class="form-text">Hỗ trợ: JPG, PNG, GIF (Max: 5MB)</div>
+                                    </div>
+                                    
+                                    <div id="create_image_preview" class="text-center" style="display: none;">
+                                        <img id="create_preview_img" src="" alt="Preview" class="img-fluid rounded" style="max-height: 200px;">
+                                    </div>
+                                </div>
+                                
+                                <!-- Preview -->
+                                <div class="mb-4">
+                                    <h6 class="fw-bold mb-3">
+                                        <i class="fas fa-eye me-2"></i>Xem trước
+                                    </h6>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h6 id="create_preview_title">Tiêu đề</h6>
+                                            <p id="create_preview_description" class="text-muted small">Mô tả</p>
+                                            <p class="text-muted small">URL: <span id="create_preview_url">/slug</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeCreateModal()">Hủy</button>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-plus me-2"></i>Tạo hạng mục
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <?php include_once __DIR__ . '/../partials/footAdmin.php'; ?>
 
     <script>
+    // Force reload to clear cache
+    if (performance.navigation.type === 1) {
+        console.log('Page reloaded - cache cleared');
+    }
+    
     // Search functionality
     document.getElementById('searchHangmuc').addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase();
@@ -393,9 +504,85 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
         }, 1000);
     }
 
+    // Delete hangmuc function
+    function deleteHangmuc(id, title) {
+        if (confirm(`Bạn có chắc chắn muốn xóa hạng mục "${title}"?\n\nHành động này sẽ:\n- Xóa hạng mục khỏi database\n- Xóa tất cả sản phẩm liên quan\n- Xóa trang web tương ứng\n\nHành động này không thể hoàn tác!`)) {
+            // Show loading
+            const deleteBtn = event.target.closest('button');
+            const originalHTML = deleteBtn.innerHTML;
+            deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            deleteBtn.disabled = true;
+            
+            fetch(`/admin/hangmuc/delete/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Remove the item from DOM
+                    const hangmucItem = deleteBtn.closest('.hangmuc-item');
+                    if (hangmucItem) {
+                        hangmucItem.remove();
+                    }
+                    
+                    // Show success message
+                    alert('Xóa hạng mục thành công!');
+                    location.reload(); // Reload to update the list
+                } else {
+                    alert('Có lỗi xảy ra khi xóa hạng mục: ' + (data.error || 'Unknown error'));
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Có lỗi xảy ra khi xóa hạng mục');
+            })
+            .finally(() => {
+                deleteBtn.innerHTML = originalHTML;
+                deleteBtn.disabled = false;
+            });
+        }
+    }
+
     // Create new hangmuc function
     function createNewHangmuc() {
-        alert('Tính năng tạo hạng mục mới sẽ được cập nhật trong phiên bản tiếp theo.');
+        // Clear form
+        document.getElementById('createHangmucForm').reset();
+        document.getElementById('create_image_preview').style.display = 'none';
+        updateCreatePreview();
+        
+        // Show modal
+        $('#createHangmucModal').modal('show');
+    }
+    
+    // Close create modal
+    function closeCreateModal() {
+        $('#createHangmucModal').modal('hide');
+    }
+    
+    // Preview create image
+    function previewCreateImage(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('create_preview_img').src = e.target.result;
+                document.getElementById('create_image_preview').style.display = 'block';
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    // Update create preview
+    function updateCreatePreview() {
+        const title = document.getElementById('create_title').value || 'Tiêu đề';
+        const description = document.getElementById('create_description').value || 'Mô tả';
+        const slug = document.getElementById('create_slug').value || 'slug';
+        
+        document.getElementById('create_preview_title').textContent = title;
+        document.getElementById('create_preview_description').textContent = description;
+        document.getElementById('create_preview_url').textContent = '/' + slug;
     }
 
     // Handle form submission
@@ -449,6 +636,47 @@ include_once __DIR__ . '/../partials/headerAdmin.php';
             $(modalElement).modal('hide');
         }
     }
+
+    // Add event listeners for create form
+    document.getElementById('create_title').addEventListener('input', updateCreatePreview);
+    document.getElementById('create_description').addEventListener('input', updateCreatePreview);
+    document.getElementById('create_slug').addEventListener('input', updateCreatePreview);
+    
+    // Handle create form submission
+    document.getElementById('createHangmucForm').addEventListener('submit', function(e) {
+        const formData = new FormData(this);
+        
+        // Show loading
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Đang tạo...';
+        submitBtn.disabled = true;
+        
+        fetch(this.action, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.redirected) {
+                window.location.href = response.url;
+            } else {
+                return response.text();
+            }
+        })
+        .then(data => {
+            if (data) {
+                console.log('Response:', data);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Có lỗi xảy ra khi tạo hạng mục');
+        })
+        .finally(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        });
+    });
 
     // Add event listeners for modal close buttons
     document.addEventListener('DOMContentLoaded', function() {
